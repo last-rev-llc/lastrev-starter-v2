@@ -12,3 +12,4 @@ dist-ssr
 server/dist
 public/dist
 **/analyze
+.env.local.backup
