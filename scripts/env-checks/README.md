@@ -13,37 +13,47 @@ The project is organized into several key areas:
 ## CI Scripts
 
 ### `ci_var_check.sh`
+
 Verifies the necessary CI environment variables are set and correct, ensuring the CI process can proceed without configuration issues.
 
 ### `ci_propagate_env.sh`
+
 Handles the propagation of environment variables through the CI pipeline, maintaining consistent environment configurations across stages.
 
 ### `ci_pull_vars.sh`
+
 Retrieves environment variables required for the CI process, supporting dynamic configuration based on project needs.
 
 ### `ci_install_envkey.sh`
+
 Installs and configures EnvKey for secure management of environment secrets, ensuring sensitive information is handled safely within CI environments.
 
 ## Local Scripts
 
 ### `local_auth_check.sh`
+
 Checks for proper authentication configurations in the local development setup, including the presence of necessary authentication files and keys.
 
 ### `local_workflow.sh`
+
 Coordinates the local development environment setup process, guiding through the necessary steps to prepare a local environment for development activities.
 
 ### `local_setup_check.sh`
+
 Confirms the local development environment is correctly set up, verifying configurations and prerequisites to ensure readiness for development tasks.
 
 ### `local_pull_vars.sh`
+
 Retrieves necessary environment variables for local development, aligning the local setup with project requirements.
 
 ## Utility Scripts
 
 ### `main_workflow.sh`
+
 Serves as the primary orchestrator for the environment setup and validation process, determining the execution context (CI or local) and initiating the appropriate workflows.
 
 ### `env_validator.js`
+
 Performs advanced validation of environment configurations, ensuring all required environment variables are present and correctly configured before starting the build or development process.
 
 ## Getting Started
@@ -58,6 +68,5 @@ To use these scripts, follow these steps:
 ## Contributing
 
 Contributions are welcome to improve the project, including enhancements to existing scripts, documentation, or adding new features. Please submit pull requests with your changes for review.
-
 
 This project is intended to provide a robust framework for managing development and CI environments. For detailed operation of each script, please refer to the inline comments within the script files themselves.
