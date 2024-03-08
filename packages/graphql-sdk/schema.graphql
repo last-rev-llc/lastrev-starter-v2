@@ -23,25 +23,18 @@ type Asset {
 }
 
 type Block implements Content {
-  OLDoverline: String
-  OLDsubtitle: String
-  OLDtitle: String
   actions: [Link]
   animation: JSON
   asset: Media
   backgroundColor: String
   backgroundImage: Media
   body: RichText
-  disclaimerText: String
   id: String
   internalTitle: String
   introText: Text
   link: Link
-  longText: String
   mediaItems: [Media]
-  overlapWithPreviousModule: Boolean
   overline: String
-  shortText: String
   sidekickLookup: JSON
   subtitle: String
   supplementalContent: Content
@@ -57,7 +50,6 @@ type Blog implements Content {
   breadcrumbs: [Link]
   categories: [CategoryBlog]
   disableBackToTop: Boolean
-  excludeFromDynamicLists: Boolean
   featuredMedia: Media
   footer: Footer
   header: Header
@@ -66,7 +58,6 @@ type Blog implements Content {
   jsonLd: JSON
   lr__path__: String
   path: String
-  persona: [String]
   promoImage: Media
   promoSummary: String
   pubDate: Date
@@ -74,16 +65,12 @@ type Blog implements Content {
   seo: JSON
   sidekickLookup: JSON
   slug: String
-  summary: String
   tags: [String]
   theme: [Theme]
   title: String
 }
 
 type Card implements Content {
-  OLDoverline: String
-  OLDsubtitle: String
-  OLDtitle: String
   actions: [Link]
   animation: JSON
   body: RichText
@@ -120,24 +107,12 @@ type CategoryBlog implements Content {
   title: String
 }
 
-type CategoryTag implements Content {
-  animation: JSON
-  id: String
-  lr__path__: String
-  name: String
-  seo: JSON
-  sidekickLookup: JSON
-  slug: String
-  theme: [Theme]
-}
-
 type Collection implements Content {
   animation: JSON
   backgroundColor: String
   backgroundImage: Media
   carouselAutoPlay: Boolean
   carouselBreakpoints: [String]
-  disclaimerText: String
   id: String
   internalTitle: String
   introText: Text
@@ -156,13 +131,11 @@ type Collection implements Content {
 
 type CollectionDynamic implements Content {
   animation: JSON
-  backgroundColor: String
   id: String
   internalTitle: String
   itemsVariant: String
   numberOfItemsToPull: String
   pullFromContentType: String
-  settings: JSON
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
@@ -182,7 +155,6 @@ type CollectionExpandable implements Content {
 }
 
 type CollectionExpandableItem implements Content {
-  OLDtitle: String
   animation: JSON
   body: RichText
   bodyRte: JSON
@@ -238,24 +210,20 @@ input ContentsFilter {
 scalar Date
 
 type ElementForm implements Content {
-  allowPersonalEmailAddresses: Boolean
   animation: JSON
   breadcrumbs: [Link]
   confirmationPath: String
   contents: [Content]
-  disclaimerText: String
   footer: Footer
   footerDisclaimerOverride: RichText
   header: Header
   hero: Hero
-  hideRecaptcha: Boolean
   hubspotFormId: String
   hubspotPortalId: String
   id: String
   internalTitle: String
   introText: Text
   lr__path__: String
-  marketoFormId: String
   path: String
   seo: JSON
   sidekickLookup: JSON
@@ -320,9 +288,6 @@ type Header implements Content {
 }
 
 type Hero implements Content {
-  OLDoverline: String
-  OLDsubtitle: String
-  OLDtitle: String
   actions: [Link]
   animation: JSON
   background: Media
@@ -440,7 +405,6 @@ type Page implements Content {
   jsonLd: JSON
   lr__path__: String
   path: String
-  persona: [String]
   promoImage: Media
   promoSummary: String
   seo: JSON
@@ -459,30 +423,11 @@ type PagePathParams {
   params: PagePathParam!
 }
 
-type PageResource implements Content {
-  animation: JSON
-  body: RichText
-  disableBackToTop: Boolean
-  footerDisclaimerOverride: RichText
-  id: String
-  includeTocTableOfContents: Boolean
-  internalTitle: String
-  lr__path__: String
-  persona: [String]
-  promoImage: Media
-  promoSummary: String
-  resourceType: String
-  seo: JSON
-  sidekickLookup: JSON
-  slug: String
-  theme: [Theme]
-  title: String
-}
-
 type Person implements Content {
   animation: JSON
   body: RichText
   breadcrumbs: [Link]
+  education: [String]
   email: String
   footer: Footer
   header: Header
@@ -494,6 +439,7 @@ type Person implements Content {
   mainImage: Media
   name: String
   path: String
+  previousExperiences: [String]
   promoImage: Media
   promoSummary: String
   rolloverImage: Media
@@ -502,20 +448,6 @@ type Person implements Content {
   slug: String
   socialLinks: [Link]
   theme: [Theme]
-}
-
-type PricingPlan implements Content {
-  animation: JSON
-  body: String
-  disclaimerText: String
-  id: String
-  internalTitle: String
-  overline: String
-  price: String
-  sidekickLookup: JSON
-  textBelowPrice: String
-  theme: [Theme]
-  variant: String
 }
 
 type Query {
@@ -534,8 +466,6 @@ type Query {
 }
 
 type Quote implements Content {
-  OLDauthorName: String
-  OLDauthorTitle: String
   animation: JSON
   authorName: String
   authorTitle: String
@@ -566,7 +496,6 @@ type Section implements Content {
   background: Media
   backgroundColor: String
   contents: [Content]
-  disclaimerText: String
   hasBackground: Boolean
   id: String
   internalTitle: String
@@ -641,9 +570,6 @@ type Template implements Content {
 }
 
 type Text implements Content {
-  OLDoverline: String
-  OLDsubtitle: String
-  OLDtitle: String
   align: String
   animation: JSON
   body: RichText
@@ -658,15 +584,6 @@ type Text implements Content {
 }
 
 type Theme {
-  variant: String
-}
-
-type ZTemporaryTemplatesToBeDeleted implements Content {
-  animation: JSON
-  id: String
-  sidekickLookup: JSON
-  theme: [Theme]
-  title: String
   variant: String
 }
 
