@@ -41,8 +41,14 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
           echo "${{ env.Z_ENVKEY_TEST_VAR }} - from env to load in chromatic.yml"
       
-      - name: Prepare Chromatic Project Token
-        run: echo "CHROMATIC_PROJECT_TOKEN=${{ env.CHROMATIC_PROJECT_TOKEN }}" | tr -d "'" > $GITHUB_ENV
+      - name: Strip quotes from all env vars
+        run: |
+          while IFS='=' read -r name value; do
+            # Use `tr` to strip single quotes from the value
+            cleaned_value=$(echo "$value" | tr -d "'")
+            # Re-export the variable without the quotes
+            echo "$name=$cleaned_value" >> $GITHUB_ENV
+          done < <(env)
         shell: bash
 
       - name: Publish to Chromatic
@@ -53,5 +59,3 @@ jobs:
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
           projectToken: "${{ env.CHROMATIC_PROJECT_TOKEN }}"
-          extraArgs: "exitOnceUploaded allowConsoleErrors"
-
