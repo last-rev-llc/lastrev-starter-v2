@@ -52,6 +52,6 @@ jobs:
         # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: "${{ env.CHROMATIC_PROJECT_TOKEN }}""
-          extraArgs: '--exit-once-uploaded --allow-console-errors'
+          projectToken: "${{ env.CHROMATIC_PROJECT_TOKEN }}"
+          extraArgs: "exitOnceUploaded allowConsoleErrors"
 
