@@ -34,7 +34,7 @@ jobs:
         env:
           ENVKEY: ${{ secrets.ENVKEY }}
         run: |
-          es --dot-env -f > $GITHUB_ENV
+          es --dot-env-compatible -f > $GITHUB_ENV
       
       - name: Testing env vars within 
         run: |
