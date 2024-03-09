@@ -34,7 +34,7 @@ jobs:
         env:
           ENVKEY: ${{ secrets.ENVKEY }}
         run: |
-          es -f -- > $GITHUB_ENV
+          es --dot-env -f -- > $GITHUB_ENV
       
       - name: Testing env vars within 
         run: |
@@ -46,8 +46,8 @@ jobs:
       #   shell: bash
 
       - name: Publish to Chromatic
-        # env: 
-        #   CHROMATIC_PROJECT_TOKEN: ${{ env.CHROMATIC_PROJECT_TOKEN }}
+        env: 
+          CHROMATIC_PROJECT_TOKEN: ${{ env.CHROMATIC_PROJECT_TOKEN }}
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
         with:
