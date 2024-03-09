@@ -41,9 +41,9 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
           echo "${{ env.Z_ENVKEY_TEST_VAR }} - from env to load in chromatic.yml"
       
-      # - name: Prepare Chromatic Project Token
-      #   run: echo "CHROMATIC_PROJECT_TOKEN=${{ env.CHROMATIC_PROJECT_TOKEN }}" | tr -d "'" > $GITHUB_ENV
-      #   shell: bash
+      - name: Prepare Chromatic Project Token
+        run: echo "CHROMATIC_PROJECT_TOKEN=${{ env.CHROMATIC_PROJECT_TOKEN }}" | tr -d "'" > $GITHUB_ENV
+        shell: bash
 
       - name: Publish to Chromatic
         env: 
