@@ -34,7 +34,7 @@ jobs:
         env:
           ENVKEY: ${{ secrets.ENVKEY }}
         run: |
-          es --pam -f > $GITHUB_ENV
+          es -f -- > $GITHUB_ENV
       
       - name: Testing env vars within 
         run: |
