@@ -20,11 +20,11 @@ jobs:
           fetch-depth: 0
           node-version: lts/*
 
-      - name: Install pnpm globally
-        run: npm install -g pnpm
+      # - name: Install pnpm globally
+      #   run: npm install -g pnpm
 
-      - name: Install dependencies
-        run: pnpm install
+      # - name: Install dependencies
+      #   run: pnpm install
       
       - name: Installing envkey-source
         run: |
@@ -41,9 +41,9 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
           echo "${{ env.Z_ENVKEY_TEST_VAR }} - from env to load in chromatic.yml"
       
-      - name: Prepare Chromatic Project Token
-        run: echo "CHROMATIC_PROJECT_TOKEN=${{ env.CHROMATIC_PROJECT_TOKEN }}" | tr -d "'" > $GITHUB_ENV
-        shell: bash
+      # - name: Prepare Chromatic Project Token
+      #   run: echo "CHROMATIC_PROJECT_TOKEN=${{ env.CHROMATIC_PROJECT_TOKEN }}" | tr -d "'" > $GITHUB_ENV
+      #   shell: bash
 
       - name: Publish to Chromatic
         # env: 
@@ -52,6 +52,6 @@ jobs:
         # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: "${{ env.CHROMATIC_PROJECT_TOKEN }}""
           extraArgs: '--exit-once-uploaded --allow-console-errors'
 
