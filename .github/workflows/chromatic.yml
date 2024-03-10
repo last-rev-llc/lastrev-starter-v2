@@ -37,12 +37,4 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
 
       - name: Publish to Chromatic
-        uses: chromaui/action@v1
-        # Chromatic GitHub Action options
-        with:
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          allowConsoleErrors: true
-          exitZeroOnChanges: true
-        env:
-          CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: npx chromatic -t "$CHROMATIC_PROJECT_TOKEN"
