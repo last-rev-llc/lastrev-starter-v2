@@ -31,9 +31,9 @@ jobs:
         run: ./scripts/env-checks/ci/git_actions_loader.sh || true
         
       - name: Load Envkey vars, Display Value for Z_ENVKEY_TEST_VAR
-        # eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
         run: |
           echo "$Z_ENVKEY_TEST_VAR"
 
       - name: Publish to Chromatic
         run: pnpm run chromatic -t "$CHROMATIC_PROJECT_TOKEN" --exit-once-uploaded
+        
