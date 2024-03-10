@@ -26,14 +26,20 @@ jobs:
       # - name: Install dependencies
       #   run: pnpm install
       
-      - name: Installing and Loading 
+      - name: Installing envkey-source 
         run: |
-          ./scripts/env-checks/ci/git_actions_loader.sh | bash
-          eval "$(envkey-source)"
+          ./scripts/env-checks/ci/git_actions_loader.sh
+          eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
           echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ env.Z_ENVKEY_TEST_VAR }}"
-        env:
-          ENVKEY: ${{ secrets.ENVKEY }}
+        
+      - name: Load and Check EnvKey
+        run: |
+          eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
+          echo "$Z_ENVKEY_TEST_VAR"
+          echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ env.Z_ENVKEY_TEST_VAR }}"
+          env:
+            ENVKEY: ${{ secrets.ENVKEY }}
 
 
       - name: Publish to Chromatic
