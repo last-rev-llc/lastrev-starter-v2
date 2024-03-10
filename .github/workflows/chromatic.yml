@@ -39,8 +39,7 @@ jobs:
       - name: Publish to Chromatic
         run: |
           eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
-          es --pam -f > .env
-          dotenv -- npx chromatic
+          npx chromatic -t "$CHROMATIC_PROJECT_TOKEN"
         
         # # Chromatic GitHub Action options
         # with:
