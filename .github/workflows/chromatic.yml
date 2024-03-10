@@ -35,18 +35,15 @@ jobs:
         run: |
           eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
-          echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ secrets.Z_ENVKEY_TEST_VAR }}"
-          env:
+        env:
             ENVKEY: ${{ secrets.ENVKEY }}
 
 
       - name: Publish to Chromatic
-        env: 
-          CHROMATIC_PROJECT_TOKEN: ${{ env.CHROMATIC_PROJECT_TOKEN }}
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: "${{ env.CHROMATIC_PROJECT_TOKEN }}"
+          projectToken: "$CHROMATIC_PROJECT_TOKEN"
           allowConsoleErrors: true
           exitZeroOnChanges: true
