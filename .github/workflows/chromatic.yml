@@ -12,6 +12,8 @@ jobs:
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
+    env:
+      ENVKEY: ${{ secrets.ENVKEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -28,16 +30,11 @@ jobs:
       
       - name: Installing envkey-source 
         run: ./scripts/env-checks/ci/git_actions_loader.sh || true
-        # env:
-        #   ENVKEY: ${{ secrets.ENVKEY }}
         
       - name: Load and Check EnvKey
         run: |
           eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
-        env:
-            ENVKEY: ${{ secrets.ENVKEY }}
-
 
       - name: Publish to Chromatic
         uses: chromaui/action@v1
