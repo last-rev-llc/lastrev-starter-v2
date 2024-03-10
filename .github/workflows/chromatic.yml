@@ -28,14 +28,13 @@ jobs:
       # - name: Install dependencies
       #   run: pnpm install
       
-      # - name: Installing envkey-source 
-      #   run: ./scripts/env-checks/ci/git_actions_loader.sh || true
+      - name: Installing envkey-source 
+        run: ./scripts/env-checks/ci/git_actions_loader.sh || true
         
       - name: Load Envkey vars and echo test var
+        # eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
         run: |
-          npm install envkey-shell
-          eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
 
       - name: Publish to Chromatic
-        run: envkey-shell npx chromatic -t "$CHROMATIC_PROJECT_TOKEN"
+        run: npx chromatic -t "$CHROMATIC_PROJECT_TOKEN" --exit-once-uploaded
