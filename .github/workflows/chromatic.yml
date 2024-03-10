@@ -41,6 +41,6 @@ jobs:
         # Chromatic GitHub Action options
         with:
           # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: "$CHROMATIC_PROJECT_TOKEN"
+          projectToken: $CHROMATIC_PROJECT_TOKEN
           allowConsoleErrors: true
           exitZeroOnChanges: true
