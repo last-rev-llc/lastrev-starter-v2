@@ -26,30 +26,11 @@ jobs:
       # - name: Install dependencies
       #   run: pnpm install
       
-      - name: Installing envkey-source
-        run: |
-          VERSION=$(curl https://envkey-releases.s3.amazonaws.com/latest/envkeysource-version.txt) && curl -s https://envkey-releases.s3.amazonaws.com/envkeysource/release_artifacts/$VERSION/install.sh | bash
-
-      - name: Loading env vars from EnvKey
+      - name: Installing and Loading 
+        run: ./scripts/env-checks/ci/git_actions_loader.sh
         env:
           ENVKEY: ${{ secrets.ENVKEY }}
-        run: |
-          es --dot-env -f -- > $GITHUB_ENV
-      
-      - name: Testing env vars within 
-        run: |
-          echo "$Z_ENVKEY_TEST_VAR"
-          echo "${{ env.Z_ENVKEY_TEST_VAR }} - from env to load in chromatic.yml"
-      
-      - name: Strip quotes from all env vars
-        run: |
-          while IFS='=' read -r name value; do
-            # Use `tr` to strip single quotes from the value
-            cleaned_value=$(echo "$value" | tr -d "'")
-            # Re-export the variable without the quotes
-            echo "$name=$cleaned_value" >> $GITHUB_ENV
-          done < <(env)
-        shell: bash
+
 
       - name: Publish to Chromatic
         env: 
