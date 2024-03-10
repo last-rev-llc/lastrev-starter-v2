@@ -28,8 +28,8 @@ jobs:
       
       - name: Installing envkey-source 
         run: ./scripts/env-checks/ci/git_actions_loader.sh || true
-        env:
-          ENVKEY: ${{ secrets.ENVKEY }}
+        # env:
+        #   ENVKEY: ${{ secrets.ENVKEY }}
         
       - name: Load and Check EnvKey
         run: |
