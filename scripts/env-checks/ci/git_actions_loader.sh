@@ -11,6 +11,3 @@ while IFS='=' read -r name value; do
   cleaned_value=$(echo "$value" | tr -d "'")
   echo "$name=$cleaned_value" >> $GITHUB_ENV
 done < <(env)
-
-echo "$Z_ENVKEY_TEST_VAR"
-echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ env.Z_ENVKEY_TEST_VAR }}"

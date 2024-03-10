@@ -27,7 +27,11 @@ jobs:
       #   run: pnpm install
       
       - name: Installing and Loading 
-        run: ./scripts/env-checks/ci/git_actions_loader.sh
+        run: |
+          ./scripts/env-checks/ci/git_actions_loader.sh
+          echo "$Z_ENVKEY_TEST_VAR"
+          echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ env.Z_ENVKEY_TEST_VAR }}"
+
         env:
           ENVKEY: ${{ secrets.ENVKEY }}
 
