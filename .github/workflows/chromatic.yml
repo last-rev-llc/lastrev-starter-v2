@@ -22,16 +22,16 @@ jobs:
           fetch-depth: 0
           node-version: lts/*
 
-      # - name: Install pnpm globally
-      #   run: npm install -g pnpm
+      - name: Install pnpm globally
+        run: npm install -g pnpm
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
       
       - name: Installing envkey-source 
         run: ./scripts/env-checks/ci/git_actions_loader.sh || true
         
-      - name: Load and Check EnvKey
+      - name: Load Envkey vars and echo test var
         run: |
           eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
