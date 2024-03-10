@@ -35,7 +35,7 @@ jobs:
         run: |
           eval $(envkey-source --verbose ENVKEY=${{ secrets.ENVKEY }})
           echo "$Z_ENVKEY_TEST_VAR"
-          echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ env.Z_ENVKEY_TEST_VAR }}"
+          echo "Checking GITHUB_ENV load state from EnvKey, should mirror the above: ${{ secrets.Z_ENVKEY_TEST_VAR }}"
           env:
             ENVKEY: ${{ secrets.ENVKEY }}
 
