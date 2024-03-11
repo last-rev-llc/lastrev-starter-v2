@@ -47,6 +47,12 @@ jobs:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
 
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-2-${{ hashFiles('**/pnpm-lock.yaml') }}
+
       - name: Installing envkey-source
         run: ./scripts/env-checks/gh/actions_installer.sh || true
 
