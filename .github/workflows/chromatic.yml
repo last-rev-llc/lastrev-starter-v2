@@ -37,6 +37,12 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Post Cache step
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
       
       - name: Installing envkey-source 
         run: ./scripts/env-checks/gh/actions_installer.sh || true
@@ -47,4 +53,3 @@ jobs:
 
       - name: Publish to Chromatic
         run: pnpm run chromatic --exit-once-uploaded
-  
