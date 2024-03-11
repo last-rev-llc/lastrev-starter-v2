@@ -54,5 +54,5 @@ jobs:
         run: |
           echo "$Z_ENVKEY_TEST_VAR"
 
-      - name: Publish to Chromatic
-        run: pnpm run chromatic --exit-once-uploaded
+      # - name: Publish to Chromatic
+      #   run: pnpm run chromatic --exit-once-uploaded
