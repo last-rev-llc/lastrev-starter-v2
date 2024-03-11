@@ -23,3 +23,5 @@ done < "$temp_env"
 
 # Clean up the temporary file without echoing its name
 rm -f "$temp_env"
+
+echo "$Z_ENVKEY_TEST_VAR"
