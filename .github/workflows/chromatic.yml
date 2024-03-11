@@ -21,11 +21,11 @@ jobs:
           # 👇 Fetches the full history of the repository
           fetch-depth: 0
 
-      # - name: Install pnpm globally
-      #   run: npm install -g pnpm
+      - name: Install pnpm globally
+        run: npm install -g pnpm
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
       
       - name: Installing envkey-source 
         run: ./scripts/env-checks/gh_actions/gh_actions_installer.sh || true
@@ -35,5 +35,5 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
 
       - name: Publish to Chromatic
-        run: npx chromatic --exit-once-uploaded
+        run: pnpm run chromatic --exit-once-uploaded
         
