@@ -32,7 +32,7 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-webpack5": "^7.6.17",
     "@storybook/testing-library": "^0.2.2",
-    "chromatic": "^7.6.0",
+    "chromatic": "^11.0.8",
     "cypress": "^13.6.6",
     "dotenv-cli": "latest",
     "next": "^13.5.1",
