@@ -30,9 +30,9 @@ jobs:
       - name: Installing envkey-source 
         run: ./scripts/env-checks/gh/actions_installer.sh || true
         
-      # - name: Load Envkey vars, Display Value for Z_ENVKEY_TEST_VAR
-      #   run: |
-      #     echo "$Z_ENVKEY_TEST_VAR"
+      - name: Load Envkey vars, Display Value for Z_ENVKEY_TEST_VAR
+        run: |
+          echo "$Z_ENVKEY_TEST_VAR"
 
       # - name: Publish to Chromatic
       #   run: pnpm run chromatic --exit-once-uploaded
