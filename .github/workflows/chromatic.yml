@@ -21,8 +21,11 @@ jobs:
           # 👇 Fetches the full history of the repository
           fetch-depth: 0
 
-      - name: Install pnpm globally
-        run: npm install -g pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3 # docs https://pnpm.io/continuous-integration#github-actions
+
+      # - name: Install pnpm globally
+      #   run: npm install -g pnpm
 
       - name: Install dependencies
         run: pnpm install
