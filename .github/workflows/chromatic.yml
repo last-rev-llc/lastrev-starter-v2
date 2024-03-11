@@ -35,6 +35,9 @@ jobs:
       - name: Set pnpm config to prefer offline
         run: pnpm config set prefer-offline true
 
+      - name: List pnpm store contents
+        run: ls -alh ~/.pnpm-store
+
       - name: Install dependencies
         run: pnpm install
 
@@ -43,10 +46,10 @@ jobs:
         with:
           path: ~/.pnpm-store
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      
-      - name: Installing envkey-source 
+
+      - name: Installing envkey-source
         run: ./scripts/env-checks/gh/actions_installer.sh || true
-        
+
       - name: Load Envkey vars, Display Value for Z_ENVKEY_TEST_VAR
         run: |
           echo "$Z_ENVKEY_TEST_VAR"
