@@ -43,7 +43,7 @@
     "storybook": "^7.6.17",
     "turbo": "^1.12.5"
   },
-  "packageManager": "pnpm@8.6.10",
+  "packageManager": "pnpm@8.10.5",
   "version": "",
   "readme": "ERROR: No README data found!",
   "_id": "lastrev-next-starter@",
