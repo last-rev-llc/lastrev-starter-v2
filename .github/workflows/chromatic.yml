@@ -36,7 +36,7 @@ jobs:
         run: pnpm config set prefer-offline true
 
       - name: List pnpm store contents
-        run: ls -alh ~/.pnpm-store
+        run: ls -alh ~/.pnpm-store || true
 
       - name: Install dependencies
         run: pnpm install
