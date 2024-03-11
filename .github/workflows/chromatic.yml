@@ -35,5 +35,5 @@ jobs:
           echo "$Z_ENVKEY_TEST_VAR"
 
       - name: Publish to Chromatic
-        run: pnpm run chromatic -t "$CHROMATIC_PROJECT_TOKEN" --exit-once-uploaded
+        run: npx chromatic --exit-once-uploaded
         
