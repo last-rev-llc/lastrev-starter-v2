@@ -1,0 +1,55 @@
+{
+  "name": "lastrev-next-starter",
+  "private": true,
+  "scripts": {
+    "start": "pnpm env:init && dotenv -- turbo start",
+    "build": "pnpm env:init && STAGE=build dotenv -- turbo build",
+    "dev": "pnpm env:init && dotenv -- turbo sync:cms dev gql:dev --continue --concurrency 15",
+    "gql:dev": "pnpm env:init && dotenv -- turbo sync:cms gql:dev --continue --concurrency 15",
+    "sync:cms": "pnpm env:init && dotenv -- turbo sync:cms",
+    "gql:logs": "pnpm env:init && dotenv -- turbo gql:logs",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic",
+    "env:check": "node ./scripts/env-scripts/envSanityCheck.js",
+    "env:init": "./scripts/env-checks/main_workflow.sh",
+    "lr-build": "es --dot-env -f > .env && pnpm i && STAGE=build dotenv -- turbo build",
+    "lr-dev": "es --dot-env -f > .env && pnpm i && pnpm dev"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.23.3",
+    "@storybook/addon-essentials": "^7.6.17",
+    "@storybook/addon-interactions": "^7.6.17",
+    "@storybook/addon-links": "^7.6.17",
+    "@storybook/addon-onboarding": "^1.0.11",
+    "@storybook/blocks": "^7.6.17",
+    "@storybook/nextjs": "^7.6.17",
+    "@storybook/react": "^7.6.17",
+    "@storybook/react-webpack5": "^7.6.17",
+    "@storybook/testing-library": "^0.2.2",
+    "chromatic": "^7.6.0",
+    "cypress": "^13.6.6",
+    "dotenv-cli": "latest",
+    "next": "^13.5.1",
+    "prettier": "^2.8.8",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.6.17",
+    "turbo": "^1.12.5"
+  },
+  "packageManager": "pnpm@8.6.10",
+  "version": "",
+  "readme": "ERROR: No README data found!",
+  "_id": "lastrev-next-starter@",
+  "pnpm": {
+    "patchedDependencies": {
+      "@mui/system@5.14.9": "patches/@mui__system@5.14.9.patch"
+    }
+  }
+}
