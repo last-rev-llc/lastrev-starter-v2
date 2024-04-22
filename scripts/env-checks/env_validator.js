@@ -30,26 +30,16 @@ const isCIEnvironment = process.env.NETLIFY === 'true' || process.env.VERCEL ===
 const envCheckExclusions = [
   'ALGOLIA_MAX_RECORDS',
   'ANALYZE_BUNDLE',
-  'CONTENTFUL_MAX_BATCH_SIZE',
   'DEPLOY_URL',
-  'fsaStoreKey',
-  'fsaStoreURL',
-  'GATSBY_PRODUCTION_DOMAIN',
   'GRAPHQL_SERVER_URL',
   'HEAD',
-  'LOG_TRANSPORT',
-  'NEXT_PHASE',
-  'NEXT_PUBLIC_LOCALE_COOKIE_AGE',
+
   'NEXT_PUBLIC_SENTRY_DSN',
   'NODE_ENV',
   'PAGES_REVALIDATE',
   'PORT',
-  'REDIS_MAX_BATCH_SIZE',
-  'REDIS_USERNAME',
-  'REDIS_USERNAME',
-  'SITE_SETTINGS',
   'STAGE',
-  'TOKEN_SECRET',
+
   'VERCEL_URL'
 ];
 
