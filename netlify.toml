@@ -1,15 +1,14 @@
 [build]
-  publish = "apps/web/.next"
   command = "pnpm build"
 
 [functions]
   included_files = ["!node_modules/@swc/**/*"]
 
-#[[plugins]]
-#  package = "@netlify/plugin-nextjs"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
-#[[plugins]]
-#  package = "@netlify/plugin-lighthouse"
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
 
 # optional, fails build when a category is below a threshold
 #[plugins.inputs.thresholds]

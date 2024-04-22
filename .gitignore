@@ -13,3 +13,4 @@ server/dist
 public/dist
 **/analyze
 .env.local.backup
+storybook-static

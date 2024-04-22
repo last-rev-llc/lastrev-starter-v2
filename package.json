@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "pnpm env:init && dotenv -- turbo start",
-    "build": "pnpm env:init && STAGE=build dotenv -- turbo build",
+    "build": "if [ \"$NETLIFY_APP_CONTEXT\" = \"storybook\" ]; then pnpm build-storybook; else pnpm env:init && STAGE=build dotenv -- turbo build; fi",
     "dev": "pnpm env:init && dotenv -- turbo sync:cms dev gql:dev --continue --concurrency 15",
     "gql:dev": "pnpm env:init && dotenv -- turbo sync:cms gql:dev --continue --concurrency 15",
     "sync:cms": "pnpm env:init && dotenv -- turbo sync:cms",
