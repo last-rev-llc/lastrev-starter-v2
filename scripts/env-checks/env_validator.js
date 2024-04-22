@@ -33,13 +33,11 @@ const envCheckExclusions = [
   'DEPLOY_URL',
   'GRAPHQL_SERVER_URL',
   'HEAD',
-
   'NEXT_PUBLIC_SENTRY_DSN',
   'NODE_ENV',
   'PAGES_REVALIDATE',
   'PORT',
   'STAGE',
-
   'VERCEL_URL'
 ];
 
