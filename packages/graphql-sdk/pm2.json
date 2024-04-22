@@ -1,9 +1,9 @@
 {
   "apps": [
     {
-      "name": "uniqueValueNeeded-gql-serve",
+      "name": "ias-intranet-gql-serve",
       "script": "./node_modules/@last-rev/cli/dist/gql-serve.js",
-      "instances": "2",
+      "instances": "1",
       "exec_mode": "cluster",
       "args": ["-c", "./config.js"],
       "watch": ["../graphql-extensions/dist", "./config.js"]
