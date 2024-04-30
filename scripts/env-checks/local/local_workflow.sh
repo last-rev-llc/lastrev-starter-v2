@@ -32,7 +32,10 @@ resolve_setup_issues() {
     echo -e "${YELLOW}Attempting to resolve environment setup issues...${NC}"
     
     bash ./scripts/env-checks/local/local_setup_check.sh || { echo -e "${RED}EnvKey setup failed.${NC}"; return 1; }
-    
+
+    envkey core stop
+    envkey core start
+
     bash ./scripts/env-checks/local/local_auth_check.sh || { echo -e "${RED}Local authentication check failed.${NC}"; return 1; }
     
     bash ./scripts/env-checks/local/local_pull_vars.sh || { echo -e "${RED}Environment variable pull failed.${NC}"; return 1; }

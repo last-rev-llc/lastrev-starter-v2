@@ -40,7 +40,7 @@ Coordinates the local development environment setup process, guiding through the
 
 ### `local_setup_check.sh`
 
-Confirms the local development environment is correctly set up, verifying configurations and prerequisites to ensure readiness for development tasks.
+Confirms the local development environment is correctly set up for Envkey, and any prerequisites to ensure readiness for development tasks.
 
 ### `local_pull_vars.sh`
 
@@ -54,19 +54,4 @@ Serves as the primary orchestrator for the environment setup and validation proc
 
 ### `env_validator.js`
 
-Performs advanced validation of environment configurations, ensuring all required environment variables are present and correctly configured before starting the build or development process.
-
-## Getting Started
-
-To use these scripts, follow these steps:
-
-1. Clone the env-checks folder to your repo under the /scripts folder.
-2. Navigate to the project directory.
-3. Execute the `main_workflow.sh` script by prefixing all commands with `bash ./scripts/env-checks/main_workflow.sh && originalBuildCommand` or create a new build script like `"env:check": "./scripts/env-checks/main_workflow.sh", "build":"pnpm env:check && STAGE=build dotenv -- turbo build"`
-4. Follow any on-screen instructions to complete the setup or resolve any issues identified by the scripts locally.
-
-## Contributing
-
-Contributions are welcome to improve the project, including enhancements to existing scripts, documentation, or adding new features. Please submit pull requests with your changes for review.
-
-This project is intended to provide a robust framework for managing development and CI environments. For detailed operation of each script, please refer to the inline comments within the script files themselves.
+Performs advanced validation of environment configurations, ensuring all required environment variables are present based on the globalEnv array within the turbo.json file and not excluded within this validator script before starting the build or development process.

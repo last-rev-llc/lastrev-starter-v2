@@ -35,8 +35,6 @@ const isCIEnvironment =
 const envCheckExclusions = [
   "ALGOLIA_MAX_RECORDS",
   "ANALYZE_BUNDLE",
-  "fsaStoreKey",
-  "fsaStoreURL",
   "GRAPHQL_SERVER_URL",
   "HEAD",
   "NEXT_PUBLIC_SENTRY_DSN",
