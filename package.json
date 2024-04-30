@@ -17,8 +17,8 @@
     "chromatic": "npx chromatic",
     "env:check": "node ./scripts/env-scripts/envSanityCheck.js",
     "env:init": "./scripts/env-checks/main_workflow.sh",
-    "lr-build": "es --dot-env -f > .env && pnpm i && STAGE=build dotenv -- turbo build",
-    "lr-dev": "es --dot-env -f > .env && pnpm i && pnpm dev"
+    "lr-dev": "envkey core stop && envkey core start && es --dot-env -f > .env && pnpm i && pnpm dev",
+    "lr-build": "envkey core stop && envkey core start && es --dot-env -f > .env && pnpm i && pnpm build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.24.0",
