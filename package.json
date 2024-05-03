@@ -35,11 +35,9 @@
     "chromatic": "^7.6.0",
     "cypress": "^13.6.6",
     "dotenv-cli": "latest",
-    "next": "^13.5.1",
+    "next": "^14.2.3",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "storybook": "^7.6.17",
     "turbo": "^1.12.5"
   },
@@ -51,5 +49,9 @@
     "patchedDependencies": {
       "@mui/system@5.14.9": "patches/@mui__system@5.14.9.patch"
     }
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

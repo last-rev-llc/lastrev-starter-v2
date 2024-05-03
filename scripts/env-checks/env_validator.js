@@ -46,7 +46,8 @@ const envCheckExclusions = [
   "REDIS_USERNAME",
   "SITE_SETTINGS",
   "VERCEL_URL",
-  "DEPLOY_URL"
+  "DEPLOY_URL",
+  "GTM_ID"
 ];
 
 // Function to read and parse turbo.json to get required environment variables
