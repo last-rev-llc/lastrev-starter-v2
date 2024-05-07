@@ -44,7 +44,7 @@ export const mappers: Mappers = {
       relatedItems: async (blog: any, _args: any, ctx: ApolloContext) =>
         createType('Collection', {
           introText: createType('Text', { title: 'Related Blogs' }),
-          items: getLocalizedField(blog.fields, 'relatedItems', ctx),
+          items: getLocalizedField(blog.fields, 'relatedItems', ctx) ?? [],
           variant: 'Three Per Row',
           itemsVariant: 'Blog'
         }),

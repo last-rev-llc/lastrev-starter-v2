@@ -5,7 +5,7 @@ import MuiCard from '@mui/material/Card';
 import { default as MuiCardMedia } from '@mui/material/CardMedia';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardActionArea from '@mui/material/CardActionArea';
+import CardActionArea, { type CardActionAreaProps } from '@mui/material/CardActionArea';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
@@ -16,7 +16,7 @@ import { getFirstOfArray } from '../utils/getFirstOfArray';
 import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
 import type { CardProps, CardOwnerState } from './Card.types';
-import { type LinkProps } from '../Link';
+import Link, { type LinkProps } from '../Link';
 
 const Card = (props: CardProps) => {
   const {
@@ -52,7 +52,7 @@ const Card = (props: CardProps) => {
         className={className}
       >
         <CardWrap ownerState={ownerState}>
-          {!!link ? <CardLink component={CardActionArea} {...(link as any)} /> : null}
+        {!!link ? <CardActionArea component={CardLink} {...link} /> : null}
 
           {image || loading ? (
             // @ts-ignore: TODO
@@ -183,11 +183,11 @@ const CardWrap = styled(MuiCard, {
   overridesResolver: (props, styles) => [styles.cardWrap]
 })<{ ownerState: CardOwnerState }>``;
 
-const CardLink = styled(CardActionArea, {
+const CardLink = styled(Link, {
   name: 'Card',
   slot: 'CardLink',
   overridesResolver: (_, styles) => [styles.link]
-})<{ ownerState: CardOwnerState }>``;
+})<CardActionAreaProps & LinkProps & { ownerState: CardOwnerState }>``;
 
 const CardMedia = styled(MuiCardMedia, {
   name: 'Card',

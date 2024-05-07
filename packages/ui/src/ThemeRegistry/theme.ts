@@ -5,7 +5,7 @@ import {
   experimental_extendTheme as extendTheme,
   CssVarsThemeOptions
 } from '@mui/material/styles';
-import deepmerge from '@mui/utils/deepmerge';
+import {deepmerge} from '@mui/utils';
 import './theme.types';
 import createGridMixin from './mixins/createGridMixin';
 import applyBackgroundColor from './mixins/applyBackgroundColor';

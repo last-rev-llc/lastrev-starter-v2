@@ -10,6 +10,8 @@ directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
 
 directive @tag(name: String!) on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
 
+union ActionLink = Link | LinkIcs
+
 type Asset {
   description: String
   extension: String
@@ -130,15 +132,57 @@ type Collection implements Content {
 }
 
 type CollectionDynamic implements Content {
+  algoliaSettings: JSON
   animation: JSON
+  backgroundImage: Media
   id: String
   internalTitle: String
+  introText: Text
+  isCarouselDesktop: Boolean
+  isCarouselMobile: Boolean
+  isCarouselTablet: Boolean
+  items: [CollectionDynamicItem]
+  itemsConnection(filter: CollectionDynamicFilterInput, limit: Int, offset: Int): CollectionDynamicItemConnection
+  itemsPerRow: Int
   itemsVariant: String
+  numItems: Int
   numberOfItemsToPull: String
   pullFromContentType: String
+  showFilters: Boolean
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
+}
+
+type CollectionDynamicConnectionPageInfo {
+  allOptions: CollectionDynamicOptions
+  options: CollectionDynamicOptions
+  total: Int
+}
+
+input CollectionDynamicFilterInput {
+  body: String
+  sector: [String]
+  tags: [String]
+  topics: [String]
+}
+
+union CollectionDynamicItem = Card
+
+type CollectionDynamicItemConnection {
+  items: [CollectionDynamicItem]
+  pageInfo: CollectionDynamicConnectionPageInfo
+}
+
+type CollectionDynamicOption {
+  label: String
+  value: String
+}
+
+type CollectionDynamicOptions {
+  sector: [CollectionDynamicOption]
+  tags: [CollectionDynamicOption]
+  topics: [CollectionDynamicOption]
 }
 
 type CollectionExpandable implements Content {
@@ -233,11 +277,15 @@ type ElementForm implements Content {
 }
 
 type ElementVideo implements Content {
+  alt: String
   altText: String
   animation: JSON
   asset: Media
   assetURL: String
   autoplay: Boolean
+  file: Asset
+  fileMobile: Asset
+  fileTablet: Asset
   id: String
   internalTitle: String
   mobile: Media
@@ -266,6 +314,11 @@ type Footer implements Content {
   socialLinks: [Link]
   theme: [Theme]
   variant: String
+}
+
+type Geo {
+  lat: String
+  lon: String
 }
 
 type Header implements Content {
@@ -325,6 +378,24 @@ type Link implements Content {
   text: String
   theme: [Theme]
   variant: String
+}
+
+type LinkIcs {
+  event: LinkIcsCalendar
+  icon: String
+  iconPosition: String
+  variant: String
+}
+
+type LinkIcsCalendar {
+  busyStatus: Boolean
+  description: String
+  end: String
+  geo: Geo
+  location: String
+  start: String
+  title: String
+  url: String
 }
 
 type Locales {
@@ -414,6 +485,17 @@ type Page implements Content {
   title: String
 }
 
+type PageEvent {
+  breadcrumbs: [Link]
+  contents: [Content]
+  footer: Footer
+  footerDisclaimerOverride: RichText
+  header: Header
+  hero: Hero
+  passwordProtection: PasswordProtection
+  path: String
+}
+
 type PagePathParam {
   slug: [String!]
 }
@@ -421,6 +503,24 @@ type PagePathParam {
 type PagePathParams {
   locale: String
   params: PagePathParam!
+}
+
+type PageProperty {
+  body: RichText
+  breadcrumbs: [Link]
+  featuredAssets: Collection
+  footer: Footer
+  header: Header
+  hero: Content
+  imageCarousel: Collection
+  mainImage: Media
+  path: String
+  socialLinks: [Link]
+}
+
+type PasswordProtection {
+  passwordPromptText: Content
+  passwordProtectedContent: [Content]
 }
 
 type Person implements Content {

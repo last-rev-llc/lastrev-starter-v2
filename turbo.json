@@ -12,7 +12,6 @@
     "DEFAULT_SITE_ID",
     "DEPLOY_URL",
     "DOMAIN",
-    "GRAPHQL_SERVER_URL",
     "NEXT_PUBLIC_SENTRY_DSN",
     "NODE_ENV",
     "PAGES_REVALIDATE",
@@ -33,7 +32,11 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"]
     },
-    "test": { "outputMode": "new-only", "outputs": ["coverage/**"], "dependsOn": [] },
+    "test": {
+      "outputMode": "new-only",
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
     "lint": {
       "dependsOn": ["^build"]
     },
@@ -62,13 +65,21 @@
       "outputMode": "new-only",
       "cache": false,
       "dependsOn": ["graphql-sdk#sync:cms", "^build"],
-      "inputs": ["./packages/graphql-sdk/.cms-sync", "./packages/**/src/**/*.graphql", "./apps/**/src/**/*.graphql"],
+      "inputs": [
+        "./packages/graphql-sdk/.cms-sync",
+        "./packages/**/src/**/*.graphql",
+        "./apps/**/src/**/*.graphql"
+      ],
       "outputs": ["dist/**", "schema.graphql", "src/generated/**"]
     },
     "graphql-sdk#gql:start": {
       "outputMode": "new-only",
       "cache": false,
-      "dependsOn": ["graphql-extensions#build", "graphql-sdk#sync:cms", "^build"]
+      "dependsOn": [
+        "graphql-extensions#build",
+        "graphql-sdk#sync:cms",
+        "^build"
+      ]
     },
     "graphql-sdk#sync:cms": {
       "outputMode": "new-only",

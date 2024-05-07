@@ -1,6 +1,6 @@
 import { getDefaultFieldValue } from '@last-rev/graphql-contentful-core';
 import { type ContentfulLoaders, type ContentfulPathsGenerator } from '@last-rev/types';
-import { type Entry } from 'contentful';
+
 import { createPath } from './utils/createPath';
 
 // Path generation
@@ -71,7 +71,7 @@ const generatePaths: ContentfulPathsGenerator = async (
   preview = false,
   _site
 ) => {
-  const slug = getDefaultFieldValue(contentItem, 'slug', defaultLocale);
+  const slug = getDefaultFieldValue(contentItem as any, 'slug', defaultLocale);
 
   const paths = await generateParentPaths(contentItem, loaders, defaultLocale, preview);
 
@@ -79,7 +79,7 @@ const generatePaths: ContentfulPathsGenerator = async (
 
   const fullPath = createPath(...paths);
   const excludedLocales =
-    getDefaultFieldValue(contentItem, 'excludeFromLocale', defaultLocale) || [];
+    getDefaultFieldValue(contentItem as any, 'excludeFromLocale', defaultLocale) || [];
 
   return {
     [fullPath]: {
