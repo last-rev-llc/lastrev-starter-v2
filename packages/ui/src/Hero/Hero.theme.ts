@@ -38,7 +38,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     }
   }),
 
-  // title: ({ theme }) => ({ marginBottom: theme.spacing(1) }),
+  title: ({ theme }) => ({ marginBottom: theme.spacing(1), color: theme.vars.palette.common.white }),
 
   // overline: ({ theme }) => ({ marginBottom: theme.spacing(1) }),
 
@@ -56,7 +56,9 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
 
   // subtitle: {},
 
-  // body: {},
+  body: ({ theme }) => ({
+    color: theme.vars.palette.common.white,
+  }),
 
   mainContentWrap: {
     display: 'flex',

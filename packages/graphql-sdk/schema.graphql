@@ -125,6 +125,7 @@ type Collection implements Content {
   itemsVariant: String
   numItems: Int
   sidekickLookup: JSON
+  style: JSON
   theme: [Theme]
   variant: String
 }
@@ -342,6 +343,8 @@ type Media implements Content {
   altText: String
   animation: JSON
   asset: Media
+  assetUrl: String
+  controls: String
   description: String
   file: Asset
   fileMobile: Asset
@@ -349,6 +352,7 @@ type Media implements Content {
   id: String
   internalTitle: String
   mobile: Media
+  placeholder: Media
   sidekickLookup: JSON
   source: String
   tablet: Media
@@ -376,6 +380,7 @@ type NavigationItem implements Content {
   iconPosition: String
   id: String
   internalTitle: String
+  layoutVariant: String
   manualUrl: String
   navMedia: Media
   sidekickLookup: JSON
@@ -495,12 +500,21 @@ type Section implements Content {
   animation: JSON
   background: Media
   backgroundColor: String
+  contentAlignment: String
+  contentDirection: String
+  contentSpacing: Int
   contents: [Content]
   hasBackground: Boolean
   id: String
   internalTitle: String
   introText: Text
+  paddingBottom: Int
+  paddingLeft: Int
+  paddingRight: Int
+  paddingTop: Int
+  settings: JSON
   sidekickLookup: JSON
+  styles: JSON
   theme: [Theme]
   variant: String
 }
@@ -583,7 +597,15 @@ type Text implements Content {
   variant: String
 }
 
-type Theme {
+type Theme implements Content {
+  animation: JSON
+  components: JSON
+  description: String
+  id: String
+  internalTitle: String
+  sidekickLookup: JSON
+  theme: [Theme]
+  typography: JSON
   variant: String
 }
 

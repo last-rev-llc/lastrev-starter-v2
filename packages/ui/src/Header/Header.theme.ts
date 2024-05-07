@@ -15,7 +15,8 @@ const defaultProps: ComponentsProps['Header'] = {};
 const styleOverrides: ComponentsOverrides<Theme>['Header'] = {
   root: ({ theme, ownerState }) => ({
     'padding': 'var(--grid-gap) 0',
-
+    backgroundColor: ownerState.backgroundColor,
+    color: theme.vars.palette.common.white,
     ':is(&, & [class*=navItemSubMenu])': {
       ...theme.mixins.applyBackgroundColor({ ownerState, theme })
     },
