@@ -26,7 +26,6 @@
     "ui": "workspace:*"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "4.41.3",
     "@types/cors": "^2.8.17",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.10",

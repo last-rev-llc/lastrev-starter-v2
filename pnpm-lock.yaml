@@ -21,7 +21,7 @@ importers:
         version: 7.24.1(@babel/core@7.23.5)
       '@netlify/plugin-nextjs':
         specifier: 4.41.3
-        version: 4.41.3(@opentelemetry/api@1.8.0)(encoding@0.1.13)
+        version: 4.41.3(@opentelemetry/api@1.8.0)
       '@storybook/addon-essentials':
         specifier: ^7.6.3
         version: 7.6.3(react-dom@18.3.1)(react@18.3.1)
@@ -125,9 +125,6 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui
     devDependencies:
-      '@netlify/plugin-nextjs':
-        specifier: 4.41.3
-        version: 4.41.3(@opentelemetry/api@1.8.0)(encoding@0.1.13)
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.17
@@ -6935,7 +6932,7 @@ packages:
       - '@opentelemetry/api'
     dev: true
 
-  /@netlify/ipx@1.4.6(@opentelemetry/api@1.8.0)(encoding@0.1.13):
+  /@netlify/ipx@1.4.6(@opentelemetry/api@1.8.0):
     resolution: {integrity: sha512-rnKR2LXhtnflitPX9CQIv+XSrNlYIqGsV54xrXifhbtHHjCjCw/lixsi8qwAXqEIgZBC9b4Y7prhHqRtC4oIjw==}
     dependencies:
       '@netlify/functions': 2.6.3(@opentelemetry/api@1.8.0)
@@ -6975,14 +6972,14 @@ packages:
     resolution: {integrity: sha512-btuPsjyX+dk/zM7e9UWM1s+EbVahwfsUoMuMV3RVttHgVR971m+CiDObTwZ0rtco8J+ibnPIsC16FA6iLRu6hw==}
     dev: false
 
-  /@netlify/plugin-nextjs@4.41.3(@opentelemetry/api@1.8.0)(encoding@0.1.13):
+  /@netlify/plugin-nextjs@4.41.3(@opentelemetry/api@1.8.0):
     resolution: {integrity: sha512-l8TB61u7A1ZF22QpoyZtresSUsHOJGP9DatECnqlNab3lG8id1kz9Pso+nZVOznWOm98o7w51k2+TIf52x+DBQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
       '@netlify/blobs': 2.2.0
       '@netlify/esbuild': 0.14.39
       '@netlify/functions': 1.6.0
-      '@netlify/ipx': 1.4.6(@opentelemetry/api@1.8.0)(encoding@0.1.13)
+      '@netlify/ipx': 1.4.6(@opentelemetry/api@1.8.0)
       '@vercel/node-bridge': 2.2.2
       chalk: 4.1.2
       chokidar: 3.5.3
