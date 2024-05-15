@@ -9,9 +9,11 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 import Grid from '../Grid';
 import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
-
-import type { CollectionProps, CollectionOwnerState } from './Collection.types';
 import Background from '../Background';
+
+import { layoutConfig } from './Collection.theme';
+
+import { type CollectionProps, type CollectionOwnerState } from './Collection.types';
 
 const Collection = (props: CollectionProps) => {
   const ownerState = { ...props };
@@ -20,7 +22,8 @@ const Collection = (props: CollectionProps) => {
     backgroundImage,
     backgroundColor,
     items,
-    variant,
+    variant = 'threePerRow',
+    itemsAspectRatio,
     itemsVariant,
     sidekickLookup,
     introText
@@ -31,8 +34,7 @@ const Collection = (props: CollectionProps) => {
       <Root
         ownerState={ownerState}
         {...sidekick(sidekickLookup)}
-        data-testid={`Collection-${variant}`}
-      >
+        data-testid={`Collection-${variant}`}>
         <CollectionBackground
           background={backgroundImage}
           backgroundColor={backgroundColor}
@@ -59,7 +61,10 @@ const Collection = (props: CollectionProps) => {
                   backgroundColor={backgroundColor}
                   key={item?.id}
                   {...item}
+                  layoutConfig={layoutConfig}
+                  gridLayout={variant}
                   variant={itemsVariant ?? item?.variant}
+                  aspectRatio={itemsAspectRatio ?? item?.aspectRatio}
                   position={index + 1}
                 />
               ))}
@@ -110,7 +115,8 @@ const ItemsGrid = styled(Box, {
 const Item = styled(ContentModule, {
   name: 'Collection',
   slot: 'Item',
-  overridesResolver: (_, styles) => [styles.item]
+
+  overridesResolver: (_: any, styles: { item: any }) => [styles.item]
 })<{ ownerState: CollectionOwnerState }>``;
 
 export default Collection;

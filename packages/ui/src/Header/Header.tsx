@@ -13,7 +13,6 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 
 import Grid from '../Grid';
 import ContentModule from '../ContentModule';
-import SiteMessage from '../SiteMessage';
 
 import type { HeaderProps, HeaderOwnerState } from './Header.types';
 import type { NavigationItemProps } from '../NavigationItem';
@@ -22,41 +21,13 @@ import Background from '../Background';
 const Header = (props: HeaderProps) => {
   const ownerState = { ...props };
 
-  const {
-    backgroundColor,
-    logo,
-    logoUrl,
-    navigationItems,
-    sidekickLookup,
-    ctaItems,
-    siteMessageIcon,
-    siteMessageText,
-    siteMessageLink
-  } = props;
-
-  // const trigger = useScrollTrigger({
-  //   disableHysteresis: true,
-  //   threshold: 0
-  // });
-
-  // const menuBreakpoint: Breakpoint = theme?.components?.Header?.mobileMenuBreakpoint ?? 'sm';
+  const { backgroundColor, logo, logoUrl, navigationItems, sidekickLookup, ctaItems } = props;
 
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   return (
-    <Root
-      {...sidekick(sidekickLookup)}
-      ownerState={ownerState}
-      // elevation={trigger ? 2 : 0}
-      menuVisible={menuVisible}
-      // menuBreakpoint={menuBreakpoint}
-    >
+    <Root {...sidekick(sidekickLookup)} ownerState={ownerState} menuVisible={menuVisible}>
       <HeaderBackground backgroundColor={backgroundColor} testId="Header-background" />
-      {siteMessageText && (
-        <SiteMessageWrap ownerState={ownerState}>
-          <SiteMessage icon={siteMessageIcon} text={siteMessageText} link={siteMessageLink} />
-        </SiteMessageWrap>
-      )}
 
       <ContentOuterGrid ownerState={ownerState}>
         {logo ? (
@@ -64,8 +35,7 @@ const Header = (props: HeaderProps) => {
             {...logoUrl}
             aria-label={'Go to homepage'}
             ownerState={ownerState}
-            text={undefined}
-          >
+            text={undefined}>
             <Logo
               {...logo}
               __typename="Media"
@@ -119,8 +89,7 @@ const Header = (props: HeaderProps) => {
             color="inherit"
             aria-label="menu"
             onClick={() => setMenuVisible(!menuVisible)}
-            size="large"
-          >
+            size="large">
             <MenuIcon ownerState={ownerState} sx={{ display: menuVisible ? 'none' : 'block' }} />
             <CloseIcon ownerState={ownerState} sx={{ display: !menuVisible ? 'none' : 'block' }} />
           </IconButton>

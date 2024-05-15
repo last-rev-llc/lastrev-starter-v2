@@ -4,15 +4,14 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['HeaderNavLink'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
   root: ({ theme, open }) => ({
     'height': '100%',
-    // 'borderBottom': `solid ${theme.spacing(0.5)} transparent`,
-    // 'borderTop': `solid ${theme.spacing(0.5)} transparent`,
+
     'display': 'flex',
     'flexDirection': 'column',
     'flexGrow': '1',
@@ -28,7 +27,6 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
       '[class*="HeaderNavLink-navItemLink"]': {
         // TODO: Standardize this across the header links if they're the same
         '.MuiSvgIcon-root': {
-          // fill: 'currentcolor',
           transform: 'rotate(-90deg)'
         }
       },
@@ -42,9 +40,6 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
   }),
 
   navItemLink: ({ theme, open }) => ({
-    // TODO: Custom Styles
-    // 'borderTop': `solid 1px ${theme.vars.palette.primary.main}`,
-
     'flexGrow': '1',
     'alignItems': 'center',
     'display': 'flex',
@@ -55,7 +50,6 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(1),
       justifyContent: 'flex-start'
-      // borderTop: 'none'
     },
 
     // TODO: Standardizxe this across the header links if they're the same
@@ -100,7 +94,6 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
       width: 'fit-content',
       // @ts-ignore: TODO: items not recognized
       gridTemplateColumns: `repeat(${(ownerState.numOfCols ?? 0) + 1}, auto)`,
-      // border: `solid 1px ${theme.vars.palette.primary.contrastText}`,
       position: 'absolute',
       zIndex: 1,
       bottom: 0,

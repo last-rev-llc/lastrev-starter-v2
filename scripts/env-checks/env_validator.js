@@ -37,7 +37,8 @@ const envCheckExclusions = [
   'NODE_ENV',
   'PAGES_REVALIDATE',
   'PORT',
-  'STAGE',
+  'REDIS_USERNAME',
+  'SITE_SETTINGS',
   'VERCEL_URL'
 ];
 

@@ -45,7 +45,7 @@ export function cleanSVG(svgContent: string /* title: string = 'svg',*/): any {
         const ast = css.parse(tagValue);
 
         ast.stylesheet?.rules.forEach((rule: any) => {
-          if (rule.type === 'rule') {
+          if (rule?.type === 'rule') {
             const { selectors, declarations } = rule as css.Rule;
             if (selectors) {
               (rule as css.Rule).selectors = selectors.map((selector) =>
@@ -54,7 +54,7 @@ export function cleanSVG(svgContent: string /* title: string = 'svg',*/): any {
             }
             if (declarations) {
               (rule as css.Rule).declarations = declarations.map((declaration) => {
-                if (declaration.type === 'declaration') {
+                if (declaration?.type === 'declaration') {
                   const { value } = declaration as css.Declaration;
                   return {
                     ...declaration,

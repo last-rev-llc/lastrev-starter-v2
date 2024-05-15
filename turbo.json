@@ -62,7 +62,11 @@
       "outputMode": "new-only",
       "cache": false,
       "dependsOn": ["graphql-sdk#sync:cms", "^build"],
-      "inputs": ["./packages/graphql-sdk/.cms-sync", "./packages/**/src/**/*.graphql", "./apps/**/src/**/*.graphql"],
+      "inputs": [
+        "./packages/graphql-sdk/.cms-sync",
+        "./packages/**/src/**/*.graphql",
+        "./apps/**/src/**/*.graphql"
+      ],
       "outputs": ["dist/**", "schema.graphql", "src/generated/**"]
     },
     "graphql-sdk#gql:start": {

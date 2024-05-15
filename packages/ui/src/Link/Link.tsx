@@ -50,6 +50,7 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
     variant,
     icon,
     iconPosition,
+    layoutConfig,
     sidekickLookup,
     // Remove id from other props
     id,
@@ -57,7 +58,7 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
   } = props;
 
   // Color prop fails if it's null
-  // if (!other.color) delete other.color;
+  if (!other.color) delete other.color;
 
   const pathname = usePathname();
   const className = clsx(classNameProps, {
@@ -100,8 +101,7 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
         {...sharedLinkProps}
         variant={buttonVariant}
         startIcon={icon && iconPosition === 'Left' && <Icon iconName={icon} />}
-        endIcon={icon && iconPosition !== 'Left' && <Icon iconName={icon} />}
-      >
+        endIcon={icon && iconPosition !== 'Left' && <Icon iconName={icon} />}>
         {text || children}
       </RootButton>
     );

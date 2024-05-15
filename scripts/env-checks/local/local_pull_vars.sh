@@ -48,12 +48,16 @@ if read -t 20 -p "Enter 1 or 2 or press Enter to skip: " action_choice; then
                 echo "$backup_file is already in .gitignore."
             fi
             echo -e "${GREEN}Overriding your .env file with environment variables from ${BLUE}Envkey${GREEN}...${NC}"
+            envkey core stop
+            envkey core start
             es --dot-env -f > .env
             echo -e "${GREEN}Your .env file has been overridden successfully.${NC}"
             ;;
         2)
             [[ $(tail -c1 .env) && -f .env ]] && echo "" >> .env  # Ensure newline at the end of .env before appending
             echo -e "${GREEN}Appending all environment variables to your current .env file...${NC}"
+            envkey core stop
+            envkey core start
             es --dot-env -f >> .env
             echo -e "${GREEN}Environment variables appended successfully.${NC}"
             ;;

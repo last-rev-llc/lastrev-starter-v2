@@ -55,7 +55,7 @@ ci_workflow() {
   
   # Check environment variables, exit if failed
   ./scripts/env-checks/ci/ci_var_check.sh || { log error "Variable check failed."; exit 1; }
-  dotenv -- bash -c 'if [ -z "$Z_ENVKEY_TEST_VAR" ]; then for i in {1..20}; do echo -e "\033[0;31mThe Z_ENVKEY_TEST_VAR is missing\033[0m"; done; exit 1; else echo -e "\033[0;32mThe value of Z_ENVKEY_TEST_VAR is: $Z_ENVKEY_TEST_VAR\033[0m"; fi'
+  dotenv -- bash -c 'if [ -z "$Z_ENVKEY_TEST_VAR" ]; then for i in {1..5}; do echo -e "\033[0;31mThe Z_ENVKEY_TEST_VAR is missing\033[0m"; done; exit 1; else echo -e "\033[0;32mThe value of Z_ENVKEY_TEST_VAR is: $Z_ENVKEY_TEST_VAR\033[0m"; fi'
 }
 
 # Function to handle the local development workflow
@@ -66,7 +66,7 @@ local_workflow() {
     # Directly call local scripts since they are standalone
     log info "Local workflow initiated..."
     bash ./scripts/env-checks/local/local_workflow.sh
-    dotenv -- bash -c 'if [ -z "$Z_ENVKEY_TEST_VAR" ]; then for i in {1..20}; do echo -e "\033[0;31mThe Z_ENVKEY_TEST_VAR is missing\033[0m"; done; exit 1; else echo -e "\033[0;32mThe value of Z_ENVKEY_TEST_VAR is: $Z_ENVKEY_TEST_VAR\033[0m"; fi'
+    dotenv -- bash -c 'if [ -z "$Z_ENVKEY_TEST_VAR" ]; then for i in {1..5}; do echo -e "\033[0;31mThe Z_ENVKEY_TEST_VAR is missing\033[0m"; done; exit 1; else echo -e "\033[0;32mThe value of Z_ENVKEY_TEST_VAR is: $Z_ENVKEY_TEST_VAR\033[0m"; fi'
   else
     log info "Setup initiation is skipped."
   fi

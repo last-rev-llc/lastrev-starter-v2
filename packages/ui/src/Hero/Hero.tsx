@@ -33,7 +33,7 @@ const Hero = (props: HeroProps) => {
       <HeroBackground
         background={{ ...background, priority: true }}
         backgroundColor={backgroundColor}
-        testId="Hero-background"
+        testId="Hero-backgrounds"
       />
 
       <ContentOuterGrid ownerState={ownerState}>

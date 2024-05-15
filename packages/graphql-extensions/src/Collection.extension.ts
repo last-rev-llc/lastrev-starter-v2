@@ -1,12 +1,14 @@
 import gql from 'graphql-tag';
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-import type { ApolloContext, Mappers } from '@last-rev/types';
+import type { Mappers } from '@last-rev/types';
+import type { ApolloContext } from './types';
 
 import { pascalCase } from './utils/pascalCase';
 import { collectOptions } from './utils/collectOptions';
 import { queryContentful } from './utils/queryContentful';
 import { getWinstonLogger } from '@last-rev/logging';
 import { defaultResolver } from './utils/defaultResolver';
+import { createType } from './utils/createType';
 
 const logger = getWinstonLogger({
   package: 'graphql-contentful-extensions',
@@ -14,7 +16,7 @@ const logger = getWinstonLogger({
 });
 
 // Note: If you want anything other than the below, this is where you will add it
-const COLLECTION_ITEM_TYPES = ['Card'];
+const COLLECTION_ITEM_TYPES = ['Card', 'Link'];
 
 export const typeDefs = gql`
   extend type Collection {
@@ -83,29 +85,19 @@ export const mappers: Mappers = {
     Collection: {
       items: async (collection: any, args: any, ctx: ApolloContext) => {
         let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
-        const itemsVariantFn = defaultResolver('itemsVariant');
-        const itemsVariant = itemsVariantFn(collection, args, ctx);
+        let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
+        const imageItems =
+          imageItemsRef?.length &&
+          (
+            await ctx.loaders.assetLoader.loadMany(
+              imageItemsRef.map((x: any) => ({ id: x.sys.id, preview: !!ctx.preview }))
+            )
+          )
+            .filter((r) => r !== null)
+            .map((asset: any) => createType('Media', { asset }));
+        const finalItems = (items || []).concat(imageItems || []);
 
-        try {
-          const { contentType, limit, offset, order, filter } =
-            (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
-          if (contentType) {
-            items = await queryContentful({ contentType, ctx, order, filter, limit, skip: offset });
-
-            return ctx.loaders.entryLoader.loadMany(
-              items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
-            );
-          }
-        } catch (error: any) {
-          logger.error(error.message, {
-            caller: 'Collection.items',
-            stack: error.stack
-          });
-        }
-
-        const returnItems = items?.map((x: any) => ({ ...x, variant: itemsVariant }));
-
-        return returnItems;
+        return finalItems;
       },
 
       isCarouselDesktop: async (collection: any, _args: any, ctx: ApolloContext) => {
@@ -127,14 +119,20 @@ export const mappers: Mappers = {
       },
 
       numItems: async (collection: any, args: any, ctx: ApolloContext) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'images', ctx) ??
+          [];
         return items.length;
       },
 
       itemsPerRow: async (collection: any, args: any, ctx: ApolloContext) => {
         const variantFn = defaultResolver('variant');
         const variant = variantFn(collection, args, ctx);
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'images', ctx) ??
+          [];
         let itemsPerRow = 3;
         const numItems = items?.length ?? 3;
 
@@ -165,7 +163,10 @@ export const mappers: Mappers = {
 
         return itemsPerRow;
       },
+
       itemsVariant: defaultResolver('itemsVariant'),
+
+      itemsAspectRatio: defaultResolver('itemsAspectRatio'),
 
       variant: async (collection: any, args: any, ctx: ApolloContext) => {
         let carouselBreakpoints =
@@ -177,62 +178,6 @@ export const mappers: Mappers = {
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;
 
         return variant;
-      },
-
-      itemsConnection: async (
-        collection: any,
-        { limit, offset, filter }: ItemsConnectionArgs,
-        ctx: ApolloContext
-      ) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
-        try {
-          const { contentType, filters } =
-            (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
-          // Get all possible items from Contentful
-          // Need all to generate the possible options for all items. Not just the current page.
-          if (contentType) {
-            items = await queryContentful({ contentType, filters, filter, ctx });
-            const allItems = await ctx.loaders.entriesByContentTypeLoader.load({
-              id: contentType,
-              preview: !!ctx.preview
-            });
-            // const options = await collectOptions({ filters, items, ctx });
-            const options = {};
-            const allOptions = await collectOptions({ filters, items: allItems, ctx });
-
-            // Paginate results
-            if (offset || limit) {
-              items = items?.slice(offset ?? 0, (offset ?? 0) + (limit ?? items?.length));
-            }
-
-            let fullItemsWithVariant = [];
-
-            if (!!items?.length) {
-              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx) ?? [];
-
-              const fullItems = await ctx.loaders.entryLoader.loadMany(
-                items.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
-              );
-
-              fullItemsWithVariant = fullItems?.map((x: any) => ({ ...x, variant: itemsVariant }));
-            }
-
-            return {
-              pageInfo: {
-                options,
-                allOptions
-              },
-              items: fullItemsWithVariant
-            };
-          }
-        } catch (error: any) {
-          logger.error(error.message, {
-            caller: 'Collection.itemsConnection',
-            stack: error.stack
-          });
-        }
-
-        return items;
       }
     }
   }
@@ -243,12 +188,15 @@ const ITEM_MAPPING: { [key: string]: string } = {
   Page: 'Card',
   Blog: 'Card',
   Media: 'Card',
-  Person: 'Card'
+  Person: 'Card',
+  Link: 'Card'
 };
 
 export const resolvers = {
   CollectionItem: {
     __resolveType: (item: any) => {
+      if (item?.itemsVariant === 'linkList') return 'Link';
+
       const type =
         ITEM_MAPPING[pascalCase(item?.sys?.contentType?.sys?.id) ?? ''] ??
         pascalCase(item?.sys?.contentType?.sys?.id);

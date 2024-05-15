@@ -5,6 +5,7 @@ fragment Collection_FieldsFragment on Collection {
   }
   variant
   itemsVariant
+  itemsAspectRatio
   backgroundImage {
     ...Media_BaseFragment
   }
@@ -14,6 +15,7 @@ fragment Collection_FieldsFragment on Collection {
   isCarouselMobile
   itemsPerRow
   numItems
+  showFullItemsInCarousel
 }
 
 # Base fragment used everywhere there's a Collection
@@ -21,6 +23,7 @@ fragment Collection_BaseFragment on Collection {
   ...Collection_FieldsFragment
   items {
     ...Card_BaseFragment
+    ...Link_BaseFragment
   }
 }
 
@@ -29,5 +32,6 @@ fragment Collection_RichTextFragment on Collection {
   ...Collection_FieldsFragment
   items {
     ...Card_RichTextFragment
+    ...Link_BaseFragment
   }
 }

@@ -6,11 +6,14 @@ GREEN='\033[0;32m'   # Green for success messages
 CYAN='\033[0;36m'    # Cyan for informational messages
 NC='\033[0m'         # No Color, to reset to the default terminal color scheme
 
-# Path to the root .env file
+# Path to the root .env and .envkey files
 root_env_file=".env"
+root_envkey_file=".envkey"
 
-# Path to the packages directory and the specific 'web' directory
+# Path to the packages directory
 packages_dir="packages"
+
+# Path to the specific 'web' directory (adjust path as needed)
 web_dir="apps/web"
 
 # Check if .env file exists
@@ -19,19 +22,27 @@ if [ ! -f "$root_env_file" ]; then
     exit 1
 fi
 
-# Copy to the 'web' directory
-if [ -d "$web_dir" ]; then
-    cp "$root_env_file" "$web_dir/.env"
-    echo -e "${CYAN}Copied .env file to ${GREEN}$web_dir${NC}"
+# Check if .envkey file exists
+if [ ! -f "$root_envkey_file" ]; then
+    echo -e "${RED}Root .envkey file not found.${NC}"
+    exit 1
 fi
 
-# Iterate over subdirectories in the packages directory and copy to their roots
+# Optionally copy to the 'web' directory if it exists
+if [ -d "$web_dir" ]; then
+    cp "$root_env_file" "$web_dir/.env"
+    cp "$root_envkey_file" "$web_dir/.envkey"
+    echo -e "${CYAN}Copied .env and .envkey files to ${GREEN}$web_dir${NC}"
+fi
+
+# Iterate over subdirectories in the packages directory and copy both .env and .envkey files to their roots
 for package in "$packages_dir"/*; do
     if [ -d "$package" ]; then
-        # Copy the .env file to the root of each package
         cp "$root_env_file" "$package/.env"
-        echo -e "${CYAN}Copied .env file to the root of ${GREEN}$package${NC}"
+        cp "$root_envkey_file" "$package/.envkey"
+        # Combining the messages into a single line per package
+        echo -e "${CYAN}Copied .env and .envkey files to ${GREEN}${package#${packages_dir}/}${NC}"
     fi
 done
 
-echo -e "${GREEN}Successfully copied .env file to the web directory and all package roots.${NC}"
+echo -e "${GREEN}Successfully copied .env and .envkey files to applicable directories.${NC}"

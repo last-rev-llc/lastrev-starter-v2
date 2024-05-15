@@ -11,8 +11,6 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 import ErrorBoundary from '../../ErrorBoundary';
 import ContentModule from '../../ContentModule';
 
-// import { getFirstOfArray } from '../../utils/getFirstOfArray';
-
 import type { HeaderNavLinkProps, HeaderNavLinkOwnerState } from './HeaderNavLink.types';
 
 const HeaderNavLink = (props: HeaderNavLinkProps) => {
@@ -58,8 +56,7 @@ const HeaderNavLink = (props: HeaderNavLinkProps) => {
             {subNavigation?.map((subNavItem: any, index: number) => (
               <NavItemSubMenuItem
                 key={`${navItemId}-nav-item-${subNavItem.id}-${index}`}
-                ownerState={ownerState}
-              >
+                ownerState={ownerState}>
                 <NavItemGroup
                   {...subNavItem}
                   variant="group"

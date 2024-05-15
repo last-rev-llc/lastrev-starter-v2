@@ -8,13 +8,13 @@ import type { BackgroundProps, BackgroundOwnerState } from './Background.types';
 
 const Background = (props: BackgroundProps) => {
   const ownerState = { ...props };
-  const { background, backgroundColor } = props;
+  const { background, backgroundColor, className } = props;
 
   if (!background && !backgroundColor) return null;
 
   return (
-    <Root ownerState={ownerState} className={props.className}>
-      {background ? (
+    <Root ownerState={ownerState} className={className}>
+      {!!background ? (
         <BackgroundContent
           {...background}
           key={background?.id}

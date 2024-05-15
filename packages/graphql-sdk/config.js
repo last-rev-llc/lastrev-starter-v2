@@ -43,12 +43,15 @@ const config = new LastRevAppConfig({
     usePreview: parseBooleanEnvVar(process.env.CONTENTFUL_USE_PREVIEW),
     maxBatchSize: parseNumberEnvVar(process.env.CONTENTFUL_MAX_BATCH_SIZE)
   },
-  algolia: {
-    applicationId: process.env.ALGOLIA_APPLICATION_ID,
-    adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
-    contentTypeIds: ['blog'],
-    indexDraftContent: parseBooleanEnvVar(process.env.ALGOLIA_INDEX_DRAFT_CONTENT)
-  },
+  // algolia: {
+  //   applicationId: process.env.ALGOLIA_APPLICATION_ID,
+  //   adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+  //   contentTypeIds: ['blog', 'page', 'pageProperty', 'person'],
+  //   indexDraftContent: parseBooleanEnvVar(process.env.ALGOLIA_INDEX_DRAFT_CONTENT),
+  //   maxBatchSize: process.env.ALGOLIA_MAX_BATCH_SIZE
+  //     ? parseInt(process.env.ALGOLIA_MAX_BATCH_SIZE, 10)
+  //     : 400
+  // },
   redis: {
     port: process.env.REDIS_PORT,
     host: process.env.REDIS_HOST,

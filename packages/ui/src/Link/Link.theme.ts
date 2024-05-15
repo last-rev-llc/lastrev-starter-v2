@@ -11,16 +11,16 @@ const defaultProps: ComponentsProps['Link'] = {};
 const styleOverrides: ComponentsOverrides<Theme>['Link'] = {
   root: ({ ownerState, theme }) => ({
     display: 'inline-flex',
-    alignItems: 'center',
-    ...(ownerState?.variant?.includes('Contained') && {
-      'color': 'var(--mui-palette-primary-contrastText)',
-      'backgroundColor': 'var(--mui-palette-primary-main)',
-      '--mui-palette-Button-inheritContainedHoverBg': 'var(--mui-palette-primary-dark)'
-    }),
-    ...(ownerState?.variant?.includes('Outlined') && {
-      color: 'var(--mui-palette-primary-main)',
-      borderColor: 'var(--mui-palette-primary-main)'
-    })
+    alignItems: 'center'
+    // ...(ownerState?.variant?.includes('Contained') && {
+    //   'color': 'var(--mui-palette-primary-contrastText)',
+    //   'backgroundColor': 'var(--mui-palette-primary-main)',
+    //   '--mui-palette-Button-inheritContainedHoverBg': 'var(--mui-palette-primary-dark)'
+    // }),
+    // ...(ownerState?.variant?.includes('Outlined') && {
+    //   color: 'var(--mui-palette-primary-main)',
+    //   borderColor: 'var(--mui-palette-primary-main)'
+    // })
   }),
 
   rootButton: {

@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-import type { ApolloContext } from '@last-rev/types';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import type { ApolloContext } from './types';
 import { getVideoEmbedUrl } from './utils/getVideoEmbedUrl';
 import { cleanSVG } from './utils/cleanSVG';
+import { createType } from './utils/createType';
+import { isImageUrl } from './utils/isImageUrl';
 
 export const typeMappings = {};
 
@@ -53,6 +55,7 @@ export const mappers = {
       url: (asset: any) => (asset?.url?.startsWith('//') ? `https:${asset?.url}` : asset?.url),
       width: (asset: any) => asset?.details?.image?.width,
       height: (asset: any) => asset?.details?.image?.height,
+
       svgContent: async (asset: any, _args: any, _ctx: ApolloContext) => {
         // We load the SVG content and clean it up for use as inline element
         // We remove the SVG width and height and instead use the one from the content
@@ -145,6 +148,55 @@ export const mappers = {
           file = assetFile;
         }
         return file;
+      }
+    },
+    Card: {
+      id: async (media: any, _args: any, ctx: ApolloContext) => {
+        const asset = getLocalizedField(media.fields, 'asset', ctx) ?? [];
+        return asset.sys.id;
+      },
+      title: async (media: any, _args: any, ctx: ApolloContext) => {
+        const title: any = getLocalizedField(media?.fields, 'title', ctx);
+        const assetTitle: any = await mediaFieldResolver({
+          fields: media?.fields,
+          field: 'asset',
+          assetField: 'title',
+          ctx
+        });
+        return title ?? assetTitle;
+      },
+      actions: async (media: any, args: any, ctx: ApolloContext) => {
+        const text = 'Read Document';
+        const file = await mediaFieldResolver({
+          fields: media?.fields,
+          field: 'asset',
+          assetField: 'file',
+          ctx
+        });
+
+        // Asset reference will be used if set
+        //TODO: Support other ways to control priority
+        if (!file?.url || isImageUrl(file?.url)) return null;
+
+        return [
+          createType('Link', {
+            id: media.id,
+            text,
+            href: file?.url?.startsWith('//') ? `https:${file?.url}` : file?.url,
+            variant: 'buttonText'
+          })
+        ];
+      },
+      body: async (media: any, _args: any, ctx: ApolloContext) => {
+        const description: any = getLocalizedField(media?.fields, 'description', ctx);
+
+        if (description) {
+          return await createRichText(description);
+        }
+        return null;
+      },
+      media: async (media: any, _args: any, ctx: ApolloContext) => {
+        return [media];
       }
     }
   }

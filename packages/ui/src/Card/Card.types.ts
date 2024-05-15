@@ -10,13 +10,26 @@ export enum CardVariants {
   pricing = 'pricing',
   person = 'person',
   quote = 'quote',
-  blog = 'blog'
+  blog = 'blog',
+  hover = 'hover',
+  iconLeft = 'iconLeft',
+  news = 'news'
 }
 
-export interface CardProps extends Omit<Card_BaseFragmentFragment, 'variant'> {
+export enum CardAspectRatios {
+  default = 'default',
+  square = 'square',
+  horizontal = 'horizontal',
+  vertical = 'vertical'
+}
+
+export interface CardProps extends Omit<Card_BaseFragmentFragment, 'variant' | 'aspectRatio'> {
   loading?: boolean;
   variant?: CardVariants;
   ownerState?: any;
+  aspectRatio?: CardAspectRatios;
+  gridLayout?: any;
+  layoutConfig?: any;
 }
 
 export interface CardOwnerState extends CardProps {

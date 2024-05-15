@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-import type { Mappers, ApolloContext } from '@last-rev/types';
+import type { Mappers } from '@last-rev/types';
+import type { ApolloContext } from './types';
 
 import { createPath } from './utils/createPath';
 import { defaultResolver } from './utils/defaultResolver';
 import { camelCase } from './utils/camelCase';
+import { createType } from './utils/createType';
 
 type TargetMapping = {
   'New Window': string;
@@ -58,10 +60,26 @@ export const mappers: Mappers = {
       target: targetResolver,
       variant: defaultResolver('variant')
     },
+
     NavigationItem: {
       link: (x: any) => ({ ...x, fieldName: 'link' }),
       children: () => [],
       variant: defaultResolver('variant')
+    },
+    Card: {
+      variant: () => 'default',
+
+      link: async (link: any, _args: any, ctx: ApolloContext) => {
+        return link;
+      },
+
+      actions: async (link: any, args: any, ctx: ApolloContext) => {
+        return [
+          createType('Link', {
+            ...link
+          })
+        ];
+      }
     }
   }
 };

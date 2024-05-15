@@ -5,7 +5,9 @@ const URL = `${(process.env.GRAPHQL_SERVER || 'http://localhost:8888/graphql').r
 )}?query={__schema{types{name}}}`;
 
 const resource = `tcp:${URL?.split(':')?.pop()?.split('/')?.shift()}`;
-const timeout = process.env.GRAPHQL_SERVER_TIMEOUT ? parseInt(process.env.GRAPHQL_SERVER_TIMEOUT, 10) : 0;
+const timeout = process.env.GRAPHQL_SERVER_TIMEOUT
+  ? parseInt(process.env.GRAPHQL_SERVER_TIMEOUT, 10)
+  : 0;
 
 module.exports = {
   delay: 100,

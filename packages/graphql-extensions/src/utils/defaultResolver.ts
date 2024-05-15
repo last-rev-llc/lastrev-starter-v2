@@ -1,4 +1,4 @@
-import { ApolloContext } from '@last-rev/types';
+import type { ApolloContext } from '../types';
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
 import { camelCase } from './camelCase';
 

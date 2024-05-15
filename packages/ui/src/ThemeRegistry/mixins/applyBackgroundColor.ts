@@ -1,4 +1,4 @@
-import { type Theme } from '@mui/system';
+import { Theme } from '../theme.types';
 import { type CSSProperties } from '@mui/material/styles/createMixins';
 import get from '../../utils/get';
 
@@ -20,6 +20,7 @@ export const applyBackgroundColor: ApplyBackgroundColor = ({
   if (!ownerState?.backgroundColor) return {};
 
   const backgroundColor: string = ownerState?.backgroundColor as any;
+
   let styles = {};
   if (
     backgroundColor?.toLowerCase()?.includes('gradient') &&
@@ -34,7 +35,7 @@ export const applyBackgroundColor: ApplyBackgroundColor = ({
       ? backgroundColor.split('.')[0]
       : `${backgroundColor}`;
 
-    if (backgroundColor && theme.vars.palette.schemes[paletteColor]) {
+    if (backgroundColor && theme?.vars?.palette?.schemes[paletteColor]) {
       styles = {
         'backgroundColor': theme.vars.palette.schemes[paletteColor].primary.main,
         'color': theme.vars.palette.text.primary,
