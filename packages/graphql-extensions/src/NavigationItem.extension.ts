@@ -1,12 +1,11 @@
 import gql from 'graphql-tag';
 
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-
 import type { ApolloContext } from './types';
-
-import { createPath } from './utils/createPath';
 import { pascalCase } from './utils/pascalCase';
 import { defaultResolver } from './utils/defaultResolver';
+import { pathResolver } from './utils/pathResolver';
+import { createPath } from './utils/createPath';
 
 const SUB_NAVIGATION_ITEM_TYPES = ['Link', 'NavigationItem', 'Page', 'Person', 'Blog'];
 
@@ -33,7 +32,8 @@ const hrefUrlResolver = async (link: any, _: never, ctx: ApolloContext) => {
         }
       }
       const slug = getLocalizedField(content?.fields, 'slug', ctx);
-      if (slug) return createPath(getLocalizedField(content?.fields, 'slug', ctx));
+
+      if (slug) return pathResolver(content, _, ctx);
     }
   }
   return '#';
@@ -57,10 +57,6 @@ export const mappers = {
   NavigationItem: {
     NavigationItem: {
       variant: defaultResolver('variant'),
-      // image: (item: any, _args: any, ctx: ApolloContext) => {
-      //   const mediaRef: any = getLocalizedField(item.fields, 'media', ctx);
-      //   return mediaRef;
-      // },
       href: hrefUrlResolver
     },
     Link: {

@@ -76,7 +76,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Footer'] = {
   }),
 
   socialLinks: ({ theme }) => ({
-    gridRow: 3,
+    gridRow: 5,
     gridColumnStart: 'start',
     gridColumnEnd: 'end',
 

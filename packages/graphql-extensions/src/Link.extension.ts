@@ -6,7 +6,7 @@ import type { ApolloContext } from './types';
 
 import { createPath } from './utils/createPath';
 import { defaultResolver } from './utils/defaultResolver';
-import { camelCase } from './utils/camelCase';
+import { pathResolver } from './utils/pathResolver';
 import { createType } from './utils/createType';
 
 type TargetMapping = {
@@ -30,6 +30,7 @@ const hrefUrlResolver = async (link: any, _: never, ctx: ApolloContext) => {
       id: contentRef.sys.id,
       preview: !!ctx.preview
     });
+
     if (content) {
       if (content?.sys?.contentType?.sys?.id === 'media') {
         const assetRef = getLocalizedField(content.fields, 'asset', ctx);
@@ -42,7 +43,8 @@ const hrefUrlResolver = async (link: any, _: never, ctx: ApolloContext) => {
         }
       }
       const slug = getLocalizedField(content?.fields, 'slug', ctx);
-      if (slug) return createPath(getLocalizedField(content?.fields, 'slug', ctx));
+
+      if (slug) return pathResolver(content, _, ctx);
     }
   }
   return '#';
@@ -60,7 +62,6 @@ export const mappers: Mappers = {
       target: targetResolver,
       variant: defaultResolver('variant')
     },
-
     NavigationItem: {
       link: (x: any) => ({ ...x, fieldName: 'link' }),
       children: () => [],
