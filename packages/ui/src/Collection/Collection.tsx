@@ -63,7 +63,11 @@ const Collection = (props: CollectionProps) => {
                   {...item}
                   layoutConfig={layoutConfig}
                   gridLayout={variant}
-                  variant={itemsVariant ?? item?.variant}
+                  variant={
+                    (itemsVariant as any) === 'linkList'
+                      ? 'buttonContained'
+                      : itemsVariant ?? item?.variant
+                  }
                   aspectRatio={itemsAspectRatio ?? item?.aspectRatio}
                   position={index + 1}
                 />

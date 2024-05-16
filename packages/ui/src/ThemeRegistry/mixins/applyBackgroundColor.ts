@@ -1,7 +1,6 @@
-import { Theme } from '../theme.types';
+// import { type Theme } from '@mui/material/styles';
 import { type CSSProperties } from '@mui/material/styles/createMixins';
-import get from '../../utils/get';
-
+import { Theme } from '../theme.types';
 type ApplyBackgroundColor = (args: { theme: Theme; ownerState: any }) => CSSProperties;
 
 declare module '@mui/material/styles/createMixins' {
@@ -17,41 +16,61 @@ export const applyBackgroundColor: ApplyBackgroundColor = ({
   ownerState?: any;
   theme: Theme;
 }) => {
-  if (!ownerState?.backgroundColor) return {};
-
-  const backgroundColor: string = ownerState?.backgroundColor as any;
-
+  const colorScheme: string =
+    ownerState?.color || ownerState?.backgroundColor || ownerState?.colorScheme;
+  if (!colorScheme) return {};
   let styles = {};
-  if (
-    backgroundColor?.toLowerCase()?.includes('gradient') &&
-    get(theme.vars.palette, backgroundColor)
-  ) {
-    styles = {
-      background: get(theme.vars.palette, `${backgroundColor}.main`),
-      color: get(theme.vars.palette, `${backgroundColor}.contrastText`)
-    };
-  } else {
-    const paletteColor = backgroundColor?.includes('.')
-      ? backgroundColor.split('.')[0]
-      : `${backgroundColor}`;
-
-    if (backgroundColor && theme?.vars?.palette?.schemes[paletteColor]) {
-      styles = {
-        'backgroundColor': theme.vars.palette.schemes[paletteColor].primary.main,
-        'color': theme.vars.palette.text.primary,
-        '--mui-palette-text-primary': theme.vars.palette.schemes[paletteColor].primary.contrastText,
-        '--mui-palette-primary-light': theme.vars.palette.schemes[paletteColor].secondary.light,
-        '--mui-palette-primary-main': theme.vars.palette.schemes[paletteColor].secondary.main,
-        '--mui-palette-primary-contrastText':
-          theme.vars.palette.schemes[paletteColor].secondary.contrastText,
-        '--mui-palette-primary-dark': theme.vars.palette.schemes[paletteColor].secondary.dark,
-        '--variant-highlight-color': theme.vars.palette.schemes[paletteColor].highlightColor,
-        '--current-color-text': theme.vars.palette.schemes[paletteColor].primary.contrastText,
-        '--current-color-bg': theme.vars.palette.schemes[paletteColor].primary.main
-        // '--mui-palette-primary-main': `var(--mui-palette-${paletteColor}-accent)`
-      };
-    }
+  let backgroundKey = 'backgroundColor';
+  if (colorScheme?.toLowerCase()?.includes('gradient')) {
+    backgroundKey = 'background';
   }
+  const paletteColor = colorScheme?.includes('.') ? colorScheme.split('.')[0] : `${colorScheme}`;
+
+  if (colorScheme && theme.vars.palette.schemes[paletteColor]) {
+    styles = {
+      [backgroundKey]: theme.vars.palette.schemes[paletteColor].primary.main,
+      '--mui-palette-background-tab': theme.vars.palette.schemes[paletteColor].primary.main,
+      '--mui-palette-overline': theme.vars.palette.schemes[paletteColor].overline,
+      '--swiper-theme-color': theme.vars.palette.schemes[paletteColor].primary.contrastText,
+
+      // Color inversion
+      '--mui-palette-text-primary': theme.vars.palette.schemes[paletteColor].primary.contrastText,
+      '--mui-palette-background-paper': theme.vars.palette.schemes[paletteColor].dark,
+      '--mui-palette-primary-light': theme.vars.palette.schemes[paletteColor].secondary.light,
+      '--mui-palette-primary-main': theme.vars.palette.schemes[paletteColor].secondary.main,
+      '--mui-palette-primary-contrastText':
+        theme.vars.palette.schemes[paletteColor].secondary.contrastText,
+      '--mui-palette-primary-dark': theme.vars.palette.schemes[paletteColor].secondary.dark,
+
+      '--mui-palette-secondary-light': theme.vars.palette.schemes[paletteColor].primary.light,
+      '--mui-palette-secondary-main': theme.vars.palette.schemes[paletteColor].primary.main,
+      '--mui-palette-secondary-contrastText':
+        theme.vars.palette.schemes[paletteColor].primary.contrastText,
+      '--mui-palette-secondary-dark': theme.vars.palette.schemes[paletteColor].primary.dark,
+      '--mui-palette-divider': theme.vars.palette.schemes[paletteColor].primary.contrastText,
+
+      '[stroke]': {
+        stroke: 'var(--mui-palette-text-primary) !important'
+      },
+
+      '.tarealty-logo-text [fill]': {
+        fill: 'var(--mui-palette-text-primary) !important'
+      },
+
+      // Theme colors
+      '--variant-highlight-color': theme.vars.palette.schemes[paletteColor].highlightColor,
+      '--mui-palette-text-primary-header': theme.vars.palette.schemes[paletteColor].headerColor,
+      '--mui-palette-text-primary-overlay': theme.vars.palette.schemes[paletteColor].overlayText,
+
+      '& *': {
+        borderColor: theme.vars.palette.schemes[paletteColor].primary.contrastText
+      },
+      '& ::marker': {
+        color: theme.vars.palette.schemes[paletteColor].primary.contrastText
+      }
+    };
+  }
+
   return styles;
 };
 

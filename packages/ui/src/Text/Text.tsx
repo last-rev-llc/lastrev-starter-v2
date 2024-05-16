@@ -24,8 +24,7 @@ const Text = (props: TextProps) => {
             data-testid="Text-overline"
             {...sidekick(sidekickLookup, 'overline')}
             variant="overline"
-            ownerState={ownerState}
-          >
+            ownerState={ownerState}>
             {overline}
           </Overline>
         )}
@@ -34,8 +33,7 @@ const Text = (props: TextProps) => {
           <Title
             data-testid="Text-title"
             {...sidekick(sidekickLookup, 'title')}
-            ownerState={ownerState}
-          >
+            ownerState={ownerState}>
             {title}
           </Title>
         )}
@@ -45,8 +43,7 @@ const Text = (props: TextProps) => {
             data-testid="Text-subtitle"
             {...sidekick(sidekickLookup, 'subtitle')}
             ownerState={ownerState}
-            variant="h2"
-          >
+            variant="h2">
             {subtitle}
           </Subtitle>
         )}

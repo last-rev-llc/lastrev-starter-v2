@@ -13,7 +13,8 @@ export enum HeroVariants {
   mediaBelow = 'mediaBelow',
   mediaAbove = 'mediaAbove',
   mediaSmall = 'mediaSmall',
-  news = 'news'
+  news = 'news',
+  imageOnly = 'imageOnly'
 }
 
 export interface HeroProps extends Omit<Hero_BaseFragmentFragment, 'variant'> {

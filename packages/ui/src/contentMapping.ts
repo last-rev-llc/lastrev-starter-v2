@@ -49,6 +49,7 @@ export const contentMapping: {
   Blog,
   Breadcrumbs,
   Card,
+  'Card:linkList': Link,
   Carousel,
   Collection,
   Footer,

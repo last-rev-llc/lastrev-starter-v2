@@ -152,20 +152,15 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     },
     style: {
       '[class*=actionsWrap]': {
-        // borderLeft: 'solid 1px var(--mui-palette-text-primary)',
-        // paddingBottom: 0,
         padding: 'var(--grid-gap)'
-        // paddingRight: 0
       },
 
       '& [class*=Card-content]': {
-        // 'borderLeft': 'solid 1px var(--mui-palette-text-primary)',
         minHeight: '33cqi',
         display: 'flex',
         flexDirection: 'column',
-        paddingBottom: 0,
-        paddingLeft: 'var(--grid-gap)',
-        paddingRight: 0
+
+        padding: 'var(--grid-gap) var(--grid-gap) 0'
       },
 
       '& [class*=Card-title]': {

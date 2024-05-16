@@ -265,6 +265,35 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
   },
   {
     props: {
+      variant: HeroVariants.imageOnly
+    },
+    style: {
+      'minHeight': 'initial',
+      'maxHeight': 'initial',
+      'position': 'initial',
+
+      '[class*=contentOuterGrid]': {
+        display: 'none'
+      },
+
+      '[class*=Hero-background]': {
+        gridRow: 1,
+        position: 'initial',
+
+        img: {
+          gridRow: 1,
+          gridColumnStart: 'full-start',
+          gridColumnEnd: 'full-end',
+          position: 'initial',
+          objectFit: 'contain',
+          width: '100%',
+          transform: 'initial'
+        }
+      }
+    }
+  },
+  {
+    props: {
       variant: HeroVariants.news
     },
     style: {

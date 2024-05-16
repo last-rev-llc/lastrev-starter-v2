@@ -54,34 +54,34 @@ const schemes = {
     primary: {
       main: commonColors.transparentLight,
       contrastText: commonColors.black,
-      light: lighten(commonColors.transparentLight, 0.1),
-      dark: darken(commonColors.transparentLight, 0.1)
+      light: lighten(commonColors.transparentLight, 0.2),
+      dark: darken(commonColors.transparentLight, 0.2)
     },
     secondary: {
       main: commonColors.coolGrey,
       contrastText: commonColors.white,
-      light: lighten(commonColors.coolGrey, 0.1),
-      dark: darken(commonColors.coolGrey, 0.1)
+      light: lighten(commonColors.coolGrey, 0.2),
+      dark: darken(commonColors.coolGrey, 0.2)
     },
-    linkColor: commonColors.black,
-    headerColor: commonColors.black,
-    text: commonColors.black,
-    overlay: commonColors.black,
-    overlayText: commonColors.white,
+    linkColor: commonColors.white,
+    headerColor: commonColors.white,
+    text: commonColors.white,
+    overlay: commonColors.white,
+    overlayText: commonColors.black,
     highlightColor: commonColors.coolGrey
   },
   transparentDark: {
     primary: {
       main: commonColors.transparentDark,
       contrastText: commonColors.white,
-      light: lighten(commonColors.transparentDark, 0.1),
-      dark: darken(commonColors.transparentDark, 0.1)
+      light: lighten(commonColors.transparentDark, 0.2),
+      dark: darken(commonColors.transparentDark, 0.2)
     },
     secondary: {
       main: commonColors.coolGrey,
       contrastText: commonColors.white,
-      light: lighten(commonColors.coolGrey, 0.1),
-      dark: darken(commonColors.coolGrey, 0.1)
+      light: lighten(commonColors.coolGrey, 0.2),
+      dark: darken(commonColors.coolGrey, 0.2)
     },
     linkColor: commonColors.white,
     headerColor: commonColors.white,
@@ -94,14 +94,14 @@ const schemes = {
     primary: {
       main: commonColors.midnight,
       contrastText: commonColors.white,
-      light: lighten(commonColors.coolGrey, 0.1),
-      dark: darken(commonColors.coolGrey, 0.1)
+      light: lighten(commonColors.coolGrey, 0.2),
+      dark: darken(commonColors.coolGrey, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.coolGrey, 0.1),
-      dark: darken(commonColors.coolGrey, 0.1)
+      light: lighten(commonColors.coolGrey, 0.2),
+      dark: darken(commonColors.coolGrey, 0.2)
     },
     linkColor: commonColors.white,
     headerColor: commonColors.white,
@@ -114,38 +114,38 @@ const schemes = {
     primary: {
       main: commonColors.white,
       contrastText: commonColors.midnight,
-      light: lighten(commonColors.white, 0.1),
-      dark: darken(commonColors.midnight, 0.1)
+      light: lighten(commonColors.white, 0.2),
+      dark: darken(commonColors.midnight, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.midnight,
     headerColor: commonColors.midnight,
-    text: commonColors.white,
+    text: commonColors.midnight,
     overlay: commonColors.midnight,
-    overlayText: commonColors.midnight,
+    overlayText: commonColors.white,
     highlightColor: commonColors.brightGreen
   },
   black: {
     primary: {
       main: commonColors.midnight,
       contrastText: commonColors.white,
-      light: lighten(commonColors.midnight, 0.1),
-      dark: darken(commonColors.midnight, 0.1)
+      light: lighten(commonColors.midnight, 0.2),
+      dark: darken(commonColors.midnight, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
-      contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      contrastText: commonColors.black,
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.white,
     headerColor: commonColors.white,
-    text: commonColors.black,
+    text: commonColors.white,
     overlay: commonColors.white,
     overlayText: commonColors.white,
     highlightColor: commonColors.brightGreen
@@ -154,14 +154,14 @@ const schemes = {
     primary: {
       main: commonColors.yellow,
       contrastText: commonColors.black,
-      light: lighten(commonColors.yellow, 0.1),
-      dark: darken(commonColors.yellow, 0.1)
+      light: lighten(commonColors.yellow, 0.2),
+      dark: darken(commonColors.yellow, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.black,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.black,
     headerColor: commonColors.black,
@@ -174,14 +174,14 @@ const schemes = {
     primary: {
       main: commonColors.aqua,
       contrastText: commonColors.black,
-      light: lighten(commonColors.aqua, 0.1),
-      dark: darken(commonColors.aqua, 0.1)
+      light: lighten(commonColors.aqua, 0.2),
+      dark: darken(commonColors.aqua, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.black,
     headerColor: commonColors.black,
@@ -194,14 +194,14 @@ const schemes = {
     primary: {
       main: commonColors.periwinkle,
       contrastText: commonColors.black,
-      light: lighten(commonColors.periwinkle, 0.1),
-      dark: darken(commonColors.periwinkle, 0.1)
+      light: lighten(commonColors.periwinkle, 0.2),
+      dark: darken(commonColors.periwinkle, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.black,
     headerColor: commonColors.black,
@@ -214,14 +214,14 @@ const schemes = {
     primary: {
       main: commonColors.coolGrey,
       contrastText: commonColors.black,
-      light: lighten(commonColors.coolGrey, 0.1),
-      dark: darken(commonColors.coolGrey, 0.1)
+      light: lighten(commonColors.coolGrey, 0.2),
+      dark: darken(commonColors.coolGrey, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.black,
     headerColor: commonColors.black,
@@ -234,14 +234,14 @@ const schemes = {
     primary: {
       main: commonColors.platinum,
       contrastText: commonColors.black,
-      light: lighten(commonColors.platinum, 0.1),
-      dark: darken(commonColors.platinum, 0.1)
+      light: lighten(commonColors.platinum, 0.2),
+      dark: darken(commonColors.platinum, 0.2)
     },
     secondary: {
       main: commonColors.brightGreen,
       contrastText: commonColors.white,
-      light: lighten(commonColors.brightGreen, 0.1),
-      dark: darken(commonColors.brightGreen, 0.1)
+      light: lighten(commonColors.brightGreen, 0.2),
+      dark: darken(commonColors.brightGreen, 0.2)
     },
     linkColor: commonColors.black,
     headerColor: commonColors.black,
