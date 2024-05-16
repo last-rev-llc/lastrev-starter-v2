@@ -160,16 +160,12 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
 
       '& [class*=Card-content]': {
         // 'borderLeft': 'solid 1px var(--mui-palette-text-primary)',
-        'minHeight': '33cqi',
-        'display': 'flex',
-        'flexDirection': 'column',
-        'paddingBottom': 0,
-        'paddingLeft': 'var(--grid-gap)',
-        'paddingRight': 0,
-
-        '& > *': {
-          marginTop: 'auto'
-        }
+        minHeight: '33cqi',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingBottom: 0,
+        paddingLeft: 'var(--grid-gap)',
+        paddingRight: 0
       },
 
       '& [class*=Card-title]': {

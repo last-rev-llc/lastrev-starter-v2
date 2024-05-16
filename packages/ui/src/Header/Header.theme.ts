@@ -13,6 +13,7 @@ const defaultProps: ComponentsProps['Header'] = {};
 const styleOverrides: ComponentsOverrides<Theme>['Header'] = {
   root: ({ theme, ownerState }) => ({
     ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
+    'position': 'relative',
     'padding': 'var(--grid-gap) 0',
     'width': '100%',
     'zIndex': 100,
