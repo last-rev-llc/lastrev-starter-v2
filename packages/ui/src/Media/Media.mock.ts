@@ -9,9 +9,7 @@ const getSvgContent = (url: string) =>
     });
 
 export const defaultFileImageMock = (override?: Partial<MediaProps>): FileProps => ({
-  url: `https://source.unsplash.com/random/${override.width ?? 1280}x${
-    override.height ?? 500
-  }?rnd=${Math.random()}`,
+  url: `https://source.unsplash.com/random/${override?.width ?? 1280}x${override?.height ?? 500}?rnd=${Math.random()}`,
   width: 1920,
   height: 1080,
   ...override
@@ -97,11 +95,9 @@ const videoDefaultMock = (override?: Partial<MediaProps>) => ({
   })
 });
 
-export const mediaBaseVideoMock = (override?: Partial<MediaProps>): MediaProps =>
-  videoDefaultMock({ ...override });
+export const mediaBaseVideoMock = (override?: Partial<MediaProps>): MediaProps => videoDefaultMock({ ...override });
 
-export const mediaBaseImageMock = (override?: Partial<MediaProps>): MediaProps =>
-  imageDefaultMock({ ...override });
+export const mediaBaseImageMock = (override?: Partial<MediaProps>): MediaProps => imageDefaultMock({ ...override });
 
 export const mediaBaseSvgMock = (override?: Partial<MediaProps>): MediaProps =>
   svgDefaultMock({

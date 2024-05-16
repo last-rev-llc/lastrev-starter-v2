@@ -124,10 +124,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Header'] = {
 
     [theme.breakpoints.up('lg')]: {
       justifyContent: 'center',
-      alignItems: 'center',
-      border: 'solid 1px blue'
-      // gridColumnStart: 'three-start',
-      // gridColumnEnd: 'end'
+      alignItems: 'center'
     }
   }),
 

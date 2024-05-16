@@ -85,6 +85,31 @@ export const mappers: Mappers = {
     Collection: {
       items: async (collection: any, args: any, ctx: ApolloContext) => {
         let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+
+        const itemsVariantFn = defaultResolver('itemsVariant');
+        const itemsVariant = itemsVariantFn(collection, args, ctx);
+
+        try {
+          const { contentType, limit, offset, order, filter } =
+            (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
+          if (contentType) {
+            items = await queryContentful({ contentType, ctx, order, filter, limit, skip: offset });
+
+            // return ctx.loaders.entryLoader.loadMany(
+            //   items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+            // );
+          }
+        } catch (error: any) {
+          logger.error(error.message, {
+            caller: 'Collection.items',
+            stack: error.stack
+          });
+        }
+
+        const returnItemsRef = await ctx.loaders.entryLoader.loadMany(
+          items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+        );
+
         let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
         const imageItems =
           imageItemsRef?.length &&
@@ -95,7 +120,11 @@ export const mappers: Mappers = {
           )
             .filter((r) => r !== null)
             .map((asset: any) => createType('Media', { asset }));
-        const finalItems = (items || []).concat(imageItems || []);
+
+        const finalItems = (returnItemsRef || []).concat(imageItems || [])?.map((x: any) => ({
+          ...x,
+          itemsVariant
+        }));
 
         return finalItems;
       },
@@ -123,6 +152,7 @@ export const mappers: Mappers = {
           getLocalizedField(collection.fields, 'items', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
+
         return items.length;
       },
 
@@ -133,6 +163,7 @@ export const mappers: Mappers = {
           getLocalizedField(collection.fields, 'items', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
+
         let itemsPerRow = 3;
         const numItems = items?.length ?? 3;
 
@@ -178,6 +209,62 @@ export const mappers: Mappers = {
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;
 
         return variant;
+      },
+
+      itemsConnection: async (
+        collection: any,
+        { limit, offset, filter }: ItemsConnectionArgs,
+        ctx: ApolloContext
+      ) => {
+        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+        try {
+          const { contentType, filters } =
+            (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
+          // Get all possible items from Contentful
+          // Need all to generate the possible options for all items. Not just the current page.
+          if (contentType) {
+            items = await queryContentful({ contentType, filters, filter, ctx });
+            const allItems = await ctx.loaders.entriesByContentTypeLoader.load({
+              id: contentType,
+              preview: !!ctx.preview
+            });
+            // const options = await collectOptions({ filters, items, ctx });
+            const options = {};
+            const allOptions = await collectOptions({ filters, items: allItems, ctx });
+
+            // Paginate results
+            if (offset || limit) {
+              items = items?.slice(offset ?? 0, (offset ?? 0) + (limit ?? items?.length));
+            }
+
+            let fullItemsWithVariant = [];
+
+            if (!!items?.length) {
+              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx) ?? [];
+
+              const fullItems = await ctx.loaders.entryLoader.loadMany(
+                items.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+              );
+
+              fullItemsWithVariant = fullItems?.map((x: any) => ({ ...x, variant: itemsVariant }));
+            }
+
+            return {
+              pageInfo: {
+                options,
+                allOptions
+              },
+              items: fullItemsWithVariant
+            };
+          }
+        } catch (error: any) {
+          logger.error(error.message, {
+            caller: 'Collection.itemsConnection',
+            stack: error.stack
+          });
+        }
+
+        return items;
       }
     }
   }
@@ -189,6 +276,7 @@ const ITEM_MAPPING: { [key: string]: string } = {
   Blog: 'Card',
   Media: 'Card',
   Person: 'Card',
+  ElementVideo: 'Card',
   Link: 'Card'
 };
 

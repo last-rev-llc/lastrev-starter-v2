@@ -282,11 +282,15 @@ type ElementForm implements Content {
 }
 
 type ElementVideo implements Content {
+  alt: String
   altText: String
   animation: JSON
   asset: Media
   assetURL: String
   autoplay: Boolean
+  file: Asset
+  fileMobile: Asset
+  fileTablet: Asset
   id: String
   internalTitle: String
   mobile: Media

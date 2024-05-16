@@ -11,6 +11,7 @@ fragment RichText_BaseFragment on RichText {
       #   ...Section_RichTextFragment
       ...Text_RichTextFragment
       ...Media_BaseFragment
+      ...Video_BaseFragment
     }
     assets {
       ...Media_BaseFragment

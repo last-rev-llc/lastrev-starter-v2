@@ -28,3 +28,33 @@ fragment Media_BaseFragment on Media {
     svgContent
   }
 }
+
+fragment Video_BaseFragment on ElementVideo {
+  id
+  __typename
+  sidekickLookup
+  title
+  variant
+  alt
+  file {
+    url
+    extension
+    fileName
+    width
+    height
+  }
+  fileMobile {
+    url
+    extension
+    fileName
+    width
+    height
+  }
+  fileTablet {
+    url
+    extension
+    fileName
+    width
+    height
+  }
+}

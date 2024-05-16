@@ -9,6 +9,7 @@ import { pageHeaderResolver } from './utils/pageHeaderResolver';
 import { pathResolver } from './utils/pathResolver';
 
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
+import { getDefaultCtaText } from './utils/getDefaultCtaText';
 
 export const typeDefs = gql`
   extend type Blog {
@@ -44,18 +45,39 @@ export const mappers: Mappers = {
       // contents: blogGlobalContentsResolver,
       relatedItems: async (blog: any, _args: any, ctx: ApolloContext) =>
         createType('Collection', {
-          introText: createType('Text', { title: 'Related Blogs' }),
+          introText: createType('Text', { title: 'Related News' }),
           items: getLocalizedField(blog.fields, 'relatedItems', ctx) ?? [],
           variant: 'Three Per Row',
           itemsVariant: 'Blog'
         }),
-      hero: async (blog: any, _args: any, ctx: ApolloContext) =>
-        createType('Hero', {
-          variant: 'default',
-          overline: getLocalizedField(blog.fields, 'pubDate', ctx),
+      hero: async (blog: any, _args: any, ctx: ApolloContext) => {
+        const textArray = [];
+
+        const categoriesRef = getLocalizedField(blog?.fields, 'categories', ctx);
+        const categoriesIds =
+          categoriesRef?.map((content: any) => {
+            return { id: content?.sys.id, preview: !!ctx.preview };
+          }) ?? [];
+
+        const categories: any[] = (await ctx.loaders.entryLoader.loadMany(categoriesIds))
+          .filter(Boolean)
+          .map((category: any) => {
+            return getLocalizedField(category?.fields, 'title', ctx);
+          });
+
+        if (categories.length) textArray.push(categories.join(', '));
+
+        const pubDate = getLocalizedField(blog.fields, 'pubDate', ctx);
+        if (pubDate) textArray.push(pubDate);
+        const body = createRichText(textArray.join(' • '));
+        return createType('Hero', {
+          variant: 'news',
+          backgroundColor: 'navy',
           title: getLocalizedField(blog.fields, 'title', ctx),
-          sideImageItems: getLocalizedField(blog.fields, 'featuredMedia', ctx)
-        })
+          body,
+          images: getLocalizedField(blog.fields, 'featuredMedia', ctx) ?? []
+        });
+      }
     },
 
     Link: {
@@ -69,10 +91,16 @@ export const mappers: Mappers = {
     },
 
     Card: {
-      body: async (blog: any, _args: any, ctx: ApolloContext) =>
-        createRichText(getLocalizedField(blog.fields, 'promoSummary', ctx)),
+      body: async (blog: any, _args: any, ctx: ApolloContext) => {
+        const promoSummary = getLocalizedField(blog.fields, 'promoSummary', ctx);
 
-      media: async (blog: any, _args: any, ctx: ApolloContext) => {
+        if (promoSummary) {
+          return await createRichText(promoSummary);
+        }
+        return null;
+      },
+
+      media: async (blog: any, args: any, ctx: ApolloContext) => {
         const promoImage =
           getLocalizedField(blog.fields, 'promoImage', ctx) ??
           getLocalizedField(blog.fields, 'featuredMedia', ctx);
@@ -80,22 +108,23 @@ export const mappers: Mappers = {
         return [promoImage];
       },
 
-      variant: () => 'default',
+      variant: () => 'buttonText',
 
       link: async (blog: any, _args: any, ctx: ApolloContext) => {
         return blog;
-      }
+      },
 
-      // actions: async (blog: any, _args: any, ctx: ApolloContext) => {
-      //   return [
-      //     createType('Link', {
-      //       id: blog.id,
-      //       text: 'Read More',
-      //       linkedContent: blog,
-      //       variant: 'buttonContained'
-      //     })
-      //   ];
-      // }
+      actions: async (blog: any, args: any, ctx: ApolloContext) => {
+        const text = await getDefaultCtaText(blog, args, ctx);
+        return [
+          createType('Link', {
+            id: blog.id,
+            text,
+            href: await pathResolver(blog, args, ctx),
+            variant: 'buttonText'
+          })
+        ];
+      }
     }
   }
 };

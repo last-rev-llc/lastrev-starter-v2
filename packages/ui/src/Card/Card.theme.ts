@@ -15,16 +15,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   root: ({ theme, ownerState }) => ({
     containerType: 'inline-size',
     height: '100%'
-
-    // ...(ownerState?.variant === CardVariants.hover
-    //   ? {
-    //       [theme.containerBreakpoints.up('md')]: {
-    //         ...theme.mixins.applyColorSchemeOverlay({ ownerState, theme })
-    //       }
-    //     }
-    //   : {
-    //       ...theme.mixins.applyBackgroundColor({ ownerState, theme })
-    //     })
   }),
 
   cardWrap: ({ theme, ownerState }) => ({
@@ -75,7 +65,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   }),
 
   media: ({ ownerState, theme }) => ({
-    backgroundColor: 'inherit',
+    'backgroundColor': 'inherit',
 
     ...(ownerState?.variant === CardVariants.hover && {
       '&::after': {
@@ -83,11 +73,15 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
         opacity: '.5'
       }
     }),
-    picture: {
-      display: 'flex',
-      height: '100%',
-      width: '100%',
-      aspectRatio: '16/9',
+    ':is(picture, svg)': {
+      'display': 'flex',
+      'height': '100%',
+      'width': '100%',
+      'aspectRatio': '16/9',
+
+      '&:is(svg)': {
+        objectFit: 'fill'
+      },
 
       ...(ownerState?.aspectRatio === CardAspectRatios.horizontal && {
         aspectRatio: '16/9'
@@ -95,6 +89,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
 
       ...(ownerState?.aspectRatio === CardAspectRatios.vertical && {
         aspectRatio: '1/1',
+
         [theme.breakpoints.up('md')]: {
           aspectRatio: '9/16'
         }
@@ -105,7 +100,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
       })
     },
 
-    img: {
+    'img': {
       objectFit: 'cover',
 
       [theme.containerBreakpoints.up('md')]: {
@@ -116,11 +111,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
 
   contentWrap: ({ theme }) => ({
     flex: 1,
-    padding: 'var(--grid-gap-half) 0 0',
-
-    [theme.containerBreakpoints.up('md')]: {
-      padding: 'var(--grid-gap)'
-    }
+    padding: 'var(--grid-gap)'
   }),
 
   bodyWrap: ({ theme }) => ({
@@ -131,16 +122,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   }),
 
   actionsWrap: ({ theme }) => ({
-    padding: '0 0 var(--grid-gap)',
-
-    [theme.containerBreakpoints.up('md')]: {
-      padding: '0 var(--grid-gap) var(--grid-gap)'
-    },
+    padding: '0 var(--grid-gap) var(--grid-gap)',
 
     a: {
       padding: 0,
       margin: 0
-      // marginLeft: '0 !important'
     }
   }),
 
@@ -196,33 +182,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     props: {
       variant: CardVariants.news
     },
-    style: {
-      'paddingLeft': 'var(--grid-gap)',
-
-      ':is([class*=Card-cardMedia], [class*=Card-bodyWrap])': {
-        display: 'none'
-      },
-
-      '[class*=actionsWrap]': {
-        paddingBottom: 0,
-        paddingLeft: 0,
-        paddingRight: 0
-      },
-
-      '& [class*=Card-content]': {
-        'display': 'flex',
-        'flexDirection': 'column',
-        'padding': 0,
-
-        '& > *': {
-          marginTop: 'auto'
-        }
-      },
-
-      '& [class*=Card-title]': {
-        marginTop: 0
-      }
-    }
+    style: {}
   },
 
   {
