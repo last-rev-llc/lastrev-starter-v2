@@ -33,10 +33,15 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
   }),
 
   sideContentWrap: ({ theme }) => ({
-    gridColumnStart: 'two-start',
-    gridColumnEnd: 'eleven-end',
-    paddingBottom: 'var(--grid-gap-double)',
-    gridRow: 2
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    paddingBottom: 'var(--grid-gap-double) 0',
+    gridRow: 2,
+
+    [theme.breakpoints.up('md')]: {
+      gridColumnStart: 'two-start',
+      gridColumnEnd: 'eleven-end'
+    }
   }),
 
   shareLinks: ({ theme }) => ({
@@ -171,10 +176,15 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
   },
 
   contentWrap: ({ theme }) => ({
-    padding: 'var(--grid-gap-double)',
-    gridColumnStart: 'two-start',
-    gridColumnEnd: 'eleven-end',
-    gridRow: 1
+    padding: 'var(--grid-gap-double) 0',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    gridRow: 1,
+
+    [theme.breakpoints.up('md')]: {
+      gridColumnStart: 'two-start',
+      gridColumnEnd: 'eleven-end'
+    }
   })
 };
 

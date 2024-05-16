@@ -43,6 +43,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Header'] = {
     }
   }),
 
+  logo: ({ theme }) => ({
+    position: 'relative',
+    zIndex: '100'
+  }),
+
   headerMenuCtas: ({ theme }) => ({
     'padding': 0,
     'display': 'inline-flex',

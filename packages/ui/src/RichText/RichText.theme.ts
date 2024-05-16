@@ -17,7 +17,7 @@ const styleOverrides: ComponentsOverrides<Theme>['RichText'] = {
     ':is(ol, ul)': {
       'padding': 0,
       'paddingTop': 'var(--grid-gap-half)',
-      'marginInlineStart': 'var(--grid-gap)',
+      'marginInlineStart': 'calc(2 * var(--grid-gap))',
 
       '& > li': {
         marginBottom: '1em',
