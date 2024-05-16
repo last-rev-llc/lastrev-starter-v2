@@ -4,66 +4,39 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Blog'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
-  // root: {},
-
-  contentOuterGrid: {
+  root: ({ theme, ownerState }) => ({
+    ...theme.mixins.applyBackgroundColor({
+      ownerState: { ...ownerState, backgroundColor: 'light' },
+      theme
+    }),
     'containerType': 'inline-size',
-    '> *': {
-      gridColumn: 'full-start / full-end'
-    }
-  },
+    'position': 'relative',
+    'width': '100%',
+    'display': 'flex',
+    'flexDirection': 'column',
 
-  headerWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'ten-end'
+    '& > *': {
+      paddingTop: 'var(--section-padding)',
+      paddingBottom: 'var(--section-padding)'
     }
   }),
 
-  breadcrumbsWrap: {
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end'
-  },
-
-  contentWrap: {
-    display: 'contents'
-  },
-
-  featuredMediaWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'ten-end'
-    }
+  featuredMediaWrap: ({ theme, ownerState }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBottom: 'var(--grid-gap-double)'
   }),
 
-  // featuredMedia: {},
-
-  // pubDate: {},
-
-  shareLinksWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('md')]: {
-      gridColumnStart: 'two-start',
-      gridColumnEnd: 'seven-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'content-quarter',
-      gridColumnEnd: 'content-three-quarter'
-    }
+  sideContentWrap: ({ theme }) => ({
+    gridColumnStart: 'two-start',
+    gridColumnEnd: 'eleven-end',
+    paddingBottom: 'var(--grid-gap-double)',
+    gridRow: 2
   }),
 
   shareLinks: ({ theme }) => ({
@@ -170,45 +143,39 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
     }
   }),
 
-  // title: {},
+  sideContentInnerWrap: {
+    'display': 'flex',
+    'flexDirection': 'column',
+    'borderLeft': 'solid',
+    'borderLeftWidth': '1px',
+    'paddingLeft': 'var(--grid-gap)',
 
-  body: ({ theme }) => ({
-    '& > *:not(div)': {
-      gridColumnStart: 'content-start',
-      gridColumnEnd: 'content-end',
-
-      [theme.breakpoints.up('md')]: {
-        gridColumnStart: 'two-start',
-        gridColumnEnd: 'seven-end'
-      },
-
-      [theme.breakpoints.up('lg')]: {
-        gridColumnStart: 'content-quarter',
-        gridColumnEnd: 'content-three-quarter'
-      }
-    },
-
-    '& > div': {
-      gridColumnStart: 'full-start',
-      gridColumnEnd: 'full-end'
-    }
-  }),
-
-  // blogCategories: ({}) => ({}),
-
-  // blogCategory: ({}) => ({}),
-
-  // tags: ({}) => ({}),
-
-  // tag: ({}) => ({}),
-
-  relatedItemsWrap: {
     '& > *': {
-      gridColumn: 'full-start / full-end'
+      marginBottom: 0
     }
-  }
+  },
 
-  // relatedItems: ({}) => ({})
+  detailsLabel: {
+    '&': {
+      paddingBottom: 'var(--grid-gap)'
+    }
+  },
+
+  bodyHeader: {
+    '&:not(:first-of-type)': {
+      paddingTop: 'var(--grid-gap)',
+      marginTop: 'var(--grid-gap)',
+      borderTop: 'solid',
+      borderTopWidth: '1px'
+    }
+  },
+
+  contentWrap: ({ theme }) => ({
+    padding: 'var(--grid-gap-double)',
+    gridColumnStart: 'two-start',
+    gridColumnEnd: 'eleven-end',
+    gridRow: 1
+  })
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['Blog'] => [];

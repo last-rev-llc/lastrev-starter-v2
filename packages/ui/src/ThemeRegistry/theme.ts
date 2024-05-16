@@ -6,14 +6,14 @@ import {
 } from '@mui/material/styles';
 
 import { deepmerge } from '@mui/utils';
-import './theme.types';
+
 import generateGridStyles from './mixins/generateGridStyles';
 import applyBackgroundColor from './mixins/applyBackgroundColor';
 import themeComponents from './theme.components';
 
+import './theme.types';
+
 import { Outfit } from 'next/font/google';
-import { light } from '@mui/material/styles/createPalette';
-import { color } from 'framer-motion';
 
 export const outfit = Outfit({
   weight: ['200', '300', '400', '600', '700'],
@@ -108,6 +108,26 @@ const schemes = {
     text: commonColors.black,
     overlay: commonColors.white,
     overlayText: commonColors.white,
+    highlightColor: commonColors.brightGreen
+  },
+  light: {
+    primary: {
+      main: commonColors.white,
+      contrastText: commonColors.midnight,
+      light: lighten(commonColors.white, 0.1),
+      dark: darken(commonColors.midnight, 0.1)
+    },
+    secondary: {
+      main: commonColors.brightGreen,
+      contrastText: commonColors.white,
+      light: lighten(commonColors.brightGreen, 0.1),
+      dark: darken(commonColors.brightGreen, 0.1)
+    },
+    linkColor: commonColors.midnight,
+    headerColor: commonColors.midnight,
+    text: commonColors.white,
+    overlay: commonColors.midnight,
+    overlayText: commonColors.midnight,
     highlightColor: commonColors.brightGreen
   },
   black: {
@@ -256,12 +276,14 @@ const paletteTheme = {
     light: {
       palette: {
         schemes: schemes,
+        ...schemes['light'],
         ...schemes
       }
     },
     dark: {
       palette: {
         schemes: schemes,
+        ...schemes['midnight'],
         ...schemes
       }
     }

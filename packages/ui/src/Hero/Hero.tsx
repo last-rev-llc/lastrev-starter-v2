@@ -9,104 +9,137 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 import ContentModule from '../ContentModule';
 import Grid from '../Grid';
 import Background from '../Background';
+import Fade from '../Animations/Fade';
+import Breadcrumbs from '../Breadcrumbs';
+
+import { layoutConfig } from './Hero.theme';
 
 import type { HeroProps, HeroOwnerState } from './Hero.types';
 
 const Hero = (props: HeroProps) => {
   const ownerState = { ...props };
 
+  const heroRef = React.useRef<HTMLDivElement | null>(null);
+
+  const scrollToBottom = () => {
+    if (heroRef.current) {
+      window.scrollTo({
+        top: heroRef.current.scrollHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const {
+    breadcrumbs,
+    variant,
     background,
     backgroundColor,
-    variant,
     overline,
     title,
     subtitle,
     body,
     actions,
     images,
-    sidekickLookup
+    sidekickLookup,
+    // hideBreadcrumbs,
+    isHomepage
   } = props;
 
   return (
-    <Root data-testid="Hero" ownerState={ownerState} {...sidekick(sidekickLookup)}>
+    <Root data-testid="Hero" ownerState={ownerState} {...sidekick(sidekickLookup)} ref={heroRef}>
       <HeroBackground
-        background={{ ...background, priority: true }}
+        background={background ? ({ ...background, priority: true } as any) : undefined}
         backgroundColor={backgroundColor}
-        testId="Hero-backgrounds"
+        testId="Hero-background"
       />
-
       <ContentOuterGrid ownerState={ownerState}>
         {overline || title || subtitle || body || actions ? (
           <MainContentWrap ownerState={ownerState}>
             <Content ownerState={ownerState}>
-              {!!overline && (
-                <Overline ownerState={ownerState} variant="overline">
-                  {overline}
-                </Overline>
-              )}
+              {/* {!hideBreadcrumbs && !!breadcrumbs?.length ? (
+                <BreadcrumbsWrap ownerState={ownerState}>
+                  <Breadcrumbs links={breadcrumbs} />
+                </BreadcrumbsWrap>
+              ) : null} */}
 
-              {!!title && (
-                <Title
-                  {...sidekick(sidekickLookup, 'title')}
-                  component="h1"
-                  variant="display1"
-                  data-testid="Hero-title"
-                  ownerState={ownerState}
-                >
-                  {title}
-                </Title>
-              )}
+              <ContentInnerWrap ownerState={ownerState}>
+                {!!overline && (
+                  <Overline ownerState={ownerState} variant="overline">
+                    {overline}
+                  </Overline>
+                )}
 
-              {!!subtitle && (
-                <Subtitle
-                  {...sidekick(sidekickLookup, 'subtitle')}
-                  data-testid="Hero-subtitle"
-                  ownerState={ownerState}
-                  variant="display3"
-                >
-                  {subtitle}
-                </Subtitle>
-              )}
+                {!!title && (
+                  <Title
+                    {...sidekick(sidekickLookup, 'title')}
+                    component="h1"
+                    variant="h1"
+                    data-testid="Hero-title"
+                    ownerState={ownerState}>
+                    {title}
+                  </Title>
+                )}
 
-              {!!body && (
-                <Body
-                  __typename="RichText"
-                  ownerState={ownerState}
-                  body={body}
-                  {...sidekick(sidekickLookup, 'body')}
-                />
-              )}
+                {!!subtitle && (
+                  <Subtitle
+                    {...sidekick(sidekickLookup, 'subtitle')}
+                    data-testid="Hero-subtitle"
+                    ownerState={ownerState}
+                    component="p"
+                    variant="h5">
+                    {subtitle}
+                  </Subtitle>
+                )}
+
+                {!!body && (
+                  <Body
+                    __typename="RichText"
+                    ownerState={ownerState}
+                    body={body}
+                    {...sidekick(sidekickLookup, 'body')}
+                  />
+                )}
+                {!!actions?.length && (
+                  <ActionsWrap
+                    {...sidekick(sidekickLookup, 'actions')}
+                    data-testid="Hero-actions"
+                    ownerState={ownerState}>
+                    {actions.map((action) => (
+                      <Action ownerState={ownerState} key={action?.id} {...action} />
+                    ))}
+                  </ActionsWrap>
+                )}
+              </ContentInnerWrap>
             </Content>
-
-            {!!actions?.length && (
-              <ActionsWrap
-                {...sidekick(sidekickLookup, 'actions')}
-                data-testid="Hero-actions"
-                ownerState={ownerState}
-              >
-                {actions.map((action) => (
-                  <Action ownerState={ownerState} key={action?.id} {...action} />
-                ))}
-              </ActionsWrap>
-            )}
           </MainContentWrap>
         ) : null}
 
         {!!images?.length ? (
-          <MediaWrap>
+          <MediaWrap ownerState={ownerState}>
             {images?.map((image) => (
-              <Media
-                key={image?.id}
-                ownerState={ownerState}
-                {...sidekick(sidekickLookup, 'images')}
-                {...image}
-                data-testid="Hero-media"
-              />
+              <Fade key={image?.id}>
+                <Media
+                  ownerState={ownerState}
+                  {...sidekick(sidekickLookup, 'images')}
+                  {...image}
+                  columns={layoutConfig[variant]}
+                  data-testid="Hero-media"
+                />
+              </Fade>
             ))}
           </MediaWrap>
         ) : null}
       </ContentOuterGrid>
+
+      {!isHomepage && (
+        <ScrollToContentWrap ownerState={ownerState}>
+          <Typography variant="overline" onClick={scrollToBottom}>
+            Scroll Down
+          </Typography>
+        </ScrollToContentWrap>
+      )}
     </Root>
   );
 };
@@ -115,6 +148,12 @@ const Root = styled(Box, {
   name: 'Hero',
   slot: 'Root',
   overridesResolver: (_, styles) => [styles.root]
+})<{ ownerState: HeroOwnerState }>``;
+
+const BreadcrumbsWrap = styled(Box, {
+  name: 'Hero',
+  slot: 'BreadcrumbsWrap',
+  overridesResolver: (_, styles) => [styles.breadcrumbsWrap]
 })<{ ownerState: HeroOwnerState }>``;
 
 const ContentOuterGrid = styled(Grid, {
@@ -133,6 +172,12 @@ const Content = styled(Box, {
   name: 'Hero',
   slot: 'Content',
   overridesResolver: (_, styles) => [styles.content]
+})<{ ownerState: HeroOwnerState }>``;
+
+const ContentInnerWrap = styled(Box, {
+  name: 'Hero',
+  slot: 'ContentInnerWrap',
+  overridesResolver: (_, styles) => [styles.contentInnerWrap]
 })<{ ownerState: HeroOwnerState }>``;
 
 const HeroBackground = styled(Background, {
@@ -175,7 +220,7 @@ const MediaWrap = styled(Box, {
   name: 'Hero',
   slot: 'MediaWrap ',
   overridesResolver: (_, styles) => [styles.mediaWrap]
-})``;
+})<{ ownerState: HeroOwnerState }>``;
 
 const ActionsWrap = styled(Box, {
   name: 'Hero',
@@ -187,6 +232,12 @@ const Action = styled(ContentModule, {
   name: 'Hero',
   slot: 'Action',
   overridesResolver: (_, styles) => [styles.action]
+})<{ ownerState: HeroOwnerState }>``;
+
+const ScrollToContentWrap = styled(Grid, {
+  name: 'Hero',
+  slot: 'ScrollToContentWrap',
+  overridesResolver: (_, styles) => [styles.scrollToContentWrap]
 })<{ ownerState: HeroOwnerState }>``;
 
 export default Hero;

@@ -3,8 +3,7 @@ import {
   type Mixins,
   type CssVarsTheme,
   type Theme as MUITheme,
-  type TypographyStyle,
-  type ThemeVars
+  type TypographyStyle
 } from '@mui/material/styles';
 
 import { type Palette, type PaletteOptions } from '@mui/material/styles/createPalette';

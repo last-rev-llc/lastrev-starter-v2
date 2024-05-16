@@ -6,9 +6,6 @@ fragment RichText_BaseFragment on RichText {
     entries {
       ...Content_BaseFragment
       ...Link_BaseFragment
-      #   ...Collection_RichTextFragment
-      #   ...Card_RichTextFragment
-      #   ...Section_RichTextFragment
       ...Text_RichTextFragment
       ...Media_BaseFragment
       ...Video_BaseFragment
@@ -59,10 +56,6 @@ fragment RichText_RichTextFragment on RichText {
     entries {
       ...Content_BaseFragment
       ...Link_BaseFragment
-      #      ...Section_BaseFieldsFragment
-      #      ...Card_RichTextFragment
-      #      ...Collection_RichTextFragment
-      #      ...Section_RichTextFragment
       ...Media_BaseFragment
     }
     assets {

@@ -21,19 +21,9 @@ export const typeDefs = gql`
     breadcrumbs: [Link]
     author: Person
     hero: Content
+    aboutText: RichText
   }
 `;
-
-// Controls which site the Blogs gets it's global config from
-// const BLOGS_SITE_ID = process.env.BLOGS_SITE_ID ?? (process.env.DEFAULT_SITE_ID || process.env.SITE_ID);
-
-// const blogGlobalContentsResolver = async (page: any, _args: any, ctx: ApolloContext) => {
-//   // TODO: Make getting a localized resolved link a single function
-//   const siteRef: any = getLocalizedField(page.fields, 'site', ctx);
-//   const site = await ctx.loaders.entryLoader.load({ id: siteRef?.sys?.id ?? BLOGS_SITE_ID, preview: !!ctx.preview });
-//   const siteblogGlobalContents: any = getLocalizedField(site?.fields, 'blogGlobalContents', ctx);
-//   return siteblogGlobalContents;
-// };
 
 export const mappers: Mappers = {
   Blog: {
@@ -42,13 +32,27 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
-      // contents: blogGlobalContentsResolver,
+
       relatedItems: async (blog: any, _args: any, ctx: ApolloContext) =>
-        createType('Collection', {
+        createType('CollectionDynamic', {
           introText: createType('Text', { title: 'Related News' }),
           items: getLocalizedField(blog.fields, 'relatedItems', ctx) ?? [],
-          variant: 'Three Per Row',
-          itemsVariant: 'Blog'
+          variant: 'threePerRow',
+          itemsVariant: 'default',
+          backgroundColor: 'coolGrey',
+          settings: {
+            configure: {
+              facetFilters: ['locale:en-US', 'contentType:Blog'],
+              hitsPerPage: 3
+            },
+            indexName: 'contentful',
+            showFilters: false,
+            showSearchBox: false,
+            showPagination: false,
+            searchAsYouType: false,
+            useInfiniteHits: false,
+            showCurrentRefinements: false
+          }
         }),
       hero: async (blog: any, _args: any, ctx: ApolloContext) => {
         const textArray = [];
@@ -71,8 +75,8 @@ export const mappers: Mappers = {
         if (pubDate) textArray.push(pubDate);
         const body = createRichText(textArray.join(' • '));
         return createType('Hero', {
-          variant: 'news',
-          backgroundColor: 'navy',
+          variant: 'mediaOnRight',
+          backgroundColor: 'coolGrey',
           title: getLocalizedField(blog.fields, 'title', ctx),
           body,
           images: getLocalizedField(blog.fields, 'featuredMedia', ctx) ?? []
@@ -120,6 +124,8 @@ export const mappers: Mappers = {
           createType('Link', {
             id: blog.id,
             text,
+            icon: 'logo',
+            iconPosition: 'Left',
             href: await pathResolver(blog, args, ctx),
             variant: 'buttonText'
           })

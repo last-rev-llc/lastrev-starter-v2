@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 const TableContainer = dynamic(() => import('@mui/material/TableContainer'));
 const Table = dynamic(() => import('@mui/material/Table'));
@@ -19,7 +20,7 @@ import INLINES from './INLINES';
 import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
 
-import type { RichTextProps } from './RichText.types';
+import type { RichTextOwnerState, RichTextProps } from './RichText.types';
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 const keyBy = (key: string, xs: any[]) =>
@@ -63,8 +64,7 @@ const renderTypography =
         <Typography
           variant={variant}
           {...(hasEmbed && { component: 'span' })}
-          data-testid={`Text-${variant}`}
-        >
+          data-testid={`Text-${variant}`}>
           {children.map((child: any) => {
             if (isHTML(child)) {
               return (
@@ -96,7 +96,7 @@ const createRenderOptions = ({
   renderNode,
   renderMark,
   renderText
-}: { links?: TextLinks } & Options) => {
+}: { links?: any } & Options) => {
   const entries = keyBy('id', links?.entries ?? []);
   const assets = keyBy('id', links?.assets ?? []);
 
@@ -107,8 +107,7 @@ const createRenderOptions = ({
           <ContentModule
             __typename="Link"
             href={_.data.uri}
-            data-testid={`Text-${INLINES.HYPERLINK}`}
-          >
+            data-testid={`Text-${INLINES.HYPERLINK}`}>
             {children}
           </ContentModule>
         );
@@ -135,8 +134,7 @@ const createRenderOptions = ({
             href={entry?.file?.url}
             target="_blank"
             rel="noopener noreferrer"
-            data-testid="Text-asset-hyperlink"
-          >
+            data-testid="Text-asset-hyperlink">
             {children}
           </ContentModule>
         );
@@ -213,26 +211,18 @@ const createRenderOptions = ({
   };
 };
 
-const RichText = ({
-  body,
-  align,
-  variant,
-  sidekickLookup,
-  sx,
-  renderNode,
-  renderMark,
-  renderOptions,
-  ...props
-}: RichTextProps) => {
+const RichText = (props: RichTextProps) => {
+  const ownerState = { ...props };
+
+  const { body, sidekickLookup, renderNode, renderMark, renderOptions } = props;
+
   return (
     <ErrorBoundary>
       <Root
         {...sidekick(sidekickLookup)}
-        variant={variant}
-        // sx={{ textAlign: align, ...sx, ...styles?.root }} // TODO
+        ownerState={ownerState}
         data-testid="RichText-root"
-        {...props}
-      >
+        {...props}>
         {documentToReactComponents(
           body?.json,
           createRenderOptions({ links: body?.links, renderNode, renderMark, ...renderOptions })
@@ -242,35 +232,33 @@ const RichText = ({
   );
 };
 
-const Root = styled('div', {
+const Root = styled(Box, {
   name: 'RichText',
   slot: 'Root',
-  shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'ownerState',
+  shouldForwardProp: (prop: string) => prop !== 'sidekickLookup' && prop !== 'ownerState',
   overridesResolver: (_, styles) => [styles.root, styles.richTextContent]
-})<{ variant?: string }>`
-  white-space: pre-wrap;
-  display: contents;
-`;
+})<{ ownerState: RichTextOwnerState }>``;
 
 const EmbeddedRoot = styled('div', {
   name: 'RichText',
   slot: 'EmbeddedRoot',
-  shouldForwardProp: (prop) => prop !== 'variant',
+
   overridesResolver: (_, styles) => [styles.embeddedRoot]
 })<{ variant?: string }>``;
 
 const InlineRoot = styled('span', {
   name: 'RichText',
   slot: 'InlineRoot',
-  shouldForwardProp: (prop) => prop !== 'variant',
   overridesResolver: (_, styles) => [styles.inlineRoot]
 })<{ variant?: string }>``;
 
 const TableRoot = styled(TableContainer, {
   name: 'RichText',
   slot: 'TableRoot',
-  shouldForwardProp: (prop) => prop !== 'variant',
+
   overridesResolver: (_, styles) => [styles.tableRoot]
 })<{ variant?: string }>``;
+
+RichText.displayName = 'RichText';
 
 export default RichText;

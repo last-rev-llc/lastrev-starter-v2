@@ -46,6 +46,7 @@ type Block implements Content {
 }
 
 type Blog implements Content {
+  aboutText: RichText
   animation: JSON
   author: Person
   body: RichText
@@ -341,15 +342,15 @@ type Header implements Content {
 }
 
 type Hero implements Content {
-  actions: [Link]
+  actions: [ActionLink]
   animation: JSON
   background: Media
   backgroundColor: String
   body: RichText
-  contentHeight: String
   id: String
   internalTitle: String
   overline: String
+  showFullImage: Boolean
   sideImageItems: [Media]
   sidekickLookup: JSON
   subtitle: String

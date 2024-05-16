@@ -1,5 +1,6 @@
 import type { ComponentsOverrides, ComponentsVariants, ComponentsProps } from '@mui/material';
 import type { Hero_BaseFragmentFragment } from '@graphql-sdk/types';
+import { type LinkProps } from '../Link';
 
 // TODO Review
 export enum HeroVariants {
@@ -10,11 +11,16 @@ export enum HeroVariants {
   mediaOnLeft = 'mediaOnLeft',
   mediaOnLeftFullBleed = 'mediaOnLeftFullBleed',
   mediaBelow = 'mediaBelow',
-  mediaAbove = 'mediaAbove'
+  mediaAbove = 'mediaAbove',
+  mediaSmall = 'mediaSmall',
+  news = 'news'
 }
 
 export interface HeroProps extends Omit<Hero_BaseFragmentFragment, 'variant'> {
   variant: HeroVariants;
+  breadcrumbs?: LinkProps[];
+  showFullImage?: boolean;
+  isHomepage?: boolean;
 }
 
 export interface HeroOwnerState extends HeroProps {}
@@ -24,6 +30,7 @@ interface HeroClasses {
   backgroundGrid: string;
   contentOuterGrid: string;
   mainContentWrap: string;
+  bottomContentWrap: string;
   sideContentWrap: string;
   content: string;
   background: string;
@@ -35,6 +42,9 @@ interface HeroClasses {
   media: string;
   actionsWrap: string;
   action: string;
+  breadcrumbsWrap: string;
+  contentInnerWrap: string;
+  scrollToContentWrap: string;
 }
 
 export declare type HeroClassKey = keyof HeroClasses;
