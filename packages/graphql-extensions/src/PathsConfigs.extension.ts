@@ -106,5 +106,6 @@ export const pathsConfigs = {
   page: generatePaths,
   blog: generatePaths,
   person: generatePaths,
-  categoryBlog: generatePaths
+  categoryBlog: generatePaths,
+  pageDocument: generatePaths
 };

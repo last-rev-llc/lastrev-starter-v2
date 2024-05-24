@@ -8,8 +8,10 @@ const Text = dynamic(() => import('./Text'));
 const RichText = dynamic(() => import('./RichText'));
 const Carousel = dynamic(() => import('./Carousel'));
 const Collection = dynamic(() => import('./Collection'));
+const LinkWheel = dynamic(() => import('./LinkWheel'));
 const Tabs = dynamic(() => import('./Tabs'));
 const Card = dynamic(() => import('./Card'));
+const PageDocument = dynamic(() => import('./PageDocument'));
 const Person = dynamic(() => import('./Person'));
 const Quote = dynamic(() => import('./Quote'));
 const Blog = dynamic(() => import('./Blog'));
@@ -32,7 +34,9 @@ const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
 export const contentMapping: {
   [key: string]: any;
 } = {
+  'Card:linkList': Link,
   'Collection:.*Carousel': Carousel,
+  'Collection:linkWheel': LinkWheel,
   'CollectionExpandable:Accordion': Accordion,
   'CollectionExpandable:Tabs': Tabs,
   'CollectionExpandable': Tabs,
@@ -49,7 +53,6 @@ export const contentMapping: {
   Blog,
   Breadcrumbs,
   Card,
-  'Card:linkList': Link,
   Carousel,
   Collection,
   Footer,
@@ -61,6 +64,7 @@ export const contentMapping: {
   Media,
   NavigationItem,
   Page,
+  PageDocument,
   Person,
   Quote,
   RichText,

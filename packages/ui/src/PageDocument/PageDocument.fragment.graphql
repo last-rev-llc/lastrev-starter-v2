@@ -1,0 +1,34 @@
+fragment PageDocument_BaseFragment on PageDocument {
+  ...Content_BaseFragment
+  seo
+  path
+  title
+  slug
+}
+
+fragment PageDocument_PageFragment on PageDocument {
+  ...PageDocument_BaseFragment
+  seo
+  path
+  title
+  slug
+  
+  header {
+    ...Header_BaseFragment
+  }
+  footer {
+    ...Footer_BaseFragment
+  }
+  body {
+    ...RichText_BaseFragment
+  }
+  relatedItems {
+    ...Collection_BaseFragment
+  }
+  hero {
+    ...Hero_BaseFragment
+  }
+  breadcrumbs {
+    ...Link_BaseFragment
+  }
+}

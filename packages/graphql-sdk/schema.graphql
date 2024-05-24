@@ -139,6 +139,7 @@ type Collection implements Content {
 type CollectionDynamic implements Content {
   algoliaSettings: JSON
   animation: JSON
+  backgroundColor: String
   backgroundImage: Media
   id: String
   internalTitle: String
@@ -462,6 +463,30 @@ type Page implements Content {
   path: String
   promoImage: Media
   promoSummary: String
+  seo: JSON
+  sidekickLookup: JSON
+  slug: String
+  theme: [Theme]
+  title: String
+}
+
+type PageDocument implements Content {
+  animation: JSON
+  body: RichText
+  breadcrumbs: [Link]
+  externalUrl: String
+  footer: Footer
+  header: Header
+  hero: Content
+  id: String
+  internalTitle: String
+  lr__path__: String
+  mainImage: Media
+  mediaFile: Media
+  path: String
+  promoImage: Media
+  promoSummary: String
+  relatedItems: Content
   seo: JSON
   sidekickLookup: JSON
   slug: String
