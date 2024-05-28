@@ -25,7 +25,9 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
     position: 'relative',
 
     ...(ownerState?.aspectRatio === CardAspectRatios.horizontal && {
-      ...(ownerState?.variant === CardVariants.media
+      ...(ownerState?.variant === CardVariants.media ||
+      ownerState?.variant === CardVariants.mediaOnlyFit ||
+      ownerState?.variant === CardVariants.mediaOnlyFull
         ? {
             [theme.breakpoints.up('md')]: { maxHeight: '56.25cqi' }
           }
@@ -38,7 +40,9 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
     }),
 
     ...(ownerState?.aspectRatio === CardAspectRatios.vertical && {
-      ...(ownerState?.variant === CardVariants.media
+      ...(ownerState?.variant === CardVariants.media ||
+      ownerState?.variant === CardVariants.mediaOnlyFit ||
+      ownerState?.variant === CardVariants.mediaOnlyFull
         ? {
             [theme.breakpoints.up('md')]: { minHeight: '177.78cqi' }
           }
@@ -51,7 +55,9 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
     }),
 
     ...(ownerState?.aspectRatio === CardAspectRatios.square && {
-      ...(ownerState?.variant === CardVariants.media
+      ...(ownerState?.variant === CardVariants.media ||
+      ownerState?.variant === CardVariants.mediaOnlyFit ||
+      ownerState?.variant === CardVariants.mediaOnlyFull
         ? {
             [theme.breakpoints.up('md')]: { maxHeight: '100cqi' }
           }
@@ -82,6 +88,10 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
       '&:is(svg)': {
         objectFit: 'fill'
       },
+
+      ...(ownerState?.variant === CardVariants.mediaOnlyFull && {
+        aspectRatio: 'unset'
+      }),
 
       ...(ownerState?.aspectRatio === CardAspectRatios.horizontal && {
         aspectRatio: '16/9'
@@ -269,26 +279,52 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     props: {
       variant: CardVariants.media
     },
-    style: {
-      '[class*=cardContent]': {
-        display: 'none'
-      }
-    }
+    style: {}
   },
   {
     props: {
       variant: CardVariants.logo
     },
     style: {
-      '[class*=cardContent]': {
-        display: 'none'
-      },
-
       '[class*=cardMedia]': {
         'margin': 'auto',
         'padding': 'var(--grid-gap-double)',
         '& :is(img, svg, picture > img)': {
           objectFit: 'contain'
+        }
+      }
+    }
+  },
+  {
+    props: {
+      variant: CardVariants.mediaOnlyFit
+    },
+    style: {
+      '[class*=CardContent]': {
+        display: 'none'
+      },
+
+      '[class*=CardMedia]': {
+        'margin': 'auto',
+        'border': 'solid 10px blue',
+        '& :is(img, svg, picture > img)': {
+          objectFit: 'contain'
+        }
+      }
+    }
+  },
+  {
+    props: {
+      variant: CardVariants.mediaOnlyFull
+    },
+    style: {
+      '[class*=CardContent]': {
+        display: 'none'
+      },
+
+      '[class*=CardMedia]': {
+        '& :is(img, svg, picture > img)': {
+          objectFit: 'cover'
         }
       }
     }

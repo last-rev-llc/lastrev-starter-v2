@@ -7,6 +7,8 @@ export enum CardVariants {
   icon = 'icon',
   logo = 'logo',
   media = 'media',
+  mediaOnlyFull = 'mediaOnlyFull',
+  mediaOnlyFit = 'mediaOnlyFit',
   pricing = 'pricing',
   person = 'person',
   quote = 'quote',

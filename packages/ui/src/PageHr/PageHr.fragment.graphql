@@ -1,0 +1,34 @@
+fragment PageHr_BaseFragment on PageHr {
+  ...Content_BaseFragment
+  seo
+  path
+  slug
+  title
+}
+
+fragment PageHr_PageFragment on PageHr {
+  ...PageHr_BaseFragment
+  
+  header {
+    ...Header_BaseFragment
+  }
+  footer {
+    ...Footer_BaseFragment
+  }
+  hero {
+    ...ContentModule_BaseFragment
+  }
+  contents {
+    ...ContentModule_BaseFragment
+  } 
+}
+
+fragment PageHr_CardFragment on PageHr {
+  ...Content_BaseFragment
+  title
+  slug
+  promoImage {
+    ...Media_BaseFragment
+  }
+  promoSummary
+}

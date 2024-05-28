@@ -494,6 +494,33 @@ type PageDocument implements Content {
   title: String
 }
 
+type PageHr implements Content {
+  animation: JSON
+  benefitsCollection: Collection
+  breadcrumbs: [Link]
+  codeCollection: Collection
+  contactEmail: String
+  contactName: String
+  contents: [Content]
+  footer: Footer
+  header: Header
+  hero: Hero
+  heroImage: Media
+  holidaysCollection: Collection
+  id: String
+  internalTitle: String
+  lr__path__: String
+  path: String
+  policiesCollection: Collection
+  promoImage: Media
+  promoSummary: String
+  seo: JSON
+  sidekickLookup: JSON
+  slug: String
+  theme: [Theme]
+  title: String
+}
+
 type PagePathParam {
   slug: [String!]
 }

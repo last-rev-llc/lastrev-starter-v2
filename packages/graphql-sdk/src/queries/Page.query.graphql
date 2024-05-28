@@ -5,5 +5,6 @@ query Page($path: String!, $locale: String, $preview: Boolean, $site: String) {
     ...ContentModule_BlogFragment
     ...ContentModule_PageDocumentFragment
     ...ContentModule_FormFragment
+    ...ContentModule_PageHrFragment
   }
 }

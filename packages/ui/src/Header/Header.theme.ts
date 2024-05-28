@@ -20,7 +20,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Header'] = {
     'gap': 0,
 
     '& *': {
-      whiteSpace: 'nowrap'
+      'whiteSpace': 'nowrap',
+
+      '&:is([class*=MuiListItem-root], [class*=MuiList-root])': {
+        ...theme.mixins.applyBackgroundColor({ ownerState, theme })
+      }
     }
   }),
 

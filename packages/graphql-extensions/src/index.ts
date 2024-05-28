@@ -42,6 +42,7 @@ function loadFiles() {
     modules['Page'] = require('./Page.extension');
     modules['PageDocument'] = require('./PageDocument.extension');
     modules['PathsConfigs'] = require('./PathsConfigs.extension');
+    modules['PageHr'] = require('./PageHr.extension');
     modules['Person'] = require('./Person.extension');
     modules['Preview'] = require('./Preview.extension');
     modules['Quote'] = require('./Quote.extension');

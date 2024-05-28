@@ -5,8 +5,8 @@ if (!process.env.DOMAIN) throw new Error('DOMAIN environment variable is require
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.DOMAIN!),
   title: {
-    template: '%s | LastRev Next Starter',
-    default: 'LastRev Next Starter'
+    template: '%s | The Hub',
+    default: 'The Hub'
   }
 };
 

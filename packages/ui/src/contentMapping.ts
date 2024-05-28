@@ -12,6 +12,7 @@ const LinkWheel = dynamic(() => import('./LinkWheel'));
 const Tabs = dynamic(() => import('./Tabs'));
 const Card = dynamic(() => import('./Card'));
 const PageDocument = dynamic(() => import('./PageDocument'));
+const PageHr = dynamic(() => import('./PageHr'));
 const Person = dynamic(() => import('./Person'));
 const Quote = dynamic(() => import('./Quote'));
 const Blog = dynamic(() => import('./Blog'));
@@ -65,6 +66,7 @@ export const contentMapping: {
   NavigationItem,
   Page,
   PageDocument,
+  PageHr,
   Person,
   Quote,
   RichText,
