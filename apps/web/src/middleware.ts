@@ -7,7 +7,7 @@ export function middleware() {
     script-src 'self' 'unsafe-inline' 'unsafe-eval' *.sentry.io  *.google-analytics.com *.googletagmanager.com vitals.vercel-insights.com *.hs-analytics.net *.hs-banner.com *.hsadspixel.net *.hscollectedforms.net *.jquery.com *.hs-scripts.com *.hsforms.net netlify-cdp-loader.netlify.app *.netlify.app;
     font-src 'self'  *.sentry.io  fonts.gstatic.com *.hs-scripts.com *.hsforms.net data:;
     connect-src 'self'  *.sentry.io  *.google-analytics.com *.googletagmanager.com vitals.vercel-insights.com *.hs-analytics.net *.hs-banner.com *.hsadspixel.net *.hscollectedforms.net *.hsforms.net *.hubapi.com *.hsforms.com *.hs-scripts.com *.netlify.app;
-    frame-src  https://forms.hsforms.com;
+    frame-src  integralads.app.box.com integralads.account.box.com docs.google.com https://forms.hsforms.com;
     img-src * data:;
     media-src * data:;
     object-src 'none';

@@ -31,6 +31,7 @@ const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem
 const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
 const SiteMessage = dynamic(() => import('./SiteMessage'));
 const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
+const IFrame = dynamic(() => import('./IFrame'));
 
 export const contentMapping: {
   [key: string]: any;
@@ -61,6 +62,7 @@ export const contentMapping: {
   FooterNavigationItemGroup,
   Header,
   Hero,
+  IFrame,
   Link,
   Media,
   NavigationItem,

@@ -12,7 +12,7 @@ fragment PageDocument_PageFragment on PageDocument {
   path
   title
   slug
-  
+  externalUrl
   header {
     ...Header_BaseFragment
   }

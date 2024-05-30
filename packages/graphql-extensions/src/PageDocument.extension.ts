@@ -29,15 +29,20 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
-      relatedItems: async (doc: any, _args: any, ctx: ApolloContext) =>
-        createType('Collection', {
+      relatedItems: async (doc: any, _args: any, ctx: ApolloContext) => {
+        const relatedItems = getLocalizedField(doc.fields, 'relatedItems', ctx);
+
+        if (!!relatedItems?.length) return null;
+
+        return createType('Collection', {
           introText: createType('Text', { title: 'Related Documents' }),
           items: getLocalizedField(doc.fields, 'relatedItems', ctx) ?? [],
           variant: 'fourPerRow',
           itemsVariant: 'logo',
           itemsAspectRatio: 'horizontal',
           backgroundColor: 'coolGrey'
-        }),
+        });
+      },
 
       hero: async (doc: any, _args: any, ctx: ApolloContext) => {
         const externalUrl = getLocalizedField(doc.fields, 'externalUrl', ctx);

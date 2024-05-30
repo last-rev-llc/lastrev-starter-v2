@@ -11,7 +11,6 @@ export enum PageDocumentVariants {
 export interface PageDocumentProps extends Omit<PageDocument_PageFragmentFragment, 'variant'> {
   variant: PageDocumentVariants;
   breadcrumbs?: LinkProps[];
-  jsonLd: any;
   hero?: HeroProps;
 }
 
