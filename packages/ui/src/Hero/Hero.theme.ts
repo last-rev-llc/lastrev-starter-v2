@@ -72,12 +72,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
   }),
 
   contentOuterGrid: ({ theme, ownerState }) => ({
-    overflow: 'hidden',
+    // overflow: 'hidden',
+    margin: 'auto',
 
     [theme.containerBreakpoints.up('md')]: {
-      ...(!!ownerState?.images?.length && {
-        maxHeight: '40vh'
-      })
+      minHeight: '40vh'
     }
   }),
 
@@ -149,6 +148,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     }
 
     return {
+      margin: 'auto',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -157,6 +157,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
       maxHeight: 'inherit',
       gridColumnStart: 'start',
       gridColumnEnd: 'end',
+      padding: 'var(--grid-gap-double) var(--grid-gap)',
 
       picture: {
         display: 'flex',
@@ -209,6 +210,10 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
       img: {
         width: '100%',
         objectFit: !!ownerState?.showFullImage ? 'contain' : 'cover'
+      },
+
+      [theme.containerBreakpoints.up('md')]: {
+        minHeight: '40vh'
       }
     };
   },
@@ -232,9 +237,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     '& > *': {
       gridColumn: 'start/end',
       justifySelf: 'flex-end',
-      paddingLeft: 'var(--grid-gap-half)',
       minHeight: '4em',
-      borderLeft: 'solid 1px var(--mui-palette-schemes-navy-secondary-main)',
       display: 'flex',
       transform: 'translate(0, 50%)',
       marginBottom: 0,

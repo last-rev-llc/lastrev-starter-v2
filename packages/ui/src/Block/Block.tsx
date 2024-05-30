@@ -56,7 +56,6 @@ const Block = (props: BlockProps) => {
         <BlockBackground
           background={backgroundImage}
           backgroundColor={backgroundColor}
-          overlap={false}
           testId="Block-background"
         />
 

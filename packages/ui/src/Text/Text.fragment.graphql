@@ -5,6 +5,7 @@ fragment Text_FieldsFragment on Text {
   overline
   title
   subtitle
+  backgroundColor
 }
 
 fragment Text_BaseFragment on Text {

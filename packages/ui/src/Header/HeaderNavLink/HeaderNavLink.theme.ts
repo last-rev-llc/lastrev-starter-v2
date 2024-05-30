@@ -11,11 +11,11 @@ const defaultProps: ComponentsProps['HeaderNavLink'] = {};
 const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
   root: ({ theme, open }) => ({
     'height': '100%',
-
     'display': 'flex',
     'flexDirection': 'column',
     'flexGrow': '1',
     'position': 'relative',
+    'fontWeight': 800,
 
     '[class$=HeaderNavLink-navItemLink]': {
       ...(!!open && {

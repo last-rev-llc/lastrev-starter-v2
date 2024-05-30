@@ -4,22 +4,13 @@ import dynamic from 'next/dynamic';
 import { styled } from '@mui/material/styles';
 
 import ContentModule from '../ContentModule';
-const BackToTop = dynamic(() => import('../BackToTop'));
+// const BackToTop = dynamic(() => import('../BackToTop'));
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 import type { PageHrProps } from './PageHr.types';
 
 const PageHr = (props: PageHrProps) => {
-  const {
-    header,
-    hero,
-    contents,
-    footer,
-    disableBackToTop,
-    sidekickLookup,
-    jsonLd,
-    footerDisclaimerOverride
-  } = props;
+  const { header, hero, contents, footer, disableBackToTop, sidekickLookup } = props;
 
   const ownerState = {
     ...props
@@ -42,7 +33,7 @@ const PageHr = (props: PageHrProps) => {
         {contents?.map((content: any) => (
           <ContentModule key={content?.id} {...content} component="section" />
         ))}
-        {!disableBackToTop ? <BackToTop /> : null}
+        {/* {!disableBackToTop ? <BackToTop /> : null} */}
       </Main>
 
       {footer ? (

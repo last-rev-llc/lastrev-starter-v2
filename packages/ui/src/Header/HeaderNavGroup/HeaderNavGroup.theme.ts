@@ -19,6 +19,7 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavGroup'] = {
     'display': 'flex',
     'width': '100%',
     'cursor': 'pointer',
+    'fontWeight': 800,
     '&:is(:hover, :focus-within):not(:focus-visible)': {
       // TODO: ADA recommends all links are underlined, so we should not do the below, but we can add custom styles here
       // textDecoration: 'none',

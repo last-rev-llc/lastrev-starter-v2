@@ -30,6 +30,7 @@ interface TextClasses {
   overline: string;
   title: string;
   subtitle: string;
+  background: string;
 }
 
 export declare type TextClassKey = keyof TextClasses;

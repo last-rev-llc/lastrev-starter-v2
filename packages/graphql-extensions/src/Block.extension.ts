@@ -25,6 +25,8 @@ export const mappers: Mappers = {
 
       imageOverlayColor: defaultResolver('imageOverlayColor'),
 
+      backgroundColor: defaultResolver('backgroundColor'),
+
       mediaItems: async (block: any, _args: any, ctx: ApolloContext) => {
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);
         if (mediaItem) return [mediaItem];

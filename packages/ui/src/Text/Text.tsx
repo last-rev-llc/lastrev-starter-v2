@@ -10,15 +10,19 @@ import ContentModule from '../ContentModule';
 
 import type { TextProps, TextOwnerState } from './Text.types';
 import Grid from '../Grid';
+import Background from '../Background';
 
 const Text = (props: TextProps) => {
   const ownerState = { ...props };
 
-  const { body, overline, title, subtitle, variant, sidekickLookup, sx } = props;
+  const { backgroundColor, body, overline, title, subtitle, variant, sidekickLookup, sx } = props;
 
   return (
     <ErrorBoundary>
       <Root data-testid="Text-root" {...sidekick(sidekickLookup)} ownerState={ownerState}>
+        {backgroundColor && (
+          <TextBackground backgroundColor={backgroundColor} testId="Text-background" />
+        )}
         {!!overline && (
           <Overline
             data-testid="Text-overline"
@@ -70,6 +74,12 @@ const Root = styled(Grid, {
   shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'ownerState',
   overridesResolver: (_, styles) => [styles.root]
 })<{ ownerState: TextOwnerState }>``;
+
+const TextBackground = styled(Background, {
+  name: 'Text',
+  slot: 'Background',
+  overridesResolver: (_, styles) => [styles.background]
+})<{}>``;
 
 const Overline = styled(Typography, {
   name: 'Text',

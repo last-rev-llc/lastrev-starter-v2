@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { styled } from '@mui/material/styles';
 
 import ContentModule from '../ContentModule';
-const BackToTop = dynamic(() => import('../BackToTop'));
+// const BackToTop = dynamic(() => import('../BackToTop'));
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 import type { PageProps } from './Page.types';
@@ -42,7 +42,7 @@ const Page = (props: PageProps) => {
         {contents?.map((content: any) => (
           <ContentModule key={content?.id} {...content} component="section" />
         ))}
-        {!disableBackToTop ? <BackToTop /> : null}
+        {/* {!disableBackToTop ? <BackToTop /> : null} */}
       </Main>
 
       {footer ? (
