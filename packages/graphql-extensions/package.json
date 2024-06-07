@@ -15,9 +15,6 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint"
   },
-  "jest": {
-    "preset": "jest-presets/jest/node"
-  },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.24.3",
     "@contentful/rich-text-from-markdown": "^15.16.15",
