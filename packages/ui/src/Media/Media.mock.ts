@@ -1,6 +1,6 @@
-import type { MediaProps, MediaVideoProps, AssetProps, FileProps } from './Media.types';
+import type { MediaProps, MediaVideoProps, FileProps } from './Media.types';
 
-import { cleanSVG } from '../../../graphql-extensions/src/utils/cleanSVG';
+import { cleanSVG } from '../utils/cleanSVG';
 const getSvgContent = (url: string) =>
   fetch(url)
     .then((res) => res.text())
@@ -8,36 +8,39 @@ const getSvgContent = (url: string) =>
       return cleanSVG(svgContent);
     });
 
-export const defaultFileImageMock = (override?: Partial<MediaProps>): FileProps => ({
-  url: `https://source.unsplash.com/random/${override.width ?? 1280}x${
-    override.height ?? 500
+export const defaultFileImageMock = (override?: Partial<FileProps>): FileProps => ({
+  url: `https://source.unsplash.com/random/${(override as any)?.width ?? 1280}x${
+    override?.height ?? 500
   }?rnd=${Math.random()}`,
-  width: 1920,
-  height: 1080,
+  width: '1920',
+  height: '1080',
   ...override
 });
 
-export const defaultFileSvgMock = (override?: Partial<MediaProps>): FileProps => ({
+export const defaultFileSvgMock = (override?: Partial<FileProps>): FileProps => ({
   url: 'https://images.ctfassets.net/imglmb3xms7o/5iTzPfXcBEhIM68upyDSxS/406045a76146d3dbc4ee1c89682abd76/whiteLastRev.svg',
-  width: 1280,
-  height: 720,
+  width: '1280',
+  height: '720',
   ...override
 });
 
-export const defaultFileVideoMock = (override?: Partial<MediaProps>): FileProps => ({
-  url: './LastRev.mp4',
-  width: 1280,
-  height: 720,
-  ...override
+export const defaultFileVideoMock = (override?: Partial<FileProps>): FileProps => ({
+  url: 'LastRev.mp4',
+  width: '1280',
+  height: '720',
+  ...override,
+  __typename: 'Asset'
 });
 
-const defaultAssetFileMock = (override?: Partial<MediaProps>): AssetProps => ({
-  file: defaultFileImageMock({ ...override }),
+const defaultAssetFileMock = (override?: Partial<MediaProps>): Partial<MediaProps> => ({
+  file: defaultFileImageMock({ ...override?.file }),
   title: 'This is an asset title',
   ...override
 });
 
-const defaultAssetSvgMock = async (override?: Partial<MediaProps>): Promise<AssetProps> => {
+const defaultAssetSvgMock = async (
+  override?: Partial<MediaProps>
+): Promise<Partial<MediaProps>> => {
   const svgContent = await getSvgContent(
     'https://images.ctfassets.net/imglmb3xms7o/5iTzPfXcBEhIM68upyDSxS/406045a76146d3dbc4ee1c89682abd76/whiteLastRev.svg'
   );
@@ -50,7 +53,7 @@ const defaultAssetSvgMock = async (override?: Partial<MediaProps>): Promise<Asse
   };
 };
 
-const defaultAssetVideoMock = (override?: Partial<MediaProps>): AssetProps => ({
+const defaultAssetVideoMock = (override?: Partial<MediaProps>): Partial<MediaProps> => ({
   file: defaultFileVideoMock(),
   title: 'This is an asset title',
   ...override
@@ -73,47 +76,47 @@ export const mediaExternalSVGMock = {
 
 const mediaDefaultMock = () => ({
   id: 'mediaBaseImageMock',
-  __typename: 'Media',
-  alt: 'This is the default media alt text'
+  alt: 'This is the default media alt text',
+  __typename: 'Media'
 });
 
-const imageDefaultMock = (override?: Partial<MediaProps>) => ({
+const imageDefaultMock = (override?: Partial<MediaProps>): MediaProps => ({
   ...mediaDefaultMock(),
-  ...defaultAssetFileMock(override)
+  ...defaultAssetFileMock(override),
+  __typename: 'Media'
 });
 
-const svgDefaultMock = (override?: Partial<MediaProps>) => ({
+const svgDefaultMock = async (override?: Partial<MediaProps>): Promise<MediaProps> => ({
   ...mediaDefaultMock(),
-  ...defaultAssetSvgMock(override)
+  ...(await defaultAssetSvgMock(override)),
+  __typename: 'Media'
 });
 
-const videoDefaultMock = (override?: Partial<MediaProps>) => ({
+const videoDefaultMock = (override?: Partial<MediaProps>): MediaVideoProps => ({
   ...mediaDefaultMock(),
-  ...defaultFileVideoMock({
-    ...override,
-
-    variant: 'video',
-    controls: true
-  })
+  variant: 'video',
+  controls: true,
+  file: defaultFileVideoMock({
+    ...override?.file
+  }),
+  __typename: 'Media'
 });
 
 export const mediaBaseVideoMock = (override?: Partial<MediaProps>): MediaProps =>
   videoDefaultMock({ ...override });
 
-export const mediaBaseImageMock = (override?: Partial<MediaProps>): MediaProps =>
-  imageDefaultMock({ ...override });
+export const mediaBaseImageMock = (override?: any): MediaProps => imageDefaultMock({ ...override });
 
-export const mediaBaseSvgMock = (override?: Partial<MediaProps>): MediaProps =>
+export const mediaBaseSvgMock = async (override?: any): Promise<MediaProps> =>
   svgDefaultMock({
     ...override
   });
 
-export const mediaVideoMock = (): MediaVideoProps => ({});
-
-export const responsiveMediaBaseImageMock = (override?: Partial<MediaProps>): MediaProps =>
-  mediaDefaultMock({
-    file: defaultFileImageMock(),
-    fileTablet: defaultFileImageMock({ width: 920, height: 613 }),
-    fileMobile: defaultFileImageMock({ width: 540, height: 540 }),
-    ...override
-  });
+export const responsiveMediaBaseImageMock = (override?: Partial<MediaProps>): MediaProps => ({
+  ...mediaDefaultMock(),
+  file: defaultFileImageMock(),
+  fileTablet: defaultFileImageMock({ width: '920', height: '613' }),
+  fileMobile: defaultFileImageMock({ width: '540', height: '540' }),
+  ...override,
+  __typename: 'Media'
+});

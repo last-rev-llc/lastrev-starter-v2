@@ -1,7 +1,6 @@
 //TODO: Fix ts issues
 // @ts-nocheck
 import * as React from 'react';
-import mountWithRouter from '../../../cypress/mountWithRouter';
 
 import Hero from './Hero';
 
@@ -19,70 +18,63 @@ beforeEach(() => {
 describe('Hero', () => {
   context('renders correctly', () => {
     it('renders a hero with correct content', () => {
-      mountWithRouter(<Hero {...mockedContent} />);
+      cy.mount(<Hero {...mockedContent} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-title]').should('exist').and('have.text', mockedContent.title);
 
       cy.get('[data-testid=Hero-subtitle]')
         .should('exist')
         .and('have.text', mockedContent.subtitle);
-      cy.get('[data-testid=Hero-body]')
+      cy.get('[data-testid=Text-body1]')
         .should('exist')
-        .and(
-          'have.text',
-          mockedContent.body?.json.content[0].content
-            .map((c) => c.content[0].content[0].value)
-            .join('')
-        );
+        .and('have.text', mockedContent.body?.json.content.map((c) => c.content[0].value).join(''));
 
-      cy.get('[data-testid=Hero-background]')
+      cy.get('[class*="Hero-background-"]').should('exist');
+      cy.get('.Hero-media')
         .should('exist')
-        .and('have.attr', 'src', mockedContent.background?.file?.url);
-      cy.get('[data-testid=Hero-image]')
-        .should('exist')
-        .and('have.attr', 'src', getFirstOfArray(mockedContent.image)?.file?.url);
+        .and('have.attr', 'src', mockedContent.images[0].file.url);
 
       cy.contains(mockedContent.actions?.[0]?.text).should('exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no title', () => {
-      mountWithRouter(<Hero {...mockedContent} title={undefined} />);
+      cy.mount(<Hero {...mockedContent} title={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-title]').should('not.exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no subtitle', () => {
-      mountWithRouter(<Hero {...mockedContent} subtitle={undefined} />);
+      cy.mount(<Hero {...mockedContent} subtitle={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-subtitle]').should('not.exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no body', () => {
-      mountWithRouter(<Hero {...mockedContent} body={undefined} />);
+      cy.mount(<Hero {...mockedContent} body={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-body]').should('not.exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no background image', () => {
-      mountWithRouter(<Hero {...mockedContent} background={undefined} />);
+      cy.mount(<Hero {...mockedContent} background={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-background]').should('not.exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no image', () => {
-      mountWithRouter(<Hero {...mockedContent} image={undefined} />);
+      cy.mount(<Hero {...mockedContent} image={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.get('[data-testid=Hero-image]').should('not.exist');
       //cy.percySnapshot();
     });
 
     it('renders a hero with no cta button', () => {
-      mountWithRouter(<Hero {...mockedContent} actions={undefined} />);
+      cy.mount(<Hero {...mockedContent} actions={undefined} />);
       cy.get('[data-testid=Hero]').should('exist');
       cy.contains(mockedContent.actions?.[0]?.text).should('not.exist');
       //cy.percySnapshot();

@@ -8,8 +8,12 @@ import { quoteBaseMock } from './Quote.mock';
 // TODO: Write tests
 describe('Quote', () => {
   it('renders a quote', () => {
-    mount(<Quote {...quoteBaseMock()} />);
-    cy.get('[data-testid=Quote]').should('exist');
+    const mockContent = quoteBaseMock();
+    mount(<Quote {...mockContent} />);
+    cy.get('.MuiTypography-body1')
+      .first()
+      .should('exist')
+      .and('have.text', `"${mockContent.quote}"`);
 
     //cy.percySnapshot();
   });
