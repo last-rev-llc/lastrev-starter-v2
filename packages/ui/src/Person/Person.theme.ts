@@ -61,7 +61,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
   },
 
   contentWrap: ({ theme }) => ({
-    backgroundColor: theme.palette.white.main,
+    backgroundColor: theme.palette.background.default,
     padding: 'calc(2 * var(--grid-gap))',
     gridColumnStart: 'content-start',
     gridColumnEnd: 'content-end',
