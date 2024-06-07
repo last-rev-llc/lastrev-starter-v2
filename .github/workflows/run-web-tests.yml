@@ -74,8 +74,8 @@ jobs:
   wait-for-preview:
     uses: ./.github/workflows/wait-for-preview.yml
     with:
-      # provider: 'netlify'
-      provider: 'vercel'
+      provider: 'netlify'
+      # provider: 'vercel'
     secrets:
       NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
       NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
