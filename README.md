@@ -63,8 +63,8 @@ Icons for links?
 [x] Implement Preview
 [x] Implement Content Redirect
 [ ] Create Grid documentation and working with Block, Collection
-[ ] Implement Test pipeline
-[ ] Implement E2E pipeline
+[x] Implement Test pipeline
+[x] Implement E2E pipeline
 [ ] Implement Chromatic pipeline
 [] Implement path resolution for href
 [] Implement Custom 404
