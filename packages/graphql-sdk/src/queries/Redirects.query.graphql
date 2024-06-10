@@ -1,7 +1,0 @@
-query Redirects($preview: Boolean!) {
-  redirects(preview: $preview) {
-    source
-    destination
-    permanent
-  }
-}

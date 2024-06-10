@@ -1,8 +1,0 @@
-query Preview($id: String!, $locale: String) {
-  content: contentPreview(id: $id, locale: $locale) {
-    ...ContentModule_BaseFragment
-    ...ContentModule_PageFragment
-    ...ContentModule_PersonFragment
-    ...ContentModule_BlogFragment
-  }
-}

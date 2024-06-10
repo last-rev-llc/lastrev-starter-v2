@@ -1,1 +1,0 @@
-export { contentMapping } from './contentMapping';
