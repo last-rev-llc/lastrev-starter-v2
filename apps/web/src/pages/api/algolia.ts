@@ -37,9 +37,19 @@ export const config = {
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   await cors(req, res);
-  const url = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}/api/graphql`
-    : 'http://localhost:8888/graphql';
+  // const url = process.env.VERCEL_URL
+  //   ? `https://${process.env.VERCEL_URL}/api/graphql`
+  //   : 'http://localhost:8888/graphql';
+
+  const deployUrl =
+    process.env.DEPLOY_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
+
+  const url =
+    process.env.NEXT_PHASE === 'phase-production-build' ||
+    process.env.STAGE === 'build' ||
+    !deployUrl
+      ? 'http://localhost:8888/graphql'
+      : `${deployUrl}/graphql`;
 
   try {
     await createAlgoliaSyncHandler(
