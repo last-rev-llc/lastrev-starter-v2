@@ -49,7 +49,7 @@ const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse
     process.env.STAGE === 'build' ||
     !deployUrl
       ? 'http://localhost:8888/graphql'
-      : `${deployUrl}/graphql`;
+      : `${deployUrl}/api/graphql`;
 
   try {
     await createAlgoliaSyncHandler(
