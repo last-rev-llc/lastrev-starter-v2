@@ -12,6 +12,19 @@ directive @tag(name: String!) on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD
 
 union ActionLink = Link
 
+type AlgoliaObject {
+  data: JSON!
+  index: String!
+}
+
+type AlgoliaRecord implements Content {
+  algoliaObjects: [AlgoliaObject]
+  animation: JSON
+  id: String
+  sidekickLookup: JSON
+  theme: [Theme]
+}
+
 type Asset {
   description: String
   extension: String
@@ -285,22 +298,13 @@ type ElementForm implements Content {
 
 type ElementVideo implements Content {
   alt: String
-  altText: String
   animation: JSON
-  asset: Media
-  assetURL: String
-  autoplay: Boolean
   file: Asset
   fileMobile: Asset
   fileTablet: Asset
   id: String
-  internalTitle: String
-  mobile: Media
-  placeholder: Media
   sidekickLookup: JSON
-  tablet: Media
   theme: [Theme]
-  title: String
   variant: String
 }
 
@@ -397,6 +401,8 @@ type Media implements Content {
   altText: String
   animation: JSON
   asset: Media
+  assetUrl: String
+  autoplay: Boolean
   description: String
   file: Asset
   fileMobile: Asset
@@ -404,6 +410,7 @@ type Media implements Content {
   id: String
   internalTitle: String
   mobile: Media
+  placeholder: Media
   sidekickLookup: JSON
   source: String
   tablet: Media
@@ -534,7 +541,6 @@ type Person implements Content {
   animation: JSON
   body: RichText
   breadcrumbs: [Link]
-  education: [String]
   email: String
   footer: Footer
   header: Header
@@ -546,7 +552,6 @@ type Person implements Content {
   mainImage: Media
   name: String
   path: String
-  previousExperiences: [String]
   promoImage: Media
   promoSummary: String
   rolloverImage: Media
@@ -570,20 +575,6 @@ type Query {
   sitemap(locales: [String!], preview: Boolean, root: String!, site: String): Sitemap
   sitemapIndex(preview: Boolean, site: String): Sitemap
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
-}
-
-type Quote implements Content {
-  animation: JSON
-  authorName: String
-  authorTitle: String
-  id: String
-  image: Media
-  internalTitle: String
-  logo: Media
-  quote: String
-  sidekickLookup: JSON
-  theme: [Theme]
-  variant: String
 }
 
 type RichText {
@@ -633,15 +624,10 @@ type Site implements Content {
   variant: String
 }
 
-type SiteRedirect implements Content {
-  animation: JSON
+type SiteRedirect {
   destination: String
-  id: String
   permanent: Boolean
-  sidekickLookup: JSON
   source: String
-  theme: [Theme]
-  variant: String
 }
 
 type Sitemap {

@@ -28,6 +28,5 @@ fragment Block_BaseFragment on Block {
     ...Media_BaseFragment
     ...Link_BaseFragment
     ...Collection_BaseFragment
-    ...Video_BaseFragment
   }
 }

@@ -9,6 +9,12 @@ import { processRewrites } from './utils/processRewrites';
 export const SITE_ID = process.env.DEFAULT_SITE_ID || process.env.SITE_ID;
 
 export const typeDefs = gql`
+  extend type SiteRedirect {
+    source: String
+    destination: String
+    permanent: Boolean
+  }
+
   extend type Query {
     redirects(preview: Boolean!): [SiteRedirect]
     rewrites(preview: Boolean!): [SiteRedirect]

@@ -14,7 +14,6 @@ const Card = dynamic(() => import('./Card'));
 const PageDocument = dynamic(() => import('./PageDocument'));
 const PageHr = dynamic(() => import('./PageHr'));
 const Person = dynamic(() => import('./Person'));
-const Quote = dynamic(() => import('./Quote'));
 const Blog = dynamic(() => import('./Blog'));
 const Accordion = dynamic(() => import('./Accordion'));
 const Form = dynamic(() => import('./Form'));
@@ -43,7 +42,6 @@ export const contentMapping: {
   'CollectionExpandable:Tabs': Tabs,
   'CollectionExpandable': Tabs,
   'ElementForm': Form,
-  'ElementVideo': Media,
   'NavigationItem:group': HeaderNavGroup,
   'NavigationItem:groupFooter': FooterNavigationItemGroup,
   'NavigationItem:link': HeaderNavLink,
@@ -70,7 +68,6 @@ export const contentMapping: {
   PageDocument,
   PageHr,
   Person,
-  Quote,
   RichText,
   Section,
   SiteMessage,

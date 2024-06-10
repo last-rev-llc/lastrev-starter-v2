@@ -17,7 +17,6 @@ const PageDocument = (props: PageDocumentProps) => {
   const { id, externalUrl, header, footer, body, relatedItems, breadcrumbs, sidekickLookup, hero } =
     props;
 
-  console.log({ externalUrl });
   return (
     <>
       {header ? <ContentModule {...(header as any)} /> : null}

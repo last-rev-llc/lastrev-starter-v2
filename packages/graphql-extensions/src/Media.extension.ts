@@ -151,9 +151,35 @@ export const mappers = {
       }
     },
     Card: {
+      variant: async (media: any, _args: any, ctx: ApolloContext) => {
+        let assetURL: any = getLocalizedField(media?.fields, 'assetURL', ctx);
+        const file = await mediaFieldResolver({
+          fields: media?.fields,
+          field: 'asset',
+          assetField: 'file',
+          ctx
+        });
+
+        // Asset reference will be used if set
+        //TODO: Support other ways to control priority
+        if (file?.url) assetURL = file?.url;
+
+        if (assetURL) {
+          if (assetURL.split('.')[assetURL.split('.').length - 1] === 'pdf') {
+            return 'embed';
+          }
+          if (getVideoEmbedUrl(assetURL)) {
+            return 'embed';
+          }
+          if (assetURL?.split('.')[assetURL?.split('.').length - 1] === 'mp4') {
+            return 'video';
+          }
+        }
+        return 'image';
+      },
       id: async (media: any, _args: any, ctx: ApolloContext) => {
         const asset = getLocalizedField(media.fields, 'asset', ctx) ?? [];
-        return asset.sys.id;
+        return asset?.sys?.id;
       },
       title: async (media: any, _args: any, ctx: ApolloContext) => {
         const title: any = getLocalizedField(media?.fields, 'title', ctx);
@@ -206,6 +232,7 @@ export const typeDefs = gql`
   extend type Media {
     alt: String
     variant: String
+    file: Asset
     fileTablet: Asset
     fileMobile: Asset
   }

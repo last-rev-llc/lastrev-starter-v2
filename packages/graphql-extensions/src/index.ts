@@ -1,5 +1,6 @@
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import type { Source, DocumentNode, GraphQLSchema } from 'graphql';
+import { typeDefs as algoliaTypeDefs } from '@last-rev/graphql-algolia-integration';
 
 import fs from 'fs';
 import path from 'path';
@@ -33,7 +34,6 @@ function loadFiles() {
     modules['CollectionExpandableItem'] = require('./CollectionExpandableItem.extension');
     modules['Footer'] = require('./Footer.extension');
     modules['ElementForm'] = require('./Form.extension');
-    modules['ElementVideo'] = require('./ElementVideo.extension');
     modules['Header'] = require('./Header.extension');
     modules['Hero'] = require('./Hero.extension');
     modules['Link'] = require('./Link.extension');
@@ -45,7 +45,6 @@ function loadFiles() {
     modules['PageHr'] = require('./PageHr.extension');
     modules['Person'] = require('./Person.extension');
     modules['Preview'] = require('./Preview.extension');
-    modules['Quote'] = require('./Quote.extension');
     modules['RichText'] = require('./RichText.extension');
     modules['Section'] = require('./Section.extension');
     modules['SEO'] = require('./SEO.extension');
@@ -87,6 +86,7 @@ function loadFiles() {
 }
 
 const extensions: GraphQlExtension[] = loadFiles();
+extensions.push({ typeDefs: algoliaTypeDefs });
 
 const getNonNullPropertiesFromExtensions = (property: any) =>
   extensions.map((ext: GraphQlExtension) => ext[property]).filter(Boolean);
