@@ -31,14 +31,8 @@
     "test": "jest --passWithNoTests"
   },
   "peerDependencies": {
-    "@types/react-dom": "^18.3.0",
-    "@types/react-router-dom": "^5.3.3",
-    "@types/react": "^18.3.1",
     "graphql": "^16.8.1",
     "nodemon": "^3.1.0",
-    "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.1",
-    "react": "^18.3.1",
     "tsc-watch": "^4.2.9"
   },
   "dependencies": {
@@ -58,18 +52,12 @@
   },
   "devDependencies": {
     "@types/node": "^20.12.10",
-    "@types/react-dom": "^18.3.0",
-    "@types/react-router-dom": "^5.3.3",
-    "@types/react": "^18.3.1",
     "cross-env": "^7.0.3",
     "encoding": "^0.1.13",
     "graphql-extensions": "workspace:*",
     "graphql": "^16.8.1",
     "nodemon": "^3.1.0",
     "pm2": "^5.3.1",
-    "react-dom": "^18.3.1",
-    "react-scripts": "^5.0.1",
-    "react": "^18.3.1",
     "tsconfig": "workspace:*",
     "typescript": "^5.4.5",
     "wait-on": "^7.2.0"

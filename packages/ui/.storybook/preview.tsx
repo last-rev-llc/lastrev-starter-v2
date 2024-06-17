@@ -1,4 +1,5 @@
-import { AppProvider } from '../packages/ui/src/AppProvider/AppProvider';
+import React from 'react';
+import { AppProvider } from '../src/AppProvider/AppProvider';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 const preview = {

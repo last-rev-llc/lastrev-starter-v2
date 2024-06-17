@@ -1,0 +1,79 @@
+name: 'Wait for preview'
+
+on:
+  workflow_call:
+    inputs:
+      provider:
+        required: true
+        type: string
+      preview-max-timeout:
+        required: false
+        type: number
+        default: 600
+      vercel-environment:
+        required: false
+        type: string
+    secrets:
+      VERCEL_PREVIEW_DEPLOYMENT_PASSWORD:
+        required: false
+      PGP_SECRET_SIGNING_PASSPHRASE:
+        required: false
+      NETLIFY_SITE_ID:
+        required: false
+      NETLIFY_TOKEN:
+        required: false
+    outputs:
+      preview-url:
+        description: 'The preview URL'
+        value: ${{ jobs.wait-for-preview.outputs.preview-url }}
+      encrypted-vercel-jwt:
+        description: 'The encrypted Vercel JWT, if using vercel'
+        value: ${{ jobs.wait-for-preview.outputs.encrypted-vercel-jwt }}
+
+jobs:
+  wait-for-preview:
+    runs-on: ubuntu-latest
+    outputs:
+      preview-url: ${{ steps.wait-for-netlify-preview.outputs.url ||
+        steps.wait-for-vercel-preview.outputs.url }}
+      encrypted-vercel-jwt: ${{ steps.encrypt-vercel-jwt.outputs.encrypted-jwt }}
+    steps:
+      - name: 🔍 Check if provider is valid
+        if: ${{ !contains(fromJSON('["netlify","vercel"]'), inputs.provider) }}
+        run: |
+          echo "::error title=Invalid provider::Invalid provider, please make sure you enter a valid option."
+          exit 1
+
+      - name: ⏳ Wait for Vercel Preview
+        if: ${{ inputs.provider == 'vercel' }}
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: wait-for-vercel-preview
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: ${{ inputs.preview-max-timeout }}
+          environment: ${{ inputs.vercel-environment }}
+          vercel_password: ${{ secrets.VERCEL_PREVIEW_DEPLOYMENT_PASSWORD }}
+
+      - name: 🔒 Encrypt Vercel JWT
+        if: ${{ inputs.provider == 'vercel' && env.PASSPHRASE }}
+        id: encrypt-vercel-jwt
+        env:
+          PASSPHRASE: ${{ secrets.PGP_SECRET_SIGNING_PASSPHRASE }}
+          JWT: ${{ steps.wait-for-vercel-preview.outputs.vercel_jwt }}
+        run: |
+          encrypted_jwt=$(gpg --symmetric --batch --passphrase "${{ env.PASSPHRASE }}" --output - <(echo "${{ env.JWT }}") | base64 -w0)
+          echo "encrypted-jwt=$encrypted_jwt" >> $GITHUB_OUTPUT
+
+      - name: ⏳ Wait for Netlify Preview
+        if: ${{ inputs.provider == 'netlify' }}
+        uses: jlevy-io/wait-for-netlify-deploy-with-headers@3.0.3
+        id: wait-for-netlify-preview
+        with:
+          site_id: ${{ secrets.NETLIFY_SITE_ID }}
+          max_timeout: ${{ inputs.preview-max-timeout }}
+        env:
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+
+      - name: Debug output
+        run: |
+          echo "Preview URL: ${{ steps.wait-for-netlify-preview.outputs.url || steps.wait-for-vercel-preview.outputs.url }}"

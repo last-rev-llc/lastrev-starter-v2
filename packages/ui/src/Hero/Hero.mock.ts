@@ -14,7 +14,7 @@ const heroDefaultMock: HeroProps = {
   title: 'This is the Hero title',
   subtitle: 'This is the Hero subtitle',
   body: richTextMock({ text: 'This is the Hero body' }),
-  images: [mediaBaseImageMock({ title: 'This is the Hero Media 1', width: 900, height: 900 })],
+  images: [mediaBaseImageMock({ title: 'This is the Hero Media 1' })],
   actions: [
     linkButtonMock({
       text: 'This is the Hero Action 1',

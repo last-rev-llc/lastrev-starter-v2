@@ -27,7 +27,7 @@ interface QuoteClasses {
   authorRoot: string;
   logo: string;
   image: string;
-  quoteText: string;
+  quote: string;
   authorName: string;
   quoteSymbol: string;
   authorTitle: string;
