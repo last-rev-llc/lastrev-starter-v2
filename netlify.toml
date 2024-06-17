@@ -5,8 +5,8 @@
 [functions]
   included_files = ["!node_modules/@swc/**/*"]
 
-#[[plugins]]
-#  package = "@netlify/plugin-nextjs"
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 #[[plugins]]
 #  package = "@netlify/plugin-lighthouse"
