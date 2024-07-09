@@ -14,6 +14,23 @@ fragment ContentModule_PageFragment on Content {
   ...Page_BaseFragment
 }
 
+fragment ContentModule_SettingsFragment on Settings {
+  ...Content_BaseFragment
+  ## Uncomment to add the header and footer.   Can also override in the Settigns.extension.ts file
+  #header {
+  #  ...Header_BaseFragment
+  #}
+  #footer {
+  #  ...Footer_BaseFragment
+  #}
+  hero {
+    ...Hero_BaseFragment
+  }
+  contents {
+    ...ContentModule_BaseFragment
+  }
+}
+
 fragment ContentModule_PersonFragment on Content {
   ...Person_BaseFragment
 }

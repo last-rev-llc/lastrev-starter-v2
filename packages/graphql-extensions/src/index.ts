@@ -45,6 +45,7 @@ function loadFiles() {
     modules['RichText'] = require('./RichText.extension');
     modules['Section'] = require('./Section.extension');
     modules['SEO'] = require('./SEO.extension');
+    modules['Settings'] = require('./Settings.extension');
     modules['Sidekick'] = require('./Sidekick.extension');
     modules['Text'] = require('./Text.extension');
     modules['Theme'] = require('./Theme.extension');
