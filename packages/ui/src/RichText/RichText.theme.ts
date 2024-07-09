@@ -16,13 +16,18 @@ const styleOverrides: ComponentsOverrides<Theme>['RichText'] = {
     'width': '100%',
     ':is(ol, ul)': {
       'padding': 0,
-      'paddingTop': 'var(--grid-gap-half)',
-      'marginInlineStart': 'calc(2 * var(--grid-gap))',
+      'marginInlineStart': 'var(--grid-gap-double)',
+      'marginBlockStart': 'var(--grid-gap-half)',
+      'marginBlockEnd': '0',
 
       '& > li': {
         marginBottom: '1em',
         padding: 'revert'
       }
+    },
+
+    '[class*="MuiTypography-h"]': {
+      marginTop: '.5em'
     }
   }
 };
