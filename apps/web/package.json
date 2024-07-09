@@ -5,9 +5,11 @@
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next",
+    "cypress:open": "cypress open --e2e",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "test:e2e": "cross-env NODE_ENV=test cypress run --e2e"
   },
   "dependencies": {
     "@apollo/server": "^4.10.4",
