@@ -27,7 +27,4 @@ export const collectionExpandableItemBlocksMock = ({
   content: blockContentOnLeftMock({ introText: undefined, title: 'Block 1 - Title' })
 });
 
-
-});
-
 export default collectionExpandableItemBaseMock;
