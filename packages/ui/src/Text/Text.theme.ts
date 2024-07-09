@@ -16,7 +16,6 @@ import { TextVariants } from './Text.types';
 
 const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
   root: ({ theme, ownerState }) => ({
-    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
     'position': 'relative',
     'width': '100%',
     'display': 'unset',

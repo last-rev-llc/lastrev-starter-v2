@@ -17,14 +17,11 @@ const Text = (props: TextProps) => {
   const align = props?.align || 'inherit';
   const ownerState = { ...props, align };
 
-  const { backgroundColor, body, overline, title, subtitle, variant, sidekickLookup, sx } = props;
+  const { body, overline, title, subtitle, variant, sidekickLookup, sx } = props;
 
   return (
     <ErrorBoundary>
       <Root data-testid="Text-root" {...sidekick(sidekickLookup)} ownerState={ownerState}>
-        {!!backgroundColor && (
-          <TextBackground backgroundColor={backgroundColor} testId="Text-background" />
-        )}
         {!!overline && (
           <Overline
             data-testid="Text-overline"
@@ -82,12 +79,6 @@ const Root = styled(Grid, {
   shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'ownerState',
   overridesResolver: (_, styles) => [styles.root]
 })<{ ownerState: TextOwnerState }>``;
-
-const TextBackground = styled(Background, {
-  name: 'Text',
-  slot: 'Background',
-  overridesResolver: (_, styles) => [styles.background]
-})<{}>``;
 
 const Overline = styled(Typography, {
   name: 'Text',
