@@ -9,7 +9,10 @@ import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 // import { IFrameVariants } from './IFrame.types';
 
-const defaultProps: ComponentsProps['IFrame'] = {};
+const defaultProps: ComponentsProps['IFrame'] = {
+  iFrameWidth: '100%',
+  iFrameHeight: '500px'
+};
 
 const styleOverrides: ComponentsOverrides<Theme>['IFrame'] = {
   root: ({ theme, ownerState }) => ({

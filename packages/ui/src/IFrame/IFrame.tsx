@@ -15,15 +15,7 @@ import type { IFrameProps, IFrameOwnerState } from './IFrame.types';
 
 const IFrame = (props: IFrameProps) => {
   const ownerState = { ...props };
-  const {
-    iFrameUrl,
-    iFrameWidth = '100%',
-    iFrameHeight = '500px',
-    backgroundImage,
-    backgroundColor,
-    introText,
-    sidekickLookup
-  } = props;
+  const { iFrameUrl, backgroundImage, backgroundColor, introText, sidekickLookup } = props;
 
   return (
     <ErrorBoundary>
@@ -40,7 +32,6 @@ const IFrame = (props: IFrameProps) => {
               ownerState={ownerState}
               {...sidekick(sidekickLookup, 'introText')}
               {...introText}
-              overline={iFrameUrl}
               variant="introText"
             />
           </IntroTextGrid>
