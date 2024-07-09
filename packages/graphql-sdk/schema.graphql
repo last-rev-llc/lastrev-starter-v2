@@ -359,8 +359,14 @@ type Media implements Content {
 
 type ModuleIntegration implements Content {
   animation: JSON
+  backgroundColor: String
+  backgroundImage: Media
+  iFrameHeight: String
+  iFrameUrl: String
+  iFrameWidth: String
   id: String
   internalTitle: String
+  introText: Text
   settings: JSON
   sidekickLookup: JSON
   theme: [Theme]
@@ -465,18 +471,9 @@ type Query {
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
 }
 
-type Quote implements Content {
-  animation: JSON
-  authorName: String
-  authorTitle: String
-  id: String
+type Quote {
   image: Media
-  internalTitle: String
   logo: Media
-  quote: String
-  sidekickLookup: JSON
-  theme: [Theme]
-  variant: String
 }
 
 type RichText {
@@ -507,9 +504,12 @@ type Section implements Content {
 
 type Settings implements Content {
   animation: JSON
+  category: String
   id: String
+  image: Media
   internalTitle: String
   liveEditorSettings: JSON
+  settingsType: String
   sidekickLookup: JSON
   theme: [Theme]
   variant: String

@@ -1,71 +1,72 @@
 import dynamic from 'next/dynamic';
+
+const Accordion = dynamic(() => import('./Accordion'));
 const Block = dynamic(() => import('./Block'));
-const Hero = dynamic(() => import('./Hero'));
-const Link = dynamic(() => import('./Link'));
-const Media = dynamic(() => import('./Media'));
-const Page = dynamic(() => import('./Page'));
-const Text = dynamic(() => import('./Text'));
-const RichText = dynamic(() => import('./RichText'));
+const Blog = dynamic(() => import('./Blog'));
+const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
+const Card = dynamic(() => import('./Card'));
 const Carousel = dynamic(() => import('./Carousel'));
 const Collection = dynamic(() => import('./Collection'));
-const Tabs = dynamic(() => import('./Tabs'));
-const Card = dynamic(() => import('./Card'));
-const Person = dynamic(() => import('./Person'));
-const Quote = dynamic(() => import('./Quote'));
-const Blog = dynamic(() => import('./Blog'));
-const Accordion = dynamic(() => import('./Accordion'));
-const Form = dynamic(() => import('./Form'));
-const Section = dynamic(() => import('./Section'));
-const NavigationItem = dynamic(() => import('./NavigationItem'));
-const Header = dynamic(() => import('./Header'));
 const Footer = dynamic(() => import('./Footer'));
-const HeaderNavLink = dynamic(() => import('./Header/HeaderNavLink/HeaderNavLink'));
+const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem'));
+const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
+const Form = dynamic(() => import('./Form'));
+const Header = dynamic(() => import('./Header'));
 const HeaderNavGroup = dynamic(() => import('./Header/HeaderNavGroup/HeaderNavGroup'));
+const HeaderNavLink = dynamic(() => import('./Header/HeaderNavLink/HeaderNavLink'));
 const HeaderNavLinkNested = dynamic(
   () => import('./Header/HeaderNavLinkNested/HeaderNavLinkNested')
 );
-const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem'));
-const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
+const Hero = dynamic(() => import('./Hero'));
+const IFrame = dynamic(() => import('./IFrame'));
+const Link = dynamic(() => import('./Link'));
+const Media = dynamic(() => import('./Media'));
+const NavigationItem = dynamic(() => import('./NavigationItem'));
+const Page = dynamic(() => import('./Page'));
+const Person = dynamic(() => import('./Person'));
+const RichText = dynamic(() => import('./RichText'));
+const Section = dynamic(() => import('./Section'));
 const SiteMessage = dynamic(() => import('./SiteMessage'));
-const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
+const Tabs = dynamic(() => import('./Tabs'));
+const Text = dynamic(() => import('./Text'));
 
 export const contentMapping: {
   [key: string]: any;
 } = {
+  'Collection:.*Carousel': Carousel,
+  'CollectionExpandable:Accordion': Accordion,
+  'CollectionExpandable:Tabs': Tabs,
+  'CollectionExpandable': Tabs,
+  'ElementForm': Form,
+  'ModuleIntegration:iFrame': IFrame,
+  'NavigationItem:group': HeaderNavGroup,
+  'NavigationItem:groupFooter': FooterNavigationItemGroup,
+  'NavigationItem:link': HeaderNavLink,
+  'NavigationItem:linkBoldedFooter': FooterNavigationItem,
+  'NavigationItem:linkFooter': FooterNavigationItem,
+  'NavigationItem:linkNested': HeaderNavLinkNested,
+  Accordion,
   Block,
+  Blog,
+  Breadcrumbs,
+  Card,
+  Carousel,
+  Collection,
+  Footer,
+  FooterNavigationItem,
+  FooterNavigationItemGroup,
+  Header,
   Hero,
   Link,
   Media,
-  Header,
-  Footer,
-  Page,
-  Text,
-  RichText,
-  Carousel,
-  Collection,
-  'Collection:.*Carousel': Carousel,
-  'CollectionExpandable:Tabs': Tabs,
-  'CollectionExpandable:Accordion': Accordion,
-  'CollectionExpandable': Tabs,
-  Card,
-  Person,
-  Blog,
-  Quote,
-  Accordion,
-  Tabs,
-  Section,
-  FooterNavigationItem,
-  FooterNavigationItemGroup,
-  'ElementForm': Form,
   NavigationItem,
-  'NavigationItem:link': HeaderNavLink,
-  'NavigationItem:linkNested': HeaderNavLinkNested,
-  'NavigationItem:group': HeaderNavGroup,
-  'NavigationItem:linkFooter': FooterNavigationItem,
-  'NavigationItem:linkBoldedFooter': FooterNavigationItem,
-  'NavigationItem:groupFooter': FooterNavigationItemGroup,
+  Page,
+  Person,
+  RichText,
+  Section,
   SiteMessage,
-  Breadcrumbs
+  Tabs,
+  Text
 };
 
 export default contentMapping;
