@@ -36,7 +36,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
     '.MuiTabs-flexContainer': { gap: 'var(--grid-gap)' },
 
     '.MuiTab-root': {
-      borderBottomWidth: '1px',
+      borderBottomWidth: '0',
       borderBottomStyle: 'solid',
       paddingRight: 'calc(3 * var(--grid-gap))',
       paddingLeft: 0,
@@ -55,7 +55,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
   detailsWrap: {
     gridColumnStart: 'content-start',
     gridColumnEnd: 'content-end',
-    padding: 0
+    padding: 'var(--section-padding) 0'
   }
   // details: {}
 };

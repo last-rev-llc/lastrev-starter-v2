@@ -11,7 +11,8 @@ import { SectionVariants } from './Section.types';
 const defaultProps: ComponentsProps['Section'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
-  root: {
+  root: ({ theme, ownerState }) => ({
+    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
     'containerType': 'inline-size',
     'width': '100%',
     'position': 'relative',
@@ -19,7 +20,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
     'main > &:last-of-type': {
       marginBottom: 0
     }
-  },
+  }),
 
   introText: { gridColumn: 'content-start / content-end' },
 

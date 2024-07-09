@@ -1,4 +1,4 @@
-import { blockContentOnLeftMock } from '../Block/Block.mock';
+import { blockContentOnRightMock } from '../Block/Block.mock';
 import { collectionBaseMock } from '../Collection/Collection.mock';
 import { complexMock } from '../RichText/RichText.mock';
 
@@ -24,7 +24,7 @@ export const collectionExpandableItemBlocksMock = ({
   ...collectionExpandableItemBaseMock(override),
   body: undefined,
   title: 'Block Example',
-  content: blockContentOnLeftMock({ introText: undefined, title: 'Block 1 - Title' })
+  content: blockContentOnRightMock({ introText: undefined, title: 'Block 1 - Title' })
 });
 
 export default collectionExpandableItemBaseMock;
