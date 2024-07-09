@@ -64,7 +64,7 @@ const Block = (props: BlockProps) => {
                     ownerState={ownerState}
                     {...sidekick(sidekickLookup, 'title')}
                     data-testid="Block-title"
-                    variant="h1"
+                    variant="h2"
                     dangerouslySetInnerHTML={{ __html: title }}
                   />
                 )}
@@ -74,8 +74,7 @@ const Block = (props: BlockProps) => {
                     ownerState={ownerState}
                     {...sidekick(sidekickLookup, 'subtitle')}
                     data-testid="Block-subtitle"
-                    variant="display5"
-                  >
+                    variant="h3">
                     {subtitle}
                   </Subtitle>
                 )}
@@ -94,8 +93,7 @@ const Block = (props: BlockProps) => {
                 <ActionsWrap
                   ownerState={ownerState}
                   {...sidekick(sidekickLookup, 'actions')}
-                  data-testid="Block-actions"
-                >
+                  data-testid="Block-actions">
                   {actions.map((action) => (
                     <Action ownerState={ownerState} key={action?.id} {...action} />
                   ))}

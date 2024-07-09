@@ -93,26 +93,15 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
     },
     style: {
       '[class*=mainContentWrap]': {
-        gridRow: 2,
+        gridRow: 1,
         gridColumnStart: 'content-start',
-        gridColumnEnd: 'content-end',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridRow: 1,
-          gridColumnStart: 'content-start',
-          gridColumnEnd: 'content-half'
-        }
+        gridColumnEnd: 'content-end'
       },
 
       '[class*=sideContentWrap]': {
-        gridRow: 1,
+        gridRow: 2,
         gridColumnStart: 'content-start',
-        gridColumnEnd: 'content-end',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridColumnStart: 'content-half',
-          gridColumnEnd: 'content-end'
-        }
+        gridColumnEnd: 'content-end'
       }
     }
   },

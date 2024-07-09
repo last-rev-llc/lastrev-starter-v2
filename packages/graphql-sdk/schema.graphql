@@ -471,9 +471,18 @@ type Query {
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
 }
 
-type Quote {
+type Quote implements Content {
+  animation: JSON
+  authorName: String
+  authorTitle: String
+  id: String
   image: Media
+  internalTitle: String
   logo: Media
+  quote: String
+  sidekickLookup: JSON
+  theme: [Theme]
+  variant: String
 }
 
 type RichText {
@@ -504,18 +513,17 @@ type Section implements Content {
 
 type Settings implements Content {
   animation: JSON
-  category: String
   contents: [Content]
   footer: Footer
   header: Header
   hero: Hero
   id: String
-  image: Media
   internalTitle: String
   liveEditorSettings: JSON
   path: String
   settingsType: String
   sidekickLookup: JSON
+  templateImage: Media
   theme: [Theme]
   variant: String
 }

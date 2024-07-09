@@ -4,17 +4,20 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Text'] = {
-  variant: TextVariants.default
+  variant: TextVariants.default,
+  align: 'center'
 };
 
 import { TextVariants } from './Text.types';
 
 const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
-  // Set some static styles
-  root: {
+  root: ({ theme, ownerState }) => ({
+    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
+    'position': 'relative',
     'width': '100%',
     'display': 'unset',
     'ol, ul, li': {
@@ -23,49 +26,104 @@ const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
       padding: 'revert'
     },
 
+    '& > *:last-child': {
+      paddingBottom: 0,
+      marginBottom: 0
+    },
+
     'main > &': {
       'display': 'grid',
 
       '& > *': {
         display: 'unset',
-        gridColumn: 'content-start/content-end'
+        gridColumn: 'start/end'
       }
     }
+  }),
+
+  bodyWrap: ({ ownerState, theme }) => ({
+    '&&': {
+      'section > *:not(:first-child)': {
+        'minHeight': '1em',
+        '&:not(:is(ul, ol, li))': {
+          marginTop: '0.7em',
+          marginBottom: '0.7em'
+        },
+
+        '&:is(ul, ol)': {
+          marginTop: '-.5em',
+          marginBottom: '2em',
+          marginLeft: '2em'
+        },
+
+        '&:is(span)': {
+          // Image Wraps
+          marginTop: '2em !important',
+          marginBottom: '2em !important'
+        },
+
+        '&[class*=MuiTypography-h]': {
+          marginBottom: '.5em',
+          marginTop: '1em'
+        },
+
+        '&[class*=-h1]': {
+          ...theme.typography.display3
+        },
+
+        '&[class*=-h2]': {
+          ...theme.typography.h4
+        },
+
+        '&[class*=-h3]': {
+          ...theme.typography.h5
+        },
+
+        '&[class*=-h4]': {
+          ...theme.typography.h5
+        }
+      },
+
+      '& > [class*=Text-root] > *:first-child': {
+        marginTop: '0'
+      },
+
+      '[class*=MuiTypography-h]': {
+        marginBottom: '.5em',
+        marginTop: '2em'
+      }
+    },
+
+    '& > *:last-child': {
+      marginBottom: 0
+    }
+  }),
+
+  titleWrap: {
+    display: 'flex'
   },
 
   title: ({ theme, ownerState }) => ({
+    width: '100%',
     ...(ownerState?.variant === TextVariants.default && {
-      ...theme.typography.h2
+      ...theme.typography.h4
     }),
 
     ...(ownerState?.variant === TextVariants.introText && {
-      ...theme.typography.h1
+      ...theme.typography.h3
     })
   }),
 
-  subtitle: ({ theme, ownerState }) => ({
-    ...(ownerState?.variant === TextVariants.default && {
-      ...theme.typography.h3
-    }),
-
-    ...(ownerState?.variant === TextVariants.introText && {
-      ...theme.typography.h2
-    })
+  subtitle: ({ theme }) => ({
+    ...theme.typography.h5
   })
-  //
-  // Use the ownerState to set dynamic styles
-  // root: ({ ownerState, theme }) => {
-  //   return {
-  //     backgroundColor: ownerState.variant === 'example' ? 'red' : theme.vars.palette.background.paper
-  //   };
-  // }
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['Text'] => [
   // Use prop matching to set variant styles
   {
     props: {
-      variant: 'inline'
+      variant: TextVariants.inline
     },
     style: {
       // TODO: Pulled from Text, but adds default padding around elements.   Classes may be wrong
@@ -94,7 +152,7 @@ const createVariants = (_theme: Theme): ComponentsVariants['Text'] => [
 
   {
     props: {
-      variant: 'introText'
+      variant: TextVariants.introText
     },
     style: ({ theme }: { theme: Theme }) => ({
       marginBottom: theme.spacing(4)

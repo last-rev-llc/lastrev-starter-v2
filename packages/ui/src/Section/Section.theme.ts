@@ -80,8 +80,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
     return {
       // gridColumn: 'full-start/full-end',
       display: 'grid',
-      gridGap: 'inherit',
-      gridRowGap: 0,
+      gridGap: 'var(--grid-gap)',
+      gridRowGap: 'var(--section-padding)',
       gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
 
       ...((ownerState?.variant === SectionVariants.twoPerRow ||
