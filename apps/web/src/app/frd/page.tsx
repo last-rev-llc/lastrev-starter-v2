@@ -39,7 +39,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <AppProvider>
-      <ContentModule {...pageData} __typename="Page" />
+      <ContentModule {...pageData} __typename="FRD" />
     </AppProvider>
   );
 }

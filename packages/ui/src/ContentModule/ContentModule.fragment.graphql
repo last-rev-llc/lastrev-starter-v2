@@ -23,6 +23,9 @@ fragment ContentModule_SettingsFragment on Settings {
   #footer {
   #  ...Footer_BaseFragment
   #}
+  sideNav {
+    ...Link_BaseFragment
+  }
   hero {
     ...Hero_BaseFragment
   }

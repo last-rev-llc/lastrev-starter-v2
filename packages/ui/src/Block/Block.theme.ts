@@ -4,6 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
+
 import { Theme } from '@ui/ThemeRegistry/theme.types';
 
 import { BlockVariants } from './Block.types';

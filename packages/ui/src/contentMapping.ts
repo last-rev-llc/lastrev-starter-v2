@@ -6,11 +6,14 @@ const Blog = dynamic(() => import('./Blog'));
 const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
 const Card = dynamic(() => import('./Card'));
 const Carousel = dynamic(() => import('./Carousel'));
+const Chat = dynamic(() => import('./Chat'));
+const ChatFullPage = dynamic(() => import('./ChatFullPage'));
 const Collection = dynamic(() => import('./Collection'));
 const Footer = dynamic(() => import('./Footer'));
 const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem'));
 const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
 const Form = dynamic(() => import('./Form'));
+const FRD = dynamic(() => import('./FRD'));
 const Header = dynamic(() => import('./Header'));
 const HeaderNavGroup = dynamic(() => import('./Header/HeaderNavGroup/HeaderNavGroup'));
 const HeaderNavLink = dynamic(() => import('./Header/HeaderNavLink/HeaderNavLink'));
@@ -39,6 +42,8 @@ export const contentMapping: {
   'CollectionExpandable': Tabs,
   'ElementForm': Form,
   'ModuleIntegration:iFrame': IFrame,
+  'ModuleIntegration:answerAIChatInline': ChatFullPage,
+  'ModuleIntegration:answerAIChatPageBubble': Chat,
   'NavigationItem:group': HeaderNavGroup,
   'NavigationItem:groupFooter': FooterNavigationItemGroup,
   'NavigationItem:link': HeaderNavLink,
@@ -60,6 +65,7 @@ export const contentMapping: {
   Link,
   Media,
   NavigationItem,
+  FRD,
   Page,
   Person,
   RichText,
