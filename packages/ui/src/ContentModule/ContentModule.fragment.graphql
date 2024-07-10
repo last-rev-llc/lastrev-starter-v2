@@ -6,13 +6,32 @@ fragment ContentModule_BaseFragment on Content {
   ...Hero_BaseFragment
   ...Media_BaseFragment
   ...ModuleIntegration_BaseFragment
-  ...Quote_BaseFragment
   ...Section_BaseFragment
   ...Text_BaseFragment
 }
 
 fragment ContentModule_PageFragment on Content {
   ...Page_BaseFragment
+}
+
+fragment ContentModule_SettingsFragment on Settings {
+  ...Content_BaseFragment
+  ## Uncomment to add the header and footer.   Can also override in the Settigns.extension.ts file
+  #header {
+  #  ...Header_BaseFragment
+  #}
+  #footer {
+  #  ...Footer_BaseFragment
+  #}
+  sideNav {
+    ...Link_BaseFragment
+  }
+  hero {
+    ...Hero_BaseFragment
+  }
+  contents {
+    ...ContentModule_BaseFragment
+  }
 }
 
 fragment ContentModule_PersonFragment on Content {
@@ -35,7 +54,6 @@ fragment ContentModule_SectionFragment on Content {
   ...Hero_BaseFragment
   ...Media_BaseFragment
   ...ModuleIntegration_BaseFragment
-  ...Quote_BaseFragment
   ...Text_BaseFragment
 }
 
@@ -47,6 +65,5 @@ fragment ContentModule_RichTextFragment on Content {
   ...Link_BaseFragment
   ...Media_BaseFragment
   ...ModuleIntegration_BaseFragment
-  ...Quote_BaseFragment
   ...Text_RichTextFragment
 }

@@ -4,5 +4,5 @@
   },
   "extends": "tsconfig/react-library.json",
   "include": ["."],
-  "exclude": ["dist", "build", "node_modules", "**/*.spec.tsx"] // TODO: Remove the spec
+  "exclude": ["dist", "build", "node_modules", "**/*.spec.tsx", "src/_archived"] // TODO: Remove the spec
 }

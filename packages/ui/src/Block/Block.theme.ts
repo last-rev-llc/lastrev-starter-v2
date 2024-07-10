@@ -4,6 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
+
 import { Theme } from '@ui/ThemeRegistry/theme.types';
 
 import { BlockVariants } from './Block.types';
@@ -87,6 +88,24 @@ const styleOverrides: ComponentsOverrides<Theme>['Block'] = {
 };
 
 const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
+  {
+    props: {
+      variant: BlockVariants.default
+    },
+    style: {
+      '[class*=mainContentWrap]': {
+        gridRow: 1,
+        gridColumnStart: 'content-start',
+        gridColumnEnd: 'content-end'
+      },
+
+      '[class*=sideContentWrap]': {
+        gridRow: 2,
+        gridColumnStart: 'content-start',
+        gridColumnEnd: 'content-end'
+      }
+    }
+  },
   {
     props: {
       variant: BlockVariants.contentOnRight

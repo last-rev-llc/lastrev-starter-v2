@@ -52,8 +52,28 @@ const ContentModule = React.forwardRef(function ContentModule(
 
   Main.displayName = `Content_${contentMappingKey}`;
 
+  const sectionText = fields.title || fields.subtitle;
+
+  const anchorText = !sectionText
+    ? sectionText
+    : sectionText
+        // reference: https://gist.github.com/codeguy/6684588
+        .normalize('NFKD')
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .trim()
+        .replace(/[-\s]+/g, '-');
+
   return (
     <ErrorBoundary>
+      {anchorText ? (
+        <a
+          style={{
+            display: 'contents'
+          }}
+          id={anchorText}
+        />
+      ) : null}
       <Main {...fields} ref={ref} />
     </ErrorBoundary>
   );

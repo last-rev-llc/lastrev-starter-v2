@@ -359,8 +359,14 @@ type Media implements Content {
 
 type ModuleIntegration implements Content {
   animation: JSON
+  backgroundColor: String
+  backgroundImage: Media
+  iFrameHeight: String
+  iFrameUrl: String
+  iFrameWidth: String
   id: String
   internalTitle: String
+  introText: Text
   settings: JSON
   sidekickLookup: JSON
   theme: [Theme]
@@ -507,10 +513,18 @@ type Section implements Content {
 
 type Settings implements Content {
   animation: JSON
+  contents: [Content]
+  footer: Footer
+  header: Header
+  hero: Hero
   id: String
   internalTitle: String
   liveEditorSettings: JSON
+  path: String
+  settingsType: String
+  sideNav: [Content]
   sidekickLookup: JSON
+  templateImage: Media
   theme: [Theme]
   variant: String
 }

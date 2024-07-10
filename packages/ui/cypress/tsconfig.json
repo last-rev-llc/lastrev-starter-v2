@@ -8,5 +8,5 @@
   },
   "extends": "tsconfig/react-library.json",
   "include": [".", "cypress", "cypress.config.ts"],
-  "exclude": ["dist", "build", "node_modules"] // TODO: Remove the spec
+  "exclude": ["dist", "build", "node_modules", "_archived"] // TODO: Remove the spec
 }

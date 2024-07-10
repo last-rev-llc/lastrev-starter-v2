@@ -1,5 +1,5 @@
 import { accordionBaseMock } from '../Accordion/Accordion.mock';
-import { blockBaseMock } from '../Block/Block.mock';
+import { blockBaseMock, blockContentBelowMock } from '../Block/Block.mock';
 import { collectionBaseMock } from '../Collection/Collection.mock';
 import { footerBaseMock } from '../Footer/Footer.mock';
 import { headerBaseMock } from '../Header/Header.mock';
@@ -31,16 +31,20 @@ const pageDefaultMock: PageProps = {
     carouselBaseMock({ introText: undefined }),
 
     sectionBaseMock({
+      variant: 'onePerRow',
+      backgroundColor: 'sapphire', //mediaBaseImageMock(),
+      contents: [tabsBaseMock({ introText: undefined })]
+    }),
+
+    sectionBaseMock({
       variant: 'twoPerRow',
+      backgroundColor: 'black',
       background: null, //mediaBaseImageMock(),
-      contents: [carouselBaseMock({ introText: undefined }), tabsBaseMock({ introText: undefined })]
+      contents: [
+        blockContentBelowMock({ introText: undefined }),
+        blockContentBelowMock({ introText: undefined })
+      ]
     })
-    // sectionBaseMock({
-    //   variant: 'twoPerRow',
-    //   backgroundColor: 'black',
-    //   background: null, //mediaBaseImageMock(),
-    //   contents: [accordionBaseMock({ introText: undefined }), tabsBaseMock({ introText: undefined })]
-    // }),
 
     // blockBaseMock({ introText: undefined }),
     // blockBaseMock({ backgroundColor: 'black', introText: undefined }),
