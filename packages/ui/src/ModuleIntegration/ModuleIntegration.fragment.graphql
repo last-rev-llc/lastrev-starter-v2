@@ -1,4 +1,16 @@
 fragment ModuleIntegration_BaseFragment on ModuleIntegration {
+  ...Content_BaseFragment
   variant
+  introText {
+    ...Text_IntroTextFragment
+  }
+  backgroundColor
+  backgroundImage {
+    ...Media_BaseFragment
+  }
+  
   settings
+  iFrameUrl
+  iFrameHeight
+  iFrameWidth
 }

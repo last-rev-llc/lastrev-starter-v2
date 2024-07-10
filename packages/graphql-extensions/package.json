@@ -36,10 +36,12 @@
     "fast-xml-parser": "^4.3.6",
     "graphql-tag": "^2.12.6",
     "graphql": "^16.8.1",
+    "svgo": "^3.3.2",
     "xss": "^1.0.15"
   },
   "devDependencies": {
     "@types/css": "^0.0.37",
+    "@types/svgo": "^3.0.0",
     "jest-presets": "workspace:*",
     "jest": "^29.7.0",
     "schema-dts": "^1.1.2",

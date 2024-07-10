@@ -5,7 +5,6 @@ import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-
 import { pageFooterResolver } from './utils/pageFooterResolver';
 import { pageHeaderResolver } from './utils/pageHeaderResolver';
 import { pathResolver } from './utils/pathResolver';
-import { resolveField } from './utils/resolveField';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { createType } from './utils/createType';
 

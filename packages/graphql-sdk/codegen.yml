@@ -4,6 +4,8 @@ documents:
   - './src/**/*.graphql'
   - './src/**/*.ts'
   - '../**/*.graphql'
+  - '!./src/**/_archived/**'
+  - '!../**/_archived/**'
 generates:
   ./src/generated/sdk.ts:
     plugins:

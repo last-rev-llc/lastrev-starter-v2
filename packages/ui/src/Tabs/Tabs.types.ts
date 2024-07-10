@@ -12,8 +12,6 @@ export interface TabsProps extends Omit<CollectionExpandable_BaseFragmentFragmen
 
 export interface TabsOwnerState extends TabsProps {}
 
-import Background from '../Background';
-
 interface TabsClasses {
   root: string;
   contentOuterGrid: string;

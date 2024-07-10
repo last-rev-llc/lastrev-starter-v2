@@ -46,7 +46,7 @@ export const breadcrumbsResolver = async (item: any, _args: any, ctx: ApolloCont
     links.push(
       createType('Link', {
         id: path.id,
-        text: path.text,
+        text: path.text || prevSlug,
         manualUrl: prevSlug
       })
     );
