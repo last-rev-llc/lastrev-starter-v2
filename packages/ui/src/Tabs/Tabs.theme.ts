@@ -6,7 +6,9 @@ import type {
 } from '@mui/material/styles';
 import { Theme } from '@ui/ThemeRegistry/theme.types';
 
-const defaultProps: ComponentsProps['Tabs'] = {};
+export const defaultProps: ComponentsProps['Tabs'] = {
+  orientation: 'vertical'
+};
 
 const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
   root: ({ theme, ownerState }) => ({
@@ -16,7 +18,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    padding: `var(--section-padding) 0`
+    padding: 0
   }),
 
   // introTextGrid: : {},
@@ -30,19 +32,47 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
   },
 
   // tabsContext: {},
-  tabListWrap: ({ theme }) => ({
+  tabListWrap: ({ ownerState, theme }) => ({
     'gridColumnStart': 'content-start',
     'gridColumnEnd': 'content-end',
-    '.MuiTabs-flexContainer': { gap: 'var(--grid-gap)' },
+
+    ...(ownerState?.orientation === 'vertical' && {
+      gridColumnStart: 'content-start',
+      gridColumnEnd: 'two-end',
+      overflow: 'auto',
+      maxHeight: '90vh',
+      position: 'sticky',
+
+      top: 0
+    }),
+
+    '.MuiTabs-flexContainer': {
+      ...(ownerState?.orientation !== 'vertical' && {
+        gap: 'var(--grid-gap)'
+      })
+    },
 
     '.MuiTab-root': {
+      ...theme.typography.h6,
+      marginBottom: 0,
       borderBottomWidth: '0',
       borderBottomStyle: 'solid',
-      paddingRight: 'calc(3 * var(--grid-gap))',
+      paddingRight: 0,
       paddingLeft: 0,
-      whiteSpace: 'nowrap',
+      textTransform: 'initial',
       opacity: 0.5,
-      ...theme.typography.h4
+
+      ...(ownerState?.orientation === 'vertical'
+        ? {
+            '&': {
+              textAlign: 'left',
+              alignItems: 'flex-start',
+              padding: 'var(--grid-gap-quarter) 0'
+            }
+          }
+        : {
+            maxWidth: '25%'
+          })
     },
 
     '.Mui-selected': {
@@ -52,11 +82,18 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
     }
   }),
 
-  detailsWrap: {
+  detailsWrap: ({ ownerState, theme }) => ({
     gridColumnStart: 'content-start',
     gridColumnEnd: 'content-end',
-    padding: 'var(--section-padding) 0'
-  }
+    padding: 'var(--grid-gap) 0',
+
+    ...(ownerState?.orientation === 'vertical' && {
+      gridColumnStart: 'three-start',
+      gridColumnEnd: 'content-end',
+      padding: 0
+    })
+  })
+
   // details: {}
 };
 

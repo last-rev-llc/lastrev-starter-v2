@@ -28,5 +28,6 @@ fragment Block_BaseFragment on Block {
     ...Media_BaseFragment
     ...Link_BaseFragment
     ...Form_BaseFragment
+    ...ModuleIntegration_BaseFragment
   }
 }

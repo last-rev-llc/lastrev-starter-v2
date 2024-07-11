@@ -9,6 +9,7 @@ fragment RichText_BaseFragment on RichText {
       #   ...Collection_RichTextFragment
       #   ...Card_RichTextFragment
       #   ...Section_RichTextFragment
+      ...ModuleIntegration_BaseFragment
       ...Text_RichTextFragment
       ...Media_BaseFragment
     }

@@ -16,11 +16,21 @@ import ContentModule from '../ContentModule';
 import Background from '../Background';
 
 import type { TabsProps, TabsOwnerState } from './Tabs.types';
+import { defaultProps } from './Tabs.theme';
 
 const Tabs = (props: TabsProps) => {
-  const ownerState = { ...props };
+  const ownerState = { ...defaultProps, ...props };
 
-  const { backgroundImage, backgroundColor, id, items, variant, sidekickLookup, introText } = props;
+  const {
+    backgroundImage,
+    backgroundColor,
+    id,
+    items,
+    variant,
+    sidekickLookup,
+    introText,
+    orientation
+  } = props;
 
   const [value, setValue] = React.useState('0');
 
@@ -55,11 +65,12 @@ const Tabs = (props: TabsProps) => {
                 {/* TODO: Add "orientation" to the expanding content type */}
                 <TabList
                   onChange={handleChange}
-                  orientation="horizontal"
+                  allowScrollButtonsMobile
+                  variant={orientation === 'horizontal' ? 'scrollable' : 'standard'}
+                  orientation={orientation}
                   aria-label="TODO"
                   textColor="primary"
-                  indicatorColor="primary"
-                >
+                  indicatorColor="primary">
                   {items?.map(
                     (
                       item: any,
@@ -68,6 +79,7 @@ const Tabs = (props: TabsProps) => {
                       <Tab
                         label={item.title}
                         value={index.toString()}
+                        wrapped
                         key={`${!id}-tab-${item?.id}-${index}`}
                       />
                     )
@@ -83,8 +95,7 @@ const Tabs = (props: TabsProps) => {
                   <DetailsWrap
                     value={index.toString()}
                     key={`${!id}-tab-panel-${item?.id}-${index}`}
-                    ownerState={ownerState}
-                  >
+                    ownerState={ownerState}>
                     {item.body ? (
                       <Details __typename="RichText" body={item.body} ownerState={ownerState} />
                     ) : (

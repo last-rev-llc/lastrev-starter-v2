@@ -149,6 +149,7 @@ type CollectionExpandable implements Content {
   internalTitle: String
   introText: Text
   items: [CollectionExpandableItem]
+  orientation: String
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
