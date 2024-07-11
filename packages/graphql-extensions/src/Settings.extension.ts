@@ -87,30 +87,18 @@ export const mappers: Mappers = {
         let frdContents = getLocalizedField(item.fields, 'frdContents', ctx) ?? [];
         if (!frdContents?.length) return [];
 
-        const finalContent = [];
-        let currentContent: any = [];
+        let finalContents: any = [];
 
-        await Promise.all(
+        frdContents = await Promise.all(
           frdContents?.map(async (contentRef: any) => {
             const contentItem = await ctx.loaders.entryLoader.load({
               id: contentRef?.sys?.id,
               preview: !!ctx.preview
             });
 
-            if (contentItem?.sys?.contentType?.sys?.id !== 'block') {
-              if (!!currentContent?.length) {
-                finalContent.push(
-                  createType('CollectionExpandable', {
-                    // introText: createType('Text', { title: 'Related Blogs' }),
-                    items: currentContent,
-                    variant: 'Tabs',
-                    orientation: 'vertical'
-                  })
-                );
-                currentContent = [];
-              }
-              finalContent.push(contentRef);
-              return;
+            if (contentItem?.sys.contentType.sys.id !== 'block') {
+              finalContents.push(contentItem);
+              return null;
             }
 
             const title = await resolveField(['title', 'subtitle'])(contentItem, args, ctx);
@@ -137,30 +125,22 @@ export const mappers: Mappers = {
               tabs = contentItem;
             }
 
-            currentContent.push(
-              createType('CollectionExpandableItem', {
-                title,
-                content: tabs
-              })
-            );
-            return;
+            return createType('CollectionExpandableItem', {
+              title,
+              content: tabs
+            });
           })
         );
 
-        if (!!currentContent?.length) {
-          finalContent.push(
-            createType('CollectionExpandable', {
-              // introText: createType('Text', { title: 'Related Blogs' }),
-              items: currentContent,
-              variant: 'Tabs',
-              orientation: 'vertical'
-            })
-          );
-        }
-
-        console.log('finalContent', finalContent);
-
-        return finalContent;
+        return [
+          ...finalContents,
+          createType('CollectionExpandable', {
+            // introText: createType('Text', { title: 'Related Blogs' }),
+            items: frdContents.filter(Boolean),
+            variant: 'Tabs',
+            orientation: 'vertical'
+          })
+        ];
       },
 
       // Commenting out, but may keep for reference
