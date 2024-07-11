@@ -6,7 +6,7 @@ export function middleware() {
     style-src 'self' 'unsafe-inline' *.sentry.io fonts.googleapis.com vitals.vercel-insights.com *.hs-scripts.com *.hsforms.net;
     script-src 'self' 'unsafe-inline' 'unsafe-eval' *.flowise.theanswer.ai *.theanswer.ai *.sentry.io *.google-analytics.com *.googletagmanager.com vitals.vercel-insights.com *.hs-analytics.net *.hs-banner.com *.hsadspixel.net *.hscollectedforms.net *.jquery.com *.hs-scripts.com *.hsforms.net netlify-cdp-loader.netlify.app;
     font-src 'self' *.sentry.io fonts.gstatic.com *.hs-scripts.com *.hsforms.net data:;
-    frame-src 'self' lastrev.com forms.hsforms.com *.theanswer.ai *.flowise.theanswer.ai;
+    frame-src 'self' *.figma.com *.lastrev.com forms.hsforms.com *.theanswer.ai *.flowise.theanswer.ai;
     img-src * data:;
     media-src * data:;
     object-src 'none';

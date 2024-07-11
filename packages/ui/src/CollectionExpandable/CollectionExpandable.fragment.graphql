@@ -4,6 +4,7 @@ fragment CollectionExpandable_FieldsFragment on CollectionExpandable {
   introText {
     ...Text_IntroTextFragment
   }
+  orientation
   backgroundImage {
     ...Media_BaseFragment
   }
@@ -15,5 +16,12 @@ fragment CollectionExpandable_BaseFragment on CollectionExpandable {
   ...CollectionExpandable_FieldsFragment
   items {
     ...CollectionExpandableItem_BaseFragment
+  }
+}
+
+fragment CollectionExpandable_NestedFragment on CollectionExpandable {
+  ...CollectionExpandable_FieldsFragment
+  items {
+    ...CollectionExpandableItem_NestedFragment
   }
 }

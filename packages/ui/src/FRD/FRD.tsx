@@ -27,9 +27,10 @@ const FRD = (props: FRDProps) => {
 
       <Main {...sidekick(sidekickLookup, 'contents')}>
         <ContentOuterGrid ownerState={ownerState}>
-          <SideNavWrap>
+          {/* // Commenting out, but may keep for reference} */}
+          {/* <SideNavWrap>
             {!!sideNav?.length ? <TableOfContents items={sideNav} /> : null}
-          </SideNavWrap>
+          </SideNavWrap> */}
           <ContentWrap>
             {contents?.map((content: any) => (
               <ContentModule key={content?.id} {...content} component="section" />

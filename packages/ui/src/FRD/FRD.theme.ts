@@ -41,43 +41,37 @@ const styleOverrides: ComponentsOverrides<Theme>['FRD'] = {
     }
   },
 
-  sideNavWrap: ({ theme }) => ({
-    'display': 'none',
-    'gridRow': 1,
+  // Commenting out, but may keep for reference
+  // sideNavWrap: ({ theme }) => ({
+  //   'display': 'none',
+  //   'gridRow': 1,
 
-    '& *': {
-      fontSize: 'var(--bodySmall-font-size)'
-    },
+  //   '& *': {
+  //     fontSize: 'var(--bodySmall-font-size)'
+  //   },
 
-    '& > *': {
-      position: 'sticky',
-      top: 0,
-      overflow: 'scroll',
-      maxHeight: '100vh',
-      padding: 'var(--grid-gap)'
-    },
+  //   '& > *': {
+  //     position: 'sticky',
+  //     top: 0,
+  //     overflow: 'scroll',
+  //     maxHeight: '100vh',
+  //     padding: 'var(--grid-gap)'
+  //   },
 
-    [theme.containerBreakpoints.up('md')]: {
-      display: 'block',
-      gridColumn: 'full-start / two-end'
-    },
+  //   [theme.containerBreakpoints.up('md')]: {
+  //     display: 'block',
+  //     gridColumn: 'full-start / two-end'
+  //   },
 
-    [theme.containerBreakpoints.up('xl')]: {
-      gridColumn: 'full-start / one-end'
-    }
-  }),
+  //   [theme.containerBreakpoints.up('xl')]: {
+  //     gridColumn: 'full-start / one-end'
+  //   }
+  // }),
 
   contentWrap: ({ theme, ownerState }) => ({
     gridRow: 1,
-    gridColumn: 'content-start / content-end',
-
-    [theme.containerBreakpoints.up('md')]: {
-      gridColumn: 'three-start / content-end'
-    },
-
-    [theme.containerBreakpoints.up('xl')]: {
-      gridColumn: 'two-start / content-end'
-    }
+    gridColumn: 'full-start / full-end',
+    padding: '0 var(--grid-gap)'
   })
 };
 

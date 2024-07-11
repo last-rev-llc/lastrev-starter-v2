@@ -8,6 +8,7 @@ export enum TabsVariants {
 
 export interface TabsProps extends Omit<CollectionExpandable_BaseFragmentFragment, 'variant'> {
   variant: TabsVariants;
+  orientation: string;
 }
 
 export interface TabsOwnerState extends TabsProps {}
