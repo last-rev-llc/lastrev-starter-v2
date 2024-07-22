@@ -6,7 +6,7 @@ import type {
 } from '@mui/material';
 
 import type { Quote_BaseFragmentFragment } from '@graphql-sdk/types';
-import { MediaProps } from '../Media';
+import { MediaProps } from '../../Media';
 
 export enum QuoteVariants {
   default = 'default',
