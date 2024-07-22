@@ -10,23 +10,13 @@ on: push
 jobs:
   chromatic-deployment:
     # Operating System
+
+    # disable this job for now
+    if: false
     runs-on: ubuntu-latest
     # Job steps
-    env:
-      ENVKEY: ${{ secrets.ENVKEY }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          # 👇 Fetches the full history of the repository
-          fetch-depth: 0
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v2
         name: Install pnpm
         with:
           version: 8
@@ -37,34 +27,26 @@ jobs:
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Dependencies cache
+        uses: actions/cache@v2
+        id: pnpm-cache # use this to check for `cache-hit` (`steps.pnpm-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ env.STORE_PATH }}
+          path: |
+            ${{ env.STORE_PATH }}
+            ~/.cache/Cypress
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
-        run: pnpm i --frozen-lockfile --prefer-offline
+        run: pnpm install
 
-      - name: Installing envkey-source and Display Variable
-        run: |
-          ./scripts/env-checks/gh/actions_installer.sh > /dev/null 2>&1
-          echo "envkey-source installed successfully."
-          eval "$(envkey-source)"
-          echo "⬇️ Displaying Z_ENVKEY_TEST_VAR, Should NOT be empty ⬇️:"
-          echo "$Z_ENVKEY_TEST_VAR"
-          
-      - name: Set CHROMATIC_PROJECT_TOKEN
-        run: |
-          eval "$(envkey-source)"
-          echo "CHROMATIC_PROJECT_TOKEN=${CHROMATIC_PROJECT_TOKEN}" >> $GITHUB_ENV
+      - name: Build Storybook
+        run: pnpm run build-storybook
 
       - name: Publish to Chromatic
-        uses: chromaui/action@latest
+        uses: chromaui/action@v1
+        # Chromatic GitHub Action options
         with:
-          projectToken: ${{ env.CHROMATIC_PROJECT_TOKEN }}
-          exitOnceUploaded: true
-          allowConsoleErrors: true
-          debug: true
+          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
