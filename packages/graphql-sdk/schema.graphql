@@ -70,6 +70,17 @@ type Blog implements Content {
   title: String
 }
 
+type BlogPost implements Content {
+  animation: JSON
+  body: RichText
+  id: String
+  image: Media
+  sidekickLookup: JSON
+  theme: [Theme]
+  title: String
+  variant: String
+}
+
 type Card implements Content {
   actions: [Link]
   animation: JSON
@@ -471,20 +482,6 @@ type Query {
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
 }
 
-type Quote implements Content {
-  animation: JSON
-  authorName: String
-  authorTitle: String
-  id: String
-  image: Media
-  internalTitle: String
-  logo: Media
-  quote: String
-  sidekickLookup: JSON
-  theme: [Theme]
-  variant: String
-}
-
 type RichText {
   id: String
   json: JSON
@@ -513,18 +510,19 @@ type Section implements Content {
 
 type Settings implements Content {
   animation: JSON
+  category: String
   contents: [Content]
   footer: Footer
   header: Header
   hero: Hero
   id: String
+  image: Media
   internalTitle: String
   liveEditorSettings: JSON
   path: String
   settingsType: String
   sideNav: [Content]
   sidekickLookup: JSON
-  templateImage: Media
   theme: [Theme]
   variant: String
 }

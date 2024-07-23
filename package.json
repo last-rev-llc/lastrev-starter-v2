@@ -38,7 +38,7 @@
     "@storybook/test": "^8.1.11",
     "@storybook/testing-library": "^0.2.2",
     "chromatic": "^11.3.1",
-    "cypress": "^13.8.1",
+    "cypress": "^13.9.0",
     "dotenv-cli": "^7.4.2",
     "next": "^14.2.3",
     "prettier": "^2.8.8",
