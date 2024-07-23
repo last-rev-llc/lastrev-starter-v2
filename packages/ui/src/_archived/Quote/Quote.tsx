@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 
 import sidekick from '@last-rev/contentful-sidekick-util';
 
-import Grid from '../Grid';
-import Background from '../Background';
-import ErrorBoundary from '../ErrorBoundary';
-import ContentModule from '../ContentModule';
+import Grid from '../../Grid';
+import Background from '../../Background';
+import ErrorBoundary from '../../ErrorBoundary';
+import ContentModule from '../../ContentModule';
 
 import { type QuoteProps, QuoteOwnerState } from './Quote.types';
 
