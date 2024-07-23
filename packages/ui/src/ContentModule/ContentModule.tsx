@@ -67,7 +67,7 @@ const ContentModule = React.forwardRef(function ContentModule(
   return (
     <ErrorBoundary>
       {anchorText ? (
-        <a
+        <span
           style={{
             display: 'contents'
           }}
