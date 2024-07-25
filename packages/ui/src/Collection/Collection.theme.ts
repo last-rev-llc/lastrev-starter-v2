@@ -29,23 +29,23 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
 
     ...((ownerState?.variant === CollectionVariants.twoPerRow ||
       ownerState?.variant === CollectionVariants.threePerRow) && {
-      [theme.containerBreakpoints.up('sm')]: {
+      [theme.breakpoints.up('sm')]: {
         gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
       }
     }),
 
     ...(ownerState?.variant === CollectionVariants.threePerRow && {
-      [theme.containerBreakpoints.up('lg')]: {
+      [theme.breakpoints.up('lg')]: {
         gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
       }
     }),
 
     ...(ownerState?.variant === CollectionVariants.fourPerRow && {
-      [theme.containerBreakpoints.up('sm')]: {
+      [theme.breakpoints.up('sm')]: {
         gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
       },
 
-      [theme.containerBreakpoints.up('md')]: {
+      [theme.breakpoints.up('md')]: {
         gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
       }
     }),
@@ -53,11 +53,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
     ...(ownerState?.variant === CollectionVariants.fivePerRow && {
       gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
 
-      [theme.containerBreakpoints.up('sm')]: {
+      [theme.breakpoints.up('sm')]: {
         gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
       },
 
-      [theme.containerBreakpoints.up('md')]: {
+      [theme.breakpoints.up('md')]: {
         gridTemplateColumns: 'repeat(5, minmax(0, 1fr))'
       }
     })

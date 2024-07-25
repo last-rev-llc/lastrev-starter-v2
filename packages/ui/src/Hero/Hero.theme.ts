@@ -79,7 +79,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     flexDirection: 'column',
     gap: theme.spacing(2),
 
-    [theme.containerBreakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm')]: {
       flexDirection: 'row'
     }
   })
@@ -117,7 +117,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-start',
           gridColumnEnd: 'content-half'
@@ -129,7 +129,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
         }
@@ -146,7 +146,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-start',
           gridColumnEnd: 'content-half'
@@ -158,7 +158,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'full-start',
         gridColumnEnd: 'full-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridColumnStart: 'content-half',
           gridColumnEnd: 'full-end'
         }
@@ -175,7 +175,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
@@ -186,7 +186,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridColumnEnd: 'content-half'
         }
       }
@@ -202,7 +202,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
@@ -213,7 +213,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         gridColumnStart: 'content-half',
         gridColumnEnd: 'content-end',
 
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridColumnEnd: 'content-half'
         }
       }

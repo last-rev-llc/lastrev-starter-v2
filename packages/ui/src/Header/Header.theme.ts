@@ -188,7 +188,6 @@ const createVariants = (_theme: Theme): ComponentsVariants['Header'] => [];
 export const headerTheme = (theme: Theme): ThemeOptions => ({
   components: {
     Header: {
-      // @ts-expect-error
       height: 80,
       defaultProps,
       styleOverrides,

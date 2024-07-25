@@ -21,6 +21,7 @@ import ContentModule from '../ContentModule';
 
 import type { RichTextProps } from './RichText.types';
 import sidekick from '@last-rev/contentful-sidekick-util';
+import { RichTextLinks } from '@graphql-sdk/types';
 
 const keyBy = (key: string, xs: any[]) =>
   xs.filter(Boolean).reduce((acc, x) => ({ ...acc, [x[key]]: x }), {});
@@ -63,8 +64,7 @@ const renderTypography =
         <Typography
           variant={variant}
           {...(hasEmbed && { component: 'span' })}
-          data-testid={`Text-${variant}`}
-        >
+          data-testid={`Text-${variant}`}>
           {children.map((child: any) => {
             if (isHTML(child)) {
               return (
@@ -96,7 +96,7 @@ const createRenderOptions = ({
   renderNode,
   renderMark,
   renderText
-}: { links?: TextLinks } & Options) => {
+}: { links?: RichTextLinks } & Options) => {
   const entries = keyBy('id', links?.entries ?? []);
   const assets = keyBy('id', links?.assets ?? []);
 
@@ -107,8 +107,7 @@ const createRenderOptions = ({
           <ContentModule
             __typename="Link"
             href={_.data.uri}
-            data-testid={`Text-${INLINES.HYPERLINK}`}
-          >
+            data-testid={`Text-${INLINES.HYPERLINK}`}>
             {children}
           </ContentModule>
         );
@@ -135,8 +134,7 @@ const createRenderOptions = ({
             href={entry?.file?.url}
             target="_blank"
             rel="noopener noreferrer"
-            data-testid="Text-asset-hyperlink"
-          >
+            data-testid="Text-asset-hyperlink">
             {children}
           </ContentModule>
         );
@@ -213,17 +211,18 @@ const createRenderOptions = ({
   };
 };
 
-const RichText = ({
-  body,
-  align,
-  variant,
-  sidekickLookup,
-  sx,
-  renderNode,
-  renderMark,
-  renderOptions,
-  ...props
-}: RichTextProps) => {
+const RichText = (
+  {
+    body,
+    // align,
+    variant,
+    sidekickLookup,
+    // sx,
+    renderOptions,
+    ...props
+  }: RichTextProps,
+  { renderNode, renderMark }: Options
+) => {
   return (
     <ErrorBoundary>
       <Root
@@ -231,8 +230,7 @@ const RichText = ({
         variant={variant}
         // sx={{ textAlign: align, ...sx, ...styles?.root }} // TODO
         data-testid="RichText-root"
-        {...props}
-      >
+        {...props}>
         {documentToReactComponents(
           body?.json,
           createRenderOptions({ links: body?.links, renderNode, renderMark, ...renderOptions })

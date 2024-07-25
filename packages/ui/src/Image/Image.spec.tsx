@@ -4,7 +4,7 @@ import Image from './Image';
 import { imageBaseMock } from './Image.mock';
 import type { ImageProps } from './Image.types';
 
-let mockedContent: ImageProps = imageBaseMock;
+let mockedContent: ImageProps = imageBaseMock();
 
 beforeEach(() => {
   mockedContent = { ...imageBaseMock() };

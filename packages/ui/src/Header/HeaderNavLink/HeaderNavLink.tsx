@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { styled } from '@mui/material/styles';
+import { CSSInterpolation, styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -58,8 +58,7 @@ const HeaderNavLink = (props: HeaderNavLinkProps) => {
             {subNavigation?.map((subNavItem: any, index: number) => (
               <NavItemSubMenuItem
                 key={`${navItemId}-nav-item-${subNavItem.id}-${index}`}
-                ownerState={ownerState}
-              >
+                ownerState={ownerState}>
                 <NavItemGroup
                   {...subNavItem}
                   variant="group"
@@ -110,7 +109,7 @@ const NavItemLink = styled(ContentModule, {
   slot: 'NavItemLink',
   shouldForwardProp: (prop: string) =>
     prop !== 'subNavigation' && prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.navItemLink]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.navItemLink]
 })<{ open?: boolean; ownerState: HeaderNavLinkOwnerState }>``;
 
 const NavItemGroup = styled(ContentModule, {

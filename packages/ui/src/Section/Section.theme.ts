@@ -34,13 +34,13 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
 
       ...((ownerState?.variant === SectionVariants.twoPerRow ||
         ownerState?.variant === SectionVariants.threePerRow) && {
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
         }
       }),
 
       ...(ownerState?.variant === SectionVariants.threePerRow && {
-        [theme.containerBreakpoints.up('lg')]: {
+        [theme.breakpoints.up('lg')]: {
           gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
         }
       })
@@ -60,12 +60,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
     //   gridRow: 'auto'
     //   // ...((ownerState?.variant === SectionVariants.twoPerRow ||
     //   //   ownerState?.variant === SectionVariants.threePerRow) && {
-    //   //   [theme.containerBreakpoints.up('md')]: {
+    //   //   [theme.breakpoints.up('md')]: {
     //   //     gridColumn: `span var(--num-columns-md)`
     //   //   }
     //   // }),
     //   // ...(ownerState?.variant === SectionVariants.threePerRow && {
-    //   //   [theme.containerBreakpoints.up('lg')]: {
+    //   //   [theme.breakpoints.up('lg')]: {
     //   //     gridColumn: `span var(--num-columns-lg)`
     //   //   }
     //   // })
@@ -86,13 +86,13 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
 
       ...((ownerState?.variant === SectionVariants.twoPerRow ||
         ownerState?.variant === SectionVariants.threePerRow) && {
-        [theme.containerBreakpoints.up('md')]: {
+        [theme.breakpoints.up('md')]: {
           gridTemplateColumns: 'repeat(2, minmax(0, 1fr))'
         }
       }),
 
       ...(ownerState?.variant === SectionVariants.threePerRow && {
-        [theme.containerBreakpoints.up('lg')]: {
+        [theme.breakpoints.up('lg')]: {
           gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
         }
       })

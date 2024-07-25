@@ -15,9 +15,9 @@ export interface RichTextProps extends RichText_BaseFragmentFragment {
   renderNode?: any;
   renderMark?: any;
   renderOptions?: Options;
-  sidekickLookup: any;
-  variant: RichTextVariants;
-  body: any;
+  sidekickLookup?: any;
+  variant?: RichTextVariants;
+  body?: any;
 }
 
 export interface RichTextOwnerState extends RichTextProps {}

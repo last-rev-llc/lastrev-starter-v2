@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { styled } from '@mui/material/styles';
+import { CSSInterpolation, styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -64,8 +64,7 @@ const Header = (props: HeaderProps) => {
             {...logoUrl}
             aria-label={'Go to homepage'}
             ownerState={ownerState}
-            text={undefined}
-          >
+            text={undefined}>
             <Logo
               {...logo}
               __typename="Media"
@@ -119,8 +118,7 @@ const Header = (props: HeaderProps) => {
             color="inherit"
             aria-label="menu"
             onClick={() => setMenuVisible(!menuVisible)}
-            size="large"
-          >
+            size="large">
             <MenuIcon ownerState={ownerState} sx={{ display: menuVisible ? 'none' : 'block' }} />
             <CloseIcon ownerState={ownerState} sx={{ display: !menuVisible ? 'none' : 'block' }} />
           </IconButton>
@@ -134,7 +132,7 @@ const Root = styled(Box, {
   name: 'Header',
   slot: 'Root',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.root]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderBackground = styled(Background, {
@@ -183,14 +181,16 @@ const HeaderMenuNav = styled(Box, {
   name: 'Header',
   slot: 'HeaderMenuNav',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.headerMenuNav]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.headerMenuNav]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderMobileNavWrap = styled(Box, {
   name: 'Header',
   slot: 'HeaderMobileNavWrap',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.headerMobileNavWrap]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [
+    styles.headerMobileNavWrap
+  ]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderMenuNavItems = styled(List, {
@@ -203,7 +203,9 @@ const HeaderMenuNavItem = styled(ListItem, {
   name: 'Header',
   slot: 'HeaderMenuNavItem',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.headerMenuNavItem]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [
+    styles.headerMenuNavItem
+  ]
 })<{ ownerState: HeaderOwnerState }>``;
 
 const HeaderMenuNavLink = styled(ContentModule, {

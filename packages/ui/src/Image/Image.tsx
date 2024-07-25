@@ -55,8 +55,8 @@ const Image = React.forwardRef<any, ImageProps>(function Image(props, ref) {
           itemProp={itemProp}
           priority={priority}
           loading={priority ? 'eager' : 'lazy'}
-          height={height}
-          width={width}
+          height={typeof height === 'string' ? parseInt(height) : height}
+          width={typeof width === 'string' ? parseInt(width) : width}
           sizes={imageProps.sizes}
           alt={alt}
         />

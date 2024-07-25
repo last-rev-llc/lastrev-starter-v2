@@ -114,7 +114,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
         marginRight: 'auto',
         paddingTop: 'var(--grid-gap)',
 
-        [theme.containerBreakpoints.up('lg')]: {
+        [theme.breakpoints.up('lg')]: {
           '& > :is(img, svg)': {
             objectFit: 'contain'
           }

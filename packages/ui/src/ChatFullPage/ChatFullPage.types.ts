@@ -6,8 +6,10 @@ export enum ChatFullPageVariants {
   default = 'default'
 }
 
-export interface ChatFullPageProps
-  extends Omit<ModuleIntegration_BaseFragmentFragment, 'variant'> {}
+export interface ChatFullPageProps extends Omit<ModuleIntegration_BaseFragmentFragment, 'variant'> {
+  chatFullPageWidth: string;
+  chatFullPageHeight: string;
+}
 
 export interface ChatFullPageOwnerState extends ChatFullPageProps {}
 

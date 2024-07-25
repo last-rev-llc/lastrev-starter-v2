@@ -16,7 +16,6 @@ import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
 
 import type { NavigationItemProps, NavigationItemOwnerState } from './NavigationItem.types';
-import type { LinkProps } from '../Link';
 
 const NavigationItem = (props: NavigationItemProps) => {
   const ownerState = {
@@ -55,7 +54,7 @@ const NavigationItem = (props: NavigationItemProps) => {
         menuBreakpoint={menuBreakpoint}
       >
         <NavigationItemLink
-          {...(props as LinkProps)}
+          {...(props as NavigationItemProps)}
           {...sidekick(sidekickLookup)}
           onClick={handleClick}
           __typename="Link"

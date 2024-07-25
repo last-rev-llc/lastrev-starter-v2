@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAmp } from 'next/amp';
 
-import { styled } from '@mui/material/styles';
+import { CSSInterpolation, styled } from '@mui/material/styles';
 
 import sidekick from '@last-rev/contentful-sidekick-util';
 
@@ -62,8 +62,7 @@ const Media = (props: MediaProps & MediaVideoProps) => {
           preload="auto"
           data-testid={testId || 'Media'}
           {...(props as MediaVideoProps)}
-          sx={{ width: '100%', height: '100%', ...props.sx }}
-        >
+          sx={{ width: '100%', height: '100%', ...props.sx }}>
           <source src={file?.url} />
           Your browser does not support the video tag.
         </VideoRoot>
@@ -116,7 +115,7 @@ const Root = styled(Image, {
   slot: 'Root',
   shouldForwardProp: (prop: string) =>
     prop !== 'variant' && prop !== 'fileName' && prop !== 'sidekickLookup',
-  overridesResolver: (_, styles) => [styles.root]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
 })<{ variant?: string }>``;
 
 const ArtDirectedRoot = styled(ArtDirectedImage, {
@@ -129,14 +128,14 @@ const EmbedRoot = styled('iframe', {
   name: 'Media',
   slot: 'EmbedRoot',
   shouldForwardProp,
-  overridesResolver: (_, styles) => [styles.root]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
 })``;
 
 const VideoRoot = styled('video', {
   name: 'Media',
   slot: 'VideoRoot',
   shouldForwardProp,
-  overridesResolver: (_, styles) => [styles.root]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
 })<{ variant?: string }>``;
 
 export default Media;
