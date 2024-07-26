@@ -35,7 +35,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Form'] = {
         grid: 'none',
         gap: 'var(--grid-gap)',
 
-        [theme.breakpoints.up('lg')]: {
+        [theme.containerBreakpoints.up('lg')]: {
           gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))'
         }
       },

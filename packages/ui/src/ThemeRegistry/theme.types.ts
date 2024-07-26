@@ -32,6 +32,7 @@ declare module '@mui/material/styles' {
 
   interface Theme {
     mixins: Mixins;
+    containerBreakpoints: Breakpoints;
   }
 
   interface ThemeOptions {

@@ -57,12 +57,12 @@ const styleOverrides: ComponentsOverrides<Theme>['FRD'] = {
       padding: 'var(--grid-gap)'
     },
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       display: 'block',
       gridColumn: 'full-start / two-end'
     },
 
-    [theme.breakpoints.up('xl')]: {
+    [theme.containerBreakpoints.up('xl')]: {
       gridColumn: 'full-start / one-end'
     }
   }),
@@ -71,11 +71,11 @@ const styleOverrides: ComponentsOverrides<Theme>['FRD'] = {
     gridRow: 1,
     gridColumn: 'content-start / content-end',
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       gridColumn: 'three-start / content-end'
     },
 
-    [theme.breakpoints.up('xl')]: {
+    [theme.containerBreakpoints.up('xl')]: {
       gridColumn: 'two-start / content-end'
     }
   })

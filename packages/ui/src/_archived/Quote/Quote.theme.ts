@@ -21,15 +21,15 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
     gridRow: 1,
     gridColumn: 'content-quarter/content-three-quarter',
 
-    [theme.breakpoints.up('sm')]: {
+    [theme.containerBreakpoints.up('sm')]: {
       gridColumn: 'four-start/five-end'
     },
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       gridColumn: 'six-start/seven-end'
     },
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       gridColumn: 'six-start/seven-end'
     }
   }),
@@ -40,7 +40,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
     textAlign: 'center',
     ...theme.typography.display4,
 
-    [theme.breakpoints.up('sm')]: {
+    [theme.containerBreakpoints.up('sm')]: {
       gridColumn: 'content-quarter/content-three-quarter'
     }
   }),
@@ -55,11 +55,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
     gridRow: '3/5',
     gridColumn: 'content-start/one-end',
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       gridColumn: 'content-quarter/content-half'
     },
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       gridColumn: 'six-start/content-half'
     }
   }),
@@ -70,7 +70,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
     lineHeight: 1,
     alignSelf: 'flex-end',
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       gridColumn: 'content-half/content-end'
     }
   }),
@@ -81,7 +81,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
     fontStyle: 'italic',
     lineHeight: 1,
 
-    [theme.breakpoints.up('md')]: {
+    [theme.containerBreakpoints.up('md')]: {
       gridColumn: 'content-half/content-end'
     }
   })

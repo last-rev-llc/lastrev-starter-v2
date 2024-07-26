@@ -24,7 +24,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
     gridColumnEnd: 'content-end',
     paddingBottom: 'var(--grid-gap-double)',
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       gridColumnStart: 'content-start',
       gridColumnEnd: 'four-end'
     }
@@ -66,7 +66,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
     gridColumnStart: 'content-start',
     gridColumnEnd: 'content-end',
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       gridColumnStart: 'five-start',
       gridColumnEnd: 'full-end',
       paddingRight: 'var(--grid-margin)'

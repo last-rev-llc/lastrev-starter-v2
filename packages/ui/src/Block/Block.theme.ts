@@ -79,7 +79,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Block'] = {
     flexDirection: 'column',
     gap: 'var(--grid-gap)',
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       flexDirection: 'row'
     }
   })
@@ -116,7 +116,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-start',
           gridColumnEnd: 'content-half'
@@ -128,7 +128,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
         }
@@ -145,7 +145,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-start',
           gridColumnEnd: 'content-half'
@@ -157,7 +157,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'full-start',
         gridColumnEnd: 'full-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridColumnStart: 'content-half',
           gridColumnEnd: 'full-end'
         }
@@ -174,7 +174,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
@@ -185,7 +185,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridColumnEnd: 'content-half'
         }
       }
@@ -201,7 +201,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: 'content-start',
         gridColumnEnd: 'content-end',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridRow: 1,
           gridColumnStart: 'content-half',
           gridColumnEnd: 'content-end'
@@ -212,7 +212,7 @@ const createVariants = (theme: Theme): ComponentsVariants['Block'] => [
         gridColumnStart: '1',
         gridColumnEnd: '-1',
 
-        [theme.breakpoints.up('md')]: {
+        [theme.containerBreakpoints.up('md')]: {
           gridColumnEnd: 'content-half'
         }
       }

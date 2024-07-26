@@ -59,12 +59,12 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 --grid-gap-half: calc(var(--grid-gap) / 1);
                 --grid-gap-quarter: calc(var(--grid-gap) / 2);
 
-                --container-width-xs: ${theme.breakpoints.values.sm}px;
-                --container-width-sm: ${theme.breakpoints.values.sm}px;
-                --container-width-md: ${theme.breakpoints.values.md}px;
-                --container-width-lg: ${theme.breakpoints.values.lg}px;
-                --container-width-xl: ${theme.breakpoints.values.xl}px;
-                --container-width-xxl: ${theme.breakpoints.values.xxl}px;
+                --container-width-xs: ${theme.containerBreakpoints.values.sm}px;
+                --container-width-sm: ${theme.containerBreakpoints.values.sm}px;
+                --container-width-md: ${theme.containerBreakpoints.values.md}px;
+                --container-width-lg: ${theme.containerBreakpoints.values.lg}px;
+                --container-width-xl: ${theme.containerBreakpoints.values.xl}px;
+                --container-width-xxl: ${theme.containerBreakpoints.values.xxl}px;
                 --container-width: var(--container-width-xs);
                 --container-margin: var(--container-width-xs);
                 --container-gutter: minmax(
@@ -246,7 +246,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                   --bodyLarge-font-size: 1.25rem;
                 } */
 
-                ${theme.breakpoints.up('xl')} {
+                ${theme.containerBreakpoints.up('xl')} {
                   --h1-font-size: ${(h1FontSizeBase / 8) * 9}rem;
                   --h2-font-size: ${(h2FontSizeBase / 8) * 9}rem;
                   --h3-font-size: ${(h3FontSizeBase / 8) * 9}rem;
@@ -260,7 +260,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                   --bodyLarge-font-size: 1.25rem;
                 }
 
-                ${theme.breakpoints.down('lg')} {
+                ${theme.containerBreakpoints.down('lg')} {
                   --h1-font-size: ${(h1FontSizeBase / 8) * 7}rem;
                   --h2-font-size: ${(h2FontSizeBase / 8) * 7}rem;
                   --h3-font-size: ${(h3FontSizeBase / 8) * 7}rem;
@@ -274,13 +274,13 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                   --bodyLarge-font-size: 1.125rem;
                 }
 
-                ${theme.breakpoints.down('md')} {
+                ${theme.containerBreakpoints.down('md')} {
                   --h1-font-size: ${(h1FontSizeBase / 8) * 6}rem;
                   --h2-font-size: ${(h2FontSizeBase / 8) * 6}rem;
                   --h3-font-size: ${(h3FontSizeBase / 8) * 6}rem;
                 }
 
-                ${theme.breakpoints.down('sm')} {
+                ${theme.containerBreakpoints.down('sm')} {
                   --h1-font-size: ${(h1FontSizeBase / 8) * 4}rem;
                   --h2-font-size: ${(h2FontSizeBase / 8) * 4}rem;
                   --h3-font-size: ${(h3FontSizeBase / 8) * 5}rem;

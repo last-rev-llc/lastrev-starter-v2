@@ -84,7 +84,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
       display: 'none'
     },
 
-    [theme.breakpoints.up('lg')]: {
+    [theme.containerBreakpoints.up('lg')]: {
       'gap': 'var(--grid-gap)',
       '& .MuiTypography-root': {
         ...theme.typography.bodySmall,
