@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { styled } from '@mui/material/styles';
+import { CSSInterpolation, styled } from '@mui/material/styles';
 
 import type { GridProps } from './Grid.types';
 
@@ -16,7 +16,7 @@ const Root = styled('div', {
   name: 'Grid',
   slot: 'Root',
   shouldForwardProp: (prop: string) => prop !== 'overrideNested' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.root]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
 })<{ variant?: string; colorScheme?: string; overrideNested?: boolean }>``;
 
 export default Grid;

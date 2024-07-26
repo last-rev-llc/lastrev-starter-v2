@@ -17,6 +17,7 @@ import type { PersonProps, PersonOwnerState } from './Person.types';
 const Person = (props: PersonProps) => {
   const ownerState = { ...props, backgroundColor: 'lightGray' };
   const {
+    id,
     education,
     previousExperiences,
     header,

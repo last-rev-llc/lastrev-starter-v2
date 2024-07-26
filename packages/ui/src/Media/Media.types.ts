@@ -4,8 +4,8 @@ import type { Media_BaseFragmentFragment } from '@graphql-sdk/types';
 
 export interface FileProps {
   url?: string;
-  width?: number;
-  height?: number;
+  width?: string;
+  height?: string;
 }
 
 export interface AssetProps {
@@ -21,11 +21,12 @@ export interface MediaProps extends Media_BaseFragmentFragment {
   disableInlineSVG?: boolean;
   q?: number;
   unoptimized?: boolean;
-  nextImageOptimization: boolean;
-  sizes: string;
+  nextImageOptimization?: boolean;
+  sizes?: string;
 }
+
 export interface MediaVideoProps extends MediaProps {
-  controls: boolean;
+  controls?: boolean;
 }
 
 interface MediaClasses {

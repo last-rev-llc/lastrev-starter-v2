@@ -28,8 +28,7 @@ export const defaultFileVideoMock = (override?: Partial<FileProps>): FileProps =
   url: 'LastRev.mp4',
   width: '1280',
   height: '720',
-  ...override,
-  __typename: 'Asset'
+  ...override
 });
 
 const defaultAssetFileMock = (override?: Partial<MediaProps>): Partial<MediaProps> => ({
@@ -46,8 +45,7 @@ const defaultAssetSvgMock = async (
   );
 
   return {
-    file: defaultFileSvgMock(),
-    svgContent,
+    file: defaultFileSvgMock(svgContent),
     title: 'This is an asset title',
     ...override
   };

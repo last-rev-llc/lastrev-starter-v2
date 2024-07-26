@@ -4,9 +4,8 @@ import type {
   ComponentsProps,
   LinkProps
 } from '@mui/material';
-
+import { Theme } from '@ui/ThemeRegistry/theme.types';
 import type { Quote_BaseFragmentFragment } from '@graphql-sdk/types';
-import { MediaProps } from '../../Media';
 
 export enum QuoteVariants {
   default = 'default',

@@ -61,7 +61,7 @@ export const cardBaseMock = (override?: Partial<CardProps>): CardProps => {
   }
 
   Object.keys(variantOverride)?.forEach((key) => {
-    baseMock[key] = variantOverride[key];
+    baseMock[key as keyof CardProps] = variantOverride[key as keyof CardProps];
   });
   return { ...baseMock, ...variantOverride, ...override };
 };

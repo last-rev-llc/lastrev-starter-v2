@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { styled } from '@mui/material/styles';
+import { CSSInterpolation, styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -37,8 +37,7 @@ const FooterNavigationItemGroup = (props: FooterNavigationItemGroupProps) => {
             {subNavigation?.map((subNavItem: any, index: number) => (
               <NavItemSubMenuItem
                 key={`${navItemId}-nav-item-${subNavItem.id}-${index}`}
-                ownerState={ownerState}
-              >
+                ownerState={ownerState}>
                 <NavItemLink
                   {...subNavItem}
                   variant={variant}
@@ -86,14 +85,14 @@ const NavItemLink = styled(ContentModule, {
   name: 'FooterNavigationItemGroup',
   slot: 'NavItemLink',
   shouldForwardProp: (prop: string) => prop !== 'subNavigation' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.navItemLink]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.navItemLink]
 })<{ ownerState: FooterNavigationItemGroupOwnerState }>``;
 
 const NavItemLinkGroup = styled(ContentModule, {
   name: 'FooterNavigationItemGroup',
   slot: 'NavItemLinkGroup',
   shouldForwardProp: (prop: string) => prop !== 'subNavigation' && prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.navItemLinkGroup]
+  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.navItemLinkGroup]
 })<{ ownerState: FooterNavigationItemGroupOwnerState }>``;
 
 export default FooterNavigationItemGroup;

@@ -8,6 +8,7 @@ export enum AccordionVariants {
 
 export interface AccordionProps extends Omit<CollectionExpandable_BaseFragmentFragment, 'variant'> {
   variant: AccordionVariants;
+  background?: any;
 }
 
 export interface AccordionOwnerState extends AccordionProps {}

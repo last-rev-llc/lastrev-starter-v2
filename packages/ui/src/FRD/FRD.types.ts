@@ -1,13 +1,12 @@
 import type { ComponentsOverrides, ComponentsVariants, ComponentsProps } from '@mui/material';
 
 import type { ContentModule_SettingsFragmentFragment } from '@graphql-sdk/types';
-import { LinkProps } from '../Link/Link.types';
 
 export enum FRDVariants {
   default = 'default'
 }
 
-export interface FRDProps extends Omit<FRD_BaseFragmentFragment, 'variant'> {
+export interface FRDProps extends Omit<ContentModule_SettingsFragmentFragment, 'variant'> {
   disableBackToTop?: boolean;
   variant?: FRDVariants;
 }

@@ -17,11 +17,11 @@ export interface CardProps extends Omit<Card_BaseFragmentFragment, 'variant'> {
   loading?: boolean;
   variant?: CardVariants;
   ownerState?: any;
+  className?: string;
+  backgroundColor?: string;
 }
 
-export interface CardOwnerState extends CardProps {
-  backgroundColor: string;
-}
+export interface CardOwnerState extends CardProps {}
 
 interface CardClasses {
   root: string;
