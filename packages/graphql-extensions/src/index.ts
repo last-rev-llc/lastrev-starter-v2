@@ -38,6 +38,7 @@ function loadFiles() {
     modules['Hero'] = require('./Hero.extension');
     modules['Link'] = require('./Link.extension');
     modules['Media'] = require('./Media.extension');
+    modules['ModuleIntegration'] = require('./ModuleIntegration.extension');
     modules['NavigationItem'] = require('./NavigationItem.extension');
     modules['Page'] = require('./Page.extension');
     modules['PathsConfigs'] = require('./PathsConfigs.extension');
