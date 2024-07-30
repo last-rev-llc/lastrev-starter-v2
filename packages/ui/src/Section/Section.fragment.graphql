@@ -67,6 +67,10 @@ fragment Section_RichText_ContentModuleFragment on Content {
   }
 }
 
+fragment Section_RichText_ContentModuleFragment_Test on Content {
+  id
+}
+
 fragment ContentModule_RichText_SectionFragment on Content {
   id
   __typename
@@ -78,4 +82,5 @@ fragment ContentModule_RichText_SectionFragment on Content {
   ...ModuleIntegration_BaseFragment
   #...Text_RichTextFragment
   #...Section_BaseFragment
+  #update
 }
