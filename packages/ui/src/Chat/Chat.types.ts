@@ -7,12 +7,14 @@ export enum ChatVariants {
 }
 
 export interface ChatProps extends Omit<ModuleIntegration_BaseFragmentFragment, 'variant'> {
-  settings: {
-    chatflowid: string;
-    apiHost: string;
-    other: any;
+  settings?: {
+    chatflowid?: string;
+    apiHost?: string;
+    other?: any;
     theme?: any;
   };
+  chatWidth?: 'full' | 'narrow' | string;
+  chatHeight?: 'full' | 'narrow' | string;
 }
 
 export interface ChatOwnerState extends ChatProps {}

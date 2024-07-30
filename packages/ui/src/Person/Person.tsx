@@ -17,7 +17,6 @@ import type { PersonProps, PersonOwnerState } from './Person.types';
 const Person = (props: PersonProps) => {
   const ownerState = { ...props, backgroundColor: 'lightGray' };
   const {
-    id,
     education,
     previousExperiences,
     header,
@@ -34,22 +33,24 @@ const Person = (props: PersonProps) => {
 
   return (
     <>
-      {!!jsonLd && (
-        <Script type="application/ld+json" id={`person-${id}-jsonld`}>
-          {jsonLd}
-        </Script>
-      )}
+      {jsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      ) : null}
 
-      {hero ? <ContentModule {...(hero as any)} header={header} breadcrumbs={breadcrumbs} /> : null}
+      {header ? <ContentModule {...(header as any)} /> : null}
 
+      {hero ? <ContentModule {...(hero as any)} /> : null}
       <Root component="main" {...sidekick(sidekickLookup)} ownerState={ownerState}>
         <ContentOuterGrid ownerState={ownerState}>
           <SideContentWrap ownerState={ownerState}>
             <SideContentInnerWrap ownerState={ownerState}>
-              <Typography variant="overline">Contact Details</Typography>
+              <DetailsLabel variant="overline">Contact Details</DetailsLabel>
 
               {!!name && (
-                <Name variant="h4" {...sidekick(sidekickLookup, 'name')} ownerState={ownerState}>
+                <Name variant="h5" {...sidekick(sidekickLookup, 'name')} ownerState={ownerState}>
                   {name}
                 </Name>
               )}
@@ -57,8 +58,7 @@ const Person = (props: PersonProps) => {
                 <JobTitle
                   variant="h5"
                   {...sidekick(sidekickLookup, 'jobTitle')}
-                  ownerState={ownerState}
-                >
+                  ownerState={ownerState}>
                   {jobTitle}
                 </JobTitle>
               )}
@@ -70,14 +70,13 @@ const Person = (props: PersonProps) => {
             </SideContentInnerWrap>
           </SideContentWrap>
           <ContentWrap ownerState={ownerState}>
-            <BodyHeader variant="h3" ownerState={ownerState}>
+            <BodyHeader variant="h5" ownerState={ownerState}>
               Biography
             </BodyHeader>
             {!!body && (
               <Body
                 body={body}
                 sidekickLookup={sidekickLookup}
-                {...props}
                 variant="inline"
                 __typename="RichText"
                 ownerState={ownerState}
@@ -86,7 +85,7 @@ const Person = (props: PersonProps) => {
 
             {!!education?.length && (
               <>
-                <BodyHeader variant="h3" ownerState={ownerState}>
+                <BodyHeader variant="h5" ownerState={ownerState}>
                   Education
                 </BodyHeader>
                 <BodyList ownerState={ownerState}>
@@ -101,7 +100,7 @@ const Person = (props: PersonProps) => {
 
             {!!previousExperiences?.length && (
               <>
-                <BodyHeader variant="h3" ownerState={ownerState}>
+                <BodyHeader variant="h5" ownerState={ownerState}>
                   Previous Experiences
                 </BodyHeader>
                 <BodyList ownerState={ownerState}>
@@ -133,6 +132,12 @@ const ContentOuterGrid = styled(Grid, {
   slot: 'ContentOuterGrid',
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
 })<{ ownerState: PersonOwnerState }>``;
+
+const DetailsLabel = styled(Typography, {
+  name: 'Person',
+  slot: 'DetailsLabel',
+  overridesResolver: (_, styles) => [styles.detailsLabel]
+})<TypographyProps & { ownerState: PersonOwnerState }>``;
 
 const Name = styled(Typography, {
   name: 'Person',

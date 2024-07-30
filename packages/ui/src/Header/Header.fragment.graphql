@@ -1,5 +1,7 @@
 fragment Header_BaseFragment on Header {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   logo {
     ...Media_BaseFragment
   }
@@ -23,4 +25,10 @@ fragment Header_BaseFragment on Header {
     ...Link_BaseFragment
   }
   backgroundColor
+  searchLandingPage {
+    ...Link_BaseFragment
+  }
+  autoComplete {
+    ...CollectionDynamic_BaseFragment
+  }
 }

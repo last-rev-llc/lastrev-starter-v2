@@ -10,6 +10,21 @@ directive @requires(fields: _FieldSet!) on FIELD_DEFINITION
 
 directive @tag(name: String!) on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | INPUT_OBJECT | INTERFACE | OBJECT | SCALAR | UNION
 
+union ActionLink = Link
+
+type AlgoliaObject {
+  data: JSON!
+  index: String!
+}
+
+type AlgoliaRecord implements Content {
+  algoliaObjects: [AlgoliaObject]
+  animation: JSON
+  id: String
+  sidekickLookup: JSON
+  theme: [Theme]
+}
+
 type Asset {
   description: String
   extension: String
@@ -23,7 +38,7 @@ type Asset {
 }
 
 type Block implements Content {
-  actions: [Link]
+  actions: [ActionLink]
   animation: JSON
   asset: Media
   backgroundColor: String
@@ -44,6 +59,7 @@ type Block implements Content {
 }
 
 type Blog implements Content {
+  aboutText: RichText
   animation: JSON
   author: Person
   body: RichText
@@ -70,20 +86,10 @@ type Blog implements Content {
   title: String
 }
 
-type BlogPost implements Content {
-  animation: JSON
-  body: RichText
-  id: String
-  image: Media
-  sidekickLookup: JSON
-  theme: [Theme]
-  title: String
-  variant: String
-}
-
 type Card implements Content {
-  actions: [Link]
+  actions: [ActionLink]
   animation: JSON
+  aspectRatio: String
   body: RichText
   bodyRte: JSON
   id: String
@@ -125,31 +131,78 @@ type Collection implements Content {
   carouselAutoPlay: Boolean
   carouselBreakpoints: [String]
   id: String
+  images: [Media]
   internalTitle: String
   introText: Text
   isCarouselDesktop: Boolean
   isCarouselMobile: Boolean
   isCarouselTablet: Boolean
   items: [CollectionItem]
+  itemsAspectRatio: String
   itemsConnection(filter: CollectionFilterInput, limit: Int, offset: Int): CollectionItemConnection
   itemsPerRow: Int
   itemsVariant: String
   numItems: Int
+  showFullItemsInCarousel: Boolean
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
 }
 
 type CollectionDynamic implements Content {
+  algoliaSettings: JSON
   animation: JSON
+  backgroundColor: String
+  backgroundImage: Media
+  filtersPlacement: String
   id: String
   internalTitle: String
+  introText: Text
+  isCarouselDesktop: Boolean
+  isCarouselMobile: Boolean
+  isCarouselTablet: Boolean
+  items: [CollectionDynamicItem]
+  itemsAspectRatio: String
+  itemsConnection(filter: CollectionDynamicFilterInput, limit: Int, offset: Int): CollectionDynamicItemConnection
+  itemsPerRow: Int
   itemsVariant: String
+  numItems: Int
   numberOfItemsToPull: String
   pullFromContentType: String
+  settings: JSON
+  showFilters: Boolean
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
+}
+
+type CollectionDynamicConnectionPageInfo {
+  allOptions: CollectionDynamicOptions
+  options: CollectionDynamicOptions
+  total: Int
+}
+
+input CollectionDynamicFilterInput {
+  body: String
+  tags: [String]
+  topics: [String]
+}
+
+union CollectionDynamicItem = Card | Link
+
+type CollectionDynamicItemConnection {
+  items: [CollectionDynamicItem]
+  pageInfo: CollectionDynamicConnectionPageInfo
+}
+
+type CollectionDynamicOption {
+  label: String
+  value: String
+}
+
+type CollectionDynamicOptions {
+  tags: [CollectionDynamicOption]
+  topics: [CollectionDynamicOption]
 }
 
 type CollectionExpandable implements Content {
@@ -184,7 +237,7 @@ input CollectionFilterInput {
   topics: [String]
 }
 
-union CollectionItem = Card
+union CollectionItem = Card | Link
 
 type CollectionItemConnection {
   items: [CollectionItem]
@@ -281,6 +334,7 @@ type Footer implements Content {
 
 type Header implements Content {
   animation: JSON
+  autoComplete: Content
   backgroundColor: String
   ctaItems: [Link]
   hasCtaItems: Boolean
@@ -289,6 +343,7 @@ type Header implements Content {
   logo: Media
   logoUrl: Link
   navigationItems: [NavigationItem]
+  searchLandingPage: Link
   sidekickLookup: JSON
   supernavIcon: Media
   supernavLink: Link
@@ -299,15 +354,16 @@ type Header implements Content {
 }
 
 type Hero implements Content {
-  actions: [Link]
+  actions: [ActionLink]
   animation: JSON
   background: Media
   backgroundColor: String
   body: RichText
-  contentHeight: String
+  hideBreadcrumbs: Boolean
   id: String
   internalTitle: String
   overline: String
+  showFullImage: Boolean
   sideImageItems: [Media]
   sidekickLookup: JSON
   subtitle: String
@@ -353,13 +409,17 @@ type Media implements Content {
   altText: String
   animation: JSON
   asset: Media
+  assetUrl: String
+  autoplay: Boolean
   description: String
   file: Asset
   fileMobile: Asset
   fileTablet: Asset
   id: String
   internalTitle: String
+  link: Link
   mobile: Media
+  placeholder: Media
   sidekickLookup: JSON
   source: String
   tablet: Media
@@ -419,6 +479,7 @@ type Page implements Content {
   hero: Hero
   id: String
   internalTitle: String
+  isHomepage: Boolean
   jsonLd: JSON
   lr__path__: String
   path: String
@@ -448,7 +509,7 @@ type Person implements Content {
   email: String
   footer: Footer
   header: Header
-  hero: Hero
+  hero: Content
   id: String
   jobTitle: String
   jsonLd: JSON
@@ -584,6 +645,7 @@ type Template implements Content {
 type Text implements Content {
   align: String
   animation: JSON
+  backgroundColor: String
   body: RichText
   id: String
   internalTitle: String

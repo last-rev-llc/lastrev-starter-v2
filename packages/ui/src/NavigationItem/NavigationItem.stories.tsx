@@ -1,46 +1,40 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import NavigationItem from './NavigationItem';
-import mockContent from './NavigationItem.mock';
+import { navigationItemBaseMock, navigationItemWithChildrenMock } from './NavigationItem.mock';
 
 export default {
   title: 'Navigation/NavigationItem',
   component: NavigationItem,
-  decorators: [
-    (storyFn: () => boolean | React.ReactChild | React.ReactFragment | React.ReactPortal) => (
-      <Box m={5}>{storyFn()}</Box>
-    )
-  ],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
-      name: 'Variant',
       control: {
         type: 'select',
-        options: ['NavigationItem', 'buttonContained', 'buttonOutlined', 'button-text']
-      },
-      table: {
-        defaultValue: { summary: 'NavigationItem' }
-      }
-    },
-    text: { name: 'Text' },
-    href: { name: 'Href' },
-    bgcolor: {
-      name: 'Background Color',
-      control: {
-        type: 'select',
-        options: ['yellow', 'orange', 'green']
-      },
-      table: {
-        defaultValue: { summary: 'yellow' }
+        options: [
+          'default',
+          'link',
+          'linkBolded',
+          'group',
+          'label',
+          'localeList',
+          'buttonOutlined',
+          'button-container',
+          'featured'
+        ]
       }
     }
-    // variantMapping: { name: 'Variant Mapping' },
-    // ref: { table: { disable: true } }
   }
 };
 
-const Template = (args: JSX.IntrinsicAttributes) => (
-  <NavigationItem __typename="NavigationItem" {...args} />
-);
-export const Default = Template.bind({});
-Default.args = { ...mockContent() };
+export const Default = {
+  args: {
+    ...navigationItemBaseMock()
+  }
+};
+
+export const WithChildren = {
+  args: {
+    ...navigationItemWithChildrenMock()
+  }
+};

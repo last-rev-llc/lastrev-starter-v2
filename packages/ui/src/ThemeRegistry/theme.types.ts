@@ -1,11 +1,12 @@
-import { Mixins } from '@mui/material/styles/createMixins';
 import {
-  type TypographyStyle,
   type Breakpoints,
+  type Mixins,
   type CssVarsTheme,
-  type Theme as MUITheme
+  type Theme as MUITheme,
+  type TypographyStyle
 } from '@mui/material/styles';
-import { Palette as MuiPalette } from '@mui/material/styles/createPalette';
+
+import { type Palette, type PaletteOptions } from '@mui/material/styles/createPalette';
 
 declare module '@mui/material/styles' {
   interface TypeBackground {
@@ -15,15 +16,21 @@ declare module '@mui/material/styles' {
   }
 
   interface Palette {
-    tertiary?: MuiPalette['primary'];
-    transparentLight?: MuiPalette['primary'];
-    transparentDark?: MuiPalette['primary'];
+    linkColor: string;
+    headerColor: string;
+    textColor: string;
+    overlay: string;
+    overlayText: string;
   }
 
-  interface PaletteOptions {
-    tertiary?: PaletteOptions['primary'];
-    transparentLight?: PaletteOptions['primary'];
-    transparentDark?: PaletteOptions['primary'];
+  interface ExtendedPalette extends Palette {
+    schemes: Palette[];
+  }
+
+  interface ExtendedCssVarsTheme extends CssVarsTheme {
+    vars: CssVarsTheme['vars'] & {
+      palette: ExtendedPalette;
+    };
   }
 
   interface BreakpointOverrides {
@@ -40,50 +47,46 @@ declare module '@mui/material/styles' {
   }
 
   interface TypographyVariants {
-    bodySmall: TypographyStyle;
-    bodyLarge: TypographyStyle;
     display1: TypographyStyle;
     display2: TypographyStyle;
     display3: TypographyStyle;
-    display4: TypographyStyle;
-    display5: TypographyStyle;
-    display6: TypographyStyle;
+    bodyXSmall: TypographyStyle;
+    bodySmall: TypographyStyle;
+    bodyLarge: TypographyStyle;
+    navLink: TypographyStyle;
   }
 
   interface TypographyVariantsOptions {
-    bodySmall?: TypographyStyle;
-    bodyLarge?: TypographyStyle;
     display1?: TypographyStyle;
     display2?: TypographyStyle;
     display3?: TypographyStyle;
-    display4?: TypographyStyle;
-    display5?: TypographyStyle;
-    display6?: TypographyStyle;
+    bodyXSmall?: TypographyStyle;
+    bodySmall?: TypographyStyle;
+    bodyLarge?: TypographyStyle;
+    navLink?: TypographyStyle;
   }
 }
 
 // Update the Typography's variant prop options
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
-    bodySmall?: true;
-    bodyLarge?: true;
     display1?: true;
     display2?: true;
     display3?: true;
-    display4?: true;
-    display5?: true;
-    display6?: true;
+    bodyXSmall?: true;
+    bodySmall?: true;
+    bodyLarge?: true;
+    navLink?: true;
   }
   type TypographyOptions = {
-    bodySmall?: TypographyStyle;
-    bodyLarge?: TypographyStyle;
     display1?: TypographyStyle;
     display2?: TypographyStyle;
     display3?: TypographyStyle;
-    display4?: TypographyStyle;
-    display5?: TypographyStyle;
-    display6?: TypographyStyle;
+    bodyXSmall?: TypographyStyle;
+    bodySmall?: TypographyStyle;
+    bodyLarge?: TypographyStyle;
+    navLink?: TypographyStyle;
   };
 }
 
-export type Theme = Omit<MUITheme, 'palette'> & CssVarsTheme;
+export type Theme = Omit<MUITheme, 'palette'> & ExtendedCssVarsTheme;

@@ -27,7 +27,6 @@ const HeaderNavLinkNested = (props: HeaderNavLinkNestedProps) => {
         data-testid="HeaderNavLinkNested"
         {...props}
         {...sidekick(sidekickLookup)}
-        icon="chevron"
         onClick={onNavItemClick}
         __typename="Link"
         ownerState={ownerState}

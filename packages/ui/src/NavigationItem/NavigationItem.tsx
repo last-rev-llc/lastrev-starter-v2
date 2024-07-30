@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 
 import { useMediaQuery } from '@mui/material';
@@ -51,8 +50,7 @@ const NavigationItem = (props: NavigationItemProps) => {
         sx={{ position: 'relative' }}
         open={open}
         data-testid="NavigationItem"
-        menuBreakpoint={menuBreakpoint}
-      >
+        menuBreakpoint={menuBreakpoint}>
         <NavigationItemLink
           {...(props as NavigationItemProps)}
           {...sidekick(sidekickLookup)}
@@ -84,44 +82,16 @@ const NavigationItem = (props: NavigationItemProps) => {
   );
 };
 
-// const visibleStyles = (open: boolean) => `
-//   max-height: ${open ? 300 : 0}px;
-//   box-shadow: ${open ? 'inset 0 0 16px -8px rgb(0 0 0 / 30%)' : 'inset 0 0 0 0 rgb(0 0 0 / 0%)'};
-// `;
-
-// const shouldForwardProp = (prop: string) =>
-//   prop !== 'variant' && prop !== 'onRequestClose' && prop !== 'menuBreakpoint';
-
 const Root = styled(Box, {
   name: 'NavigationItem',
   slot: 'Root',
-  // shouldForwardProp,
   overridesResolver: (_, styles) => [styles.root]
-})<{ variant?: string; open: boolean; menuBreakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }>`
-  // ${({ open, theme, menuBreakpoint }) => `
-  //   @media (max-width: ${theme.breakpoints.values[menuBreakpoint]}px) {
-  //     [class$=NavigationItem-menuRoot] {
-  //       ${visibleStyles(open)}
-  //     }
-  //   }
-  //   @media (min-width: ${theme.breakpoints.values[menuBreakpoint]}px) {
-  //     [class$=NavigationItem-menuRoot] {
-  //       max-height: 0px;
-  //     }
-  //     &:hover {
-  //       background: rgba(0,0,0,0.05);
-  //       [class$=NavigationItem-menuRoot] {
-  //         max-height: 300px;
-  //       }
-  //     }
-  //  }
-  // `}
-`;
+})<{ variant?: string; open: boolean; menuBreakpoint: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }>``;
 
 const NavItemSubMenu = styled(List, {
   name: 'NavigationItem',
   slot: 'NavItemSubMenu',
-  // shouldForwardProp: (prop: string) => prop !== 'numOfCols',
+
   overridesResolver: (_, styles) => [styles.navItemSubMenu]
 })<{ ownerState: NavigationItemOwnerState }>``;
 
@@ -134,15 +104,8 @@ const NavItemSubMenuItem = styled(ListItem, {
 const NavigationItemLink = styled(ContentModule, {
   name: 'NavigationItem',
   slot: 'Link',
-  // shouldForwardProp,
-  overridesResolver: (_, styles) => [styles.link]
-})<{ ownerState: NavigationItemOwnerState }>``;
 
-const MenuRoot = styled(Paper, {
-  name: 'NavigationItem',
-  slot: 'MenuRoot',
-  // shouldForwardProp,
-  overridesResolver: (_, styles) => [styles.menuRoot]
+  overridesResolver: (_, styles) => [styles.link]
 })<{ ownerState: NavigationItemOwnerState }>``;
 
 export default NavigationItem;

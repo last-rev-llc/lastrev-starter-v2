@@ -10,11 +10,11 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 
 import ContentModule from '../ContentModule';
 import Grid from '../Grid';
+import Background from '../Background';
 
-import type { FooterProps, FooterOwnerState } from './Footer.types';
 import type { NavigationItemProps } from '../NavigationItem';
 import type { LinkProps } from '../Link';
-import Background from '../Background';
+import type { FooterProps, FooterOwnerState } from './Footer.types';
 
 const Footer = (props: FooterProps) => {
   const ownerState = { ...props };
@@ -90,7 +90,7 @@ const Footer = (props: FooterProps) => {
 
         <LegalSection ownerState={ownerState}>
           {!!disclaimerText && (
-            <DisclaimerWrap ownerState={ownerState} overrideNested>
+            <DisclaimerWrap ownerState={ownerState}>
               <Disclaimer
                 {...sidekick(sidekickLookup, 'disclaimerText')}
                 ownerState={ownerState}
@@ -117,8 +117,7 @@ const Footer = (props: FooterProps) => {
                 <LegalLinkWrap
                   key={link?.id}
                   ownerState={ownerState}
-                  {...sidekick(sidekickLookup, 'sidekickLookup')}
-                >
+                  {...sidekick(sidekickLookup, 'sidekickLookup')}>
                   <LegalLink {...(link as LinkProps)} ownerState={ownerState} />
                 </LegalLinkWrap>
               ))}
@@ -137,7 +136,7 @@ const Root = styled(Box, {
 })<{ ownerState: FooterOwnerState }>``;
 
 const FooterBackground = styled(Background, {
-  name: 'Block',
+  name: 'Footer',
   slot: 'FooterBackground',
   overridesResolver: (_, styles) => [styles.background]
 })<{}>``;
@@ -160,7 +159,7 @@ const Logo = styled(ContentModule, {
   overridesResolver: (_, styles) => [styles.logo]
 })<{ ownerState: FooterOwnerState }>``;
 
-const DisclaimerWrap = styled(Grid, {
+const DisclaimerWrap = styled(Box, {
   name: 'Footer',
   slot: 'DisclaimerWrap',
   overridesResolver: (_, styles) => [styles.disclaimerWrap]

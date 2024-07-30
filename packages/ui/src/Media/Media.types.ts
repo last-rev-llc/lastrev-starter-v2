@@ -23,7 +23,11 @@ export interface MediaProps extends Media_BaseFragmentFragment {
   unoptimized?: boolean;
   nextImageOptimization?: boolean;
   sizes?: string;
+  imageOverlayColor?: string;
+  aspectRatio?: string;
 }
+
+export interface MediaOwnerState extends MediaProps {}
 
 export interface MediaVideoProps extends MediaProps {
   controls?: boolean;

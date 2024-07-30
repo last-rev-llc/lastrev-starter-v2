@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Tabs'] = {};
 
@@ -21,7 +21,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
 
   // introTextGrid: : {},
 
-  introText: { gridColumn: 'content-start / content-end' },
+  introText: { gridColumn: 'start / end' },
 
   contentOuterGrid: {
     '> *': {
@@ -31,8 +31,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
 
   // tabsContext: {},
   tabListWrap: ({ theme }) => ({
-    'gridColumnStart': 'content-start',
-    'gridColumnEnd': 'content-end',
+    'gridColumnStart': 'start',
+    'gridColumnEnd': 'end',
     '.MuiTabs-flexContainer': { gap: 'var(--grid-gap)' },
 
     '.MuiTab-root': {
@@ -53,8 +53,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Tabs'] = {
   }),
 
   detailsWrap: {
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
     padding: 'var(--section-padding) 0'
   }
   // details: {}

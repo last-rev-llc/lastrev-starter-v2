@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CSSInterpolation, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -10,12 +10,13 @@ import sidekick from '@last-rev/contentful-sidekick-util';
 
 import ErrorBoundary from '../../ErrorBoundary';
 import ContentModule from '../../ContentModule';
-
-// import { getFirstOfArray } from '../../utils/getFirstOfArray';
+import { breakpointsMinMax } from '../../ThemeRegistry/theme';
 
 import type { HeaderNavLinkProps, HeaderNavLinkOwnerState } from './HeaderNavLink.types';
 
 const HeaderNavLink = (props: HeaderNavLinkProps) => {
+  const [open, setOpen] = React.useState(false);
+
   const ownerState = {
     ...props,
     numOfCols: props.subNavigation?.length || 1
@@ -25,11 +26,17 @@ const HeaderNavLink = (props: HeaderNavLinkProps) => {
 
   const onNavItemClick = (evt: any) => {
     if (subNavigation?.length) {
-      evt.preventDefault();
-      evt.stopPropagation();
+      if (
+        window?.outerWidth < breakpointsMinMax.md.min &&
+        evt?.target?.classList?.contains('MuiSvgIcon-root')
+      ) {
+        evt.preventDefault();
+        evt.stopPropagation();
+      }
       if (document.activeElement instanceof HTMLElement) {
         evt?.target?.blur();
       }
+      setOpen(!open);
     } else {
       if (onRequestClose) onRequestClose();
     }
@@ -48,13 +55,14 @@ const HeaderNavLink = (props: HeaderNavLinkProps) => {
             variant={variant}
             {...sidekick(sidekickLookup)}
             onClick={onNavItemClick}
+            open={open}
             icon="chevron"
             __typename="Link"
             subNavigation={undefined}
             ownerState={ownerState}
           />
 
-          <NavItemSubMenu key={`${navItemId}-nav-item-submenu`} ownerState={ownerState}>
+          <NavItemSubMenu key={`${navItemId}-nav-item-submenu`} ownerState={ownerState} open={open}>
             {subNavigation?.map((subNavItem: any, index: number) => (
               <NavItemSubMenuItem
                 key={`${navItemId}-nav-item-${subNavItem.id}-${index}`}
@@ -90,13 +98,13 @@ const Root = styled(Box, {
   name: 'HeaderNavLink',
   slot: 'Root',
   overridesResolver: (_, styles) => [styles.root]
-})<{ open?: boolean; ownerState: HeaderNavLinkOwnerState }>``;
+})<{ ownerState: HeaderNavLinkOwnerState }>``;
 
 const NavItemSubMenu = styled(List, {
   name: 'HeaderNavLink',
   slot: 'NavItemSubMenu',
   overridesResolver: (_, styles) => [styles.navItemSubMenu]
-})<{ open?: boolean; ownerState: HeaderNavLinkOwnerState }>``;
+})<{ ownerState: HeaderNavLinkOwnerState }>``;
 
 const NavItemSubMenuItem = styled(ListItem, {
   name: 'HeaderNavLink',
@@ -109,8 +117,8 @@ const NavItemLink = styled(ContentModule, {
   slot: 'NavItemLink',
   shouldForwardProp: (prop: string) =>
     prop !== 'subNavigation' && prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.navItemLink]
-})<{ open?: boolean; ownerState: HeaderNavLinkOwnerState }>``;
+  overridesResolver: (_: any, styles: { navItemLink: any }) => [styles.navItemLink]
+})<{ ownerState: HeaderNavLinkOwnerState }>``;
 
 const NavItemGroup = styled(ContentModule, {
   name: 'HeaderNavLink',

@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['FooterNavigationItemGroup'] = {};
 
@@ -12,23 +12,41 @@ const styleOverrides: ComponentsOverrides<Theme>['FooterNavigationItemGroup'] = 
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 'calc(var(--grid-gap) / 4)'
+    gap: 'var(--grid-gap-quarter)'
   },
 
+  navItemLink: ({ theme, ownerState }) => ({
+    ...(ownerState.variant === 'linkBoldedFooter'
+      ? {
+          ...theme.typography.navLink,
+          minHeight: 'calc(2 * var(--bodyXSmall-line-height))'
+        }
+      : {
+          ...theme.typography.bodyXSmall
+        })
+  }),
+
   navItemLinkGroup: ({ theme }) => ({
-    ...theme.typography.bodyLarge,
-    gap: 'calc(var(--grid-gap) / 4)'
+    ...theme.typography.navLink,
+
+    gap: 'var(--grid-gap-quarter)',
+
+    [theme.breakpoints.up('md')]: {
+      minHeight: 'calc(2 * var(--bodyXSmall-line-height))'
+    }
   }),
 
-  navItemSubMenu: ({ theme }) => ({
+  navItemSubMenu: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: 'calc(var(--grid-gap) / 2)'
-  }),
+    flexDirection: 'row',
+    gap: 'var(--grid-gap-half)'
+  },
 
-  navItemSubMenuItem: {
-    padding: 0
-  }
+  navItemSubMenuItem: ({ theme }) => ({
+    padding: 0,
+    ...theme.typography.bodySmall,
+    width: 'auto'
+  })
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['FooterNavigationItemGroup'] => [];

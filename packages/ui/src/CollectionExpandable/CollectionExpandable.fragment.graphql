@@ -1,5 +1,7 @@
 fragment CollectionExpandable_FieldsFragment on CollectionExpandable {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   introText {
     ...Text_IntroTextFragment

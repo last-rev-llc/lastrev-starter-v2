@@ -4,65 +4,44 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Blog'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
-  // root: {},
-
-  contentOuterGrid: {
+  root: ({ theme, ownerState }) => ({
+    ...theme.mixins.applyBackgroundColor({
+      ownerState: { ...ownerState, backgroundColor: 'white' },
+      theme
+    }),
     'containerType': 'inline-size',
-    '> *': {
-      gridColumn: 'full-start / full-end'
-    }
-  },
+    'position': 'relative',
+    'width': '100%',
+    'display': 'flex',
+    'flexDirection': 'column',
 
-  headerWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'ten-end'
+    '& > *': {
+      paddingTop: 'var(--section-padding)',
+      paddingBottom: 'var(--section-padding)'
     }
   }),
 
-  breadcrumbsWrap: {
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end'
-  },
-
-  contentWrap: {
-    display: 'contents'
-  },
-
-  featuredMediaWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'ten-end'
-    }
+  featuredMediaWrap: ({ theme, ownerState }) => ({
+    display: 'flex',
+    justifyContent: 'center',
+    paddingBottom: 'var(--grid-gap-double)'
   }),
 
-  // featuredMedia: {},
-
-  // pubDate: {},
-
-  shareLinksWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+  sideContentWrap: ({ theme }) => ({
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    paddingBottom: 'var(--grid-gap-double) 0',
+    gridRow: 2,
 
     [theme.breakpoints.up('md')]: {
       gridColumnStart: 'two-start',
-      gridColumnEnd: 'seven-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'content-quarter',
-      gridColumnEnd: 'content-three-quarter'
+      gridColumnEnd: 'eleven-end'
     }
   }),
 
@@ -95,19 +74,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
 
   authorImageWrap: ({ theme }) => ({
     gridRow: 1,
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-quarter',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'quarter',
 
     [theme.breakpoints.up('md')]: {
-      gridRow: '1/ span 3',
-      gridColumnStart: 'two-start',
-      gridColumnEnd: 'two-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridRow: '1/ span 3',
-      gridColumnStart: 'four-start',
-      gridColumnEnd: 'four-end'
+      gridColumnStart: 'one-start',
+      gridColumnEnd: 'one-end'
     }
   }),
 
@@ -116,19 +88,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
     alignSelf: 'center',
     marginBottom: 0,
 
-    gridColumnStart: 'content-quarter',
-    gridColumnEnd: 'content-end',
+    gridColumnStart: 'quarter',
+    gridColumnEnd: 'end',
 
     [theme.breakpoints.up('md')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'seven-end',
-      alignSelf: 'self-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'five-start',
-      gridColumnEnd: 'content-three-quarter',
-      alignSelf: 'self-end'
+      gridColumnStart: 'two-start'
     }
   }),
 
@@ -138,77 +102,55 @@ const styleOverrides: ComponentsOverrides<Theme>['Blog'] = {
     marginBottom: 0,
 
     gridRow: 2,
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
-
-    [theme.breakpoints.up('md')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'seven-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'five-start',
-      gridColumnEnd: 'content-three-quarter'
-    }
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end'
   }),
 
   authorSocialLinks: ({ theme }) => ({
     alignSelf: 'self-start',
-
     gridRow: 3,
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end'
+  }),
+
+  sideContentInnerWrap: {
+    'display': 'flex',
+    'flexDirection': 'column',
+    'borderLeft': 'solid',
+    'borderLeftWidth': '1px',
+    'paddingLeft': 'var(--grid-gap)',
+
+    '& > *': {
+      marginBottom: 0
+    }
+  },
+
+  detailsLabel: {
+    '&': {
+      paddingBottom: 'var(--grid-gap)'
+    }
+  },
+
+  bodyHeader: {
+    '&:not(:first-of-type)': {
+      paddingTop: 'var(--grid-gap)',
+      marginTop: 'var(--grid-gap)',
+      borderTop: 'solid',
+      borderTopWidth: '1px'
+    }
+  },
+
+  contentWrap: ({ theme }) => ({
+    padding: 'var(--grid-gap-double) 0',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    gridRow: 1,
 
     [theme.breakpoints.up('md')]: {
-      gridColumnStart: 'three-start',
-      gridColumnEnd: 'seven-end'
-    },
-
-    [theme.breakpoints.up('lg')]: {
-      gridColumnStart: 'five-start',
-      gridColumnEnd: 'content-three-quarter'
+      gridColumnStart: 'two-start',
+      gridColumnEnd: 'eleven-end'
     }
-  }),
-
-  // title: {},
-
-  body: ({ theme }) => ({
-    '& > *:not(div)': {
-      gridColumnStart: 'content-start',
-      gridColumnEnd: 'content-end',
-
-      [theme.breakpoints.up('md')]: {
-        gridColumnStart: 'two-start',
-        gridColumnEnd: 'seven-end'
-      },
-
-      [theme.breakpoints.up('lg')]: {
-        gridColumnStart: 'content-quarter',
-        gridColumnEnd: 'content-three-quarter'
-      }
-    },
-
-    '& > div': {
-      gridColumnStart: 'full-start',
-      gridColumnEnd: 'full-end'
-    }
-  }),
-
-  // blogCategories: ({}) => ({}),
-
-  // blogCategory: ({}) => ({}),
-
-  // tags: ({}) => ({}),
-
-  // tag: ({}) => ({}),
-
-  relatedItemsWrap: {
-    '& > *': {
-      gridColumn: 'full-start / full-end'
-    }
-  }
-
-  // relatedItems: ({}) => ({})
+  })
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['Blog'] => [];

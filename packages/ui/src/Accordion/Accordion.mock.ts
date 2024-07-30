@@ -12,7 +12,7 @@ import { type AccordionProps, AccordionVariants } from './Accordion.types';
 export const accordionBaseMock = (override?: Partial<AccordionProps>): AccordionProps => {
   return {
     id: randomId(),
-    __typename: 'Accordion',
+    __typename: 'CollectionExpandable',
     variant: AccordionVariants.default,
     items: [
       collectionExpandableItemBlocksMock({ title: 'Block - Title' }),

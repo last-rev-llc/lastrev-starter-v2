@@ -5,7 +5,7 @@ import type {
   ComponentsVariants
 } from '@mui/material/styles';
 
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['TableOfContents'] = {};
 

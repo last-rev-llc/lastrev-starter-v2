@@ -1,14 +1,15 @@
 fragment ModuleIntegration_BaseFragment on ModuleIntegration {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   introText {
-    ...Text_IntroTextFragment
+    ...Text_BaseFragment
   }
   backgroundColor
   backgroundImage {
     ...Media_BaseFragment
   }
-  
   settings
   iFrameUrl
   iFrameHeight

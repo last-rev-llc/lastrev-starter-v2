@@ -11,6 +11,7 @@ import Grid from '../Grid';
 import TableOfContents from '../TableOfContents';
 
 import type { FRDProps } from './FRD.types';
+import { LinkProps } from '../Link';
 
 const FRD = (props: FRDProps) => {
   const { header, hero, contents, footer, sidekickLookup, sideNav } = props;
@@ -28,7 +29,11 @@ const FRD = (props: FRDProps) => {
       <Main {...sidekick(sidekickLookup, 'contents')}>
         <ContentOuterGrid ownerState={ownerState}>
           <SideNavWrap>
-            {!!sideNav?.length ? <TableOfContents items={sideNav} /> : null}
+            {!!sideNav?.length && (
+              <TableOfContents
+                items={sideNav.filter((item): item is LinkProps => item !== undefined)}
+              />
+            )}
           </SideNavWrap>
           <ContentWrap>
             {contents?.map((content: any) => (
@@ -38,9 +43,7 @@ const FRD = (props: FRDProps) => {
         </ContentOuterGrid>
       </Main>
 
-      {footer ? (
-        <ContentModule {...(footer as any)} disclaimerText={footer.disclaimerText} />
-      ) : null}
+      {footer ? <ContentModule {...(footer as any)} /> : null}
     </>
   );
 };

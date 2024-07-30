@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Quote'] = {};
 
@@ -19,7 +19,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
 
   logo: ({ theme }) => ({
     gridRow: 1,
-    gridColumn: 'content-quarter/content-three-quarter',
+    gridColumn: 'quarter/three-quarter',
 
     [theme.containerBreakpoints.up('sm')]: {
       gridColumn: 'four-start/five-end'
@@ -36,12 +36,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
 
   quoteText: ({ theme }) => ({
     gridRow: 2,
-    gridColumn: 'content-start/content-end',
+    gridColumn: 'start/end',
     textAlign: 'center',
     ...theme.typography.display4,
 
     [theme.containerBreakpoints.up('sm')]: {
-      gridColumn: 'content-quarter/content-three-quarter'
+      gridColumn: 'quarter/three-quarter'
     }
   }),
 
@@ -53,36 +53,36 @@ const styleOverrides: ComponentsOverrides<Theme>['Quote'] = {
 
   image: ({ theme }) => ({
     gridRow: '3/5',
-    gridColumn: 'content-start/one-end',
+    gridColumn: 'start/one-end',
 
     [theme.containerBreakpoints.up('md')]: {
-      gridColumn: 'content-quarter/content-half'
+      gridColumn: 'quarter/half'
     },
 
     [theme.containerBreakpoints.up('lg')]: {
-      gridColumn: 'six-start/content-half'
+      gridColumn: 'six-start/half'
     }
   }),
 
   authorName: ({ theme }) => ({
     gridRow: 3,
-    gridColumn: 'two-start/content-end',
+    gridColumn: 'two-start/end',
     lineHeight: 1,
     alignSelf: 'flex-end',
 
     [theme.containerBreakpoints.up('md')]: {
-      gridColumn: 'content-half/content-end'
+      gridColumn: 'half/end'
     }
   }),
 
   authorTitle: ({ theme }) => ({
     gridRow: 4,
-    gridColumn: 'two-start/content-end',
+    gridColumn: 'two-start/end',
     fontStyle: 'italic',
     lineHeight: 1,
 
     [theme.containerBreakpoints.up('md')]: {
-      gridColumn: 'content-half/content-end'
+      gridColumn: 'half/end'
     }
   })
 };

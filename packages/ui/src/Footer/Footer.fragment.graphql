@@ -1,5 +1,7 @@
 fragment Footer_BaseFragment on Footer {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   logo {
     ...Media_BaseFragment
   }

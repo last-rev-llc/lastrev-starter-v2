@@ -13,6 +13,7 @@ export interface BlogProps extends Omit<Blog_BaseFragmentFragment, 'variant'> {
   breadcrumbs?: LinkProps[];
   jsonLd: any;
   hero?: HeroProps;
+  algoliaSearchKey?: string;
 }
 
 export interface BlogOwnerState extends BlogProps {}
@@ -24,16 +25,6 @@ interface BlogClasses {
   contentWrap: string;
   title: string;
   pubDate: string;
-  featuredMedia: string;
-  featuredMediaWrap: string;
-  authorWrap: string;
-  author: string;
-  authorName: string;
-  authorSummaryWrap: string;
-  authorSummary: string;
-  authorImageWrap: string;
-  authorImage: string;
-  authorSocialLinks: string;
   body: string;
   breadcrumbsWrap: string;
   blogCategories: string;
@@ -42,9 +33,17 @@ interface BlogClasses {
   tag: string;
   relatedItemsWrap: string;
   relatedItems: string;
-  shareLinksWrap: string;
   shareLinks: string;
+  authorImageWrap: string;
   shareLink: string;
+  authorName: string;
+  authorSummaryWrap: string;
+  authorSocialLinks: string;
+  sideContentWrap: string;
+  sideContentInnerWrap: string;
+  detailsLabel: string;
+  bodyHeader: string;
+  featuredMediaWrap: string;
 }
 
 export declare type BlogClassKey = keyof BlogClasses;

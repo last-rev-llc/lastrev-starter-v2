@@ -1,5 +1,7 @@
 fragment Link_BaseFragment on Link {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   text
   href
   variant
@@ -9,7 +11,9 @@ fragment Link_BaseFragment on Link {
 }
 
 fragment Link_CardFragment on Link {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   text
   href
   variant

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CSSInterpolation, styled } from '@mui/material/styles';
+import { type CSSInterpolation, styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -35,6 +35,7 @@ const HeaderNavGroup = (props: HeaderNavGroupProps) => {
         <Root data-testid="HeaderNavGroup" ownerState={ownerState}>
           <NavItemLinkGroup
             {...props}
+            icon="chevron"
             variant={variant}
             {...sidekick(sidekickLookup)}
             onClick={onNavItemClick}

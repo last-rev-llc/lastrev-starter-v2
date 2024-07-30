@@ -12,7 +12,7 @@ export interface FormProps extends Form_BaseFragmentFragment {
   hasSuccessMessage?: boolean;
   variant: FormVariants;
   background?: any;
-  backgroundColor: string;
+  backgroundColor?: string;
 }
 
 export interface FormOwnerState extends FormProps {}

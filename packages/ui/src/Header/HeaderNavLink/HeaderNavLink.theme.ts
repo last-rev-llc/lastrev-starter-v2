@@ -4,37 +4,34 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['HeaderNavLink'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
-  root: ({ theme, open }) => ({
-    'height': '100%',
-    // 'borderBottom': `solid ${theme.spacing(0.5)} transparent`,
-    // 'borderTop': `solid ${theme.spacing(0.5)} transparent`,
+  root: ({ theme }) => ({
+    ...theme.typography.body,
+
     'display': 'flex',
     'flexDirection': 'column',
     'flexGrow': '1',
-    'position': 'relative',
 
-    '[class$=HeaderNavLink-navItemLink]': {
-      ...(!!open && {
-        fontWeight: 800
-      })
+    [theme.breakpoints.up('md')]: {
+      height: '100%'
     },
 
     '&:is(:hover, :focus, :focus-within):not(:focus-visible)': {
       '[class*="HeaderNavLink-navItemLink"]': {
-        // TODO: Standardize this across the header links if they're the same
+        // 'fontWeight': 800,
+        'color': theme.vars.palette.highlightColor,
+        'textDecoration': 'none!important',
         '.MuiSvgIcon-root': {
-          // fill: 'currentcolor',
           transform: 'rotate(-90deg)'
         }
       },
 
       '[class*="HeaderNavLink-navItemSubMenu"]': {
-        display: 'flex',
         visibility: 'visible',
         opacity: 1
       }
@@ -42,20 +39,19 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
   }),
 
   navItemLink: ({ theme, open }) => ({
-    // TODO: Custom Styles
-    // 'borderTop': `solid 1px ${theme.vars.palette.primary.main}`,
-
     'flexGrow': '1',
     'alignItems': 'center',
-    'display': 'flex',
+    'display': 'inline-flex',
     'width': '100%',
     'justifyContent': 'space-between',
     'cursor': 'pointer',
+    'height': '100%',
 
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(1),
-      justifyContent: 'flex-start'
-      // borderTop: 'none'
+      justifyContent: 'flex-start',
+      marginTop: 'calc(-1 * var(--grid-gap)) !important',
+      marginBottom: 'calc(-1 * var(--grid-gap)) !important'
     },
 
     // TODO: Standardizxe this across the header links if they're the same
@@ -63,7 +59,7 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
       fill: theme.vars.palette.primary.main,
       width: 'auto',
       height: theme.spacing(2),
-      marginLeft: theme.spacing(0.5),
+      marginLeft: 'var(--grid-gap-half)',
       transform: 'rotate(90deg)',
       transition:
         'fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
@@ -81,80 +77,57 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLink'] = {
     }
   }),
 
-  navItemSubMenu: ({ theme, open, ownerState }) => ({
-    display: 'none',
-    transition: 'visibility 0s, opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+  navItemSubMenu: ({ theme, ownerState, open }) => ({
     ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
 
+    display: 'grid',
+    gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
+    rowGap: 0,
+    columnGap: 'var(--grid-gap)',
+    padding: 0,
+    width: '100%',
+    transition: 'max-height 500ms ease, opacity 500ms ease',
+
     [theme.breakpoints.down('md')]: {
-      flexDirection: 'column'
+      maxHeight: '100%',
+      overflow: 'hidden',
+      ...(!open && { maxHeight: 0 })
     },
 
     [theme.breakpoints.up('md')]: {
       visibility: 'hidden',
-      opacity: 0,
-
-      display: 'grid',
-      gap: theme.spacing(0),
-      overflow: 'hidden',
-      width: 'fit-content',
-      // @ts-ignore: TODO: items not recognized
-      gridTemplateColumns: `repeat(${(ownerState.numOfCols ?? 0) + 1}, auto)`,
-      // border: `solid 1px ${theme.vars.palette.primary.contrastText}`,
       position: 'absolute',
-      zIndex: 1,
+      left: 0,
       bottom: 0,
+      zIndex: 1,
+      opacity: 0,
+      // borderTop: 'solid 2px yellow',
       transform: 'translateY(100%)',
-      padding: theme.spacing(3, 0, 0, 0),
+      padding: `var(--grid-gap-half) var(--grid-margin)`,
+      gridTemplateColumns: 'repeat(3, minmax(0, 1fr))'
+    },
 
-      ...(ownerState.numOfCols === 2 && {
-        // TODO: Check variant here instead?
-        right: ownerState.hasMegaNav ? -578 : -252
-      }),
-
-      ...(ownerState.numOfCols === 1 && {
-        left: 0
-      })
+    [theme.breakpoints.up('lg')]: {
+      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))'
     }
   }),
 
   navItemSubMenuItem: ({ theme }) => ({
+    '& > a': {
+      ...theme.typography.body1
+    },
+    '[class*=rootLinkIcon] *': {
+      marginLeft: 8,
+      fontSize: 10
+    },
+    // '& > * *': {
+    //   ...theme.typography.navLink
+    // },
+
     [theme.breakpoints.up('md')]: {
       alignItems: 'flex-start'
     }
-  }),
-
-  megaNavContainer: ({ theme }) => ({
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'space-between',
-      juistifyContent: 'space-between',
-      // TODO: Is there a better way to define this?
-      width: 324
-    }
-  }),
-
-  megaNavContent: ({ theme }) => ({
-    flex: 1,
-    padding: theme.spacing(3),
-    display: 'flex',
-    flexDirection: 'column',
-    gap: theme.spacing(1.5)
-  }),
-
-  // megaNavTitle: : {},
-
-  // megaNavActions: : {},
-
-  // megaNavAction: : {},
-
-  megaNavMedia: {
-    // TODO: Is there a better way to define this?
-    maxHeight: 190,
-    margin: 0
-  }
+  })
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['HeaderNavLink'] => [];

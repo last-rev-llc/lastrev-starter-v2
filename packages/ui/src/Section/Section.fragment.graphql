@@ -22,7 +22,9 @@ fragment Section_BaseFragment on Section {
 }
 
 fragment Section_BaseFieldsFragment on Section {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   backgroundColor
   background {
@@ -66,7 +68,9 @@ fragment Section_RichText_ContentModuleFragment on Content {
 }
 
 fragment ContentModule_RichText_SectionFragment on Content {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   ...Media_BaseFragment
   ...NavigationItem_BaseFragment
   ...Collection_RichTextFragment

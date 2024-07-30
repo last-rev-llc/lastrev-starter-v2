@@ -18,6 +18,7 @@ export interface HeaderProps extends Header_BaseFragmentFragment {
   siteMessageIcon?: MediaProps;
   siteMessageText?: RichTextProps;
   siteMessageLink?: LinkProps;
+  algoliaSearchKey?: string;
 }
 
 export interface HeaderOwnerState extends HeaderProps {}
@@ -38,9 +39,13 @@ interface HeaderClasses {
   headerMenuCtaItem: string;
   menuIcon: string;
   closeIcon: string;
+  searchCloseIcon: string;
+  searchIcon: string;
   iconButtonWrap: string;
   iconButton: string;
   contentOuterGrid: string;
+  autoCompleteWrap: string;
+  autoCompleteInnerWrap: string;
 }
 
 export declare type HeaderClassKey = keyof HeaderClasses;

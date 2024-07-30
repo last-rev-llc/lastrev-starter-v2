@@ -51,7 +51,7 @@
   "dependencies": {
     "@netlify/plugin-nextjs": "4"
   },
-  "packageManager": "pnpm@9.1.4",
+  "packageManager": "pnpm@9.6.0",
   "engines": {
     "pnpm": "9.x"
   },

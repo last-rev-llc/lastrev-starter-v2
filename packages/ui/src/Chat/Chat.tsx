@@ -17,13 +17,9 @@ import type { ChatProps, ChatOwnerState } from './Chat.types';
 const Chat = (props: ChatProps) => {
   const ownerState = { ...props };
 
-  const {
-    backgroundImage,
-    backgroundColor,
-    introText,
-    sidekickLookup,
-    settings: { chatflowid, apiHost, other }
-  } = props;
+  const { backgroundImage, backgroundColor, introText, sidekickLookup, settings = {} } = props;
+
+  const { chatflowid, apiHost, other } = settings;
 
   if (!chatflowid || !apiHost) return null;
   return (
