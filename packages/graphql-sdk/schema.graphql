@@ -543,6 +543,11 @@ type Query {
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
 }
 
+type Quote {
+  image: Media
+  logo: Media
+}
+
 type RichText {
   id: String
   json: JSON
