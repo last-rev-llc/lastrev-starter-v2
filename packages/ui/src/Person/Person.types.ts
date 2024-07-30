@@ -13,8 +13,6 @@ export interface PersonProps extends Omit<Person_BaseFragmentFragment, 'variant'
   breadcrumbs?: LinkProps[];
   jsonLd: any;
   hero?: HeroProps;
-  education?: string[];
-  previousExperiences?: string[];
 }
 
 export interface PersonOwnerState extends PersonProps {}
@@ -32,6 +30,7 @@ interface PersonClasses {
   bodyHeader: string;
   bodyList: string;
   bodyListItem: string;
+  detailsLabel: string;
 }
 
 export declare type PersonClassKey = keyof PersonClasses;

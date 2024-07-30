@@ -35,7 +35,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Chat'] = {
     }
   },
 
-  introText: { gridColumn: 'content-start / content-end' },
+  introText: { gridColumn: 'start / end' },
 
   mainContentWrap: ({ ownerState }) => ({
     display: 'flex',
@@ -45,8 +45,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Chat'] = {
     overflow: 'hidden',
     minHeight: '250px',
     maxHeight: '80vh',
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
     margin: 'auto',
 
     ...(ownerState?.chatHeight ? { height: ownerState.chatHeight } : { height: '100%' }),

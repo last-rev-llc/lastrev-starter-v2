@@ -8,9 +8,9 @@ export enum PageVariants {
 }
 
 export interface PageProps extends Omit<Page_BaseFragmentFragment, 'variant'> {
-  disableBackToTop?: boolean;
   variant?: PageVariants;
   breadcrumbs?: LinkProps[];
+  algoliaSearchKey?: string;
 }
 
 interface PageClasses {

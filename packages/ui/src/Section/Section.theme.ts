@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 import { SectionVariants } from './Section.types';
 
@@ -22,7 +22,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
     }
   }),
 
-  introText: { gridColumn: 'content-start / content-end' },
+  introText: { gridColumn: 'start / end' },
 
   contentOuterGrid: ({ theme, ownerState }) => ({
     gridColumn: 'full-start/full-end',
@@ -49,7 +49,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
 
   contentWrap: ({ theme, ownerState }) => ({
     zIndex: 2,
-    gridColumn: 'content-start/content-end'
+    gridColumn: 'start/end'
     // 'gridRow': 1,
 
     // TEST TO let children blocks flow with main section grid
@@ -72,7 +72,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Section'] = {
     // }
   }),
 
-  introTextGrid: { gridColumn: 'content-start/content-end' },
+  introTextGrid: { gridColumn: 'start/end' },
 
   // introText: { },
 

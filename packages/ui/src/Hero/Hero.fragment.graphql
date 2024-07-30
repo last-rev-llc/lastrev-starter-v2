@@ -1,11 +1,14 @@
 fragment Hero_BaseFragment on Hero {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   internalTitle
   overline
   title
   subtitle
   backgroundColor
+  showFullImage
   background {
     ...Media_BaseFragment
   }

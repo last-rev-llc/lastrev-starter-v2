@@ -4,7 +4,7 @@ import type {
   ComponentsProps,
   LinkProps
 } from '@mui/material';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 import type { Quote_BaseFragmentFragment } from '@graphql-sdk/types';
 
 export enum QuoteVariants {

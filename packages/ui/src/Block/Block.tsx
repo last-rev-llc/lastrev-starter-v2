@@ -1,24 +1,41 @@
 import React from 'react';
+import { useTransform, motion, useInView } from 'framer-motion';
+
 import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 import ContentModule from '../ContentModule';
 import Grid from '../Grid';
+import Slide from '../Animations/Slide';
 import Background from '../Background';
 import ErrorBoundary from '../ErrorBoundary';
 
 import type { BlockProps, BlockOwnerState } from './Block.types';
+import { layoutConfig } from './Block.theme';
 
 const Block = (props: BlockProps) => {
   const ownerState = { ...props };
+
+  const ref = React.useRef<HTMLDivElement>(null);
+
+  // Use useInView with the ref
+  const isInView = useInView(ref, { once: false });
+
+  // Define the animation properties
+  const animation = {
+    x: isInView ? 0 : '100%', // Animate when inView is true, otherwise off-screen to the right
+    transition: { duration: 0.5, ease: 'easeInOut' } // You can adjust duration and easing
+  };
 
   const {
     backgroundImage,
     backgroundColor,
     introText,
+    variant,
     overline,
     title,
     subtitle,
@@ -31,7 +48,11 @@ const Block = (props: BlockProps) => {
 
   return (
     <ErrorBoundary>
-      <Root data-testid="Block" {...sidekick(sidekickLookup)} ownerState={ownerState}>
+      <Root
+        data-testid="Block"
+        {...sidekick(sidekickLookup)}
+        ownerState={ownerState}
+        data-variant={props.variant}>
         <BlockBackground
           background={backgroundImage}
           backgroundColor={backgroundColor}
@@ -64,7 +85,7 @@ const Block = (props: BlockProps) => {
                     ownerState={ownerState}
                     {...sidekick(sidekickLookup, 'title')}
                     data-testid="Block-title"
-                    variant="h2"
+                    variant="h3"
                     dangerouslySetInnerHTML={{ __html: title }}
                   />
                 )}
@@ -74,16 +95,17 @@ const Block = (props: BlockProps) => {
                     ownerState={ownerState}
                     {...sidekick(sidekickLookup, 'subtitle')}
                     data-testid="Block-subtitle"
-                    variant="h3">
+                    variant="h5">
                     {subtitle}
                   </Subtitle>
                 )}
 
                 {!!body && (
                   <Body
+                    variant="inline"
+                    __typename="RichText"
                     ownerState={ownerState}
                     {...sidekick(sidekickLookup, 'body')}
-                    __typename="RichText"
                     body={body}
                   />
                 )}
@@ -95,7 +117,14 @@ const Block = (props: BlockProps) => {
                   {...sidekick(sidekickLookup, 'actions')}
                   data-testid="Block-actions">
                   {actions.map((action) => (
-                    <Action ownerState={ownerState} key={action?.id} {...action} />
+                    <Action
+                      ownerState={ownerState}
+                      key={action?.id}
+                      {...action}
+                      variant="buttonText"
+                      iconPosition="Left"
+                      icon="logo"
+                    />
                   ))}
                 </ActionsWrap>
               )}
@@ -106,12 +135,14 @@ const Block = (props: BlockProps) => {
             <SideContentWrap ownerState={ownerState}>
               {!!mediaItems?.length ? (
                 mediaItems.map((media) => (
-                  <Media
-                    ownerState={ownerState}
-                    key={media?.id}
-                    {...sidekick(sidekickLookup, 'mediaItems')}
-                    {...media}
-                  />
+                  // <Slide key={media?.id}>
+                    <Media
+                      ownerState={ownerState}
+                      {...sidekick(sidekickLookup, 'mediaItems')}
+                      {...media}
+                      columns={layoutConfig[variant]}
+                    />
+                  // </Slide>
                 ))
               ) : (
                 <ContentModule {...supplementalContent} />
@@ -193,7 +224,6 @@ const Body = styled(ContentModule, {
 const SideContentWrap = styled('div', {
   name: 'Block',
   slot: 'SideContentWrap',
-
   overridesResolver: (_, styles) => [styles.sideContentWrap]
 })<{ ownerState: BlockOwnerState }>``;
 
@@ -206,7 +236,6 @@ const Media = styled(ContentModule, {
 const ActionsWrap = styled(Box, {
   name: 'Block',
   slot: 'ActionsWrap',
-
   overridesResolver: (_, styles) => [styles.actionsWrap]
 })<{ ownerState: BlockOwnerState }>``;
 

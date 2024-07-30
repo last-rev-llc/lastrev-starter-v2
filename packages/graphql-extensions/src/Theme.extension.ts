@@ -14,7 +14,7 @@ export const colorResolver =
     if (COLOR_MAPPING[colorClean]) {
       colorClean = COLOR_MAPPING[colorClean];
     }
-    if (!colorClean) return 'inherit';
+    if (!colorClean) return null; //'inherit';
 
     if (root) return colorClean?.split('.')[0];
     return colorClean;
@@ -71,12 +71,6 @@ export const mappers = {
   },
   Section: {
     Section: {
-      backgroundColor: defaultResolver('backgroundColor'),
-      color: colorResolver('color', true)
-    }
-  },
-  ModuleIntegration: {
-    ModuleIntegration: {
       backgroundColor: defaultResolver('backgroundColor'),
       color: colorResolver('color', true)
     }

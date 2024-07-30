@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 const SITEMESSAGE_TIMEOUT = '200s';
 

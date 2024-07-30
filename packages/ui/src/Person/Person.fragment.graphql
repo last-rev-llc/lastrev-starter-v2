@@ -1,5 +1,7 @@
 fragment Person_BaseFragment on Person {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   path
   slug
   header {
@@ -11,16 +13,13 @@ fragment Person_BaseFragment on Person {
   name
   jobTitle
   email
-  #education
-  #previousExperiences
+  education
+  previousExperiences
   mainImage {
     ...Media_BaseFragment
   }
   body {
     ...RichText_BaseFragment
-  }
-  socialLinks {
-    ...Link_BaseFragment
   }
   hero {
     ...Hero_BaseFragment
@@ -30,8 +29,11 @@ fragment Person_BaseFragment on Person {
   }
 }
 
+
 fragment Person_Card_Fragment on Person {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   slug
   name
   jobTitle
@@ -45,7 +47,19 @@ fragment Person_Card_Fragment on Person {
 }
 
 fragment Person_Blog_Author_Fragment on Person {
-  ...Person_Card_Fragment
+  id
+  __typename
+  sidekickLookup
+  slug
+  name
+  jobTitle
+  email
+  mainImage {
+    ...Media_BaseFragment
+  }
+  socialLinks {
+    ...Link_BaseFragment
+  }
   body {
     ...RichText_BaseFragment
   }

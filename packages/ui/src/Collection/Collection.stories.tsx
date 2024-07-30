@@ -48,11 +48,10 @@ const CollectionTemplate = {
                 top: 0,
                 backgroundColor: theme.vars.palette.primary.main,
                 color: theme.vars.palette.primary.contrastText,
-                ...theme.typography.display6,
+                ...theme.typography.h6,
                 zIndex: 500,
                 p: 1
-              }}
-            >
+              }}>
               Collection &quot;{itemsVariant}&quot; Items Variant
             </Box>
             <Grid>

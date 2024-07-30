@@ -8,6 +8,7 @@ import type {
 } from '@mui/material';
 
 import type { Link_BaseFragmentFragment } from '@graphql-sdk/types';
+import { LayoutConfig } from '../ThemeRegistry/mixins/generateGridStyles';
 
 export enum LinkVariants {
   default = 'default',
@@ -29,6 +30,7 @@ export interface LinkProps extends Link_BaseFragmentFragment {
   target?: string;
   rel?: string;
   sx?: any;
+  layoutConfig?: LayoutConfig;
 }
 
 export interface LinkOwnerState extends LinkProps {}

@@ -6,14 +6,12 @@ const Blog = dynamic(() => import('./Blog'));
 const Breadcrumbs = dynamic(() => import('./Breadcrumbs'));
 const Card = dynamic(() => import('./Card'));
 const Carousel = dynamic(() => import('./Carousel'));
-const Chat = dynamic(() => import('./Chat'));
-const ChatFullPage = dynamic(() => import('./ChatFullPage'));
 const Collection = dynamic(() => import('./Collection'));
+const CollectionDynamic = dynamic(() => import('./CollectionDynamic'));
 const Footer = dynamic(() => import('./Footer'));
 const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem'));
 const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
 const Form = dynamic(() => import('./Form'));
-const FRD = dynamic(() => import('./FRD'));
 const Header = dynamic(() => import('./Header'));
 const HeaderNavGroup = dynamic(() => import('./Header/HeaderNavGroup/HeaderNavGroup'));
 const HeaderNavLink = dynamic(() => import('./Header/HeaderNavLink/HeaderNavLink'));
@@ -36,14 +34,12 @@ const Text = dynamic(() => import('./Text'));
 export const contentMapping: {
   [key: string]: any;
 } = {
+  'Card:linkList': Link,
+  'CollectionDynamic(:.*Carousel)?': CollectionDynamic,
   'Collection:.*Carousel': Carousel,
+  'CollectionExpandable(:Tabs)?': Tabs,
   'CollectionExpandable:Accordion': Accordion,
-  'CollectionExpandable:Tabs': Tabs,
-  'CollectionExpandable': Tabs,
   'ElementForm': Form,
-  'ModuleIntegration:iFrame': IFrame,
-  'ModuleIntegration:answerAIChatInline': ChatFullPage,
-  'ModuleIntegration:answerAIChatPageBubble': Chat,
   'NavigationItem:group': HeaderNavGroup,
   'NavigationItem:groupFooter': FooterNavigationItemGroup,
   'NavigationItem:link': HeaderNavLink,
@@ -62,10 +58,10 @@ export const contentMapping: {
   FooterNavigationItemGroup,
   Header,
   Hero,
+  IFrame,
   Link,
   Media,
   NavigationItem,
-  FRD,
   Page,
   Person,
   RichText,

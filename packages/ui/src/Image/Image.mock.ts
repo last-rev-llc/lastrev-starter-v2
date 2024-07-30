@@ -11,7 +11,7 @@ const imageDefaultMock: ImageProps = {
   // lazy: false
 };
 
-export const imageBaseMock = ({ ...override } = {}) => ({
+export const imageBaseMock = ({ ...override } = {}): ImageProps => ({
   ...imageDefaultMock,
   ...override
 });

@@ -2,14 +2,14 @@ import React from 'react';
 import clsx from 'clsx';
 
 import { usePathname } from 'next/navigation';
-import NextLink from 'next/link';
+import NextLink, { type LinkProps as NextLinkProps } from 'next/link';
 
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Icon } from '../Icons/Icon';
-import IconButton from '@mui/material/IconButton';
-import MuiLink from '@mui/material/Link';
-import Button, { ButtonProps } from '@mui/material/Button';
+import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
+import MuiLink, { type LinkProps as MuiLinkProps } from '@mui/material/Link';
+import Button, { type ButtonProps } from '@mui/material/Button';
 
 import sidekick from '@last-rev/contentful-sidekick-util';
 
@@ -20,20 +20,6 @@ const isReactComponent = (value: any): value is React.ComponentType<any> => {
     typeof value === 'function' && value.prototype && typeof value.prototype.render === 'function'
   );
 };
-
-// Icon component using FontAwesome
-// TODO: Clean this up
-// const getIcon = (LinkIcon: string | React.ComponentType<any>) => {
-//   if (!LinkIcon) return null;
-
-//   if (!(typeof LinkIcon === 'string' || LinkIcon instanceof String)) {
-//     return <LinkIcon />;
-//   }
-
-//   const brandIcons = ['google', 'twitter', 'facebook', 'github', 'linkedin', 'pinterest', 'instagram', 'youtube'];
-//   const iconString = LinkIcon.toString().toLowerCase();
-//   return <Icon className={`fa${brandIcons.includes(iconString) ? 'b' : 's'} fa-${iconString}`} />;
-// };
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
@@ -60,20 +46,22 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
   if (!other.color) delete other.color;
 
   const pathname = usePathname();
+
   const className = clsx(classNameProps, {
     [activeClassName]: pathname?.toLowerCase().startsWith(href?.toLowerCase()) && activeClassName
   });
 
   const sharedLinkProps = {
-    'component': NextLink,
+    component: NextLink, //href === '/#' ? Box : NextLink,
     className,
     ref,
     href,
     variant,
+    target: href?.startsWith('http') ? '_blank' : '_self',
     ...other,
     ...sidekick(sidekickLookup),
-    'aria-label': text,
-    'ownerState': ownerState
+    // 'aria-label': text,
+    ownerState: ownerState
   };
 
   if (children) {
@@ -89,6 +77,12 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
   }
 
   if (variant?.includes('button')) {
+    let trimmedSharedLinkProps: any = sharedLinkProps;
+    if ((sharedLinkProps as { type?: string })?.type === 'submit') {
+      const { component, href, ref, ...rest } = sharedLinkProps;
+      trimmedSharedLinkProps = rest;
+    }
+
     const buttonVariant = variant.replace('button', '').toLowerCase() as
       | 'text'
       | 'outlined'
@@ -97,11 +91,10 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
 
     return (
       <RootButton
-        {...sharedLinkProps}
+        {...trimmedSharedLinkProps}
         variant={buttonVariant}
         startIcon={icon && iconPosition === 'Left' && <Icon iconName={icon} />}
-        endIcon={icon && iconPosition !== 'Left' && <Icon iconName={icon} />}
-      >
+        endIcon={icon && iconPosition !== 'Left' && <Icon iconName={icon} />}>
         {text || children}
       </RootButton>
     );
@@ -121,46 +114,83 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
   return <RootLink {...sharedLinkProps}>{text}</RootLink>;
 });
 
+const shouldForwardProp = (prop: string) =>
+  // prop !== 'variant' &&
+  prop !== 'icon' &&
+  prop !== 'iconPosition' &&
+  prop !== 'sidekickLookup' &&
+  prop !== 'onRequestClose' &&
+  prop !== 'passHref' &&
+  prop !== 'ownerState';
+
 const RootButton = styled(Button, {
   name: 'Link',
   slot: 'Root',
-  overridesResolver: (_, styles) => [styles.root, styles.rootButton]
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootButton: any }) => [
+    styles.root,
+    styles.rootButton
+  ]
 })<ButtonProps & { ownerState: LinkOwnerState }>``;
 
 const RootIconButton = styled(IconButton, {
   name: 'Link',
   slot: 'Root',
-  overridesResolver: (_, styles) => [styles.root, styles.rootIconButton]
-})<{ ownerState: LinkOwnerState }>``;
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootIconButton: any }) => [
+    styles.root,
+    styles.rootIconButton
+  ]
+})<IconButtonProps & { ownerState: LinkOwnerState }>``;
 
 const RootLinkTextIcon = styled(MuiLink, {
   name: 'Link',
   slot: 'Root',
-  overridesResolver: (_, styles) => [styles.root, styles.rootLink]
-})<{ ownerState: LinkOwnerState }>``;
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootLink: any }) => [
+    styles.root,
+    styles.rootLink
+  ]
+})<NextLinkProps & MuiLinkProps & { ownerState: LinkOwnerState }>``;
 
 const RootLink = styled(MuiLink, {
   name: 'Link',
   slot: 'Root',
-  overridesResolver: (_, styles) => [styles.root, styles.rootLink]
-})<{ ownerState: LinkOwnerState }>``;
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootLink: any }) => [
+    styles.root,
+    styles.rootLink
+  ]
+})<MuiLinkProps & { ownerState: LinkOwnerState }>``;
 
 const RootLinkChildren = styled(NextLink, {
   name: 'Link',
   slot: 'Root',
-  overridesResolver: (_, styles) => [styles.root, styles.rootLinkChildren]
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootLinkChildren: any }) => [
+    styles.root,
+    styles.rootLinkChildren
+  ]
 })<{ ownerState: LinkOwnerState }>``;
 
 const RootLinkIcon = styled(Box, {
   name: 'Link',
   slot: 'RootLinkIcon',
-  overridesResolver: (_, styles) => [styles.root, styles.rootLinkIcon]
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootLinkIcon: any }) => [
+    styles.root,
+    styles.rootLinkIcon
+  ]
 })<{ ownerState: LinkOwnerState }>``;
 
 const RootLinkText = styled(Box, {
   name: 'Link',
   slot: 'RootLinkText',
-  overridesResolver: (_, styles) => [styles.root, styles.rootLinkText]
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any; rootLinkText: any }) => [
+    styles.root,
+    styles.rootLinkText
+  ]
 })<{ ownerState: LinkOwnerState }>``;
 
 export default Link;

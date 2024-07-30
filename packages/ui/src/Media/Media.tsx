@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAmp } from 'next/amp';
 
-import { CSSInterpolation, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import sidekick from '@last-rev/contentful-sidekick-util';
 
@@ -9,17 +9,33 @@ import ErrorBoundary from '../ErrorBoundary';
 import Image from '../Image';
 import ArtDirectedImage from '../ArtDirectedImage';
 
-import type { MediaProps, MediaVideoProps } from './Media.types';
+import type { MediaOwnerState, MediaProps, MediaVideoProps } from './Media.types';
+import Box from '@mui/material/Box';
 
-// import dynamic from 'next/dynamic';
-
-// const Image = dynamic(() => import('../Image'));
-// const ArtDirectedImage = dynamic(() => import('../ArtDirectedImage'));
+const Wrapper = ({ children, aspectRatio }: { children: React.ReactNode; aspectRatio?: string }) =>
+  aspectRatio ? (
+    <AspectRatioRoot ownerState={{ aspectRatio }}> {children} </AspectRatioRoot>
+  ) : (
+    children
+  );
 
 const Media = (props: MediaProps & MediaVideoProps) => {
   const isAmp = useAmp();
+  const ownerState = { ...props };
 
-  const { variant, file, title, fileMobile, fileTablet, testId, sidekickLookup, ...other } = props;
+  const {
+    variant,
+    file,
+    title,
+    fileMobile,
+    fileTablet,
+    testId,
+    sidekickLookup,
+    imageOverlayColor,
+    aspectRatio,
+    ...other
+  } = props;
+
   // TODO: Add support for video
   const image = file;
   const alt = title || '';
@@ -27,29 +43,38 @@ const Media = (props: MediaProps & MediaVideoProps) => {
   if (variant === 'embed' && isAmp) {
     return (
       <ErrorBoundary>
-        {/* @ts-expect-error */}
-        <amp-iframe
-          {...sidekick(sidekickLookup)}
-          src={image?.url}
-          data-testid={testId || 'Media'}
-          width={image?.width ?? 800}
-          height={image?.height ?? 400}
-          layout="responsive"
-          sandbox="allow-scripts allow-same-origin"
-        />
+        <Wrapper aspectRatio={aspectRatio}>
+          {/* @ts-expect-error */}
+          <amp-iframe
+            {...sidekick(sidekickLookup)}
+            src={image?.url}
+            data-testid={testId || 'Media'}
+            width={image?.width ?? 800}
+            height={image?.height ?? 400}
+            layout="responsive"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        </Wrapper>
       </ErrorBoundary>
     );
   }
   if (variant === 'embed') {
     return (
       <ErrorBoundary>
-        <EmbedRoot
-          {...sidekick(sidekickLookup)}
-          {...(props as React.IframeHTMLAttributes<any>)}
-          src={image?.url}
-          sx={{ width: '100%', height: '100%', ...props.sx }}
-          data-testid={testId || 'Media'}
-        />
+        <Wrapper aspectRatio={aspectRatio}>
+          <EmbedWrap ownerState={ownerState}>
+            <EmbedRoot
+              {...sidekick(sidekickLookup)}
+              {...(props as React.IframeHTMLAttributes<any>)}
+              mozallowfullscreen={'mozallowfullscreen'}
+              webkitallowfullscreen={'webkitallowfullscreen'}
+              allowfullscreen={'allowfullscreen'}
+              src={image?.url}
+              sx={{ width: '100%', height: '100%', ...props.sx }}
+              data-testid={testId || 'Media'}
+            />
+          </EmbedWrap>
+        </Wrapper>
       </ErrorBoundary>
     );
   }
@@ -57,15 +82,18 @@ const Media = (props: MediaProps & MediaVideoProps) => {
   if (variant === 'video') {
     return (
       <ErrorBoundary>
-        <VideoRoot
-          {...sidekick(sidekickLookup)}
-          preload="auto"
-          data-testid={testId || 'Media'}
-          {...(props as MediaVideoProps)}
-          sx={{ width: '100%', height: '100%', ...props.sx }}>
-          <source src={file?.url} />
-          Your browser does not support the video tag.
-        </VideoRoot>
+        <Wrapper aspectRatio={aspectRatio}>
+          <VideoRoot
+            {...sidekick(sidekickLookup)}
+            preload="auto"
+            data-testid={testId || 'Media'}
+            {...(props as MediaVideoProps)}
+            controls="true"
+            sx={{ width: '100%', height: '100%', ...props.sx }}>
+            <source src={file?.url} />
+            Your browser does not support the video tag.
+          </VideoRoot>
+        </Wrapper>
       </ErrorBoundary>
     );
   }
@@ -79,6 +107,7 @@ const Media = (props: MediaProps & MediaVideoProps) => {
           file={file}
           fileTablet={fileTablet}
           fileMobile={fileMobile}
+          ownerState={ownerState}
           testId={testId || 'Media'}
         />
       </ErrorBoundary>
@@ -91,7 +120,9 @@ const Media = (props: MediaProps & MediaVideoProps) => {
         {...image}
         {...other}
         src={image?.url}
-        alt={alt}
+        alt={'alt'}
+        ownerState={ownerState}
+        columns={other?.columns}
         testId={testId || 'Media'}
       />
     </ErrorBoundary>
@@ -108,6 +139,8 @@ const shouldForwardProp = (prop: string) =>
   prop !== 'sidekickLookup' &&
   prop !== 'sx' &&
   prop !== 'file' &&
+  prop !== 'fileTablet' &&
+  prop !== 'fileMobile' &&
   prop !== 'nextImageOptimization';
 
 const Root = styled(Image, {
@@ -115,8 +148,14 @@ const Root = styled(Image, {
   slot: 'Root',
   shouldForwardProp: (prop: string) =>
     prop !== 'variant' && prop !== 'fileName' && prop !== 'sidekickLookup',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
+  overridesResolver: (_: any, styles: { root: any }) => [styles.root]
 })<{ variant?: string }>``;
+
+const AspectRatioRoot = styled(Box, {
+  name: 'Media',
+  slot: 'AspectRatioRoot',
+  overridesResolver: (_, styles) => [styles.aspectRatioRoot]
+})<{ variant?: string; ownerState: MediaOwnerState }>``;
 
 const ArtDirectedRoot = styled(ArtDirectedImage, {
   name: 'Media',
@@ -128,14 +167,21 @@ const EmbedRoot = styled('iframe', {
   name: 'Media',
   slot: 'EmbedRoot',
   shouldForwardProp,
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
+  overridesResolver: (_: any, styles: { root: any }) => [styles.root]
 })``;
+
+const EmbedWrap = styled(Box, {
+  name: 'Media',
+  slot: 'EmbedWrap',
+  shouldForwardProp,
+  overridesResolver: (_: any, styles: { root: any }) => [styles.root]
+})<{ ownerState: MediaOwnerState }>``;
 
 const VideoRoot = styled('video', {
   name: 'Media',
   slot: 'VideoRoot',
   shouldForwardProp,
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
-})<{ variant?: string }>``;
+  overridesResolver: (_: any, styles: { root: any }) => [styles.root]
+})<{ variant?: string; ownerState: MediaOwnerState }>``;
 
 export default Media;

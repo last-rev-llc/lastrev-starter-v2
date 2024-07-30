@@ -1,8 +1,11 @@
 fragment Media_BaseFragment on Media {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   title
   variant
   alt
+  assetUrl
   file {
     url
     extension

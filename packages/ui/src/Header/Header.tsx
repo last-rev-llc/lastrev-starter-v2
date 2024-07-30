@@ -1,25 +1,38 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
-import { CSSInterpolation, styled } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import MuiIconButton from '@mui/material/IconButton';
+// import TextField from '@mui/material/TextField';
 import MuiMenuIcon from '@mui/icons-material/Menu';
 import MuiCloseIcon from '@mui/icons-material/Close';
+import MuiSearchIcon from '@mui/icons-material/Search';
 
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 import Grid from '../Grid';
 import ContentModule from '../ContentModule';
-import SiteMessage from '../SiteMessage';
 
 import type { HeaderProps, HeaderOwnerState } from './Header.types';
 import type { NavigationItemProps } from '../NavigationItem';
 import Background from '../Background';
+// import AutoComplete from '../Algolia/AutoComplete';
+// import CollectionDynamic from '../CollectionDynamic';
+
+interface FormElements extends HTMLFormControlsCollection {
+  query: HTMLInputElement;
+}
+
+interface SearchFormElements extends HTMLFormElement {
+  readonly elements: FormElements;
+}
 
 const Header = (props: HeaderProps) => {
+  const router = useRouter();
   const ownerState = { ...props };
 
   const {
@@ -29,36 +42,19 @@ const Header = (props: HeaderProps) => {
     navigationItems,
     sidekickLookup,
     ctaItems,
-    siteMessageIcon,
-    siteMessageText,
-    siteMessageLink
+    searchLandingPage,
+    algoliaSearchKey,
+    autoComplete
   } = props;
 
-  // const trigger = useScrollTrigger({
-  //   disableHysteresis: true,
-  //   threshold: 0
-  // });
-
-  // const menuBreakpoint: Breakpoint = theme?.components?.Header?.mobileMenuBreakpoint ?? 'sm';
-
   const [menuVisible, setMenuVisible] = React.useState(false);
+  const [showSearch, setShowSearch] = React.useState(false);
 
   return (
-    <Root
-      {...sidekick(sidekickLookup)}
-      ownerState={ownerState}
-      // elevation={trigger ? 2 : 0}
-      menuVisible={menuVisible}
-      // menuBreakpoint={menuBreakpoint}
-    >
+    <Root {...sidekick(sidekickLookup)} ownerState={ownerState} menuVisible={menuVisible}>
       <HeaderBackground backgroundColor={backgroundColor} testId="Header-background" />
-      {siteMessageText && (
-        <SiteMessageWrap ownerState={ownerState}>
-          <SiteMessage icon={siteMessageIcon} text={siteMessageText} link={siteMessageLink} />
-        </SiteMessageWrap>
-      )}
 
-      <ContentOuterGrid ownerState={ownerState}>
+      <ContentOuterGrid ownerState={ownerState} menuVisible={menuVisible}>
         {logo ? (
           <LogoRoot
             {...logoUrl}
@@ -100,15 +96,25 @@ const Header = (props: HeaderProps) => {
             </HeaderMenuNav>
           )}
 
-          {!!ctaItems?.length && (
-            <HeaderMenuCtas ownerState={ownerState}>
-              {ctaItems?.map((ctaItem: any, index: number) => (
-                <HeaderMenuCtaItem key={`${ctaItem.id}-${index}`} ownerState={ownerState}>
-                  <ContentModule {...ctaItem} size="small" />
-                </HeaderMenuCtaItem>
-              ))}
-            </HeaderMenuCtas>
-          )}
+          <HeaderMenuCtas ownerState={ownerState}>
+            {ctaItems?.map((ctaItem: any, index: number) => (
+              <HeaderMenuCtaItem key={`${ctaItem.id}-${index}`} ownerState={ownerState}>
+                <ContentModule {...ctaItem} size="small" />
+              </HeaderMenuCtaItem>
+            ))}
+            {algoliaSearchKey && autoComplete && (
+              <HeaderMenuCtaItem ownerState={ownerState}>
+                <IconButton
+                  ownerState={ownerState}
+                  edge="end"
+                  color="inherit"
+                  aria-label="search"
+                  onClick={() => setShowSearch(true)}>
+                  <SearchIcon ownerState={ownerState} />
+                </IconButton>
+              </HeaderMenuCtaItem>
+            )}
+          </HeaderMenuCtas>
         </HeaderMobileNavWrap>
 
         <IconButtonWrap ownerState={ownerState}>
@@ -117,13 +123,44 @@ const Header = (props: HeaderProps) => {
             edge="end"
             color="inherit"
             aria-label="menu"
-            onClick={() => setMenuVisible(!menuVisible)}
-            size="large">
+            onClick={() => setMenuVisible(!menuVisible)}>
             <MenuIcon ownerState={ownerState} sx={{ display: menuVisible ? 'none' : 'block' }} />
             <CloseIcon ownerState={ownerState} sx={{ display: !menuVisible ? 'none' : 'block' }} />
           </IconButton>
+          {algoliaSearchKey && autoComplete && (
+            <IconButton
+              ownerState={ownerState}
+              edge="end"
+              color="inherit"
+              aria-label="search"
+              onClick={() => setShowSearch(true)}>
+              <SearchIcon ownerState={ownerState} />
+            </IconButton>
+          )}
         </IconButtonWrap>
       </ContentOuterGrid>
+      {algoliaSearchKey && autoComplete && (
+        <AutoCompleteWrap ownerState={ownerState} sx={{ display: showSearch ? 'block' : 'none' }}>
+          <ContentOuterGrid>
+            <AutoCompleteInnerWrap ownerState={ownerState}>
+              <IconButton
+                ownerState={ownerState}
+                edge="end"
+                color="inherit"
+                aria-label="menu"
+                onClick={() => setShowSearch(false)}>
+                <SearchCloseIcon ownerState={ownerState} />
+              </IconButton>
+
+              <ContentModule
+                {...autoComplete}
+                algoliaSearchKey={algoliaSearchKey}
+                itemClickCallback={() => setShowSearch(false)}
+              />
+            </AutoCompleteInnerWrap>
+          </ContentOuterGrid>
+        </AutoCompleteWrap>
+      )}
     </Root>
   );
 };
@@ -132,7 +169,7 @@ const Root = styled(Box, {
   name: 'Header',
   slot: 'Root',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.root]
+  overridesResolver: (_: any, styles: { root: any }) => [styles.root]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderBackground = styled(Background, {
@@ -145,12 +182,6 @@ const ContentOuterGrid = styled(Grid, {
   name: 'Header',
   slot: 'ContentOuterGrid',
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
-})<{ ownerState: HeaderOwnerState }>``;
-
-const SiteMessageWrap = styled(Box, {
-  name: 'Header',
-  slot: 'SiteMessageWrap',
-  overridesResolver: (_, styles) => [styles.siteMessageWrap]
 })<{ ownerState: HeaderOwnerState }>``;
 
 const LogoRoot = styled(ContentModule, {
@@ -181,16 +212,14 @@ const HeaderMenuNav = styled(Box, {
   name: 'Header',
   slot: 'HeaderMenuNav',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [styles.headerMenuNav]
+  overridesResolver: (_: any, styles: { headerMenuNav: any }) => [styles.headerMenuNav]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderMobileNavWrap = styled(Box, {
   name: 'Header',
   slot: 'HeaderMobileNavWrap',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [
-    styles.headerMobileNavWrap
-  ]
+  overridesResolver: (_: any, styles: { headerMobileNavWrap: any }) => [styles.headerMobileNavWrap]
 })<{ ownerState: HeaderOwnerState; menuVisible?: boolean }>``;
 
 const HeaderMenuNavItems = styled(List, {
@@ -203,9 +232,7 @@ const HeaderMenuNavItem = styled(ListItem, {
   name: 'Header',
   slot: 'HeaderMenuNavItem',
   shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
-  overridesResolver: (_: any, styles: Record<string, CSSInterpolation>) => [
-    styles.headerMenuNavItem
-  ]
+  overridesResolver: (_: any, styles: { headerMenuNavItem: any }) => [styles.headerMenuNavItem]
 })<{ ownerState: HeaderOwnerState }>``;
 
 const HeaderMenuNavLink = styled(ContentModule, {
@@ -226,6 +253,18 @@ const CloseIcon = styled(MuiCloseIcon, {
   overridesResolver: (_, styles) => [styles.closeIcon]
 })<{ ownerState: HeaderOwnerState }>``;
 
+const SearchCloseIcon = styled(MuiCloseIcon, {
+  name: 'Header',
+  slot: 'SearchCloseIcon',
+  overridesResolver: (_, styles) => [styles.searchCloseIcon]
+})<{ ownerState: HeaderOwnerState }>``;
+
+const SearchIcon = styled(MuiSearchIcon, {
+  name: 'Header',
+  slot: 'SearchIcon',
+  overridesResolver: (_, styles) => [styles.searchIcon]
+})<{ ownerState: HeaderOwnerState }>``;
+
 const IconButtonWrap = styled(Box, {
   name: 'Header',
   slot: 'IconButtonWrap',
@@ -236,6 +275,18 @@ const IconButton = styled(MuiIconButton, {
   name: 'Header',
   slot: 'IconButton',
   overridesResolver: (_, styles) => [styles.iconButton]
+})<{ ownerState: HeaderOwnerState }>``;
+
+const AutoCompleteWrap = styled(Grid, {
+  name: 'Header',
+  slot: 'AutoCompleteWrap',
+  overridesResolver: (_, styles) => [styles.autoCompleteWrap, styles.contentGrid]
+})<{ ownerState: HeaderOwnerState }>``;
+
+const AutoCompleteInnerWrap = styled(Box, {
+  name: 'Header',
+  slot: 'AutoCompleteInnerWrap',
+  overridesResolver: (_, styles) => [styles.autoCompleteInnerWrap]
 })<{ ownerState: HeaderOwnerState }>``;
 
 export default Header;

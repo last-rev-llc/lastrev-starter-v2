@@ -7,18 +7,36 @@ export enum CardVariants {
   icon = 'icon',
   logo = 'logo',
   media = 'media',
+  mediaOnlyFull = 'mediaOnlyFull',
+  mediaOnlyFit = 'mediaOnlyFit',
   pricing = 'pricing',
   person = 'person',
   quote = 'quote',
-  blog = 'blog'
+  blog = 'blog',
+  hover = 'hover',
+  iconLeft = 'iconLeft',
+  news = 'news',
+  iconCenter = 'iconCenter',
+  search = 'search',
+  autocomplete = 'autocomplete'
 }
 
-export interface CardProps extends Omit<Card_BaseFragmentFragment, 'variant'> {
+export enum CardAspectRatios {
+  default = 'default',
+  square = 'square',
+  horizontal = 'horizontal',
+  vertical = 'vertical'
+}
+
+export interface CardProps extends Omit<Card_BaseFragmentFragment, 'variant' | 'aspectRatio'> {
   loading?: boolean;
   variant?: CardVariants;
   ownerState?: any;
-  className?: string;
+  aspectRatio?: CardAspectRatios;
+  gridLayout?: any;
+  layoutConfig?: any;
   backgroundColor?: string;
+  className?: string;
 }
 
 export interface CardOwnerState extends CardProps {}

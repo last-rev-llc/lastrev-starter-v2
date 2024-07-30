@@ -1,11 +1,13 @@
 import gql from 'graphql-tag';
 
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-import type { Mappers, ApolloContext } from '@last-rev/types';
+import type { Mappers } from '@last-rev/types';
+import type { ApolloContext } from './types';
 
 import { createPath } from './utils/createPath';
 import { defaultResolver } from './utils/defaultResolver';
-import { camelCase } from './utils/camelCase';
+import { pathResolver } from './utils/pathResolver';
+import { createType } from './utils/createType';
 
 type TargetMapping = {
   'New Window': string;
@@ -28,6 +30,7 @@ const hrefUrlResolver = async (link: any, _: never, ctx: ApolloContext) => {
       id: contentRef.sys.id,
       preview: !!ctx.preview
     });
+
     if (content) {
       if (content?.sys?.contentType?.sys?.id === 'media') {
         const assetRef = getLocalizedField(content.fields, 'asset', ctx);
@@ -40,7 +43,8 @@ const hrefUrlResolver = async (link: any, _: never, ctx: ApolloContext) => {
         }
       }
       const slug = getLocalizedField(content?.fields, 'slug', ctx);
-      if (slug) return createPath(getLocalizedField(content?.fields, 'slug', ctx));
+
+      if (slug) return pathResolver(content, _, ctx);
     }
   }
   return '#';
@@ -56,12 +60,28 @@ export const mappers: Mappers = {
     Link: {
       href: hrefUrlResolver,
       target: targetResolver,
+      color: defaultResolver('color'),
       variant: defaultResolver('variant')
     },
     NavigationItem: {
       link: (x: any) => ({ ...x, fieldName: 'link' }),
       children: () => [],
       variant: defaultResolver('variant')
+    },
+    Card: {
+      variant: () => 'default',
+
+      link: async (link: any, _args: any, ctx: ApolloContext) => {
+        return link;
+      },
+
+      actions: async (link: any, args: any, ctx: ApolloContext) => {
+        return [
+          createType('Link', {
+            ...link
+          })
+        ];
+      }
     }
   }
 };

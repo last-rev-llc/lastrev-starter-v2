@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import { type Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['FRD'] = {};
 
@@ -69,14 +69,14 @@ const styleOverrides: ComponentsOverrides<Theme>['FRD'] = {
 
   contentWrap: ({ theme, ownerState }) => ({
     gridRow: 1,
-    gridColumn: 'content-start / content-end',
+    gridColumn: 'start / end',
 
     [theme.containerBreakpoints.up('md')]: {
-      gridColumn: 'three-start / content-end'
+      gridColumn: 'three-start / end'
     },
 
     [theme.containerBreakpoints.up('xl')]: {
-      gridColumn: 'two-start / content-end'
+      gridColumn: 'two-start / end'
     }
   })
 };

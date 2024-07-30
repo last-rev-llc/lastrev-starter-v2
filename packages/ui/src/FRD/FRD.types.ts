@@ -9,6 +9,8 @@ export enum FRDVariants {
 export interface FRDProps extends Omit<ContentModule_SettingsFragmentFragment, 'variant'> {
   disableBackToTop?: boolean;
   variant?: FRDVariants;
+  header?: string;
+  footer?: string;
 }
 
 interface FRDClasses {

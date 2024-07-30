@@ -1,5 +1,6 @@
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import type { Source, DocumentNode, GraphQLSchema } from 'graphql';
+import { typeDefs as algoliaTypeDefs } from '@last-rev/graphql-algolia-integration';
 
 import fs from 'fs';
 import path from 'path';
@@ -28,15 +29,15 @@ function loadFiles() {
     modules['Card'] = require('./Card.extension');
     modules['CategoryBlog'] = require('./CategoryBlog.extension');
     modules['Collection'] = require('./Collection.extension');
+    modules['CollectionDynamic'] = require('./CollectionDynamic.extension');
     modules['CollectionExpandable'] = require('./CollectionExpandable.extension');
     modules['CollectionExpandableItem'] = require('./CollectionExpandableItem.extension');
-    modules['ElementForm'] = require('./Form.extension');
     modules['Footer'] = require('./Footer.extension');
+    modules['ElementForm'] = require('./Form.extension');
     modules['Header'] = require('./Header.extension');
     modules['Hero'] = require('./Hero.extension');
     modules['Link'] = require('./Link.extension');
     modules['Media'] = require('./Media.extension');
-    modules['ModuleIntegration'] = require('./ModuleIntegration.extension');
     modules['NavigationItem'] = require('./NavigationItem.extension');
     modules['Page'] = require('./Page.extension');
     modules['PathsConfigs'] = require('./PathsConfigs.extension');
@@ -45,8 +46,8 @@ function loadFiles() {
     modules['RichText'] = require('./RichText.extension');
     modules['Section'] = require('./Section.extension');
     modules['SEO'] = require('./SEO.extension');
-    modules['Settings'] = require('./Settings.extension');
     modules['Sidekick'] = require('./Sidekick.extension');
+    modules['Site'] = require('./Site.extension');
     modules['Text'] = require('./Text.extension');
     modules['Theme'] = require('./Theme.extension');
 
@@ -83,6 +84,7 @@ function loadFiles() {
 }
 
 const extensions: GraphQlExtension[] = loadFiles();
+extensions.push({ typeDefs: algoliaTypeDefs });
 
 const getNonNullPropertiesFromExtensions = (property: any) =>
   extensions.map((ext: GraphQlExtension) => ext[property]).filter(Boolean);

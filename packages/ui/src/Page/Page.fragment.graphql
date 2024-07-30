@@ -1,5 +1,7 @@
 fragment Page_BaseFragment on Page {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   seo
   jsonLd
   path
@@ -20,10 +22,13 @@ fragment Page_BaseFragment on Page {
   contents {
     ...ContentModule_BaseFragment
   }
+  disableBackToTop
 }
 
 fragment Page_CardFragment on Page {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   title
   slug
   promoImage {

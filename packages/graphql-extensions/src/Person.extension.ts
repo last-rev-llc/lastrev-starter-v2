@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
-import type { ApolloContext, Mappers } from '@last-rev/types';
+import type { Mappers } from '@last-rev/types';
+import type { ApolloContext } from './types';
 import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
 
 import { pageFooterResolver } from './utils/pageFooterResolver';
@@ -7,6 +8,7 @@ import { pageHeaderResolver } from './utils/pageHeaderResolver';
 import { pathResolver } from './utils/pathResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { createType } from './utils/createType';
+import { getDefaultCtaText } from './utils/getDefaultCtaText';
 
 export const typeDefs = gql`
   extend type Person {
@@ -17,7 +19,7 @@ export const typeDefs = gql`
     socialLinks: [Link]
     mainImage: Media
     breadcrumbs: [Link]
-    hero: Hero
+    hero: Content
   }
 `;
 
@@ -30,10 +32,12 @@ export const mappers: Mappers = {
       breadcrumbs: breadcrumbsResolver,
       hero: async (person: any, _args: any, ctx: ApolloContext) =>
         createType('Hero', {
-          variant: 'mediaOnRight',
+          variant: 'mediaOnRightFullBleed',
+          backgroundColor: 'white',
+          showFullImage: true,
           overline: getLocalizedField(person.fields, 'jobTitle', ctx),
           title: getLocalizedField(person.fields, 'name', ctx),
-          sideImageItems: [getLocalizedField(person.fields, 'mainImage', ctx)]
+          sideImageItems: [getLocalizedField(person.fields, 'mainImage', ctx)] ?? []
         })
     },
 
@@ -48,30 +52,42 @@ export const mappers: Mappers = {
     },
 
     Card: {
-      body: async (person: any, _args: any, ctx: ApolloContext) =>
-        createRichText(getLocalizedField(person.fields, 'promoSummary', ctx)),
+      overline: 'department',
+      title: 'name',
+      subtitle: 'jobTitle',
+      body: async (person: any, _args: any, ctx: ApolloContext) => {
+        const promoSummary = getLocalizedField(person.fields, 'promoSummary', ctx);
 
-      media: async (blog: any, _args: any, ctx: ApolloContext) => {
+        if (promoSummary) {
+          return await createRichText(promoSummary);
+        }
+        return null;
+      },
+
+      media: async (person: any, _args: any, ctx: ApolloContext) => {
         const promoImage =
-          getLocalizedField(blog.fields, 'promoImage', ctx) ??
-          getLocalizedField(blog.fields, 'mainImage', ctx);
+          getLocalizedField(person.fields, 'promoImage', ctx) ??
+          getLocalizedField(person.fields, 'mainImage', ctx);
         if (!promoImage) return null;
         return [promoImage];
       },
 
-      variant: () => 'default',
+      // variant: () => 'buttonText',
 
       link: async (person: any, _args: any, ctx: ApolloContext) => {
         return person;
       },
 
       actions: async (person: any, args: any, ctx: ApolloContext) => {
+        const text = await getDefaultCtaText(person, args, ctx);
         return [
           createType('Link', {
             id: person.id,
-            text: 'Read More',
+            text,
+            icon: 'logo',
+            iconPosition: 'Left',
             href: await pathResolver(person, args, ctx),
-            variant: 'buttonContained'
+            variant: 'buttonText'
           })
         ];
       }

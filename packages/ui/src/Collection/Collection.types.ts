@@ -10,7 +10,8 @@ export enum CollectionVariants {
   twoPerRow = 'twoPerRow',
   threePerRow = 'threePerRow',
   fourPerRow = 'fourPerRow',
-  fivePerRow = 'fivePerRow'
+  fivePerRow = 'fivePerRow',
+  linkList = 'linkList'
 }
 
 export interface CollectionProps

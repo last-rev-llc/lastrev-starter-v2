@@ -1,8 +1,10 @@
 import gql from 'graphql-tag';
 
 import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-import type { ApolloContext } from '@last-rev/types';
+
+import type { ApolloContext } from './types';
 import { defaultResolver } from './utils/defaultResolver';
+import { createType } from './utils/createType';
 
 export const typeDefs = gql`
   extend type Header {
@@ -13,6 +15,8 @@ export const typeDefs = gql`
     supernavLink: Link
     supernavIcon: Media
     hasCtaItems: Boolean
+    searchLandingPage: Link
+    autoComplete: Content
   }
 `;
 
@@ -23,7 +27,33 @@ export const mappers = {
         const ctaItems: any = getLocalizedField(header.fields, 'ctaItems', ctx);
         return !!ctaItems.length;
       },
-      backgroundColor: defaultResolver('backgroundColor')
+      backgroundColor: defaultResolver('backgroundColor'),
+      autoComplete: async (header: any, _args: any, ctx: ApolloContext) => {
+        const settings = {
+          configure: {
+            hitsPerPage: 5
+          },
+          indexName: 'contentful',
+          showFilters: true,
+          showSearchBox: true,
+          showPagination: false,
+          searchAsYouType: true,
+          useInfiniteHits: false,
+          filtersPlacement: 'left',
+          showCurrentRefinements: false,
+          minCharacters: 3,
+          forceMinCharacters: true,
+          showViewAll: true
+        };
+
+        return createType('CollectionDynamic', {
+          introText: createType('Text', { title: 'Search' }),
+          variant: 'onePerRow',
+          itemsVariant: 'autocomplete',
+          backgroundColor: 'transparentLight',
+          settings
+        });
+      }
     }
   }
 };

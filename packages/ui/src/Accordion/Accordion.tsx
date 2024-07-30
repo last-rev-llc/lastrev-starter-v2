@@ -33,8 +33,7 @@ const Accordion = (props: AccordionProps) => {
       <Root
         {...sidekick(sidekickLookup)}
         ownerState={ownerState}
-        data-testid={`Accordion-${variant}`}
-      >
+        data-testid={`Accordion-${variant}`}>
         <AccordionBackground
           background={background}
           backgroundColor={backgroundColor}
@@ -63,13 +62,11 @@ const Accordion = (props: AccordionProps) => {
                   expanded={expanded === `${!id}-accordion-panel-${item?.id}-${index}`}
                   onChange={handleChange(`${!id}-accordion-panel-${item?.id}-${index}`)}
                   key={`${!id}-accordion-panel-${item?.id}-${index}`}
-                  ownerState={ownerState}
-                >
+                  ownerState={ownerState}>
                   <SummaryWrap
                     aria-controls="panel1d-content"
                     id="panel1d-header"
-                    ownerState={ownerState}
-                  >
+                    ownerState={ownerState}>
                     <Summary ownerState={ownerState}>{item.title}</Summary>
                   </SummaryWrap>
                   <DetailsWrap ownerState={ownerState}>

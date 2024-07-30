@@ -4,12 +4,31 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['HeaderNavGroup'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['HeaderNavGroup'] = {
-  // root: : {},
+  root: {
+    'position': 'relative',
+    '&>[class*=navItemSubMenu]': {
+      position: 'absolute',
+      top: '100%',
+      left: 0
+    },
+    '&:not(:hover, :focus-within)': {
+      '&>[class*=navItemSubMenu]': {
+        maxHeight: 0,
+        padding: 0,
+        overflow: 'hidden'
+      }
+    },
+    '&:is(:hover, :focus-within):not(:focus-visible)': {
+      '&>[class*=navItemLink]': {
+        // fontWeight: 800
+      }
+    }
+  },
 
   navItemLink: ({ theme }) => ({
     'padding': 0,
@@ -19,10 +38,11 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavGroup'] = {
     'display': 'flex',
     'width': '100%',
     'cursor': 'pointer',
+    // 'fontWeight': 800,
     '&:is(:hover, :focus-within):not(:focus-visible)': {
       // TODO: ADA recommends all links are underlined, so we should not do the below, but we can add custom styles here
       // textDecoration: 'none',
-      fontWeight: 800
+      // fontWeight: 800
     },
 
     // TODO: Standardizxe this across the header links if they're the same
@@ -30,7 +50,7 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavGroup'] = {
       fill: theme.vars.palette.primary.main,
       width: 'auto',
       height: '16px',
-      paddingLeft: theme.spacing(0.625)
+      paddingLeft: 'var(--grid-gap-quarter)'
     }
   }),
 

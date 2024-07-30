@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['HeaderNavLinkNested'] = {};
 
@@ -22,7 +22,7 @@ const styleOverrides: ComponentsOverrides<Theme>['HeaderNavLinkNested'] = {
       fill: theme.vars.palette.primary.main,
       width: 'auto',
       height: '14px',
-      paddingLeft: theme.spacing(0.625)
+      marginLeft: 'var(--grid-gap-half)'
     }
   })
 };

@@ -1,10 +1,13 @@
 fragment Text_FieldsFragment on Text {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   align
   overline
   title
   subtitle
+  backgroundColor
 }
 
 fragment Text_BaseFragment on Text {
@@ -27,14 +30,18 @@ fragment Text_RichTextFragment on Text {
     ...RichText_RichTextFragment
     links {
       entries {
-        ...Content_BaseFragment
+        id
+  __typename
+  sidekickLookup
         ... on Text {
           ...Text_FieldsFragment
           body {
             ...RichText_RichTextFragment
             links {
               entries {
-                ...Content_BaseFragment
+                id
+  __typename
+  sidekickLookup
                 ... on Text {
                   ...Text_FieldsFragment
                   body {

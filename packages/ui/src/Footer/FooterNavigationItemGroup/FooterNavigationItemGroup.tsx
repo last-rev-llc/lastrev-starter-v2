@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CSSInterpolation, styled } from '@mui/material/styles';
+import { type CSSInterpolation, styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
@@ -25,14 +25,16 @@ const FooterNavigationItemGroup = (props: FooterNavigationItemGroupProps) => {
     <ErrorBoundary>
       {!!subNavigation?.length ? (
         <Root data-testid="FooterNavGroup" ownerState={ownerState}>
-          <NavItemLinkGroup
-            {...props}
-            variant={variant}
-            {...sidekick(sidekickLookup)}
-            __typename="Link"
-            subNavigation={undefined}
-            ownerState={ownerState}
-          />
+          {props.text ? (
+            <NavItemLinkGroup
+              {...props}
+              variant={variant}
+              {...sidekick(sidekickLookup)}
+              __typename="Link"
+              subNavigation={undefined}
+              ownerState={ownerState}
+            />
+          ) : null}
           <NavItemSubMenu key={`${navItemId}-nav-item-submenu`} ownerState={ownerState}>
             {subNavigation?.map((subNavItem: any, index: number) => (
               <NavItemSubMenuItem
@@ -40,7 +42,7 @@ const FooterNavigationItemGroup = (props: FooterNavigationItemGroupProps) => {
                 ownerState={ownerState}>
                 <NavItemLink
                   {...subNavItem}
-                  variant={variant}
+                  variant={`${subNavItem.variant}Footer`}
                   {...sidekick(sidekickLookup)}
                   subNavigation={undefined}
                   __typename="Link"

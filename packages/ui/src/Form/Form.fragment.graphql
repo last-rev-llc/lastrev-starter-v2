@@ -1,5 +1,7 @@
 fragment Form_BaseFragment on ElementForm {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   hubspotPortalId
   hubspotFormId
@@ -9,7 +11,9 @@ fragment Form_BaseFragment on ElementForm {
 }
 
 fragment Form_PageFragment on ElementForm {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   variant
   hubspotPortalId
   hubspotFormId

@@ -4,7 +4,7 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
+import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Person'] = {};
 
@@ -20,12 +20,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
   }),
 
   sideContentWrap: ({ theme }) => ({
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
     paddingBottom: 'var(--grid-gap-double)',
 
     [theme.containerBreakpoints.up('lg')]: {
-      gridColumnStart: 'content-start',
+      gridColumnStart: 'start',
       gridColumnEnd: 'four-end'
     }
   }),
@@ -42,6 +42,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
     }
   },
 
+  detailsLabel: {
+    '&': {
+      paddingBottom: 'var(--grid-gap)'
+    }
+  },
+
   bodyHeader: {
     '&:not(:first-of-type)': {
       paddingTop: 'var(--grid-gap)',
@@ -51,8 +57,13 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
     }
   },
 
+  bodyList: {
+    padding: 0
+  },
+
   bodyListItem: {
     'paddingLeft': 0,
+    'color': 'var(--mui-palette-text-primary)',
     '&::before': {
       content: '"– "' /* en dash */,
       display: ' inline-block',
@@ -61,10 +72,13 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
   },
 
   contentWrap: ({ theme }) => ({
-    backgroundColor: theme.palette.background.default,
-    padding: 'calc(2 * var(--grid-gap))',
-    gridColumnStart: 'content-start',
-    gridColumnEnd: 'content-end',
+    ...theme.mixins.applyBackgroundColor({
+      ownerState: { backgroundColor: 'white' },
+      theme
+    }),
+    padding: 'var(--grid-gap-double)',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
 
     [theme.containerBreakpoints.up('lg')]: {
       gridColumnStart: 'five-start',
@@ -72,10 +86,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Person'] = {
       paddingRight: 'var(--grid-margin)'
     }
   })
-
-  // name: {},
-  // jobTitle: {},
-  // email: {}
 };
 
 const createVariants = (_theme: Theme): ComponentsVariants['Person'] => [];

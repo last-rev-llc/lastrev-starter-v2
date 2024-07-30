@@ -4,9 +4,8 @@ import type {
   ComponentsOverrides,
   ComponentsVariants
 } from '@mui/material/styles';
-import { Theme } from '@ui/ThemeRegistry/theme.types';
 
-import { AccordionVariants } from './Accordion.types';
+import { type Theme } from '../ThemeRegistry/theme.types';
 
 const defaultProps: ComponentsProps['Accordion'] = {};
 
@@ -20,33 +19,22 @@ const styleOverrides: ComponentsOverrides<Theme>['Accordion'] = {
     flexDirection: 'column'
   }),
 
-  // introTextGrid: : {},
-
-  introText: { gridColumn: 'content-start / content-end' },
+  introText: { gridColumn: 'start / end' },
 
   contentOuterGrid: {
     '> *': {
-      gridColumnStart: 'content-start',
-      gridColumnEnd: 'content-end'
+      gridColumnStart: 'start',
+      gridColumnEnd: 'end'
     },
     'gridGap': 0
-    // 'display': 'contents'
-  }
-  // accordionItem: {},
-  // summaryWrap: {},
-  // summary: {},
-  // detailsWrap: {},
-  // details: {},
+  },
+
+  summary: ({ theme, ownerState }) => ({
+    ...theme.typography.h4
+  })
 };
 
-const createVariants = (_theme: Theme): ComponentsVariants['Accordion'] => [
-  {
-    props: {
-      variant: AccordionVariants.default
-    },
-    style: {}
-  }
-];
+const createVariants = (_theme: Theme): ComponentsVariants['Accordion'] => [];
 
 export const AccordionTheme = (theme: Theme): ThemeOptions => ({
   components: {

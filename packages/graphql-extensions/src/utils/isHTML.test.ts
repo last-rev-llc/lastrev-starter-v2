@@ -1,4 +1,4 @@
-import { isHTML } from './isHTML';
+import isHTML from './isHTML';
 
 const testHTML = [
   '<div>test</div>',

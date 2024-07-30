@@ -12,13 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import sidekick from '@last-rev/contentful-sidekick-util';
 
 import Grid from '../Grid';
-import Breadcrumbs from '../Breadcrumbs';
 import ContentModule from '../ContentModule';
-import TwitterIcon from '../Icons/TwitterIcon';
-import FacebookIcon from '../Icons/FacebookIcon';
-import LinkedinIcon from '../Icons/LinkedinIcon';
-import EmailIcon from '../Icons/EmailIcon';
-import CopyLinkIcon from '../Icons/CopyLinkIcon';
 
 import type { BlogProps, BlogOwnerState } from './Blog.types';
 import { type MediaProps } from '../Media';
@@ -40,7 +34,8 @@ const Blog = (props: BlogProps) => {
     jsonLd,
     breadcrumbs,
     sidekickLookup,
-    hero
+    hero,
+    algoliaSearchKey
   } = props;
 
   const pathname = usePathname();
@@ -61,38 +56,135 @@ const Blog = (props: BlogProps) => {
         </Script>
       )}
 
-      {header ? <ContentModule {...(header as any)} /> : null}
+      {header ? <ContentModule {...(header as any)} algoliaSearchKey={algoliaSearchKey} /> : null}
 
       <Root component="main" {...sidekick(sidekickLookup)} ownerState={ownerState}>
-        <ContentOuterGrid ownerState={ownerState}>
-          <HeaderWrap ownerState={ownerState}>
-            {hero ? (
-              <ContentModule {...(hero as any)} />
-            ) : (
-              <>
-                {!!title && (
-                  <Title component="h1" variant="display1" ownerState={ownerState}>
-                    {title}
-                  </Title>
-                )}
-
-                {!!pubDate && <PubDate ownerState={ownerState}>{pubDate}</PubDate>}
-              </>
+        {hero ? (
+          <ContentModule {...(hero as any)} breadcrumbs={breadcrumbs} />
+        ) : (
+          <>
+            {!!title && (
+              <Title component="h1" variant="display1" ownerState={ownerState}>
+                {title}
+              </Title>
             )}
-          </HeaderWrap>
+
+            {!!pubDate && <PubDate ownerState={ownerState}>{pubDate}</PubDate>}
+          </>
+        )}
+
+        <ContentOuterGrid ownerState={ownerState} overrideNested={true}>
+          <SideContentWrap ownerState={ownerState}>
+            <SideContentInnerWrap ownerState={ownerState}>
+              {!!author && (
+                <AuthorWrap ownerState={ownerState} overrideNested={true}>
+                  {!!author.mainImage?.file?.url && (
+                    <AuthorImageWrap ownerState={ownerState}>
+                      <AuthorImage src={author.mainImage.file?.url} ownerState={ownerState} />
+                    </AuthorImageWrap>
+                  )}
+
+                  {!!author.name && (
+                    <AuthorName ownerState={ownerState} variant="display4">
+                      {author.name}
+                    </AuthorName>
+                  )}
+
+                  {!!author.body && (
+                    <AuthorSummaryWrap ownerState={ownerState}>
+                      <AuthorSummary
+                        body={author.body}
+                        variant="bodyLarge"
+                        __typename="RichText"
+                        ownerState={ownerState}
+                      />
+                    </AuthorSummaryWrap>
+                  )}
+
+                  {!!author.socialLinks?.length && (
+                    <AuthorSocialLinks ownerState={ownerState}>
+                      {author.socialLinks.map((link, index) => (
+                        <AuthorSocialLink
+                          key={`author-social-link-${index}=${link?.href}`}
+                          {...(link as LinkProps)}
+                          ownerState={ownerState}
+                        />
+                      ))}
+                    </AuthorSocialLinks>
+                  )}
+                </AuthorWrap>
+              )}
+
+              <ShareLinksWrap ownerState={ownerState}>
+                <ShareLinksLabel ownerState={ownerState}>Share</ShareLinksLabel>
+
+                <ShareLinks ownerState={ownerState}>
+                  <ShareLink ownerState={ownerState}>
+                    <ShareLinkItem
+                      __typename="Link"
+                      href={`http://www.twitter.com/share?url=${encodedShareUrl}`}
+                      target="_blank"
+                      icon={'twitter'}
+                      // text="Twitter"
+                      ownerState={ownerState}
+                    />
+                  </ShareLink>
+
+                  <ShareLink ownerState={ownerState}>
+                    <ShareLinkItem
+                      __typename="Link"
+                      href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
+                      target="_blank"
+                      icon={'facebook'}
+                      // text="Facebook"
+                      ownerState={ownerState}
+                    />
+                  </ShareLink>
+
+                  <ShareLink ownerState={ownerState}>
+                    <ShareLinkItem
+                      __typename="Link"
+                      href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`}
+                      target="_blank"
+                      icon={'linkedin'}
+                      // text="Linkedin"
+                      ownerState={ownerState}
+                    />
+                  </ShareLink>
+
+                  <ShareLink ownerState={ownerState}>
+                    <ShareLinkItem
+                      __typename="Link"
+                      href={`mailto:?to=&body=${encodedShareUrl}`}
+                      target="_blank"
+                      icon={'email'}
+                      // text="Email"
+                      ownerState={ownerState}
+                    />
+                  </ShareLink>
+
+                  <ShareLink ownerState={ownerState}>
+                    <ShareLinkItem
+                      __typename="Link"
+                      target="_blank"
+                      icon={'copyLink'}
+                      // text="Copy Link"
+                      ownerState={ownerState}
+                      onClick={() => {
+                        navigator.clipboard.writeText(shareUrl);
+                      }}
+                    />
+                  </ShareLink>
+                </ShareLinks>
+              </ShareLinksWrap>
+            </SideContentInnerWrap>
+          </SideContentWrap>
 
           <ContentWrap ownerState={ownerState}>
-            {!!breadcrumbs?.length ? (
-              <BreadcrumbsWrap ownerState={ownerState}>
-                <Breadcrumbs links={breadcrumbs} />
-              </BreadcrumbsWrap>
-            ) : null}
-
             {!!featuredMedia && (
               <FeaturedMediaWrap
                 {...sidekick(sidekickLookup, 'featuredMedia')}
-                ownerState={ownerState}
-              >
+                ownerState={ownerState}>
                 <FeaturedMedia {...(featuredMedia as MediaProps)} ownerState={ownerState} />
               </FeaturedMediaWrap>
             )}
@@ -106,113 +198,16 @@ const Blog = (props: BlogProps) => {
                 ownerState={ownerState}
               />
             )}
-
-            <ShareLinksWrap ownerState={ownerState}>
-              <ShareLinksLabel ownerState={ownerState}>Share</ShareLinksLabel>
-
-              <ShareLinks ownerState={ownerState}>
-                <ShareLink ownerState={ownerState}>
-                  <ShareLinkItem
-                    __typename="Link"
-                    href={`http://www.twitter.com/share?url=${encodedShareUrl}`}
-                    target="_blank"
-                    icon={TwitterIcon}
-                    text="Twitter"
-                    ownerState={ownerState}
-                  />
-                </ShareLink>
-
-                <ShareLink ownerState={ownerState}>
-                  <ShareLinkItem
-                    __typename="Link"
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
-                    target="_blank"
-                    icon={FacebookIcon}
-                    text="Facebook"
-                    ownerState={ownerState}
-                  />
-                </ShareLink>
-
-                <ShareLink ownerState={ownerState}>
-                  <ShareLinkItem
-                    __typename="Link"
-                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedShareUrl}`}
-                    target="_blank"
-                    icon={LinkedinIcon}
-                    text="Linkedin"
-                    ownerState={ownerState}
-                  />
-                </ShareLink>
-
-                <ShareLink ownerState={ownerState}>
-                  <ShareLinkItem
-                    __typename="Link"
-                    href={`mailto:?to=&body=${encodedShareUrl}`}
-                    target="_blank"
-                    icon={EmailIcon}
-                    text="Email"
-                    ownerState={ownerState}
-                  />
-                </ShareLink>
-
-                <ShareLink ownerState={ownerState}>
-                  <ShareLinkItem
-                    __typename="Link"
-                    target="_blank"
-                    icon={CopyLinkIcon}
-                    text="Copy Link"
-                    ownerState={ownerState}
-                    onClick={() => {
-                      navigator.clipboard.writeText(shareUrl);
-                    }}
-                  />
-                </ShareLink>
-              </ShareLinks>
-            </ShareLinksWrap>
           </ContentWrap>
-
-          {!!author && (
-            <AuthorWrap ownerState={ownerState}>
-              {!!author.mainImage && (
-                <AuthorImageWrap ownerState={ownerState}>
-                  <AuthorImage {...author.mainImage} ownerState={ownerState} />
-                </AuthorImageWrap>
-              )}
-
-              {!!author.name && (
-                <AuthorName ownerState={ownerState} variant="display4">
-                  {author.name}
-                </AuthorName>
-              )}
-
-              {!!author.body && (
-                <AuthorSummaryWrap ownerState={ownerState}>
-                  <AuthorSummary
-                    body={author.body}
-                    variant="bodyLarge"
-                    __typename="RichText"
-                    ownerState={ownerState}
-                  />
-                </AuthorSummaryWrap>
-              )}
-
-              {!!author.socialLinks?.length && (
-                <AuthorSocialLinks ownerState={ownerState}>
-                  {author.socialLinks.map((link, index) => (
-                    <AuthorSocialLink
-                      key={`author-social-link-${index}=${link?.href}`}
-                      {...(link as LinkProps)}
-                      ownerState={ownerState}
-                    />
-                  ))}
-                </AuthorSocialLinks>
-              )}
-            </AuthorWrap>
-          )}
         </ContentOuterGrid>
 
         {!!relatedItems && (
-          <RelatedItems {...relatedItems} ownerState={ownerState} backgroundColor="white" />
+          <RelatedItems
+            {...relatedItems}
+            ownerState={ownerState}
+            backgroundColor="white"
+            algoliaSearchKey={algoliaSearchKey}
+          />
         )}
       </Root>
 
@@ -222,7 +217,7 @@ const Blog = (props: BlogProps) => {
 };
 
 const Root = styled(Box, {
-  name: 'Page',
+  name: 'Blog',
   slot: 'Root',
   overridesResolver: (_, styles) => [styles.root]
 })<{ ownerState: BlogOwnerState }>``;
@@ -231,18 +226,6 @@ const ContentOuterGrid = styled(Grid, {
   name: 'Blog',
   slot: 'ContentOuterGrid',
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
-})<{ ownerState: BlogOwnerState }>``;
-
-const HeaderWrap = styled(Box, {
-  name: 'Blog',
-  slot: 'HeaderWrap',
-  overridesResolver: (_, styles) => [styles.headerWrap]
-})<{ ownerState: BlogOwnerState }>``;
-
-const BreadcrumbsWrap = styled(Box, {
-  name: 'Blog',
-  slot: 'BreadcrumbsWrap',
-  overridesResolver: (_, styles) => [styles.breadcrumbsWrap]
 })<{ ownerState: BlogOwnerState }>``;
 
 const Title = styled(Typography, {
@@ -257,19 +240,13 @@ const PubDate = styled(Typography, {
   overridesResolver: (_, styles) => [styles.pubDate]
 })<TypographyProps & { ownerState: BlogOwnerState }>``;
 
-const Author = styled(Box, {
-  name: 'Blog',
-  slot: 'Author',
-  overridesResolver: (_, styles) => [styles.author]
-})<{ ownerState: BlogOwnerState }>``;
-
 const AuthorImageWrap = styled(Box, {
   name: 'Blog',
   slot: 'AuthorImageWrap',
   overridesResolver: (_, styles) => [styles.authorImageWrap]
 })<{ ownerState: BlogOwnerState }>``;
 
-const AuthorImage = styled(ContentModule, {
+const AuthorImage = styled(MuiAvatar, {
   name: 'Blog',
   slot: 'AuthorImage',
   overridesResolver: (_, styles) => [styles.authorImage]
@@ -375,6 +352,18 @@ const AuthorSocialLink = styled(ContentModule, {
   name: 'Blog',
   slot: 'AuthorSocialLink',
   overridesResolver: (_, styles) => [styles.AuthorSocialLink]
+})<{ ownerState: BlogOwnerState }>``;
+
+const SideContentWrap = styled(Box, {
+  name: 'Blog',
+  slot: 'SideContentWrap',
+  overridesResolver: (_, styles) => [styles.sideContentWrap]
+})<{ ownerState: BlogOwnerState }>``;
+
+const SideContentInnerWrap = styled(Box, {
+  name: 'Blog',
+  slot: 'SideContentInnerWrap',
+  overridesResolver: (_, styles) => [styles.sideContentInnerWrap]
 })<{ ownerState: BlogOwnerState }>``;
 
 export default Blog;

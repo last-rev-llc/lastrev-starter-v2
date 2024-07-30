@@ -1,4 +1,4 @@
-import { bodyOnlyMock } from '../Text/Text.mock';
+import { richTextMock } from '../RichText/RichText.mock';
 import { linkBaseMock } from '../Link/Link.mock';
 import { mediaBaseImageMock } from '../Media/Media.mock';
 
@@ -8,16 +8,15 @@ import type { SiteMessageProps } from './SiteMessage.types';
 
 const siteMessageDefaultMock = (): SiteMessageProps => {
   return {
-    id: randomId(),
     __typename: 'SiteMessage',
     icon: mediaBaseImageMock(),
     link: linkBaseMock(),
-    text: bodyOnlyMock(),
+    text: richTextMock({ text: 'This is the SiteMessage text' }),
     sidekickLookup: {} // TODO: Mock
   };
 };
 
-export const siteMessageBaseMock = ({ ...override } = {}) => {
+export const siteMessageBaseMock = (override: Partial<SiteMessageProps> = {}): SiteMessageProps => {
   return {
     ...siteMessageDefaultMock(),
     ...override

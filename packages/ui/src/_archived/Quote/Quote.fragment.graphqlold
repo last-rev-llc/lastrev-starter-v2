@@ -1,5 +1,7 @@
 fragment Quote_BaseFragment on Quote {
-  ...Content_BaseFragment
+  id
+  __typename
+  sidekickLookup
   quote
   authorName
   authorTitle

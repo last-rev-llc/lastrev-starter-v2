@@ -20,12 +20,6 @@ interface HeaderNavLinkClasses {
   navItemLink: string;
   navItemSubMenu: string;
   navItemSubMenuItem: string;
-  megaNavContainer: string;
-  megaNavContent: string;
-  megaNavTitle: string;
-  megaNavActions: string;
-  megaNavAction: string;
-  megaNavMedia: string;
 }
 
 export declare type HeaderNavLinkClassKey = keyof HeaderNavLinkClasses;
