@@ -3,8 +3,8 @@
 ## Steps to download and prepare your local dev environment for Envkey
 
 - Download the repo
-  - HTTP - `https://github.com/last-rev-llc/tarealty-marketing`
-  - SSH - `git@github.com:last-rev-llc/tarealty-marketing.git`
+  - HTTP - `https://github.com/last-rev-llc/lastrev-starter-v2`
+  - SSH - `git@github.com:last-rev-llc/lastrev-starter-v2.git`
 - Open Terminal within VS Code or your favorite IDE and use the following commands.
 
 ```
@@ -14,7 +14,7 @@ envkey init
 ```
 
 - You will need to select "Attach an existing EnvKey app", hit return.
-- Use your arrow keys and Select the `TA Realty` app, then hit return.
+- Use your arrow keys and Select the `Last Rev Starter v2` app, then hit return.
 
 _Once you have attached the appropriate envkey app, it should have created a local cli key for you behind the scenes which will then allow you load the variables._
 
