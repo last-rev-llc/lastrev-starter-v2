@@ -49,7 +49,7 @@ const Auth = ({ providers }) => {
           variant: 'buttonContained',
           onClick: () =>
             signIn(provider.id, {
-              callbackUrl: `https://ias-intranet-prod.netlify.app${callbackUrl || '/'}`
+              callbackUrl: `https://someAppUrl--prod.netlify.app${callbackUrl || '/'}`
             }),
           text: `Login via ${provider.name}`
         }

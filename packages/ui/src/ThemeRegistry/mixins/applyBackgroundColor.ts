@@ -53,7 +53,7 @@ export const applyBackgroundColor: ApplyBackgroundColor = ({
       //   stroke: 'var(--mui-palette-text-primary) !important'
       // },
 
-      '.ias-logo-text [fill]': {
+      '.some-logo-text [fill]': {
         fill: 'var(--mui-palette-text-primary) !important'
       },
 
