@@ -18,7 +18,7 @@ jobs:
 
       - name: Create ESLint config with ignores
         run: |
-          echo 'module.exports = { ignores: ["env_validator.js"], rules: { "no-console": ["error", { "allow": ["warn", "error"] }] } };' > eslint.config.js
+          echo 'module.exports = { ignores: ["scripts/env-checks/env_validator.js"], rules: { "no-console": ["error", { "allow": ["warn", "error"] }] } };' > eslint.config.js
 
       - name: Run ESLint to check for console logs
         run: |
