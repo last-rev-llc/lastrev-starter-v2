@@ -13,9 +13,6 @@ jobs:
         with:
           node-version: 'latest'
 
-      - name: Install ESLint
-        run: npm install eslint
-
       # This will flag all console statements as errors
       - name: Create ESLint config to disallow all console logs
         run: |
@@ -23,5 +20,5 @@ jobs:
 
       - name: Run ESLint to check for console logs
         run: |
-          npx eslint '**/*' --config eslint.config.js
+          npx --no-deprecation eslint '**/*' --config eslint.config.js
           rm eslint.config.js
