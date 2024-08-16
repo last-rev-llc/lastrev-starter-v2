@@ -12,6 +12,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const hasAllSentryVars = !!process.env.NEXT_PUBLIC_SENTRY_DSN;
 
 if (!hasAllSentryVars) {
+  /* eslint-ignore-next-line no-console */
   console.warn('Sentry is disabled.  Please check your environment variables.');
 }
 
