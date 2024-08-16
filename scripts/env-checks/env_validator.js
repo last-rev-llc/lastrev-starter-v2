@@ -1,4 +1,3 @@
-//eslint-ignore-file
 // Validate the required environment variables before starting the build process.
 const fs = require('fs');
 const path = require('path');
@@ -18,6 +17,7 @@ const colors = {
 
 // Immediately exit if skip flag exists
 if (fs.existsSync(skipValidatorFlagPath)) {
+  //eslint-disable-next-line no-console
   console.log(
     `${colors.yellow}Environment validation is skipped by flag. To re-enable validation, remove '${colors.green}${skipValidatorFlagPath}'.${colors.reset}`
   );
@@ -50,6 +50,7 @@ const getRequiredEnvVars = () => {
     const turboConfig = JSON.parse(fs.readFileSync(turboConfigPath, 'utf8'));
     return turboConfig.globalEnv;
   } catch (error) {
+    //eslint-disable-next-line no-console
     console.error(`${colors.red}Failed to read or parse 'turbo.json':${error}${colors.reset}`);
     process.exit(1); // Exit if there's an error reading the config
   }
@@ -62,18 +63,19 @@ const getMissingEnvVars = () => {
     (varName) => !process.env[varName] && !envCheckExclusions.includes(varName)
   );
 };
-
+//eslint-disable-next-line no-console
 console.log(`${colors.cyan}Starting environment checks...${colors.reset}`);
 
 const missingVars = getMissingEnvVars();
 
 // Check for any missing environment variables and display an error if any are found.
 if (missingVars.length > 0) {
+  //eslint-disable-next-line no-console
   console.error(
     `${colors.red}ERROR: The following required environment variables are missing or empty:${colors.reset}`
   );
   missingVars.forEach((varName) => console.error(`${colors.yellow}  - ${varName}${colors.reset}`));
-
+  //eslint-disable-next-line no-console
   console.error(
     colors.red +
       '\nExiting due to missing environment variables.\nPlease update your environment and try again.\n ' +
@@ -86,6 +88,7 @@ if (missingVars.length > 0) {
 
   process.exit(1);
 } else {
+  //eslint-disable-next-line no-console
   console.log(
     `${colors.green}All required environment variables are set. Continuing build...${colors.reset}`
   );
