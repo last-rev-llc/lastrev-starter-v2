@@ -3,22 +3,4 @@ on: [push, pull_request]
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 'latest'
-
-      # This will flag all console statements as errors
-      - name: Create ESLint config to disallow all console logs
-        run: |
-          echo 'module.exports = { rules: { "no-console": "error" } };' > eslint.config.js
-
-      - name: Run ESLint to check for console logs
-        run: |
-          npx --no-deprecation eslint '**/*' --config eslint.config.js
-          rm eslint.config.js
+    uses: last-rev-llc/workflows/.github/workflows/lint.yml
