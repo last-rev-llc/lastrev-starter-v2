@@ -1,4 +1,4 @@
-name: Lint Codebase
+name: Lint Codebase - Disallow Console Logs
 on: [push, pull_request]
 
 jobs:
