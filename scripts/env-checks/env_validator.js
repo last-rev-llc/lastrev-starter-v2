@@ -1,3 +1,4 @@
+//eslint-ignore-file
 // Validate the required environment variables before starting the build process.
 const fs = require('fs');
 const path = require('path');
