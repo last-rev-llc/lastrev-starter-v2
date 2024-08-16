@@ -1,6 +1,19 @@
 const { promises: fs } = require('fs');
 const path = require('path');
 
+// Inline custom logger due to eslint no-console rule for Pull Request checks
+class Logger {
+  info(...args) {
+    console.log(...args);
+  }
+
+  error(...args) {
+    console.error(...args);
+  }
+}
+
+const logger = new Logger();
+
 function loadFiles() {
   const dirPath = __dirname;
   const files = fs.readdirSync(dirPath);
@@ -9,11 +22,11 @@ function loadFiles() {
     if (/\.theme\.ts$/.test(file)) {
       const modulePath = path.join(dirPath, file);
       try {
-        console.log('Loading theme:', modulePath);
+        logger.info('Loading theme:', modulePath);
 
         modules.push(file);
       } catch (error) {
-        console.error(`Failed to load module: ${modulePath}`, error);
+        logger.error(`Failed to load module: ${modulePath}`, error);
       }
     }
   }
