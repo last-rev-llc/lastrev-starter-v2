@@ -16,9 +16,10 @@ jobs:
       - name: Install ESLint
         run: npm install eslint
 
-      - name: Create ESLint config with ignores
+      # This will flag all console statements as errors
+      - name: Create ESLint config to disallow all console logs
         run: |
-          echo 'module.exports = { rules: { "no-console": ["error", { "allow": ["warn", "error"] }] } };' > eslint.config.js
+          echo 'module.exports = { rules: { "no-console": "error" } };' > eslint.config.js
 
       - name: Run ESLint to check for console logs
         run: |
