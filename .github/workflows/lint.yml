@@ -1,0 +1,11 @@
+name: Lint Codebase
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    uses: last-rev-llc/workflows/.github/workflows/lint.yml@main
