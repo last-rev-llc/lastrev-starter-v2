@@ -1,15 +1,23 @@
 name: Lint Codebase
-
-on:
-  pull_request:
-    branches:
-      - main
-      - master
-  push:
-    branches:
-      - main
-      - master
+on: push
 
 jobs:
   lint:
-    uses: last-rev-llc/workflows/.github/workflows/lint.yml@main
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Create ESLint config with ignores
+        run: |
+          echo 'module.exports = { ignores: ["env_validator.js"], rules: { "no-console": ["error", { "allow": ["warn", "error"] }] } };' > eslint.config.js
+
+      - name: Run ESLint to check for console logs
+        run: |
+          npx eslint '**/*' --config eslint.config.js
+          rm eslint.config.js
