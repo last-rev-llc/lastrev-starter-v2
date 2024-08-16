@@ -1,4 +1,4 @@
-name: Lint Codebase - Disallow Console Logs
+name: Codebase Linting (No Console Logs)
 on: [push, pull_request]
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: 'latest'
 
       - name: Install ESLint
         run: npm install eslint
