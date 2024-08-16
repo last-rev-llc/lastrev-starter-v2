@@ -1,4 +1,4 @@
-name: Codebase Linting (No Console Logs)
+name: Console Log Linting
 on: [push, pull_request]
 
 jobs:
