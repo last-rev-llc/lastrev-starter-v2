@@ -20,19 +20,17 @@ export function middleware() {
 
   const styleSources = [
     'self',
-    'unsafe-inline',
     'https://*.sentry.io',
     'https://fonts.googleapis.com',
     'https://vitals.vercel-insights.com',
     'https://*.hs-scripts.com',
     'https://*.hsforms.net',
-    'https://*.googletagmanager.com'
+    'https://*.googletagmanager.com',
+    'unsafe-inline'
   ];
 
   const scriptSources = [
     'self',
-    'unsafe-inline',
-    'unsafe-eval',
     'https://*.flowise.theanswer.ai',
     'https://*.theanswer.ai',
     'https://*.sentry.io',
@@ -46,7 +44,9 @@ export function middleware() {
     'https://*.jquery.com',
     'https://*.hs-scripts.com',
     'https://*.hsforms.net',
-    'https://netlify-cdp-loader.netlify.app'
+    'https://netlify-cdp-loader.netlify.app',
+    'unsafe-inline',
+    'unsafe-eval'
   ];
 
   const fontSources = [
