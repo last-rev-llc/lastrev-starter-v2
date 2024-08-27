@@ -22,7 +22,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const path = join('/', (params.slug || ['/']).join('/'));
-  
+
   const { data: pageData } = await client.Page({
     path,
     locale,
@@ -44,7 +44,6 @@ export async function generateMetadata(
 // }
 
 // TODO: Add support for locale
-// TODO: Add support for GTM and other analytics
 
 const locale = 'en-US';
 

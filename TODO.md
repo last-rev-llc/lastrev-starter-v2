@@ -9,7 +9,6 @@
 [] Implement Live Editor and other UIEs
 [] Implement Analytics
 [] Implement Algolia
-[] Add GTM
 
 # Components
 
