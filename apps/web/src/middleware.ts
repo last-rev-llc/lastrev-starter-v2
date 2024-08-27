@@ -57,6 +57,7 @@ export function middleware() {
     img-src 'self'
       https://*.googletagmanager.com
       https://*.google-analytics.com
+      https://*.ctfassets.net
       data:;
     connect-src 'self'
       https://*.googletagmanager.com
