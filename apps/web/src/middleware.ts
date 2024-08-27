@@ -2,12 +2,12 @@ import { NextResponse } from 'next/server';
 
 export function middleware() {
   const cspHeader = `
-    default-src 'self' *.flowise.theanswer.ai *.theanswer.ai localhost:8888 *.sentry.io *.facebook.com vitals.vercel-insights.com *.hubapi.com *.hsforms.com *.hs-scripts.com *.hsforms.net *.hscollectedforms.net *.netlify.app;
-    style-src 'self' 'unsafe-inline' *.sentry.io fonts.googleapis.com vitals.vercel-insights.com *.hs-scripts.com *.hsforms.net;
+    default-src 'self' *.flowise.theanswer.ai *.theanswer.ai localhost:8888 *.sentry.io *.facebook.com vitals.vercel-insights.com *.hubapi.com *.hsforms.com *.hs-scripts.com *.hsforms.net *.hscollectedforms.net *.netlify.app *.googletagmanager.com;
+    style-src 'self' 'unsafe-inline' *.sentry.io fonts.googleapis.com vitals.vercel-insights.com *.hs-scripts.com *.hsforms.net *.googletagmanager.com;
     script-src 'self' 'unsafe-inline' 'unsafe-eval' *.flowise.theanswer.ai *.theanswer.ai *.sentry.io *.google-analytics.com *.googletagmanager.com vitals.vercel-insights.com *.hs-analytics.net *.hs-banner.com *.hsadspixel.net *.hscollectedforms.net *.jquery.com *.hs-scripts.com *.hsforms.net netlify-cdp-loader.netlify.app;
-    font-src 'self' *.sentry.io fonts.gstatic.com *.hs-scripts.com *.hsforms.net data:;
-    frame-src 'self' lastrev.com forms.hsforms.com *.theanswer.ai *.flowise.theanswer.ai;
-    img-src * data:;
+    font-src 'self' *.sentry.io fonts.gstatic.com *.hs-scripts.com *.hsforms.net data: *.googletagmanager.com;
+    frame-src 'self' lastrev.com forms.hsforms.com *.theanswer.ai *.flowise.theanswer.ai *.googletagmanager.com;
+    img-src * data: *.googletagmanager.com;
     media-src * data:;
     object-src 'none';
     base-uri 'self';

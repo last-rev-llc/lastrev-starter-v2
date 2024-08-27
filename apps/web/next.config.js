@@ -60,21 +60,22 @@ let config = {
     formats: ['image/avif', 'image/webp']
   },
   env: {
-    CONTENTFUL_SETTINGS_ID: process.env.CONTENTFUL_SETTINGS_ID ?? '',
-    //GRAPHQL_SERVER_URL: process.env.GRAPHQL_SERVER_URL,
-    CONTENTFUL_USE_PREVIEW: process.env.CONTENTFUL_USE_PREVIEW,
-    SITE: process.env.SITE,
-    SITE_SETTINGS: process.env.SITE_SETTINGS ?? '',
-    DEFAULT_SITE_ID: process.env.DEFAULT_SITE_ID,
-    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
-    CONTENTFUL_DELIVERY_TOKEN: process.env.CONTENTFUL_DELIVERY_TOKEN,
-    CONTENTFUL_PREVIEW_TOKEN: process.env.CONTENTFUL_PREVIEW_TOKEN,
-    CONTENTFUL_ENV: process.env.CONTENTFUL_ENV,
     //ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
     //ALGOLIA_SEARCH_API_KEY: process.env.ALGOLIA_SEARCH_API_KEY,
-    VERCEL_URL: process.env.VERCEL_URL,
+    //GRAPHQL_SERVER_URL: process.env.GRAPHQL_SERVER_URL,
+    CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY ?? '',
+    CONTENTFUL_DELIVERY_TOKEN: process.env.CONTENTFUL_DELIVERY_TOKEN,
+    CONTENTFUL_ENV: process.env.CONTENTFUL_ENV,
+    CONTENTFUL_PREVIEW_TOKEN: process.env.CONTENTFUL_PREVIEW_TOKEN,
+    CONTENTFUL_SETTINGS_ID: process.env.CONTENTFUL_SETTINGS_ID ?? '',
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_USE_PREVIEW: process.env.CONTENTFUL_USE_PREVIEW,
+    DEFAULT_SITE_ID: process.env.DEFAULT_SITE_ID,
     DEPLOY_URL: process.env.DEPLOY_URL,
-    CAPTCHA_SITE_KEY: process.env.CAPTCHA_SITE_KEY ?? ''
+    NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+    SITE_SETTINGS: process.env.SITE_SETTINGS ?? '',
+    SITE: process.env.SITE,
+    VERCEL_URL: process.env.VERCEL_URL
   },
   webpack: (config) => {
     config.resolve.alias = {
