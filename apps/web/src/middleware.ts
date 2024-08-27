@@ -1,110 +1,23 @@
 import { NextResponse } from 'next/server';
 
 export function middleware() {
-  const defaultSources = [
-    'self',
-    'https://*.flowise.theanswer.ai',
-    'https://*.theanswer.ai',
-    'localhost:8888',
-    'https://*.sentry.io',
-    'https://*.facebook.com',
-    'https://vitals.vercel-insights.com',
-    'https://*.hubapi.com',
-    'https://*.hsforms.com',
-    'https://*.hs-scripts.com',
-    'https://*.hsforms.net',
-    'https://*.hscollectedforms.net',
-    'https://*.netlify.app',
-    'https://*.googletagmanager.com'
-  ];
-
-  const styleSources = [
-    'self',
-    'https://*.sentry.io',
-    'https://fonts.googleapis.com',
-    'https://vitals.vercel-insights.com',
-    'https://*.hs-scripts.com',
-    'https://*.hsforms.net',
-    'https://*.googletagmanager.com',
-    'unsafe-inline'
-  ];
-
-  const scriptSources = [
-    'self',
-    'https://*.flowise.theanswer.ai',
-    'https://*.theanswer.ai',
-    'https://*.sentry.io',
-    'https://*.google-analytics.com',
-    'https://*.googletagmanager.com',
-    'https://vitals.vercel-insights.com',
-    'https://*.hs-analytics.net',
-    'https://*.hs-banner.com',
-    'https://*.hsadspixel.net',
-    'https://*.hscollectedforms.net',
-    'https://*.jquery.com',
-    'https://*.hs-scripts.com',
-    'https://*.hsforms.net',
-    'https://netlify-cdp-loader.netlify.app',
-    'unsafe-inline',
-    'unsafe-eval'
-  ];
-
-  const fontSources = [
-    'self',
-    'https://*.sentry.io',
-    'https://fonts.gstatic.com',
-    'https://*.hs-scripts.com',
-    'https://*.hsforms.net',
-    'data:',
-    'https://*.googletagmanager.com'
-  ];
-
-  const frameSources = [
-    'self',
-    'https://lastrev.com',
-    'https://forms.hsforms.com',
-    'https://*.theanswer.ai',
-    'https://*.flowise.theanswer.ai',
-    'https://*.googletagmanager.com'
-  ];
-
-  const imgSources = [
-    'self',
-    'https://*.googletagmanager.com',
-    'https://*.google-analytics.com',
-    'https://*.ctfassets.net',
-    'data:'
-  ];
-
-  const connectSources = [
-    'self',
-    'https://*.googletagmanager.com',
-    'https://*.google-analytics.com'
-  ];
-
-  const cspHeader = {
-    'default-src': defaultSources,
-    'style-src': styleSources,
-    'script-src': scriptSources,
-    'font-src': fontSources,
-    'frame-src': frameSources,
-    'img-src': imgSources,
-    'connect-src': connectSources,
-    'media-src': ['*', 'data:'],
-    'object-src': ['none'],
-    'base-uri': ['self'],
-    'form-action': ['self'],
-    'frame-ancestors': [
-      'self',
-      'https://app.contentful.com',
-      'https://lastrev.com',
-      'https://lr-live-editor.netlify.app',
-      'https://*.theanswer.ai',
-      'https://*.flowise.theanswer.ai'
-    ],
-    'block-all-mixed-content': true,
-    'upgrade-insecure-requests': true
-  };
+  const cspHeader = `
+    default-src 'self' *.flowise.theanswer.ai *.theanswer.ai localhost:8888 *.sentry.io *.facebook.com vitals.vercel-insights.com *.hubapi.com *.hsforms.com *.hs-scripts.com *.hsforms.net *.hscollectedforms.net *.netlify.app *.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com;
+    style-src 'self' 'unsafe-inline' *.sentry.io fonts.googleapis.com vitals.vercel-insights.com *.hs-scripts.com *.hsforms.net *.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com;
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' *.flowise.theanswer.ai *.theanswer.ai *.sentry.io *.google-analytics.com *.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com vitals.vercel-insights.com *.hs-analytics.net *.hs-banner.com *.hsadspixel.net *.hscollectedforms.net *.jquery.com *.hs-scripts.com *.hsforms.net netlify-cdp-loader.netlify.app;
+    font-src 'self' *.sentry.io fonts.gstatic.com *.hs-scripts.com *.hsforms.net data: *.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com;
+    frame-src 'self' lastrev.com forms.hsforms.com *.theanswer.ai *.flowise.theanswer.ai *.googletagmanager.com https://*.googletagmanager.com https://*.google-analytics.com;
+    img-src * data: *.googletagmanager.com https://*.ctfassets.net https://*.googletagmanager.com https://*.google-analytics.com;
+    media-src * data:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'self' https://app.contentful.com https://lastrev.com https://lr-live-editor.netlify.app *.theanswer.ai *.flowise.theanswer.ai;
+    block-all-mixed-content;
+    upgrade-insecure-requests;
+  `
+    .replace(/\s{2,}/g, ' ')
+    .trim();
 
   const requestHeaders = new Headers();
 
@@ -115,17 +28,7 @@ export function middleware() {
     },
     {
       key: 'Content-Security-Policy',
-      value: Object.entries(cspHeader)
-        .map(([key, value]) => {
-          if (typeof value === 'boolean') {
-            return key;
-          } else if (Array.isArray(value)) {
-            return `${key} ${value.join(' ')}`;
-          } else {
-            throw new Error(`Unexpected value type for CSP key ${key}`);
-          }
-        })
-        .join('; ')
+      value: cspHeader.replace(/\s{2,}/g, ' ').trim()
     },
     {
       key: 'X-Content-Type-Options',
