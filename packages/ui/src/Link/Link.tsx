@@ -100,6 +100,12 @@ const Link = React.forwardRef<any, LinkProps>(function Link(props, ref) {
     );
   }
 
+  /* This needs to pull from the main color since it's MUI link and it doesn't accept an object */
+
+  if (sharedLinkProps.color) {
+    sharedLinkProps.color = `${sharedLinkProps.color}.main`;
+  }
+
   if (text && icon) {
     return (
       <RootLinkTextIcon {...sharedLinkProps}>
