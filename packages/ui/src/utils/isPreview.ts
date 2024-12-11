@@ -1,7 +1,18 @@
-import { draftMode } from 'next/headers';
+// import { draftMode } from 'next/headers';
 const preview = process.env.CONTENTFUL_USE_PREVIEW === 'true';
 
 export const isPreview = () => {
-  const { isEnabled } = draftMode();
-  return preview || isEnabled;
+  return preview;
+  // if (!!preview) {
+  //   return true;
+  // }
+
+  // try {
+  //   const { isEnabled } = draftMode();
+  //   return !!preview || !!isEnabled;
+  // } catch (e) {
+  //   console.log('ispreviewerror', e);
+  // }
+
+  // return false;
 };

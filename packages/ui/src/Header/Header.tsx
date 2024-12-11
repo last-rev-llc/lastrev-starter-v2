@@ -181,6 +181,7 @@ const HeaderBackground = styled(Background, {
 const ContentOuterGrid = styled(Grid, {
   name: 'Header',
   slot: 'ContentOuterGrid',
+  shouldForwardProp: (prop: string) => prop !== 'menuVisible' && prop !== 'ownerState',
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
 })<{ ownerState: HeaderOwnerState }>``;
 

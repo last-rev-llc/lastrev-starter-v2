@@ -14,7 +14,7 @@ interface SettingEntry {
   value: string;
 }
 
-interface SEOValue {
+export interface SEOValue {
   'robots': SettingEntry;
   'canonical': SettingEntry;
   'keywords': SettingEntry;

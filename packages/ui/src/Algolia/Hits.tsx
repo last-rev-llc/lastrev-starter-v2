@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useHits } from 'react-instantsearch-core';
 import { CardProps } from '../Card/Card.types';
@@ -18,10 +18,25 @@ const Hits = ({
   HitComponent: any;
 }) => {
   const { items } = useHits(other);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null; // Skip rendering on server-side
+
   return (
     <>
       {items.map((hit, index) => {
         const cardData: CardProps = { ...(hit.card ?? hit), __typename: 'Card' };
+        // !!hit?.categories?.length && (cardData.overline = hit.categories[0]);
+        // cardData.actions?.forEach((cta) => {
+        //   if (cta) {
+        //     cta.color = 'navyBlue';
+        //     cta.variant = 'buttonContained';
+        //   }
+        // });
 
         return (
           <HitComponent
@@ -33,6 +48,7 @@ const Hits = ({
             aspectRatio={ownerState.itemsAspectRatio}
             backgroundColor={ownerState.backgroundColor}
             ownerState={ownerState}
+            highlightOverline
           />
         );
       })}
