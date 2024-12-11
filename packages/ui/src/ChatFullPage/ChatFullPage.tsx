@@ -86,7 +86,7 @@ const IntroText = styled(ContentModule, {
   overridesResolver: (_, styles) => [styles.introText]
 })<{ ownerState: ChatFullPageOwnerState }>``;
 
-const MainContentWrap = styled('div', {
+const MainContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'ChatFullPage',
   slot: 'MainContentWrap',
   overridesResolver: (_, styles) => [styles.mainContentWrap]

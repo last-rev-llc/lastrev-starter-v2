@@ -18,7 +18,7 @@ const BackToTop = (props: BackToTopProps) => {
   const { FabProps, sidekickLookup } = props;
 
   const handleClick = () => {
-    window.scrollTo({ top: 0, left: 0 });
+    !!window?.scrollTo && window.scrollTo({ top: 0, left: 0 });
   };
 
   const trigger = useScrollTrigger({
@@ -35,8 +35,7 @@ const BackToTop = (props: BackToTopProps) => {
         data-testid="BackToTop"
         aria-label="Back to top"
         {...sidekick(sidekickLookup)}
-        ownerState={ownerState}
-      >
+        ownerState={ownerState}>
         <KeyboardArrowUpIcon />
       </Root>
     </ErrorBoundary>

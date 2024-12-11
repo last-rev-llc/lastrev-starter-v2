@@ -31,14 +31,14 @@
     "test": "jest --passWithNoTests"
   },
   "peerDependencies": {
-    "@types/react-dom": "^18.3.0",
+    "@types/react-dom": "^19.0.2",
     "@types/react-router-dom": "^5.3.3",
-    "@types/react": "^18.3.1",
+    "@types/react": "^19.0.1",
     "graphql": "^16.9.0",
     "nodemon": "^3.1.7",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "react-scripts": "^5.0.1",
-    "react": "^18.3.1",
+    "react": "^19.0.0",
     "tsc-watch": "^4.2.9"
   },
   "dependencies": {
@@ -57,19 +57,19 @@
     "npm-run-all": "^4.1.5"
   },
   "devDependencies": {
-    "@types/node": "^20.12.10",
-    "@types/react-dom": "^18.3.0",
+    "@types/node": "^22.10.2",
+    "@types/react-dom": "^19.0.2",
     "@types/react-router-dom": "^5.3.3",
-    "@types/react": "^18.3.1",
+    "@types/react": "^19.0.1",
     "cross-env": "^7.0.3",
     "encoding": "^0.1.13",
     "graphql-extensions": "workspace:*",
     "graphql": "^16.9.0",
     "nodemon": "^3.1.7",
     "pm2": "^5.4.3",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.0.0",
     "react-scripts": "^5.0.1",
-    "react": "^18.3.1",
+    "react": "^19.0.0",
     "tsconfig": "workspace:*",
     "typescript": "^5.7.2",
     "wait-on": "^7.2.0"

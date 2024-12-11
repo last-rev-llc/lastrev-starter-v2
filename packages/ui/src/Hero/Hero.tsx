@@ -21,15 +21,16 @@ const Hero = (props: HeroProps) => {
 
   const heroRef = React.useRef<HTMLDivElement | null>(null);
 
-  const scrollToBottom = () => {
-    if (heroRef.current) {
-      window.scrollTo({
-        top: heroRef.current.scrollHeight,
-        left: 0,
-        behavior: 'smooth'
-      });
-    }
-  };
+  // const scrollToBottom = () => {
+  //   if (heroRef.current) {
+  //     !!window?.scrollTo &&
+  //       window.scrollTo({
+  //         top: heroRef.current.scrollHeight,
+  //         left: 0,
+  //         behavior: 'smooth'
+  //       });
+  //   }
+  // };
 
   const {
     breadcrumbs,
@@ -162,7 +163,7 @@ const ContentOuterGrid = styled(Grid, {
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
 })<{ ownerState: HeroOwnerState }>``;
 
-const MainContentWrap = styled('div', {
+const MainContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'Hero',
   slot: 'MainContentWrap',
   overridesResolver: (_, styles) => [styles.mainContentWrap]

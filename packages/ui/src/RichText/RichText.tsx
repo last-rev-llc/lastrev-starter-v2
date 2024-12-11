@@ -211,26 +211,18 @@ const createRenderOptions = ({
   };
 };
 
-const RichText = (
-  {
-    body,
-    // align,
-    variant,
-    sidekickLookup,
-    // sx,
-    renderOptions,
-    ...props
-  }: RichTextProps,
-  { renderNode, renderMark }: Options
-) => {
+const RichText = ({
+  body,
+  variant,
+  sidekickLookup,
+  renderOptions = {},
+  ...props
+}: RichTextProps) => {
+  const { renderNode, renderMark } = renderOptions;
+
   return (
     <ErrorBoundary>
-      <Root
-        {...sidekick(sidekickLookup)}
-        variant={variant}
-        // sx={{ textAlign: align, ...sx, ...styles?.root }} // TODO
-        data-testid="RichText-root"
-        {...props}>
+      <Root {...sidekick(sidekickLookup)} variant={variant} data-testid="RichText-root" {...props}>
         {documentToReactComponents(
           body?.json,
           createRenderOptions({ links: body?.links, renderNode, renderMark, ...renderOptions })
@@ -240,7 +232,7 @@ const RichText = (
   );
 };
 
-const Root = styled('div', {
+const Root = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'RichText',
   slot: 'Root',
   shouldForwardProp: (prop) =>
@@ -251,14 +243,14 @@ const Root = styled('div', {
   display: contents;
 `;
 
-const EmbeddedRoot = styled('div', {
+const EmbeddedRoot = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'RichText',
   slot: 'EmbeddedRoot',
   shouldForwardProp: (prop) => prop !== 'variant',
   overridesResolver: (_, styles) => [styles.embeddedRoot]
 })<{ variant?: string }>``;
 
-const InlineRoot = styled('span', {
+const InlineRoot = styled('span' as keyof JSX.IntrinsicElements, {
   name: 'RichText',
   slot: 'InlineRoot',
   shouldForwardProp: (prop) => prop !== 'variant',

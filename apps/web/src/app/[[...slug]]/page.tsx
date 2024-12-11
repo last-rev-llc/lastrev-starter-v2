@@ -11,16 +11,14 @@ import ContentModule from '@ui/ContentModule/ContentModule';
 const site = process.env.SITE;
 
 type Props = {
-  params: { slug: string[] };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ slug: string[] }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export const revalidate = 300;
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
   const path = join('/', (params.slug || ['/']).join('/'));
 
   const { data: pageData } = await client.Page({
@@ -47,7 +45,8 @@ export async function generateMetadata(
 
 const locale = 'en-US';
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const path = join('/', (params.slug || ['/']).join('/'));
 
   const { data: pageData } = await client.Page({

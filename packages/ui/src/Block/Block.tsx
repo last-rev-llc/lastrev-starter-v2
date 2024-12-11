@@ -186,7 +186,7 @@ const IntroText = styled(ContentModule, {
   overridesResolver: (_, styles) => [styles.introText]
 })<{ ownerState: BlockOwnerState }>``;
 
-const MainContentWrap = styled('div', {
+const MainContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'Block',
   slot: 'MainContentWrap',
   overridesResolver: (_, styles) => [styles.mainContentWrap]
@@ -222,7 +222,7 @@ const Body = styled(ContentModule, {
   overridesResolver: (_, styles) => [styles.body]
 })<{ ownerState: BlockOwnerState }>``;
 
-const SideContentWrap = styled('div', {
+const SideContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'Block',
   slot: 'SideContentWrap',
   overridesResolver: (_, styles) => [styles.sideContentWrap]

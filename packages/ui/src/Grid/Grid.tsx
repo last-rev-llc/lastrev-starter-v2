@@ -12,7 +12,7 @@ const Grid = ({ children, overrideNested, ...props }: GridProps) => {
   );
 };
 
-const Root = styled('div', {
+const Root = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'Grid',
   slot: 'Root',
   shouldForwardProp: (prop: string) => prop !== 'overrideNested' && prop !== 'ownerState',

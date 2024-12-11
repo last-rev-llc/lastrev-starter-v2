@@ -19,6 +19,7 @@ const Collection = (props: CollectionProps) => {
   const ownerState = { ...props };
 
   const {
+    id,
     backgroundImage,
     backgroundColor,
     items,
@@ -59,7 +60,7 @@ const Collection = (props: CollectionProps) => {
                 <Item
                   ownerState={ownerState}
                   backgroundColor={backgroundColor}
-                  key={item?.id}
+                  key={`collection-${id}-${item?.id}-index`}
                   {...item}
                   layoutConfig={layoutConfig}
                   gridLayout={variant}

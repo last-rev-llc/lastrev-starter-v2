@@ -5,13 +5,14 @@ import { AppProvider } from '@ui/AppProvider/AppProvider';
 import { notFound } from 'next/navigation';
 
 type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 const locale = 'en-US';
 
-export default async function Preview({ params }: Props) {
+export default async function Preview(props: Props) {
+  const params = await props.params;
   const { id } = params;
   const { data } = await client.Preview({ id, locale });
 

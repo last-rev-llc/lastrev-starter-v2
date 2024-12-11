@@ -87,7 +87,7 @@ const ContentOuterGrid = styled(Grid, {
   overridesResolver: (_, styles) => [styles.contentOuterGrid]
 })<{ ownerState: FormOwnerState }>``;
 
-const MainContentWrap = styled('div', {
+const MainContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'Block',
   slot: 'MainContentWrap',
   overridesResolver: (_, styles) => [styles.mainContentWrap]

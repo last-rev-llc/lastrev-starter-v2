@@ -77,7 +77,7 @@ const IntroText = styled(ContentModule, {
   overridesResolver: (_, styles) => [styles.introText]
 })<{ ownerState: IFrameOwnerState }>``;
 
-const MainContentWrap = styled('div', {
+const MainContentWrap = styled('div' as keyof JSX.IntrinsicElements, {
   name: 'IFrame',
   slot: 'MainContentWrap',
   overridesResolver: (_, styles) => [styles.mainContentWrap]

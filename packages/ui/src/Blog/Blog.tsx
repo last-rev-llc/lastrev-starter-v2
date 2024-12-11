@@ -44,7 +44,7 @@ const Blog = (props: BlogProps) => {
 
   React.useEffect(() => {
     const origin =
-      typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+      typeof window !== 'undefined' && !!window?.location?.origin ? window.location.origin : '';
     setShareUrl(`${origin}${pathname}`);
   }, [pathname]);
 

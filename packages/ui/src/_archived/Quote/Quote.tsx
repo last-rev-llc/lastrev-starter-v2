@@ -125,7 +125,7 @@ const AuthorName = styled(Typography, {
   overridesResolver: (_, styles) => [styles.authorName]
 })<{ ownerState: QuoteOwnerState }>``;
 
-const QuoteSymbol = styled('span', {
+const QuoteSymbol = styled('span' as keyof JSX.IntrinsicElements, {
   name: 'Quote',
   slot: 'QuoteSymbol',
   overridesResolver: (_, styles) => [styles.quoteSymbol]
