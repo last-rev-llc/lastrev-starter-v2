@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Chip from '@mui/material/Chip';
+import { unCamelCase } from '../utils/unCamelCase';
 
 import { useCurrentRefinements } from 'react-instantsearch-core';
 
@@ -15,7 +16,7 @@ const CurrentRefinements = ({ ownerState, ...other }: { ownerState: any }) => {
           {item.refinements.map((refinement, subIndex) => (
             <Chip
               key={`refinement-chip-${index}-${subIndex}`}
-              label={`${item.label}: ${refinement.value}`}
+              label={`${unCamelCase(item.label)}: ${refinement.value}`}
               variant="outlined"
               onClick={() => {
                 refine(refinement);

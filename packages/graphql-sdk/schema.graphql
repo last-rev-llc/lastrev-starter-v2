@@ -92,6 +92,7 @@ type Card implements Content {
   aspectRatio: String
   body: RichText
   bodyRte: JSON
+  disclaimer: String
   id: String
   internalTitle: String
   jsonLd: JSON
@@ -102,6 +103,7 @@ type Card implements Content {
   subtitle: String
   theme: [Theme]
   title: String
+  userName: String
   variant: String
 }
 
@@ -541,6 +543,11 @@ type Query {
   sitemap(locales: [String!], preview: Boolean, root: String!, site: String): Sitemap
   sitemapIndex(preview: Boolean, site: String): Sitemap
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
+}
+
+type Quote {
+  image: Media
+  logo: Media
 }
 
 type RichText {

@@ -37,7 +37,9 @@ export const mappers: Mappers = {
           showFullImage: true,
           overline: getLocalizedField(person.fields, 'jobTitle', ctx),
           title: getLocalizedField(person.fields, 'name', ctx),
-          sideImageItems: [getLocalizedField(person.fields, 'mainImage', ctx)] ?? []
+          sideImageItems: getLocalizedField(person.fields, 'mainImage', ctx)
+            ? [getLocalizedField(person.fields, 'mainImage', ctx)]
+            : []
         })
     },
 

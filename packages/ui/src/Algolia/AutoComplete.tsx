@@ -19,6 +19,7 @@ const AutoComplete = (props: any) => {
   const variant = 'onePerRow';
   const itemsVariant = 'autocomplete';
   const [showResults, setShowResults] = React.useState(false);
+  const [showError, setShowError] = React.useState(false);
   const ownerState = {
     ...props,
     ...props.ownerState,
@@ -26,11 +27,12 @@ const AutoComplete = (props: any) => {
     itemsVariant
   };
 
-  const cbOnChange = (isValid: boolean) => {
+  const cbOnChange = (isValid: boolean, query: string) => {
     setShowResults(isValid);
   };
 
   const { sidekickLookup, algoliaSettings, algoliaSearchKey } = props;
+
   return (
     <ErrorBoundary>
       <Root
@@ -46,7 +48,7 @@ const AutoComplete = (props: any) => {
             <SearchBox
               ownerState={ownerState}
               searchAsYouType={true}
-              minCharacters={3}
+              minCharacters={1}
               cbOnChange={cbOnChange}
             />
           </SearchBoxWrap>
@@ -86,7 +88,7 @@ const AutoCompleteBackground = styled(Background, {
 })<{}>``;
 
 const ItemsGrid = styled(Box, {
-  name: 'CollectionDynamic',
+  name: 'AutoComplete',
   slot: 'ItemsGrid',
   overridesResolver: (_, styles) => [styles.itemsGrid, styles.itemsContainerOnePerRow]
 })<{ ownerState: any }>(({ ownerState }) => ({
@@ -104,7 +106,15 @@ const ResultsWrap = styled(Box, {
   slot: 'ResultsWrap',
   overridesResolver: (_, styles) => [styles.resultsWrap]
 })<{ ownerState: any }>(({ ownerState, theme }) => ({
-  // backgroundColor: ownerState.backgroundColor
+  position: 'absolute', // Position it below the text box
+  top: '100%', // Ensure it appears right below the text box
+  right: 0, // Align it to the right of the text box
+  width: '100%', // Set the width to 100% to match the parent
+  maxHeight: '300px', // Set the max height to 300px
+  overflowY: 'auto', // Add scroll if content exceeds max height
+  backgroundColor: ownerState.backgroundColor,
+  borderBottomRightRadius: 'var(--grid-gap-double)',
+  borderBottomLeftRadius: 'var(--grid-gap-double)'
 }));
 
 const ResultsInnerWrap = styled(Box, {
@@ -116,9 +126,25 @@ const ResultsInnerWrap = styled(Box, {
 }));
 
 const SearchBoxWrap = styled(Box, {
-  name: 'CollectionDynamic',
+  name: 'AutoComplete',
   slot: 'SearchBoxWrap',
   overridesResolver: (_, styles) => [styles.searchBoxWrap]
-})<{ ownerState: any }>(({ ownerState }) => ({}));
+})<{ ownerState: any }>(({ ownerState, theme }) => ({
+  ...theme.mixins.applyBackgroundColor({ ownerState: { backgroundColor: 'white' }, theme }),
+  flex: 1,
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: theme.spacing(10),
+
+  input: { ...theme.typography.body1, padding: theme.spacing(1.5, 3) },
+
+  svg: {
+    position: 'absolute',
+    width: theme.spacing(2),
+    height: theme.spacing(2),
+    right: theme.spacing(3)
+  }
+}));
 
 export default AutoComplete;

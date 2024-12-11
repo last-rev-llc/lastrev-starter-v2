@@ -61,7 +61,7 @@ const HierarchicalList = ({ onChangeCb, items, createURL, onNavigate }: Hierarch
               />
             </ListItemIcon>
             <ListItemText
-              primaryTypographyProps={{ variant: 'bodyXSmall' }}
+              primaryTypographyProps={{ variant: 'body2' }}
               primary={FACETS_NAME_MAP[item.label] ?? item.label}
             />
           </ListItemButton>

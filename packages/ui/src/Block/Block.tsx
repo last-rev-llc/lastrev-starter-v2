@@ -136,12 +136,13 @@ const Block = (props: BlockProps) => {
               {!!mediaItems?.length ? (
                 mediaItems.map((media) => (
                   // <Slide key={media?.id}>
-                    <Media
-                      ownerState={ownerState}
-                      {...sidekick(sidekickLookup, 'mediaItems')}
-                      {...media}
-                      columns={layoutConfig[variant]}
-                    />
+                  <Media
+                    key={media?.id}
+                    ownerState={ownerState}
+                    {...sidekick(sidekickLookup, 'mediaItems')}
+                    {...media}
+                    columns={layoutConfig[variant]}
+                  />
                   // </Slide>
                 ))
               ) : (

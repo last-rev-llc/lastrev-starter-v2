@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { InstantSearchNext } from 'react-instantsearch-nextjs';
 import { Configure } from 'react-instantsearch';
@@ -13,7 +13,8 @@ type AlgoliaSearch = {
 };
 
 export const AlgoliaSearch = ({ children, algoliaSettings, algoliaSearchKey }: AlgoliaSearch) => {
-  const searchClient = createSearchClient(algoliaSearchKey);
+  const searchClient = useMemo(() => createSearchClient(algoliaSearchKey), [algoliaSearchKey]);
+
   return (
     <InstantSearchNext
       searchClient={searchClient}
@@ -26,7 +27,8 @@ export const AlgoliaSearch = ({ children, algoliaSettings, algoliaSearchKey }: A
               }
             }
           : {}
-      }>
+      }
+      future={{ preserveSharedStateOnUnmount: true }}>
       {!!algoliaSettings?.configure ? <Configure {...algoliaSettings.configure} /> : null}
       {children}
     </InstantSearchNext>
