@@ -243,7 +243,8 @@ const RichText = (
 const Root = styled('div', {
   name: 'RichText',
   slot: 'Root',
-  shouldForwardProp: (prop) => prop !== 'variant' && prop !== 'ownerState',
+  shouldForwardProp: (prop) =>
+    prop !== 'variant' && prop !== 'ownerState' && prop !== 'backgroundColor',
   overridesResolver: (_, styles) => [styles.root, styles.richTextContent]
 })<{ variant?: string }>`
   white-space: pre-wrap;
