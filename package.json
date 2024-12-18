@@ -40,7 +40,7 @@
     "chromatic": "^11.20.1",
     "cypress": "^13.16.1",
     "dotenv-cli": "^7.4.4",
-    "next": "^14.2.3",
+    "next": "^14.2.15",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "react-dom": "^18.3.1",
