@@ -13,4 +13,8 @@ server/dist
 public/dist
 **/analyze
 storybook-static
-.env.local.backup
+.env.local.backup 
+# BWS Secure
+.env.secure.*
+requiredVars.env
+.env-debug.html
