@@ -545,6 +545,11 @@ type Query {
   sitemapPage(contentType: String!, locale: String, page: Int, preview: Boolean, site: String): SitemapPage
 }
 
+type Quote {
+  image: Media
+  logo: Media
+}
+
 type RichText {
   id: String
   json: JSON
@@ -574,17 +579,13 @@ type Section implements Content {
 type Settings implements Content {
   animation: JSON
   category: String
-  contents: [Content]
   footer: Footer
   header: Header
-  hero: Hero
   id: String
   image: Media
   internalTitle: String
   liveEditorSettings: JSON
-  path: String
   settingsType: String
-  # sideNav: [Content]
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
