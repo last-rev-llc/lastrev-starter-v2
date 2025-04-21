@@ -1,0 +1,14 @@
+{
+  "projects": [
+    {
+      "platform": "netlify",
+      "projectName": "lastrev-starter-v2",
+      "bwsProjectIds": {
+        "prod": "1d06bbbb-973a-4cd5-b448-b2c601029b9a",
+        "dev": "33a325ed-9f7c-419e-8a3c-b2c60102a2c2",
+        "local": "90c55c8b-2bc5-48e7-b0ce-b2c60102a984"
+      },
+      "preserveVars": ["BWS_ACCESS_TOKEN"]
+    }
+  ]
+}
