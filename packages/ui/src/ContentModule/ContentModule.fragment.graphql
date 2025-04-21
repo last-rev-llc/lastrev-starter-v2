@@ -31,12 +31,12 @@ fragment ContentModule_SettingsFragment on Settings {
   #sideNav {
   #  ...Link_BaseFragment
   #}
-  hero {
-    ...Hero_BaseFragment
-  }
-  contents {
-    ...ContentModule_BaseFragment
-  }
+  #hero {
+  #  ...Hero_BaseFragment
+  #}
+  #contents {
+  #  ...ContentModule_BaseFragment
+  #}
 }
 
 fragment ContentModule_PersonFragment on Content {
