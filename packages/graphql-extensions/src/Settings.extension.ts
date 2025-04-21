@@ -14,7 +14,7 @@ export const typeDefs = gql`
     header: Header
     footer: Footer
     path: String
-    sideNav: [Content]
+    # sideNav: [Content]
     hero: Hero
     contents: [Content]
   }

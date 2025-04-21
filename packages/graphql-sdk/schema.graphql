@@ -589,7 +589,7 @@ type Settings implements Content {
   liveEditorSettings: JSON
   path: String
   settingsType: String
-  sideNav: [Content]
+  # sideNav: [Content]
   sidekickLookup: JSON
   theme: [Theme]
   variant: String
