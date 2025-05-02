@@ -66,7 +66,8 @@ const config = new LastRevAppConfig({
   },
   sitemap: {
     domain: `${process.env.DOMAIN}`,
-    excludePages: ['error_404']
+    excludePages: ['error_404'],
+    maxPageSize: 100
   },
   apolloServerOptions: {
     introspection: true
