@@ -14,6 +14,9 @@
     "gql:dev": "pnpm secure-run turbo sync:cms gql:dev --continue --concurrency 15",
     "gql:logs": "pnpm secure-run turbo gql:logs",
     "lint": "turbo lint",
+    "backstop:reference": "backstop reference",
+    "backstop:test": "backstop test",
+    "backstop:open": "backstop openReport",
     "storybook": "pnpm --filter ui storybook dev -p 6006",
     "sync:cms": "pnpm secure-run turbo sync:cms",
     "test": "turbo test",
@@ -51,7 +54,8 @@
     "dotenv": "^16.4.7",
     "yargs": "^17.7.2",
     "glob": "^11.0.1",
-    "axios": "^1.7.9"
+    "axios": "^1.7.9",
+    "backstopjs": "^6.5.4"
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "4"
