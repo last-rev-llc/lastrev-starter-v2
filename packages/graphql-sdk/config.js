@@ -3,6 +3,7 @@ require('dotenv').config();
 const LastRevAppConfig = require('@last-rev/app-config');
 const extensions = require('graphql-extensions');
 const { resolve } = require('path');
+const { schemaTypes } = require('./schema');
 
 const testForEnvVar = (name) => {
   const envVar = process.env[name];
@@ -18,10 +19,11 @@ const parseNumberEnvVar = (value = '') => {
   return Number.isNaN(result) ? undefined : result;
 };
 
-const spaceId = testForEnvVar('CONTENTFUL_SPACE_ID');
-const contentDeliveryToken = testForEnvVar('CONTENTFUL_DELIVERY_TOKEN');
-const contentPreviewToken = testForEnvVar('CONTENTFUL_PREVIEW_TOKEN');
-const env = testForEnvVar('CONTENTFUL_ENV');
+const projectId = testForEnvVar('SANITY_PROJECT_ID');
+const dataset = testForEnvVar('SANITY_DATASET');
+const apiVersion = testForEnvVar('SANITY_API_VERSION');
+const token = testForEnvVar('SANITY_TOKEN');
+
 const parseBooleanEnvVar = (value = '') => {
   // values parsed as true: true, 1, yes, y, => ignore caps
   const val = value.toString().toLowerCase();
@@ -29,19 +31,19 @@ const parseBooleanEnvVar = (value = '') => {
 };
 
 const config = new LastRevAppConfig({
-  cms: 'Contentful',
-  contentStrategy: 'fs',
-  // cmsCacheStrategy: 'redis',
+  cms: 'Sanity',
+  contentStrategy: 'cms',
+  cmsCacheStrategy: 'redis',
   sites: [process.env.SITE],
   extensions,
   graphql: { port: 8888 },
-  contentful: {
-    contentPreviewToken,
-    contentDeliveryToken,
-    spaceId,
-    env,
-    usePreview: parseBooleanEnvVar(process.env.CONTENTFUL_USE_PREVIEW),
-    maxBatchSize: parseNumberEnvVar(process.env.CONTENTFUL_MAX_BATCH_SIZE)
+  sanity: {
+    projectId,
+    dataset,
+    apiVersion,
+    // useCdn: parseBooleanEnvVar(process.env.SANITY_USE_CDN),
+    token,
+    schemaTypes
   },
   // algolia: {
   //   applicationId: process.env.ALGOLIA_APPLICATION_ID,

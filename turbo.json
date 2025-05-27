@@ -45,7 +45,7 @@
     },
     "gql:dev": {
       "outputMode": "new-only",
-      "dependsOn": ["^build", "graphql-sdk#sync:cms"],
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
@@ -61,28 +61,18 @@
     "graphql-sdk#build": {
       "outputMode": "new-only",
       "cache": false,
-      "dependsOn": ["graphql-sdk#sync:cms", "^build"],
-      "inputs": [
-        "./packages/graphql-sdk/.cms-sync",
-        "./packages/**/src/**/*.graphql",
-        "./apps/**/src/**/*.graphql"
-      ],
+      "dependsOn": ["^build"],
+      "inputs": ["./packages/**/src/**/*.graphql", "./apps/**/src/**/*.graphql"],
       "outputs": ["dist/**", "schema.graphql", "src/generated/**"]
     },
     "graphql-sdk#gql:start": {
       "outputMode": "new-only",
       "cache": false,
-      "dependsOn": ["graphql-extensions#build", "graphql-sdk#sync:cms", "^build"]
-    },
-    "graphql-sdk#sync:cms": {
-      "outputMode": "new-only",
-      "cache": false,
-      "dependsOn": ["^build", "graphql-extensions#build"],
-      "outputs": [".cms-sync"]
+      "dependsOn": ["graphql-extensions#build", "^build"]
     },
     "web#build": {
       "outputMode": "new-only",
-      "dependsOn": ["graphql-sdk#sync:cms", "graphql-sdk#gql:start", "^build"],
+      "dependsOn": ["graphql-sdk#gql:start", "^build"],
       "outputs": ["out/**", ".next/**"]
     }
   }
