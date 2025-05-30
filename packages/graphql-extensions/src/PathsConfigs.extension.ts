@@ -1,5 +1,5 @@
 import { getDefaultFieldValue } from '@last-rev/graphql-contentful-core';
-import { type ContentfulLoaders, type ContentfulPathsGenerator } from '@last-rev/types';
+import { type CmsLoaders, type ContentfulPathsGenerator } from '@last-rev/types';
 
 import { createPath } from './utils/createPath';
 
@@ -41,7 +41,7 @@ import { createPath } from './utils/createPath';
 // only checking for the first item
 const generateParentPaths = async (
   content: any,
-  loaders: ContentfulLoaders,
+  loaders: CmsLoaders,
   defaultLocale: string,
   preview?: boolean,
   paths: string[] = []

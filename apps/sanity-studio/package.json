@@ -1,5 +1,5 @@
 {
-  "name": "@last-rev/sanity",
+  "name": "sanity-studio",
   "version": "0.1.0",
   "private": true,
   "main": "dist/index.js",
@@ -8,22 +8,21 @@
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",
-    "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
-    "remove-tables": "node scripts/removeTables.js"
+    "sanity-studio-deploy": "sanity deploy -y"
   },
   "dependencies": {
     "@sanity/document-internationalization": "^3.3.1",
-    "@sanity/vision": "^3.89.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sanity": "^3.89.0",
+    "@sanity/vision": "^3.90.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sanity": "^3.90.0",
+    "sanity-plugin-media": "^3.0.2",
+    "sanity-schema": "workspace:*",
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
-    "@types/react": "^18.0.25",
-    "contentful-to-sanity": "^4.2.10",
+    "@types/react": "^18.3.1",
     "eslint": "^9.9.0",
     "prettier": "^3.0.2",
     "tsconfig": "workspace:*",

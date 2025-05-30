@@ -28,6 +28,7 @@ export const typeDefs = gql`
     numItems: Int
     algoliaSettings: JSON
     showFilters: Boolean
+    settings: JSON
   }
 
   type CollectionDynamicOptions {

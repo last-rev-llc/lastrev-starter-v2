@@ -20,6 +20,7 @@ export const typeDefs = gql`
     mainImage: Media
     breadcrumbs: [Link]
     hero: Content
+    seo: JSON
   }
 `;
 

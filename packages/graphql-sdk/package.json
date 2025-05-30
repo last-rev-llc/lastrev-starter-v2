@@ -48,14 +48,15 @@
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
     "@graphql-codegen/typescript-operations": "^4.4.0",
     "@last-rev/app-config": "link:../../../lastrev-libraries/packages/app-config",
-    "@last-rev/cli": "^0.5.20",
+    "@last-rev/cli": "link:../../../lastrev-libraries/packages/cli",
     "@parcel/watcher": "^2.4.1",
     "concurrently": "^8.2.2",
     "dotenv": "^16.4.7",
     "graphql-request": "^6.1.0",
     "graphql-tag": "^2.12.6",
     "npm-run-all": "^4.1.5",
-    "sanity": "^3.89.0"
+    "sanity": "^3.90.0",
+    "sanity-schema": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.12.10",

@@ -13,6 +13,8 @@ export const typeDefs = gql`
   extend type Settings {
     header: Header
     footer: Footer
+    seo: JSON
+    liveEditorSettings: JSON
     # path: String
     # sideNav: [Content]
     # hero: Hero

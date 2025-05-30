@@ -21,6 +21,7 @@ export const typeDefs = gql`
     breadcrumbs: [Link]
     footerDisclaimerOverride: RichText
     isHomepage: Boolean
+    seo: JSON
   }
 `;
 

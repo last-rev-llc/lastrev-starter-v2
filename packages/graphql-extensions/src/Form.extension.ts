@@ -14,6 +14,7 @@ export const typeDefs = gql`
     contents: [Content]
     breadcrumbs: [Link]
     footerDisclaimerOverride: RichText
+    seo: JSON
   }
 `;
 

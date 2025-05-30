@@ -8,6 +8,7 @@ export const typeDefs = gql`
   extend type ModuleIntegration {
     introText: Text
     backgroundImage: Media
+    settings: JSON
   }
 `;
 

@@ -23,6 +23,7 @@ export const typeDefs = gql`
     author: Person
     hero: Content
     aboutText: RichText
+    seo: JSON
   }
 `;
 

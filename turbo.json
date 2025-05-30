@@ -5,8 +5,11 @@
     "ANALYZE_BUNDLE",
     "CONTENTFUL_DELIVERY_TOKEN",
     "CONTENTFUL_ENV",
+    "CONTENTFUL_MANAGEMENT_TOKEN",
     "CONTENTFUL_PREVIEW_TOKEN",
     "CONTENTFUL_SPACE_ID",
+    "CONTENTFUL_STARTER_ACCESS_TOKEN",
+    "CONTENTFUL_STARTER_SPACE_ID",
     "CONTENTFUL_USE_PREVIEW",
     "DEFAULT_SITE_ID",
     "DEPLOY_URL",
@@ -18,6 +21,11 @@
     "PAGES_REVALIDATE",
     "PORT",
     "PREVIEW_TOKEN",
+    "SANITY_STUDIO_SANITY_API_VERSION",
+    "SANITY_STUDIO_SANITY_DATASET",
+    "SANITY_STUDIO_SANITY_PROJECT_ID",
+    "SANITY_STUDIO_SANITY_PROJECT_TITLE",
+    "SANITY_TOKEN",
     "SITE_SETTINGS",
     "SITE",
     "VERCEL_URL"
@@ -27,6 +35,11 @@
       "cache": false,
       "persistent": true,
       "dependsOn": ["build"]
+    },
+    "deploy:sanity": {
+      "outputMode": "new-only",
+      "cache": false,
+      "dependsOn": ["^build"]
     },
     "build": {
       "outputMode": "new-only",
@@ -45,7 +58,7 @@
     },
     "gql:dev": {
       "outputMode": "new-only",
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "graphql-sdk#sync:cms"],
       "cache": false,
       "persistent": true
     },
@@ -61,19 +74,49 @@
     "graphql-sdk#build": {
       "outputMode": "new-only",
       "cache": false,
-      "dependsOn": ["^build"],
-      "inputs": ["./packages/**/src/**/*.graphql", "./apps/**/src/**/*.graphql"],
+      "dependsOn": ["graphql-sdk#sync:cms", "^build"],
+      "inputs": [
+        "./packages/graphql-sdk/.cms-sync",
+        "./packages/**/src/**/*.graphql",
+        "./apps/**/src/**/*.graphql"
+      ],
       "outputs": ["dist/**", "schema.graphql", "src/generated/**"]
     },
     "graphql-sdk#gql:start": {
       "outputMode": "new-only",
       "cache": false,
-      "dependsOn": ["graphql-extensions#build", "^build"]
+      "dependsOn": ["graphql-extensions#build", "graphql-sdk#sync:cms", "^build"]
+    },
+    "graphql-sdk#sync:cms": {
+      "outputMode": "new-only",
+      "cache": false,
+      "dependsOn": ["^build", "graphql-extensions#build"],
+      "outputs": [".cms-sync"]
     },
     "web#build": {
       "outputMode": "new-only",
-      "dependsOn": ["graphql-sdk#gql:start", "^build"],
+      "dependsOn": ["graphql-sdk#sync:cms", "graphql-sdk#gql:start", "^build"],
       "outputs": ["out/**", ".next/**"]
+    },
+    "sanity-schema#sanity-contentful-export": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-schema#sanity-create-schema": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-schema#sanity-create-dataset": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-schema#sanity-dataset-import": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-studio#sanity-studio-deploy": {
+      "outputMode": "new-only",
+      "cache": false
     }
   }
 }

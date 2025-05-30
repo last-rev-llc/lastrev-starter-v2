@@ -19,6 +19,7 @@ export const typeDefs = gql`
     path: String
     hero: Hero
     contents: [Content]
+    seo: JSON
   }
 `;
 

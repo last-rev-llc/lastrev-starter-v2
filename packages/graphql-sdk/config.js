@@ -3,7 +3,9 @@ require('dotenv').config();
 const LastRevAppConfig = require('@last-rev/app-config');
 const extensions = require('graphql-extensions');
 const { resolve } = require('path');
-const { schemaTypes } = require('./schema');
+const sanitySchema = require('sanity-schema');
+
+const schemaTypes = sanitySchema.types;
 
 const testForEnvVar = (name) => {
   const envVar = process.env[name];
@@ -19,9 +21,9 @@ const parseNumberEnvVar = (value = '') => {
   return Number.isNaN(result) ? undefined : result;
 };
 
-const projectId = testForEnvVar('SANITY_PROJECT_ID');
-const dataset = testForEnvVar('SANITY_DATASET');
-const apiVersion = testForEnvVar('SANITY_API_VERSION');
+const projectId = testForEnvVar('SANITY_STUDIO_SANITY_PROJECT_ID');
+const dataset = testForEnvVar('SANITY_STUDIO_SANITY_DATASET');
+const apiVersion = testForEnvVar('SANITY_STUDIO_SANITY_API_VERSION');
 const token = testForEnvVar('SANITY_TOKEN');
 
 const parseBooleanEnvVar = (value = '') => {
@@ -33,7 +35,7 @@ const parseBooleanEnvVar = (value = '') => {
 const config = new LastRevAppConfig({
   cms: 'Sanity',
   contentStrategy: 'cms',
-  cmsCacheStrategy: 'redis',
+  // cmsCacheStrategy: 'redis',
   sites: [process.env.SITE],
   extensions,
   graphql: { port: 8888 },
