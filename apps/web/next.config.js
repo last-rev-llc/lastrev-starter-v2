@@ -55,6 +55,12 @@ let config = {
         hostname: 'images.contentful.com',
         port: '',
         pathname: `/${process.env.CONTENTFUL_SPACE_ID}/**`
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**'
       }
     ],
     formats: ['image/avif', 'image/webp']
