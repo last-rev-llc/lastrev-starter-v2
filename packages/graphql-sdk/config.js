@@ -21,16 +21,17 @@ const parseNumberEnvVar = (value = '') => {
   return Number.isNaN(result) ? undefined : result;
 };
 
-const projectId = testForEnvVar('SANITY_STUDIO_SANITY_PROJECT_ID');
-const dataset = testForEnvVar('SANITY_STUDIO_SANITY_DATASET');
-const apiVersion = testForEnvVar('SANITY_STUDIO_SANITY_API_VERSION');
-const token = testForEnvVar('SANITY_TOKEN');
-
 const parseBooleanEnvVar = (value = '') => {
   // values parsed as true: true, 1, yes, y, => ignore caps
   const val = value.toString().toLowerCase();
   return /^(true|1|yes|y)$/.test(val);
 };
+
+const projectId = testForEnvVar('SANITY_STUDIO_SANITY_PROJECT_ID');
+const dataset = testForEnvVar('SANITY_STUDIO_SANITY_DATASET');
+const apiVersion = testForEnvVar('SANITY_STUDIO_SANITY_API_VERSION');
+const token = testForEnvVar('SANITY_TOKEN');
+const usePreview = parseBooleanEnvVar(process.env.USE_PREVIEW);
 
 const config = new LastRevAppConfig({
   cms: 'Sanity',
@@ -43,7 +44,7 @@ const config = new LastRevAppConfig({
     projectId,
     dataset,
     apiVersion,
-    // useCdn: parseBooleanEnvVar(process.env.SANITY_USE_CDN),
+    usePreview,
     token,
     schemaTypes
   },
