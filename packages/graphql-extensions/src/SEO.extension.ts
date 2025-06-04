@@ -131,7 +131,7 @@ export const resolvers: any = {
         };
       }
 
-      if (seo['keywords']?.value) jsonLDSchema.keywords = seo['keywords']?.value;
+      if (seo?.['keywords']?.value) jsonLDSchema.keywords = seo?.['keywords']?.value;
 
       return jsonLDSchema as unknown as JSON;
     }
