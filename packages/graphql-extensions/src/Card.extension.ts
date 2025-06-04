@@ -10,7 +10,7 @@ export const typeMappings = {};
 export const typeDefs = gql`
   extend type Card {
     # Unccoment if using Media reference
-    #media: [Media]
+    media: [Media]
     actions: [ActionLink]
     link: Link
     variant: String

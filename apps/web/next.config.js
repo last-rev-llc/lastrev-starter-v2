@@ -63,7 +63,7 @@ let config = {
         pathname: '/**'
       }
     ],
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/webp']
   },
   env: {
     //ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,

@@ -35,7 +35,8 @@ const usePreview = parseBooleanEnvVar(process.env.USE_PREVIEW);
 
 const config = new LastRevAppConfig({
   cms: 'Sanity',
-  contentStrategy: 'cms',
+  contentStrategy: 'fs',
+  // contentStrategy: 'cms',
   // cmsCacheStrategy: 'redis',
   sites: [process.env.SITE],
   extensions,

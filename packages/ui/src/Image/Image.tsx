@@ -141,7 +141,7 @@ const Image = React.forwardRef<any, ImageProps>(function Image(props, ref) {
               <source
                 key={`avif-${src}-${breakpoint}`}
                 media={mediaCondition}
-                srcSet={`${source}&fm=avif, ${source}&fm=webp`}
+                srcSet={`${source}&fm=webp`}
                 type="image/avif"
               />
             );
