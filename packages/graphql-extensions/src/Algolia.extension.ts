@@ -3,13 +3,11 @@ import type { ApolloContext } from './types';
 
 import { constructObjectId } from '@last-rev/graphql-algolia-integration';
 import { pathResolver } from './utils/pathResolver';
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { generateCard } from './utils/generateCard';
 import { getLink } from './utils/getLink';
 import { getMedia } from './utils/getMedia';
 import { getSysContentTypeName } from './utils/getSysContentTypeName';
 import { pruneEmpty } from './utils/pruneEmpty';
-import { resolveField } from './utils/resolveField';
 import parseRichTextField from './utils/parseRichTextFields';
 import { resolveContentFields } from './utils/resolveContentFields';
 import { splitStringBySize } from './utils/splitStringBySize';

@@ -1,11 +1,6 @@
 import gql from 'graphql-tag';
-import type { Mappers, ApolloContext } from '@last-rev/types';
+import type { Mappers } from '@last-rev/types';
 import * as types from '@contentful/rich-text-types';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-
-import { createType } from './utils/createType';
-import { pageHeaderResolver } from './utils/pageHeaderResolver';
-import { pageFooterResolver } from './utils/pageFooterResolver';
 
 export const typeMappings = {};
 
