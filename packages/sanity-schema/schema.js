@@ -3861,6 +3861,10 @@ const types = [
   tagType,
 ]
 
+const supportedLanguages = [
+  {id: 'en-US', title: 'English'},
+  {id: 'es-ES', title: 'Spanish'},
+]
 
 module.exports = {
   validateIn,
@@ -3892,4 +3896,5 @@ module.exports = {
   breakType,
   tagType,
   types,
+  supportedLanguages,
 }

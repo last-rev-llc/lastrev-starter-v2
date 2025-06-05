@@ -7,6 +7,7 @@ import {media} from 'sanity-plugin-media'
 // import {structure} from './structure'
 
 const schemaTypes = sanitySchema.types
+const supportedLanguages = sanitySchema.supportedLanguages
 
 if (!process.env.SANITY_STUDIO_SANITY_PROJECT_ID) {
   throw new Error('SANITY_STUDIO_SANITY_PROJECT_ID is not set')
@@ -32,7 +33,7 @@ export default defineConfig({
     documentInternationalization({
       // Required
       // Either: an array of supported languages...
-      supportedLanguages: [{id: 'en-US', title: 'English'}],
+      supportedLanguages,
       // ...or a function that takes the client and returns a promise of an array of supported languages
       // MUST return an "id" and "title" as strings
       // Note: Async language configuration cannot create templates for new documents

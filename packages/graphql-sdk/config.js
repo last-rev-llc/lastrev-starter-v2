@@ -6,6 +6,7 @@ const { resolve } = require('path');
 const sanitySchema = require('sanity-schema');
 
 const schemaTypes = sanitySchema.types;
+const supportedLanguages = sanitySchema.supportedLanguages;
 
 const testForEnvVar = (name) => {
   const envVar = process.env[name];
@@ -47,7 +48,8 @@ const config = new LastRevAppConfig({
     apiVersion,
     usePreview,
     token,
-    schemaTypes
+    schemaTypes,
+    supportedLanguages
   },
   // algolia: {
   //   applicationId: process.env.ALGOLIA_APPLICATION_ID,

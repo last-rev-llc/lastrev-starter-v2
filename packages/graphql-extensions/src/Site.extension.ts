@@ -76,7 +76,7 @@ export const resolvers = {
         `${locale === ctx.defaultLocale ? '' : `${locale}/`}${path.replace(/^\//, '')}`;
 
       const ids = (
-        await ctx.contentful[preview ? 'preview' : 'prod'].getEntries({
+        await ctx.contentful![preview ? 'preview' : 'prod'].getEntries({
           content_type: contentType,
           select: `sys.id`,
           limit: maxPageSize,
