@@ -1,1 +1,6 @@
 /.sanity
+build
+contentful.json
+contentful.published.json
+dataset.ndjson
+schemaerrors.txt

@@ -685,6 +685,15 @@ type Template implements Content {
   variant: String
 }
 
+type Test implements Content {
+  animation: JSON
+  id: String
+  name: String
+  sidekickLookup: JSON
+  theme: [Theme]
+  variant: String
+}
+
 type Text implements Content {
   align: String
   animation: JSON

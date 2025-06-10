@@ -1,13 +1,11 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
-import * as sanitySchema from 'sanity-schema'
+import {types as schemaTypes} from './schema'
 import {documentInternationalization} from '@sanity/document-internationalization'
+import {supportedLanguages} from './supportedLanguages'
 import {media} from 'sanity-plugin-media'
 // import {structure} from './structure'
-
-const schemaTypes = sanitySchema.types
-const supportedLanguages = sanitySchema.supportedLanguages
 
 if (!process.env.SANITY_STUDIO_SANITY_PROJECT_ID) {
   throw new Error('SANITY_STUDIO_SANITY_PROJECT_ID is not set')
@@ -18,6 +16,14 @@ if (!process.env.SANITY_STUDIO_SANITY_DATASET) {
 if (!process.env.SANITY_STUDIO_SANITY_PROJECT_TITLE) {
   throw new Error('SANITY_STUDIO_SANITY_PROJECT_TITLE is not set')
 }
+
+if (!schemaTypes) {
+  // This will show up in the browser console
+  // @ts-ignore
+  window.schemaTypesDebug = sanitySchema
+  throw new Error('schemaTypes is undefined at runtime')
+}
+console.log('schemaTypes at runtime:', schemaTypes)
 
 export default defineConfig({
   name: 'default',

@@ -44,7 +44,7 @@
     "build": {
       "outputMode": "new-only",
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**", ".next/**", "build/**"]
     },
     "test": { "outputMode": "new-only", "outputs": ["coverage/**"], "dependsOn": [] },
     "lint": {
@@ -98,19 +98,19 @@
       "dependsOn": ["graphql-sdk#sync:cms", "graphql-sdk#gql:start", "^build"],
       "outputs": ["out/**", ".next/**"]
     },
-    "sanity-schema#sanity-contentful-export": {
+    "sanity-studio#sanity-contentful-export": {
       "outputMode": "new-only",
       "cache": false
     },
-    "sanity-schema#sanity-create-schema": {
+    "sanity-studio#sanity-create-schema": {
       "outputMode": "new-only",
       "cache": false
     },
-    "sanity-schema#sanity-create-dataset": {
+    "sanity-studio#sanity-create-dataset": {
       "outputMode": "new-only",
       "cache": false
     },
-    "sanity-schema#sanity-dataset-import": {
+    "sanity-studio#sanity-dataset-import": {
       "outputMode": "new-only",
       "cache": false
     },

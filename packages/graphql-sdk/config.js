@@ -3,10 +3,7 @@ require('dotenv').config();
 const LastRevAppConfig = require('@last-rev/app-config');
 const extensions = require('graphql-extensions');
 const { resolve } = require('path');
-const sanitySchema = require('sanity-schema');
-
-const schemaTypes = sanitySchema.types;
-const supportedLanguages = sanitySchema.supportedLanguages;
+const { types: schemaTypes, supportedLanguages } = require('sanity-studio');
 
 const testForEnvVar = (name) => {
   const envVar = process.env[name];
