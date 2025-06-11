@@ -256,12 +256,6 @@ importers:
       '@babel/plugin-transform-runtime':
         specifier: ^7.25.9
         version: 7.25.9(@babel/core@7.24.7)
-      '@contentful/rich-text-plain-text-renderer':
-        specifier: ^16.0.13
-        version: 16.0.13
-      '@contentful/rich-text-types':
-        specifier: ^16.3.5
-        version: 16.3.5
       '@graphql-tools/merge':
         specifier: ^9.0.12
         version: 9.0.12(graphql@16.9.0)
@@ -283,9 +277,6 @@ importers:
       '@last-rev/types':
         specifier: link:../../../lastrev-libraries/packages/types
         version: link:../../../lastrev-libraries/packages/types
-      contentful:
-        specifier: ^9.3.6
-        version: 9.3.6
       css:
         specifier: ^3.0.0
         version: 3.0.0
@@ -443,9 +434,9 @@ importers:
       '@contentful/rich-text-react-renderer':
         specifier: ^15.19.6
         version: 15.19.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@last-rev/contentful-sidekick-util':
-        specifier: link:../../../lastrev-libraries/packages/contentful-sidekick-util
-        version: link:../../../lastrev-libraries/packages/contentful-sidekick-util
+      '@last-rev/cms-sidekick-util':
+        specifier: link:../../../lastrev-libraries/packages/cms-sidekick-util
+        version: link:../../../lastrev-libraries/packages/cms-sidekick-util
       '@mui/icons-material':
         specifier: ^5.14.19
         version: 5.14.19(@mui/material@5.14.19(@emotion/react@11.14.0(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
@@ -1999,10 +1990,6 @@ packages:
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
-
-  '@contentful/rich-text-plain-text-renderer@16.0.13':
-    resolution: {integrity: sha512-r1w9NjxRAf275G7vtI9EiWVA5fWHXSCdx6yUYPsIxR2eHtwjswDG6QrmHeTBOuyKYPdEFtHUWTo6KTGGd0SYZg==}
-    engines: {node: '>=6.0.0'}
 
   '@contentful/rich-text-react-renderer@15.19.6':
     resolution: {integrity: sha512-SPpkr2uSyirsN/uUaek8djqLMGP8nPqSqxoQ8M0VJcfD9+INKK56vjmteNr5dBbqAZO/PJMxT1S8to9BndpinQ==}
@@ -19891,10 +19878,6 @@ snapshots:
 
   '@colors/colors@1.5.0':
     optional: true
-
-  '@contentful/rich-text-plain-text-renderer@16.0.13':
-    dependencies:
-      '@contentful/rich-text-types': 16.3.5
 
   '@contentful/rich-text-react-renderer@15.19.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:

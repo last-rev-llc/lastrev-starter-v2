@@ -20,7 +20,7 @@ import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
 
 import type { RichTextProps } from './RichText.types';
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 import { RichTextLinks } from '@graphql-sdk/types';
 
 const keyBy = (key: string, xs: any[]) =>

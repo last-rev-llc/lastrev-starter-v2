@@ -8,7 +8,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import Grid from '../Grid';
 import ErrorBoundary from '../ErrorBoundary';
@@ -58,8 +58,7 @@ const Tabs = (props: TabsProps) => {
                   orientation="horizontal"
                   aria-label="TODO"
                   textColor="primary"
-                  indicatorColor="primary"
-                >
+                  indicatorColor="primary">
                   {items?.map(
                     (
                       item: any,
@@ -83,8 +82,7 @@ const Tabs = (props: TabsProps) => {
                   <DetailsWrap
                     value={index.toString()}
                     key={`${!id}-tab-panel-${item?.id}-${index}`}
-                    ownerState={ownerState}
-                  >
+                    ownerState={ownerState}>
                     {item.body ? (
                       <Details __typename="RichText" body={item.body} ownerState={ownerState} />
                     ) : (

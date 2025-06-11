@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import Grid from '../Grid';
 import ContentModule from '../ContentModule';
@@ -20,8 +20,7 @@ const SiteMessage = (props: SiteMessageProps) => {
     <Root
       {...sidekick(sidekickLookup)}
       ownerState={ownerState}
-      data-testid="SiteMessage-SiteMessage"
-    >
+      data-testid="SiteMessage-SiteMessage">
       <ContentOuterGrid ownerState={ownerState}>
         <ContentWrap ownerState={ownerState}>
           {icon && <Icon {...icon} ownerState={ownerState} />}

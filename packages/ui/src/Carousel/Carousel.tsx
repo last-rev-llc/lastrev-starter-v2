@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 
 import Box from '@mui/material/Box';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import Grid from '../Grid';
 import ErrorBoundary from '../ErrorBoundary';

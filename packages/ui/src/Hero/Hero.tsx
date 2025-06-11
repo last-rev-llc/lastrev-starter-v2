@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography, { type TypographyProps } from '@mui/material/Typography';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ContentModule from '../ContentModule';
 import Grid from '../Grid';
