@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { pathResolver } from './utils/pathResolver';
 import { pageHeaderResolver } from './utils/pageHeaderResolver';

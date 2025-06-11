@@ -15,7 +15,7 @@
     "@apollo/server": "^4.11.2",
     "@last-rev/contentful-webhook-handler": "link:../../../lastrev-libraries/packages/contentful-webhook-handler",
     "@last-rev/graphql-algolia-integration": "link:../../../lastrev-libraries/packages/graphql-algolia-integration",
-    "@last-rev/graphql-contentful-core": "link:../../../lastrev-libraries/packages/graphql-contentful-core",
+    "@last-rev/graphql-cms-core": "link:../../../lastrev-libraries/packages/graphql-cms-core",
     "@next/bundle-analyzer": "^14.2.3",
     "@sentry/nextjs": "^7.113.0",
     "cors": "^2.8.5",

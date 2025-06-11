@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from './types';
 import { getVideoEmbedUrl } from './utils/getVideoEmbedUrl';
 import { cleanSVG } from './utils/cleanSVG';

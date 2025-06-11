@@ -1,6 +1,6 @@
-import type { Entry } from 'contentful';
+import type { Entry } from '@last-rev/types';
 
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { pathNodeResolver } from './utils/pathNodeResolver';
 

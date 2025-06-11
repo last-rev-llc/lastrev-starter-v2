@@ -1,5 +1,5 @@
 import type { ApolloContext } from '../types';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import { camelCase } from './camelCase';
 
 interface DefaultResolverParams {

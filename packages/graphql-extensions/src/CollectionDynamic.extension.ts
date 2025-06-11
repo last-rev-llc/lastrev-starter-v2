@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
 
@@ -8,7 +8,7 @@ import { getWinstonLogger } from '@last-rev/logging';
 import { defaultResolver } from './utils/defaultResolver';
 
 const logger = getWinstonLogger({
-  package: 'graphql-contentful-extensions',
+  package: 'graphql-cms-extensions',
   module: 'CollectionDynamic'
 });
 
@@ -91,7 +91,7 @@ export const mappers: Mappers = {
 
         if (settings) {
           return {
-            indexName: 'contentful',
+            indexName: 'cms',
             ...settings,
             showFilters: true,
             filtersPlacement

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import { resolveField } from './utils/resolveField';
 import type {
   BlogPosting as LdBlogPosting,

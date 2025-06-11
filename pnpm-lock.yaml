@@ -159,9 +159,9 @@ importers:
       '@last-rev/graphql-algolia-integration':
         specifier: link:../../../lastrev-libraries/packages/graphql-algolia-integration
         version: link:../../../lastrev-libraries/packages/graphql-algolia-integration
-      '@last-rev/graphql-contentful-core':
-        specifier: link:../../../lastrev-libraries/packages/graphql-contentful-core
-        version: link:../../../lastrev-libraries/packages/graphql-contentful-core
+      '@last-rev/graphql-cms-core':
+        specifier: link:../../../lastrev-libraries/packages/graphql-cms-core
+        version: link:../../../lastrev-libraries/packages/graphql-cms-core
       '@next/bundle-analyzer':
         specifier: ^14.2.3
         version: 14.2.3
@@ -268,9 +268,9 @@ importers:
       '@last-rev/graphql-algolia-integration':
         specifier: link:../../../lastrev-libraries/packages/graphql-algolia-integration
         version: link:../../../lastrev-libraries/packages/graphql-algolia-integration
-      '@last-rev/graphql-contentful-core':
-        specifier: link:../../../lastrev-libraries/packages/graphql-contentful-core
-        version: link:../../../lastrev-libraries/packages/graphql-contentful-core
+      '@last-rev/graphql-cms-core':
+        specifier: link:../../../lastrev-libraries/packages/graphql-cms-core
+        version: link:../../../lastrev-libraries/packages/graphql-cms-core
       '@last-rev/logging':
         specifier: link:../../../lastrev-libraries/packages/logging
         version: link:../../../lastrev-libraries/packages/logging

@@ -1,4 +1,4 @@
-import type { ContentType } from 'contentful';
+import type { ContentType } from '@last-rev/types';
 import { isString } from './isString';
 import { capitalizeFirst } from './capitalizeFirst';
 

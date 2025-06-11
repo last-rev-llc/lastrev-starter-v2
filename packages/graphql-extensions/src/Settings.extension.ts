@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
-import type { Mappers } from '@last-rev/types';
-import * as types from '@contentful/rich-text-types';
+import { type Mappers } from '@last-rev/types';
+import { BLOCKS } from '@last-rev/graphql-cms-core';
 
 export const typeMappings = {};
 
@@ -22,12 +22,12 @@ interface Heading {
 }
 
 const HEADINGS: Heading = {
-  [types.BLOCKS.HEADING_1]: 1,
-  [types.BLOCKS.HEADING_2]: 2,
-  [types.BLOCKS.HEADING_3]: 3,
-  [types.BLOCKS.HEADING_4]: 4,
-  [types.BLOCKS.HEADING_5]: 5,
-  [types.BLOCKS.HEADING_6]: 6
+  [BLOCKS.HEADING_1]: 1,
+  [BLOCKS.HEADING_2]: 2,
+  [BLOCKS.HEADING_3]: 3,
+  [BLOCKS.HEADING_4]: 4,
+  [BLOCKS.HEADING_5]: 5,
+  [BLOCKS.HEADING_6]: 6
 };
 
 export const mappers: Mappers = {

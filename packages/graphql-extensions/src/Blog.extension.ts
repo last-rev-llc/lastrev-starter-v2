@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { createType } from './utils/createType';
 import { pageFooterResolver } from './utils/pageFooterResolver';
@@ -60,7 +60,7 @@ export const mappers: Mappers = {
         //       facetFilters: ['locale:en-US', 'contentType:Blog'],
         //       hitsPerPage: 3
         //     },
-        //     indexName: 'contentful',
+        //     indexName: 'cms',
         //     showFilters: false,
         //     showSearchBox: false,
         //     showPagination: false,

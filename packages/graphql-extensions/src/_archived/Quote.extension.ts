@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import type { ApolloContext, Mappers } from '@last-rev/types';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 
 export const typeDefs = gql`
   extend type Quote {

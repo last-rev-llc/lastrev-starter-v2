@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from './types';
 import { pascalCase } from './utils/pascalCase';
 import { defaultResolver } from './utils/defaultResolver';

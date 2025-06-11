@@ -5,7 +5,7 @@ import { defaultResolver } from './utils/defaultResolver';
 import type { Mappers, TypeMappings } from '@last-rev/types';
 import type { ApolloContext } from './types';
 import { createType } from './utils/createType';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import { resolveField } from './utils/resolveField';
 
 export const typeMappings: TypeMappings = {

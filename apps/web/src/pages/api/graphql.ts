@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 // require('dotenv').config();
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiHandler } from 'next';
 
-import { createVercelHandler } from '@last-rev/graphql-contentful-core';
+import { createVercelHandler } from '@last-rev/graphql-cms-core';
 
 import { ApolloServerPluginLandingPageDisabled } from '@apollo/server/plugin/disabled';
 

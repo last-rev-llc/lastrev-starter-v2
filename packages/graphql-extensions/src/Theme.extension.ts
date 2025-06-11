@@ -1,4 +1,4 @@
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from '@last-rev/types';
 import { defaultResolver } from './utils/defaultResolver';
 
