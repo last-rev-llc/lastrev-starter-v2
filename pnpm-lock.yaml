@@ -153,9 +153,9 @@ importers:
       '@apollo/server':
         specifier: ^4.11.2
         version: 4.11.2(encoding@0.1.13)(graphql@16.9.0)
-      '@last-rev/contentful-webhook-handler':
-        specifier: link:../../../lastrev-libraries/packages/contentful-webhook-handler
-        version: link:../../../lastrev-libraries/packages/contentful-webhook-handler
+      '@last-rev/cms-webhook-handler':
+        specifier: link:../../../lastrev-libraries/packages/cms-webhook-handler
+        version: link:../../../lastrev-libraries/packages/cms-webhook-handler
       '@last-rev/graphql-algolia-integration':
         specifier: link:../../../lastrev-libraries/packages/graphql-algolia-integration
         version: link:../../../lastrev-libraries/packages/graphql-algolia-integration

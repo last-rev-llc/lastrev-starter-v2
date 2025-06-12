@@ -1,5 +1,5 @@
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-import handleWebhook from '@last-rev/contentful-webhook-handler';
+import handleWebhook from '@last-rev/cms-webhook-handler';
 import { cors } from '../../cors';
 
 import lrConfig from 'graphql-sdk/config.serverless';

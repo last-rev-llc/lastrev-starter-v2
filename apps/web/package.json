@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
-    "@last-rev/contentful-webhook-handler": "link:../../../lastrev-libraries/packages/contentful-webhook-handler",
+    "@last-rev/cms-webhook-handler": "link:../../../lastrev-libraries/packages/cms-webhook-handler",
     "@last-rev/graphql-algolia-integration": "link:../../../lastrev-libraries/packages/graphql-algolia-integration",
     "@last-rev/graphql-cms-core": "link:../../../lastrev-libraries/packages/graphql-cms-core",
     "@next/bundle-analyzer": "^14.2.3",
