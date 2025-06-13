@@ -1,18 +1,29 @@
 // GTM.tsx
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Script from 'next/script';
 import { usePathname } from 'next/navigation';
-import { pageview } from '@ui/utils/gtm';
+import { page_view } from '@ui/utils/gtm';
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 const GTM: React.FC = () => {
   const pathname = usePathname();
+  const previousPathname = useRef<string | null>(null);
 
   useEffect(() => {
-    if (pathname) {
-      pageview(pathname);
+    // Ensure the GTM script runs only once on initial load
+    if (!previousPathname.current) {
+      page_view(window.location.pathname); // Initial page load
+      previousPathname.current = window.location.pathname;
+      return;
+    }
+
+    // Handle client-side navigation, avoiding duplicate firings
+    if (pathname && pathname !== previousPathname.current) {
+      console.log('Navigated to:', pathname);
+      page_view(pathname);
+      previousPathname.current = pathname; // Update previous path
     }
   }, [pathname]);
 
