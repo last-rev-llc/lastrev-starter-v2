@@ -111,3 +111,15 @@ Alternatively, you can run the following command manually from your project root
 rm -rf scripts/bws-secure && git clone git@github.com:last-rev-llc/bws-secure.git scripts/bws-secure && rm -rf scripts/bws-secure/.git && bash scripts/bws-secure/install.sh
 ```
 <!-- BWS-SECURE-DOCS-END -->
+
+## Visual Regression Testing with BackstopJS
+
+This project uses [BackstopJS](https://github.com/garris/BackstopJS) for visual regression testing. Scenarios are generated from the pages used in Cypress tests.
+
+Run the following commands with the web application running locally on `http://localhost:3000`:
+
+```bash
+pnpm backstop:reference  # create baseline images
+pnpm backstop:test       # compare against the baseline
+pnpm backstop:open       # open the HTML report
+```
