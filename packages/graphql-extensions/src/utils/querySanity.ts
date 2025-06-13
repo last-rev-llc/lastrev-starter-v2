@@ -51,7 +51,17 @@ const query = async ({
 }: QueryArgs): Promise<any[]> => {
   if (!ctx.sanity) throw new Error('Sanity client is not available on context');
   const groqFilter = buildGroqFilter(contentType, filter, filters);
-  let groq = `*[${groqFilter}]`;
+  let groq = `*[${groqFilter} && (!defined(__i18n_lang) || __i18n_lang == $defaultLocale)]{
+    ...,
+    "_translations": *[
+      _type == "translation.metadata" &&
+      references(^._id)
+    ].translations[]{
+      "doc": value->{
+        ...
+      }
+    }[doc.__i18n_lang != $defaultLocale && defined(doc)]
+  }`;
   if (order) {
     groq += ` | order(${order})`;
   }
@@ -63,9 +73,9 @@ const query = async ({
 
   const client = ctx.preview ? ctx.sanity.preview : ctx.sanity.prod;
   console.log('groq', groq);
-  const items = await client.fetch(groq);
+  const items = await client.fetch(groq, { defaultLocale: ctx.defaultLocale });
   // TODO: locale
-  return items.map((item: any) => convertSanityDoc(item, 'en-US'));
+  return items.map((item: any) => convertSanityDoc(item, ctx.defaultLocale, ctx.locales));
 };
 
 export const querySanity = async (args: QueryArgs): Promise<any[]> => {
