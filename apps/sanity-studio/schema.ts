@@ -4,6 +4,121 @@ import {defineField, defineType, type SchemaTypeDefinition} from 'sanity'
 const validateIn = (values: (string | number)[], value: any) =>
   values.includes(value) ? true : `Value must be one of ${values.join(', ')}`
 
+export const seoType = defineType({
+  name: 'seo',
+  title: 'SEO',
+  type: 'object',
+
+  /* -------- fieldsets -------- */
+  fieldsets: [
+    {name: 'general', title: 'General', options: {collapsible: true, collapsed: true}},
+    {name: 'og', title: 'Open Graph', options: {collapsible: true, collapsed: true}},
+    {name: 'twitter', title: 'Twitter', options: {collapsible: true, collapsed: true}},
+  ],
+
+  /* -------- fields -------- */
+  fields: [
+    /* General ---------------------------------------------------- */
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      fieldset: 'general',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      fieldset: 'general',
+    }),
+    defineField({
+      name: 'keywords',
+      title: 'Keywords',
+      type: 'array',
+      of: [{type: 'string'}],
+      options: {layout: 'tags'},
+      fieldset: 'general',
+    }),
+    defineField({
+      name: 'canonicalUrl',
+      title: 'Canonical URL',
+      type: 'url',
+      fieldset: 'general',
+      validation: (r) => r.uri({scheme: ['https'], allowRelative: false}),
+    }),
+    defineField({
+      name: 'index',
+      title: 'Indexed by search engines?',
+      type: 'boolean',
+      initialValue: true,
+      fieldset: 'general',
+    }),
+    defineField({
+      name: 'follow',
+      title: 'Follow links from this page?',
+      type: 'boolean',
+      initialValue: true,
+      fieldset: 'general',
+    }),
+
+    /* Facebook --------------------------------------------------- */
+    defineField({
+      name: 'ogTitle',
+      title: 'Post title',
+      type: 'string',
+      fieldset: 'og',
+    }),
+    defineField({
+      name: 'ogDescription',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      fieldset: 'og',
+    }),
+    defineField({
+      name: 'ogImage',
+      title: 'Post image',
+      type: 'image',
+      options: {hotspot: true},
+      fieldset: 'og',
+    }),
+
+    /* Twitter ---------------------------------------------------- */
+    defineField({
+      name: 'twTitle',
+      title: 'Post title',
+      type: 'string',
+      fieldset: 'twitter',
+    }),
+    defineField({
+      name: 'twDescription',
+      title: 'Description',
+      type: 'text',
+      rows: 3,
+      fieldset: 'twitter',
+    }),
+    defineField({
+      name: 'twImage',
+      title: 'Post image',
+      type: 'image',
+      options: {hotspot: true},
+      fieldset: 'twitter',
+    }),
+  ],
+
+  /* -------- preview (optional) -------- */
+  preview: {
+    select: {title: 'title', index: 'index'},
+    prepare({title, index}) {
+      return {
+        title: title ?? 'SEO settings',
+        subtitle: index === false ? '🚫 No-index' : 'Indexable',
+      }
+    },
+  },
+})
+
 export const sectionType = defineType({
   type: 'document',
   name: 'section',
@@ -987,6 +1102,12 @@ export const pageType = defineType({
         'If this document was archived on Contentful at the time of export, the document will be in a read-only state.',
       name: 'contentfulArchived',
       readOnly: true,
+    }),
+    defineField({
+      name: 'seo',
+      type: 'seo',
+      title: 'SEO',
+      hidden: false,
     }),
   ],
   preview: {select: {title: 'internalTitle'}},
@@ -3930,4 +4051,5 @@ export const types = [
   breakType,
   tagType,
   testType,
+  seoType,
 ] satisfies SchemaTypeDefinition[]

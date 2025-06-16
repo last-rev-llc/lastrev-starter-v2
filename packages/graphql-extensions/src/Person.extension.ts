@@ -9,6 +9,7 @@ import { pathResolver } from './utils/pathResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { createType } from './utils/createType';
 import { getDefaultCtaText } from './utils/getDefaultCtaText';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeDefs = gql`
   extend type Person {
@@ -31,6 +32,9 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
+      seo: async (person: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(person, 'seo', ctx);
+      },
       hero: async (person: any, _args: any, ctx: ApolloContext) =>
         createType('Hero', {
           variant: 'mediaOnRightFullBleed',

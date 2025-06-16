@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
-import { type Mappers } from '@last-rev/types';
+import { type ApolloContext, type Mappers } from '@last-rev/types';
 import { BLOCKS } from '@last-rev/graphql-cms-core';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeMappings = {};
 
@@ -33,6 +34,9 @@ const HEADINGS: Heading = {
 export const mappers: Mappers = {
   Settings: {
     Settings: {
+      seo: async (settings: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(settings, 'seo', ctx);
+      }
       // path: async (settings: any, _args: any, ctx: ApolloContext) => {
       //   return '/frd';
       // },

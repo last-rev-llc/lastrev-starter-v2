@@ -598,6 +598,26 @@ type Section implements Content {
   variant: String
 }
 
+type Seo implements Content {
+  animation: JSON
+  canonicalUrl: String
+  description: String
+  follow: Boolean
+  id: String
+  index: Boolean
+  keywords: [String]
+  ogDescription: String
+  ogImage: Media
+  ogTitle: String
+  sidekickLookup: JSON
+  theme: [Theme]
+  title: String
+  twDescription: String
+  twImage: Media
+  twTitle: String
+  variant: String
+}
+
 type Settings implements Content {
   animation: JSON
   category: String

@@ -11,6 +11,7 @@ import { pathResolver } from './utils/pathResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { getDefaultCtaText } from './utils/getDefaultCtaText';
 import { formatDate } from './utils/formatDate';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeDefs = gql`
   extend type Blog {
@@ -34,7 +35,9 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
-
+      seo: async (blog: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(blog, 'seo', ctx);
+      },
       relatedItems: async (blog: any, _args: any, ctx: ApolloContext) => {
         const relatedItems = getLocalizedField(blog.fields, 'relatedItems', ctx);
         if (!relatedItems?.length) return null;

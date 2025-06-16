@@ -8,6 +8,7 @@ import { pageHeaderResolver } from './utils/pageHeaderResolver';
 import { pageFooterResolver } from './utils/pageFooterResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { createType } from './utils/createType';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeMappings = {};
 
@@ -35,6 +36,9 @@ export const mappers: Mappers = {
       isHomepage: async (page: any, _args: any, ctx: ApolloContext) => {
         const slug = getLocalizedField(page.fields, 'slug', ctx);
         return slug === '/';
+      },
+      seo: async (page: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(page, 'seo', ctx);
       }
     },
 

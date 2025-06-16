@@ -11,6 +11,7 @@ import { pruneEmpty } from './utils/pruneEmpty';
 import parseRichTextField from './utils/parseRichTextFields';
 import { resolveContentFields } from './utils/resolveContentFields';
 import { splitStringBySize } from './utils/splitStringBySize';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 const index = 'cms';
 
@@ -22,8 +23,8 @@ export const mappers = {
   Blog: {
     AlgoliaRecord: {
       algoliaObjects: async (blog: any, args: any, ctx: ApolloContext) => {
-        const seo = getLocalizedField(blog.fields, 'seo', ctx);
-        if (seo?.robots?.value?.includes('noindex')) return [];
+        const seo = await getSeoFieldValue(blog, 'seo', ctx);
+        if (!seo?.robots?.index) return [];
 
         const path = await pathResolver(blog, args, ctx);
 
@@ -110,8 +111,8 @@ export const mappers = {
   Page: {
     AlgoliaRecord: {
       algoliaObjects: async (page: any, args: any, ctx: ApolloContext) => {
-        const seo = getLocalizedField(page.fields, 'seo', ctx);
-        if (seo?.robots?.value?.includes('noindex')) return [];
+        const seo = await getSeoFieldValue(page, 'seo', ctx);
+        if (!seo?.robots?.index) return [];
 
         const path = await pathResolver(page, args, ctx);
 

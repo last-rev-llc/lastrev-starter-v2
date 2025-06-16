@@ -7,6 +7,7 @@ import type {
   WebPage as LdWebPage
 } from 'schema-dts';
 import { pathResolver } from './utils/pathResolver';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeDefs = gql`
   extend type Page {
@@ -29,7 +30,7 @@ export const resolvers: any = {
       const title = getLocalizedField(page.fields, 'title', ctx);
       const description = getLocalizedField(page.fields, 'description', ctx);
       const pageUrl = await pathResolver(page, args, ctx);
-      const seo = resolveField('seo');
+      const seo = await getSeoFieldValue(page, 'seo', ctx);
 
       const jsonLDSchema: LdWebPage = {
         // '@context': 'https://schema.org',
@@ -49,7 +50,7 @@ export const resolvers: any = {
       };
 
       // TODO: This should be the same as on the page
-      if (seo['title']?.value) jsonLDSchema.name = seo['name']?.value;
+      if (seo?.title) jsonLDSchema.name = seo.title;
 
       return jsonLDSchema as unknown as JSON;
     }
@@ -59,7 +60,7 @@ export const resolvers: any = {
       const title = getLocalizedField(blog.fields, 'title', ctx);
       const description = getLocalizedField(blog.fields, 'promoSummary', ctx);
       // const body =  = resolveField(['body']);
-      const seo = getLocalizedField(blog.fields, 'seo', ctx);
+      const seo = await getSeoFieldValue(blog, 'seo', ctx);
       const authorRef = getLocalizedField(blog.fields, 'author', ctx);
       const author = await ctx.loaders.entryLoader.load({
         id: authorRef?.sys?.id,
@@ -131,7 +132,7 @@ export const resolvers: any = {
         };
       }
 
-      if (seo?.['keywords']?.value) jsonLDSchema.keywords = seo?.['keywords']?.value;
+      if (seo?.keywords) jsonLDSchema.keywords = seo?.keywords;
 
       return jsonLDSchema as unknown as JSON;
     }
