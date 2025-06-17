@@ -133,8 +133,8 @@ export const sectionType = defineType({
       hidden: false,
       description:
         'Choose the variant that will be applied to the format of the Section and/or applied to the items selected in the Content field.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.custom((value) => validateIn(['Default', 'One Per Row', 'Two Per Row'], value)),
       options: {list: ['Default', 'One Per Row', 'Two Per Row'], layout: 'dropdown'},
@@ -386,8 +386,8 @@ export const linkType = defineType({
       title: 'Variant',
       hidden: false,
       description: 'Choose the format of your linked item.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Link'},
+
+      initialValue: 'Link',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(['Link', 'Button - Text', 'Button - Outlined', 'Button - Contained'], value),
@@ -465,8 +465,8 @@ export const linkType = defineType({
       hidden: false,
       description:
         'Optional. This applies only to Links with an icon.  Icon positioned on the right side of the text by default',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Right'},
+
+      initialValue: 'Right',
       validation: (Rule) => Rule.custom((value) => validateIn(['Right', 'Left', 'None'], value)),
       options: {list: ['Right', 'Left', 'None'], layout: 'dropdown'},
     }),
@@ -487,8 +487,8 @@ export const linkType = defineType({
       type: 'string',
       title: 'Target',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(['Default', 'New Window', 'Same Window', 'Parent Window'], value),
@@ -534,8 +534,8 @@ export const collectionType = defineType({
       hidden: false,
       description:
         'The "variant" of the Collection often refers the appearance and/or functionality of the Collection as a whole.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Three Per Row'},
+
+      initialValue: 'Three Per Row',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -576,8 +576,8 @@ export const collectionType = defineType({
       title: 'Carousel Auto Play?',
       hidden: false,
       description: 'If this is a carousel, should it auto play on load?',
-      // @ts-expect-error
-      initialValue: {'en-US': false},
+
+      initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -594,8 +594,8 @@ export const collectionType = defineType({
       hidden: false,
       description:
         'Determines the appearance of each individual item in the collection and most often refers to the appearance of a Card item.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -614,8 +614,8 @@ export const collectionType = defineType({
       title: 'Items Aspect Ratio',
       hidden: false,
       description: 'This will guide a minimum height for the items in the collection',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(['Default', 'Horizontal', 'Vertical', 'Square'], value),
@@ -651,8 +651,8 @@ export const collectionType = defineType({
       type: 'string',
       title: 'Background Color',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Transparent'},
+
+      initialValue: 'Transparent',
       validation: (Rule) =>
         Rule.required().custom((value) => validateIn(['Transparent', 'Black', 'White'], value)),
       options: {list: ['Transparent', 'Black', 'White'], layout: 'dropdown'},
@@ -692,8 +692,8 @@ export const contentful_textType = defineType({
       title: 'Layout Style',
       hidden: false,
       description: 'The Variant determines the style or the format the Text item. ',
-      // @ts-expect-error
-      initialValue: {'en-US': 'default'},
+
+      initialValue: 'default',
       validation: (Rule) => Rule.custom((value) => validateIn(['default', 'Intro Text'], value)),
       options: {list: ['default', 'Intro Text'], layout: 'dropdown'},
     }),
@@ -877,8 +877,8 @@ export const contentful_textType = defineType({
       title: 'Text Alignment',
       hidden: false,
       description: 'Choose alignment of the text (e.g. left, right, center).',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(['Default', 'Left', 'Center', 'Right', 'Justified'], value),
@@ -1126,8 +1126,8 @@ export const heroType = defineType({
       type: 'string',
       title: 'Layout Style',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -1348,8 +1348,8 @@ export const navigationItemType = defineType({
       type: 'string',
       title: 'Link Style',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'link'},
+
+      initialValue: 'link',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -1653,8 +1653,8 @@ export const headerType = defineType({
       title: 'Layout Style',
       hidden: false,
       description: 'Choose the variant that will be applied to the format of the Header.  ',
-      // @ts-expect-error
-      initialValue: {'en-US': 'default'},
+
+      initialValue: 'default',
       validation: (Rule) => Rule.custom((value) => validateIn(['default', 'simplified'], value)),
       options: {list: ['default', 'simplified'], layout: 'dropdown'},
     }),
@@ -1784,8 +1784,8 @@ export const headerType = defineType({
       type: 'string',
       title: 'Background Color',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Inherit'},
+
+      initialValue: 'Inherit',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(['Inherit', 'Black', 'White', 'Transparent Light', 'Transparent Dark'], value),
@@ -1961,8 +1961,8 @@ export const mediaType = defineType({
       type: 'boolean',
       title: 'Autoplay?',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': false},
+
+      initialValue: false,
     }),
     defineField({name: 'altText', type: 'text', title: 'Alt Text', hidden: false}),
     defineField({
@@ -2554,8 +2554,8 @@ export const settingsType = defineType({
       type: 'string',
       title: 'Template Category',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Used for template categorization'},
+
+      initialValue: 'Used for template categorization',
     }),
     defineField({
       name: 'frdContents',
@@ -2621,8 +2621,8 @@ export const contentful_blockType = defineType({
       title: 'Variant',
       hidden: false,
       description: 'Configures the placement of elements within the Block.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.custom((value) =>
           validateIn(
@@ -3041,8 +3041,8 @@ export const footerType = defineType({
       type: 'string',
       title: 'Background Color',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Inherit'},
+
+      initialValue: 'Inherit',
       validation: (Rule) =>
         Rule.required().custom((value) => validateIn(['Inherit', 'Black', 'White'], value)),
       options: {list: ['Inherit', 'Black', 'White'], layout: 'dropdown'},
@@ -3082,8 +3082,8 @@ export const collectionDynamicType = defineType({
       hidden: false,
       description:
         'The "variant" of the Collection often refers the appearance and/or functionality of the Collection as a whole.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Three Per Row'},
+
+      initialValue: 'Three Per Row',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -3103,8 +3103,8 @@ export const collectionDynamicType = defineType({
       hidden: false,
       description:
         'Determines the appearance of each individual item in the collection and most often refers to the appearance of a Card item.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
@@ -3272,8 +3272,8 @@ export const elementFormType = defineType({
       type: 'string',
       title: 'Variant',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': 'Default'},
+
+      initialValue: 'Default',
       validation: (Rule) => Rule.required().custom((value) => validateIn(['Default'], value)),
       options: {list: ['Default'], layout: 'dropdown'},
     }),
@@ -3480,8 +3480,8 @@ export const elementVideoType = defineType({
       type: 'boolean',
       title: 'Autoplay?',
       hidden: false,
-      // @ts-expect-error
-      initialValue: {'en-US': false},
+
+      initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -3636,8 +3636,8 @@ export const collectionExpandableType = defineType({
       hidden: false,
       description:
         'The "variant" of the Collection often refers the appearance and/or functionality of the Collection as a whole.',
-      // @ts-expect-error
-      initialValue: {'en-US': 'Tabs'},
+
+      initialValue: 'Tabs',
       validation: (Rule) =>
         Rule.required().custom((value) => validateIn(['Tabs', 'Accordion'], value)),
       options: {list: ['Tabs', 'Accordion'], layout: 'dropdown'},
@@ -3940,8 +3940,8 @@ export const blogType = defineType({
       hidden: false,
       description:
         'The \'back to top of page\' widget appears on all pages by default. To disable this for this page, set this condition to "true".',
-      // @ts-expect-error
-      initialValue: {'en-US': false},
+
+      initialValue: false,
     }),
     defineField({
       type: 'boolean',
