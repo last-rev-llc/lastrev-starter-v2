@@ -639,7 +639,7 @@ export const collectionType = defineType({
     defineField({
       name: 'images',
       type: 'array',
-      of: [{type: 'file'}],
+      of: [{type: 'file'}, {type: 'image'}],
       title: 'Images / Documents',
       hidden: false,
       description:
