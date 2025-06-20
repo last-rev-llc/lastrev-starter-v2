@@ -12,6 +12,436 @@ import {
 const validateIn = (values: (string | number)[], value: any) =>
   values.includes(value) ? true : `Value must be one of ${values.join(', ')}`
 
+// Helper function to gather comprehensive page content for AI generation
+const gatherPageContent = (formValues: any) => {
+  const content = formValues.content || []
+  const references = formValues.references || []
+
+  // Extract text content from structured content blocks
+  const extractTextFromContent = (blocks: any[]): string => {
+    if (!Array.isArray(blocks)) return ''
+
+    return blocks
+      .map((block: any) => {
+        if (typeof block === 'string') return block
+        if (block?._type === 'block' && block?.children) {
+          return block.children.map((child: any) => child.text || '').join(' ')
+        }
+        if (block?.text) return block.text
+        if (block?.title) return block.title
+        if (block?.heading) return block.heading
+        return ''
+      })
+      .filter(Boolean)
+      .join(' ')
+  }
+
+  // Extract reference information
+  const extractReferences = (refs: any[]): string => {
+    if (!Array.isArray(refs)) return ''
+
+    return refs
+      .map((ref: any) => {
+        const title = ref?.internalTitle || ref?.title || ''
+        const summary = ref?.promoSummary || ref?.excerpt || ''
+        return `${title} ${summary}`.trim()
+      })
+      .filter(Boolean)
+      .join(' ')
+  }
+
+  return {
+    title: formValues.internalTitle || formValues.title || formValues.name || '',
+    slug: formValues.slug?.current || '',
+    excerpt: formValues.excerpt || '',
+    content: extractTextFromContent(content),
+    references: extractReferences(references),
+  }
+}
+
+// AI Content Generation Service
+const generateContentWithAI = async (
+  fieldName: string,
+  fieldType: string,
+  fieldTitle: string,
+  pageContent: any,
+  currentValue?: string,
+) => {
+  const prompt = createFieldPrompt(fieldName, fieldType, fieldTitle, pageContent, currentValue)
+
+  const response = await fetch(
+    'https://lr-production.studio.theanswer.ai/api/v1/prediction/718c0507-d5e5-4a62-ba14-989c681c1b8e',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({question: prompt}),
+    },
+  )
+
+  if (!response.ok) {
+    throw new Error('Failed to generate content')
+  }
+
+  const result = await response.json()
+  const aiResponse = result.text || result.answer || result.response || ''
+
+  return aiResponse.replace(/^["']|["']$/g, '').trim()
+}
+
+// Smart prompt generator based on field context
+const createFieldPrompt = (
+  fieldName: string,
+  fieldType: string,
+  fieldTitle: string,
+  pageContent: any,
+  currentValue?: string,
+) => {
+  const baseContext = `Generate content for a web page field with the following context:
+
+Page Title: ${pageContent.title}
+Page Slug: ${pageContent.slug}
+Page Excerpt: ${pageContent.excerpt}
+Page Content: ${pageContent.content.substring(0, 1500)}...
+Referenced Content: ${pageContent.references.substring(0, 400)}...
+
+Field to generate content for:
+- Field Name: ${fieldName}
+- Field Type: ${fieldType}
+- Field Title: ${fieldTitle}
+${currentValue ? `- Current Value: ${currentValue}` : ''}
+
+`
+
+  // Field-specific prompts based on name and type
+  if (fieldName.includes('title') || fieldName.includes('Title')) {
+    return (
+      baseContext +
+      `Generate a compelling, SEO-optimized title that:
+- Is concise and descriptive (max 60 characters)
+- Captures the essence of the content
+- Is engaging for the target audience
+- Avoids generic phrases
+
+Return only the title text, no additional formatting.`
+    )
+  }
+
+  if (fieldName.includes('description') || fieldName.includes('Description')) {
+    return (
+      baseContext +
+      `Generate a compelling description that:
+- Is 2-3 sentences long (max 160 characters for meta descriptions)
+- Summarizes the key value proposition
+- Is engaging and informative
+- Encourages further reading
+
+Return only the description text, no additional formatting.`
+    )
+  }
+
+  if (fieldName.includes('summary') || fieldName.includes('Summary')) {
+    return (
+      baseContext +
+      `Generate a promotional summary that:
+- Is 2-3 sentences long (max 200 characters)
+- Is engaging and compelling for marketing use
+- Captures the key value proposition
+- Would work well in cards, listings, and promotional materials
+- Is optimized for driving clicks and engagement
+
+Return only the summary text, no additional formatting.`
+    )
+  }
+
+  if (fieldName.includes('excerpt') || fieldName.includes('Excerpt')) {
+    return (
+      baseContext +
+      `Generate an excerpt that:
+- Is a brief, engaging preview of the content
+- Is 1-2 sentences long
+- Entices readers to learn more
+- Captures the main topic or benefit
+
+Return only the excerpt text, no additional formatting.`
+    )
+  }
+
+  if (fieldName.includes('overline') || fieldName.includes('Overline')) {
+    return (
+      baseContext +
+      `Generate a short overline that:
+- Is very brief (max 30 characters)
+- Provides context or category information
+- Examples: "Featured", "Latest News", "Case Study", "Guide"
+- Is relevant to the content type
+
+Return only the overline text, no additional formatting.`
+    )
+  }
+
+  // Open Graph specific fields
+  if (fieldName === 'ogTitle') {
+    return (
+      baseContext +
+      `Generate an Open Graph title optimized for Facebook sharing that:
+- Is compelling and click-worthy (max 60 characters)
+- Works well when shared on social media
+- May be slightly more engaging/casual than the SEO title
+- Captures attention in a social feed context
+- Encourages social sharing
+
+Return only the title text, no additional formatting.`
+    )
+  }
+
+  if (fieldName === 'ogDescription') {
+    return (
+      baseContext +
+      `Generate an Open Graph description for Facebook that:
+- Is engaging and shareable (max 155 characters)
+- Encourages clicks from social media
+- Highlights the most interesting aspect of the content
+- Works well in a social media context
+- May be more conversational than SEO description
+
+Return only the description text, no additional formatting.`
+    )
+  }
+
+  // Twitter specific fields
+  if (fieldName === 'twTitle') {
+    return (
+      baseContext +
+      `Generate a Twitter card title that:
+- Is concise and punchy (max 70 characters)
+- Works well in Twitter's fast-paced environment
+- May include relevant hashtags if appropriate
+- Captures attention quickly
+- Optimized for retweets and engagement
+
+Return only the title text, no additional formatting.`
+    )
+  }
+
+  if (fieldName === 'twDescription') {
+    return (
+      baseContext +
+      `Generate a Twitter card description that:
+- Is brief and engaging (max 200 characters)
+- Complements the title effectively
+- Encourages clicks and retweets
+- Works well in Twitter's format
+- May be more conversational or urgent
+
+Return only the description text, no additional formatting.`
+    )
+  }
+
+  if (fieldType === 'text' || fieldType === 'string') {
+    return (
+      baseContext +
+      `Generate appropriate ${fieldTitle.toLowerCase()} content that:
+- Is relevant to the page context
+- Matches the purpose of a "${fieldTitle}" field
+- Is concise and well-written
+- Fits the content style and tone
+
+Return only the content text, no additional formatting.`
+    )
+  }
+
+  // Generic fallback
+  return (
+    baseContext +
+    `Generate appropriate content for the "${fieldTitle}" field that:
+- Is relevant to the page context
+- Matches the expected format for this field type
+- Is well-written and engaging
+- Fits the overall content strategy
+
+Return only the content, no additional formatting.`
+  )
+}
+
+// Reusable AI field wrapper
+// Usage: withAIGeneration(defineField({ name: 'title', type: 'string', title: 'Title' }))
+const withAIGeneration = (field: any) => {
+  // Only add AI generation to text and string fields
+  if (!['string', 'text'].includes(field.type)) {
+    return field
+  }
+
+  return {
+    ...field,
+    components: {
+      input: (props: any) => {
+        const [isGenerating, setIsGenerating] = React.useState(false)
+        const [suggestedContent, setSuggestedContent] = React.useState('')
+        const [showSuggestion, setShowSuggestion] = React.useState(false)
+
+        // Get form values for context
+        const formDocument = useFormValue([])
+
+        const generateContent = async () => {
+          if (!formDocument) return
+
+          setIsGenerating(true)
+          try {
+            const pageContent = gatherPageContent(formDocument)
+            const generated = await generateContentWithAI(
+              field.name,
+              field.type,
+              field.title,
+              pageContent,
+              props.value,
+            )
+
+            setSuggestedContent(generated)
+            setShowSuggestion(true)
+          } catch (error: any) {
+            console.error('Error generating content:', error)
+            alert(`Failed to generate content: ${error.message}`)
+          } finally {
+            setIsGenerating(false)
+          }
+        }
+
+        const acceptSuggestion = () => {
+          props.onChange(PatchEvent.from(set(suggestedContent)))
+          setShowSuggestion(false)
+          setSuggestedContent('')
+        }
+
+        const rejectSuggestion = () => {
+          setShowSuggestion(false)
+          setSuggestedContent('')
+        }
+
+        return React.createElement(
+          'div',
+          {},
+          // Original field input
+          props.renderDefault(props),
+          // AI Generation Button
+          React.createElement(
+            'div',
+            {
+              style: {
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                marginTop: '8px',
+              },
+            },
+            React.createElement(
+              'button',
+              {
+                type: 'button',
+                onClick: generateContent,
+                disabled: isGenerating,
+                style: {
+                  padding: '4px 8px',
+                  fontSize: '11px',
+                  border: '1px solid #7c3aed',
+                  borderRadius: '3px',
+                  background: isGenerating ? '#d1d5db' : '#7c3aed',
+                  color: 'white',
+                  cursor: isGenerating ? 'not-allowed' : 'pointer',
+                  opacity: isGenerating ? 0.5 : 1,
+                },
+              },
+              isGenerating ? '🤖 Generating...' : '🤖 Generate with AI',
+            ),
+          ),
+
+          // Suggestion Box
+          showSuggestion &&
+            React.createElement(
+              'div',
+              {
+                style: {
+                  marginBottom: '12px',
+                  padding: '12px',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '6px',
+                  backgroundColor: '#f9fafb',
+                },
+              },
+              React.createElement(
+                'div',
+                {
+                  style: {
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    marginBottom: '6px',
+                    color: '#374151',
+                  },
+                },
+                'AI Suggestion:',
+              ),
+              React.createElement(
+                'div',
+                {
+                  style: {
+                    marginBottom: '8px',
+                    padding: '8px',
+                    backgroundColor: 'white',
+                    border: '1px solid #d1d5db',
+                    borderRadius: '4px',
+                    fontSize: '13px',
+                  },
+                },
+                suggestedContent,
+              ),
+              React.createElement(
+                'div',
+                {
+                  style: {display: 'flex', gap: '8px'},
+                },
+                React.createElement(
+                  'button',
+                  {
+                    type: 'button',
+                    onClick: acceptSuggestion,
+                    style: {
+                      padding: '4px 12px',
+                      fontSize: '11px',
+                      border: '1px solid #10b981',
+                      borderRadius: '3px',
+                      background: '#10b981',
+                      color: 'white',
+                      cursor: 'pointer',
+                    },
+                  },
+                  '✓ Accept',
+                ),
+                React.createElement(
+                  'button',
+                  {
+                    type: 'button',
+                    onClick: rejectSuggestion,
+                    style: {
+                      padding: '4px 12px',
+                      fontSize: '11px',
+                      border: '1px solid #ef4444',
+                      borderRadius: '3px',
+                      background: '#ef4444',
+                      color: 'white',
+                      cursor: 'pointer',
+                    },
+                  },
+                  '✗ Reject',
+                ),
+              ),
+            ),
+        )
+      },
+    },
+  }
+}
+
 export const seoType = defineType({
   name: 'seo',
   title: 'SEO',
@@ -27,20 +457,24 @@ export const seoType = defineType({
   /* -------- fields -------- */
   fields: [
     /* General ---------------------------------------------------- */
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      fieldset: 'general',
-      initialValue: ({parent}) => parent?.internalTitle || '',
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-      fieldset: 'general',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        fieldset: 'general',
+        initialValue: ({parent}) => parent?.internalTitle || '',
+      }),
+    ),
+    withAIGeneration(
+      defineField({
+        name: 'description',
+        title: 'Description',
+        type: 'text',
+        rows: 3,
+        fieldset: 'general',
+      }),
+    ),
     defineField({
       name: 'keywords',
       title: 'Keywords',
@@ -72,19 +506,23 @@ export const seoType = defineType({
     }),
 
     /* Facebook --------------------------------------------------- */
-    defineField({
-      name: 'ogTitle',
-      title: 'Post title',
-      type: 'string',
-      fieldset: 'og',
-    }),
-    defineField({
-      name: 'ogDescription',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-      fieldset: 'og',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'ogTitle',
+        title: 'Post title',
+        type: 'string',
+        fieldset: 'og',
+      }),
+    ),
+    withAIGeneration(
+      defineField({
+        name: 'ogDescription',
+        title: 'Description',
+        type: 'text',
+        rows: 3,
+        fieldset: 'og',
+      }),
+    ),
     defineField({
       name: 'ogImage',
       title: 'Post image',
@@ -94,19 +532,23 @@ export const seoType = defineType({
     }),
 
     /* Twitter ---------------------------------------------------- */
-    defineField({
-      name: 'twTitle',
-      title: 'Post title',
-      type: 'string',
-      fieldset: 'twitter',
-    }),
-    defineField({
-      name: 'twDescription',
-      title: 'Description',
-      type: 'text',
-      rows: 3,
-      fieldset: 'twitter',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'twTitle',
+        title: 'Post title',
+        type: 'string',
+        fieldset: 'twitter',
+      }),
+    ),
+    withAIGeneration(
+      defineField({
+        name: 'twDescription',
+        title: 'Description',
+        type: 'text',
+        rows: 3,
+        fieldset: 'twitter',
+      }),
+    ),
     defineField({
       name: 'twImage',
       title: 'Post image',
@@ -134,7 +576,9 @@ export const sectionType = defineType({
   title: 'Section',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -380,7 +824,46 @@ export const cardType = defineType({
     //   readOnly: true,
     // }),
   ],
-  preview: {select: {title: 'title'}},
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'body',
+      media: 'media',
+      hasActions: 'actions',
+      linkTitle: 'link.title',
+    },
+    prepare(selection) {
+      const {title, subtitle, media, hasActions, linkTitle} = selection
+
+      // Extract text from rich text body if available
+      const bodyText =
+        subtitle && subtitle.length > 0
+          ? subtitle
+              .filter((block) => block._type === 'block')
+              .map((block) =>
+                block.children
+                  ?.filter((child) => child._type === 'span')
+                  ?.map((span) => span.text)
+                  ?.join(''),
+              )
+              .join(' ')
+              .slice(0, 100) + (subtitle.length > 100 ? '...' : '')
+          : ''
+
+      // Build subtitle with available information
+      const subtitleParts = []
+      if (bodyText) subtitleParts.push(bodyText)
+      if (hasActions && hasActions.length > 0)
+        subtitleParts.push(`• ${hasActions.length} action${hasActions.length > 1 ? 's' : ''}`)
+      if (linkTitle) subtitleParts.push(`• Links to: ${linkTitle}`)
+
+      return {
+        title: title || 'Untitled Card',
+        subtitle: subtitleParts.join(' '),
+        media: media && media.length > 0 ? media[0] : undefined,
+      }
+    },
+  },
   readOnly: ({document}) => (document == null ? void 0 : document.contentfulArchived) === !0,
 })
 
@@ -390,7 +873,9 @@ export const linkType = defineType({
   title: 'Link - CTA',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -574,7 +1059,7 @@ export const collectionType = defineType({
 
     defineField({
       group: 'content',
-      name: 'introText',
+      name: 'introText_raw',
       type: 'introText',
       title: 'Intro Text',
 
@@ -582,7 +1067,7 @@ export const collectionType = defineType({
     }),
     defineField({
       group: 'content',
-      name: 'items',
+      name: 'items_raw',
       type: 'array',
       of: [
         // Inline card object for collection-specific content
@@ -624,7 +1109,6 @@ export const collectionType = defineType({
     //   validation: (Rule) => Rule.max(20).warning('Consider limiting images for performance'),
     // }),
     defineField({
-      group: 'content',
       name: 'variant',
       type: 'string',
       title: 'Layout Style',
@@ -652,7 +1136,6 @@ export const collectionType = defineType({
       },
     }),
     defineField({
-      group: 'content',
       name: 'itemsVariant',
       type: 'string',
       title: 'Items Style',
@@ -663,31 +1146,44 @@ export const collectionType = defineType({
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
-            ['Default', 'Icon', 'Logo', 'Media', 'Pricing', 'Person', 'Quote', 'Blog'],
+            [
+              'Default',
+              'Icon Left',
+              'Icon Center',
+              'Icon Padding Left',
+              'Icon Padding Center',
+              'Logo',
+              'Media',
+              'Quote',
+              'Icon Stats',
+              'Icon Listing',
+            ],
             value,
           ),
         ),
       options: {
         list: [
           {value: 'Default', title: 'Default Card'},
-          {value: 'Icon', title: '🎯 Icon Card'},
-          {value: 'Logo', title: '🏢 Logo Card'},
-          {value: 'Media', title: '🎬 Media Card'},
-          {value: 'Pricing', title: '💰 Pricing Card'},
-          {value: 'Person', title: '👤 Person Card'},
-          {value: 'Quote', title: '💬 Quote Card'},
-          {value: 'Blog', title: '📝 Blog Card'},
+          {value: 'Icon Left', title: '🎯 Icon Left'},
+          {value: 'Icon Center', title: '🎯 Icon Center'},
+          {value: 'Icon Padding Left', title: '🎯 Icon Padding Left'},
+          {value: 'Icon Padding Center', title: '🎯 Icon Padding Center'},
+          {value: 'Logo', title: '🏢 Logo'},
+          {value: 'Media', title: '🎬 Media'},
+          {value: 'Quote', title: '💬 Testimonial'},
+          {value: 'Icon Stats', title: '📊 Icon Stats'},
+          {value: 'Icon Listing', title: '📋 Icon Listing'},
         ],
         layout: 'dropdown',
       },
     }),
     defineField({
-      group: 'content',
+      group: 'styling',
       name: 'itemsAspectRatio',
       type: 'string',
       title: 'Items Aspect Ratio',
       fieldset: 'styling',
-      group: 'styling',
+
       description: 'This will guide a minimum height for the items in the collection',
       initialValue: 'Default',
       validation: (Rule) =>
@@ -699,11 +1195,10 @@ export const collectionType = defineType({
 
     // Carousel Settings
     defineField({
-      group: 'carousel',
+      group: 'styling',
       name: 'carouselBreakpoints',
       type: 'array',
       fieldset: 'styling',
-      group: 'styling',
       of: [
         {
           type: 'string',
@@ -715,6 +1210,7 @@ export const collectionType = defineType({
       title: 'Show as Carousel at These Sizes',
       // group: 'carousel',
       description: 'Should this show as a carousel? If so, at which sizes?',
+      fieldset: 'styling',
       options: {
         list: [
           {value: 'Mobile', title: '📱 Mobile'},
@@ -730,6 +1226,7 @@ export const collectionType = defineType({
       type: 'boolean',
       title: 'Carousel Auto Play?',
       group: 'carousel',
+      fieldset: 'styling',
       hidden: ({document}) => {
         const breakpoints = document?.carouselBreakpoints
         return !Array.isArray(breakpoints) || breakpoints.length === 0
@@ -742,6 +1239,7 @@ export const collectionType = defineType({
       type: 'boolean',
       title: 'Show Full Items in Carousel?',
       group: 'carousel',
+      fieldset: 'styling',
       hidden: ({document}) => {
         const breakpoints = document?.carouselBreakpoints
         return !Array.isArray(breakpoints) || breakpoints.length === 0
@@ -808,7 +1306,9 @@ export const contentful_textType = defineType({
   title: 'Element - Text',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -820,21 +1320,25 @@ export const contentful_textType = defineType({
       validation: (Rule) => Rule.custom((value) => validateIn(['default', 'Intro Text'], value)),
       options: {list: ['default', 'Intro Text'], layout: 'dropdown'},
     }),
-    defineField({
-      name: 'overline',
-      type: 'string',
-      title: 'Overline',
-      hidden: false,
-      description: '[Optional] This field will be displayed above the Title.',
-    }),
-    defineField({name: 'title', type: 'string', title: 'Title', hidden: false}),
-    defineField({
-      name: 'subtitle',
-      type: 'string',
-      title: 'Subtitle',
-      hidden: false,
-      description: '[Optional] This field will be displayed below the Title.',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'overline',
+        type: 'string',
+        title: 'Overline',
+        hidden: false,
+        description: '[Optional] This field will be displayed above the Title.',
+      }),
+    ),
+    withAIGeneration(defineField({name: 'title', type: 'string', title: 'Title', hidden: false})),
+    withAIGeneration(
+      defineField({
+        name: 'subtitle',
+        type: 'string',
+        title: 'Subtitle',
+        hidden: false,
+        description: '[Optional] This field will be displayed below the Title.',
+      }),
+    ),
     defineField({
       name: 'body',
       type: 'array',
@@ -1033,7 +1537,7 @@ export const introTextType = defineType({
   name: 'introText',
   title: 'Intro Text',
   description: 'Add intro content to appear above the main content of this module.',
-
+  fieldsets: [{name: 'styling', title: 'Styling'}],
   // Simplified - no nested fieldsets within the object
   options: {
     collapsible: true,
@@ -1110,6 +1614,7 @@ export const introTextType = defineType({
     defineField({
       name: 'align',
       type: 'string',
+      fieldset: 'styling',
       title: 'Text Alignment',
       description: 'Choose alignment of the text',
       initialValue: 'Default',
@@ -1146,7 +1651,9 @@ export const pageType = defineType({
   title: 'Page - General',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'parentPage',
       type: 'reference',
@@ -1167,7 +1674,7 @@ export const pageType = defineType({
         (Rule.required() as any).regex(/^([^\/][a-zA-Z0-9_\-\/]*[^\/])|(\/)$/, {invert: false}),
       options: {source: 'title'},
     }),
-    defineField({name: 'title', type: 'string', title: 'Title', hidden: false}),
+    withAIGeneration(defineField({name: 'title', type: 'string', title: 'Title', hidden: false})),
     defineField({
       name: 'hero',
       type: 'reference',
@@ -1202,14 +1709,16 @@ export const pageType = defineType({
         'Select the modules that will appear on the page. You can drag and drop them to control the sort order.',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'promoSummary',
-      type: 'text',
-      title: 'Promo Summary',
-      hidden: false,
-      description:
-        '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'promoSummary',
+        type: 'text',
+        title: 'Promo Summary',
+        hidden: false,
+        description:
+          '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
+      }),
+    ),
     defineField({
       name: 'promoImage',
       type: 'image',
@@ -1354,7 +1863,9 @@ export const heroType = defineType({
   title: 'Hero',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -1406,13 +1917,15 @@ export const heroType = defineType({
       hidden: false,
       description: 'Optional. This field will be displayed above the Title.',
     }),
-    defineField({
-      name: 'subtitle',
-      type: 'string',
-      title: 'Subtitle',
-      hidden: false,
-      description: '[Optional] This field will be displayed below the Title.',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'subtitle',
+        type: 'string',
+        title: 'Subtitle',
+        hidden: false,
+        description: '[Optional] This field will be displayed below the Title.',
+      }),
+    ),
     defineField({
       name: 'body',
       type: 'array',
@@ -1576,7 +2089,9 @@ export const navigationItemType = defineType({
   title: 'Link - Navigation',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -1880,7 +2395,9 @@ export const headerType = defineType({
   title: 'Site - Header',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -2054,7 +2571,9 @@ export const moduleIntegrationType = defineType({
   title: 'Module Integration',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -2154,7 +2673,9 @@ export const mediaType = defineType({
   title: 'Element - Media',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -2439,14 +2960,16 @@ export const personType = defineType({
       hidden: false,
       validation: (Rule) => Rule.regex(/^\w[\w.-]*@([\w-]+\.)+[\w-]+$/, {invert: false}),
     }),
-    defineField({
-      name: 'promoSummary',
-      type: 'text',
-      title: 'Promo Summary',
-      hidden: false,
-      description:
-        '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'promoSummary',
+        type: 'text',
+        title: 'Promo Summary',
+        hidden: false,
+        description:
+          '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
+      }),
+    ),
     defineField({
       name: 'promoImage',
       type: 'image',
@@ -2664,14 +3187,16 @@ export const categoryBlogType = defineType({
       title: 'Body',
       hidden: false,
     }),
-    defineField({
-      name: 'promoSummary',
-      type: 'text',
-      title: 'Promo Summary',
-      hidden: false,
-      description:
-        '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'promoSummary',
+        type: 'text',
+        title: 'Promo Summary',
+        hidden: false,
+        description:
+          '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
+      }),
+    ),
     defineField({
       name: 'promoImage',
       type: 'image',
@@ -2726,7 +3251,9 @@ export const settingsType = defineType({
   title: 'Site - Last Rev Settings',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'settingsType',
       type: 'string',
@@ -2848,7 +3375,9 @@ export const contentful_blockType = defineType({
   title: 'Block',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'variant',
       type: 'string',
@@ -3057,7 +3586,9 @@ export const footerType = defineType({
   title: 'Site - Footer',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'introContents',
       type: 'array',
@@ -3299,7 +3830,9 @@ export const collectionDynamicType = defineType({
   title: 'Collection - Dynamic',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'introText',
       type: 'reference',
@@ -3475,7 +4008,9 @@ export const elementFormType = defineType({
   title: 'Element - Form',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'parentPage',
       type: 'reference',
@@ -3688,7 +4223,9 @@ export const elementVideoType = defineType({
   title: 'Element - Video',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({name: 'title', type: 'string', title: 'Title', hidden: false}),
     defineField({name: 'altText', type: 'text', title: 'Alt Text', hidden: false}),
     defineField({
@@ -3736,7 +4273,9 @@ export const collectionExpandableItemType = defineType({
   title: 'Collection - Expandable - Item',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'title',
       type: 'string',
@@ -3853,7 +4392,9 @@ export const collectionExpandableType = defineType({
   title: 'Collection - Expandable',
   description: '',
   fields: [
-    defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    withAIGeneration(
+      defineField({name: 'internalTitle', type: 'string', title: 'Internal Title', hidden: false}),
+    ),
     defineField({
       name: 'introText',
       type: 'reference',
@@ -4143,14 +4684,16 @@ export const blogType = defineType({
         'These are free-form tags that are used for filtering  blogs. These appear as tags on the blog detail page.',
       options: {layout: 'tags'},
     }),
-    defineField({
-      name: 'promoSummary',
-      type: 'text',
-      title: 'Promo Summary',
-      hidden: false,
-      description:
-        '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
-    }),
+    withAIGeneration(
+      defineField({
+        name: 'promoSummary',
+        type: 'text',
+        title: 'Promo Summary',
+        hidden: false,
+        description:
+          '[Optional] When promoting this page, this summary may be shown dynamically rendered cards, listing pages, etc.)',
+      }),
+    ),
     defineField({
       name: 'promoImage',
       type: 'image',
