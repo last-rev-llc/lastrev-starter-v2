@@ -4,6 +4,7 @@ import type { ApolloContext } from './types';
 import { getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import type { Mappers } from '@last-rev/types';
+import { mapCardVariant } from './utils/cardVariantMapping';
 
 export const typeMappings = {};
 
@@ -15,6 +16,9 @@ export const typeDefs = gql`
     link: Link
     variant: String
     aspectRatio: String
+    overline: String
+    subtitle: String
+    body: RichText
   }
 `;
 
@@ -30,6 +34,10 @@ export const mappers: Mappers = {
         if (!!actions?.length) return actions[0];
 
         return null;
+      },
+      variant: async (card: any, _args: any, ctx: ApolloContext) => {
+        const variant = getLocalizedField(card.fields, 'variant', ctx);
+        return mapCardVariant(variant);
       }
     }
   }

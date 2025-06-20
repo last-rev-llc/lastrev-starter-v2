@@ -20,6 +20,7 @@ export const typeDefs = gql`
     link: Link
     supplementalContent: Content
     backgroundImage: Media
+    body: RichText
   }
 `;
 

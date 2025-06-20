@@ -16,6 +16,11 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   Text: {
     Text: {
+      id: defaultResolver('id'),
+      title: defaultResolver('title'),
+      // overline: defaultResolver('overline'),
+      // overline: 'overline',
+      overline: (content: any) => content.overline,
       backgroundColor: defaultResolver('backgroundColor'),
       variant: defaultResolver('variant')
     }
