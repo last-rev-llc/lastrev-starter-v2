@@ -12,19 +12,6 @@ directive @tag(name: String!) on ARGUMENT_DEFINITION | ENUM | ENUM_VALUE | FIELD
 
 union ActionLink = Link
 
-type AlgoliaObject {
-  data: JSON!
-  index: String!
-}
-
-type AlgoliaRecord implements Content {
-  algoliaObjects: [AlgoliaObject]
-  animation: JSON
-  id: String
-  sidekickLookup: JSON
-  theme: [Theme]
-}
-
 type Asset {
   description: String
   extension: String
@@ -102,10 +89,7 @@ type Card implements Content {
   animation: JSON
   aspectRatio: String
   body: RichText
-  contentfulArchived: Boolean
-  disclaimer: String
   id: String
-  internalTitle: String
   jsonLd: JSON
   link: Link
   media: [Media]
@@ -114,7 +98,6 @@ type Card implements Content {
   subtitle: String
   theme: [Theme]
   title: String
-  userName: String
   variant: String
 }
 
@@ -146,9 +129,9 @@ type Collection implements Content {
   carouselBreakpoints: [String]
   contentfulArchived: Boolean
   id: String
-  images: [Media]
   internalTitle: String
   introText: Text
+  introText_raw: JSON
   isCarouselDesktop: Boolean
   isCarouselMobile: Boolean
   isCarouselTablet: Boolean
@@ -157,6 +140,7 @@ type Collection implements Content {
   itemsConnection(filter: CollectionFilterInput, limit: Int, offset: Int): CollectionItemConnection
   itemsPerRow: Int
   itemsVariant: String
+  items_raw: [JSON]
   numItems: Int
   showFullItemsInCarousel: Boolean
   sidekickLookup: JSON
@@ -389,6 +373,18 @@ type Hero implements Content {
   sideImageItems: [Media]
   sidekickLookup: JSON
   subtitle: String
+  theme: [Theme]
+  title: String
+  variant: String
+}
+
+type IntroText implements Content {
+  align: String
+  animation: JSON
+  body: RichText
+  id: String
+  overline: String
+  sidekickLookup: JSON
   theme: [Theme]
   title: String
   variant: String

@@ -9,6 +9,7 @@ import { queryContentful } from './utils/queryContentful';
 import { getWinstonLogger } from '@last-rev/logging';
 import { defaultResolver } from './utils/defaultResolver';
 import { createType } from './utils/createType';
+import { mapCardVariant } from './utils/cardVariantMapping';
 
 const logger = getWinstonLogger({
   package: 'graphql-cms-extensions',
@@ -86,11 +87,15 @@ export const mappers: Mappers = {
   Collection: {
     Collection: {
       backgroundColor: defaultResolver('backgroundColor'),
-      items: async (collection: any, args: any, ctx: ApolloContext) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+      introText: 'introText_raw',
+      items: async (collection: any, _args: any, ctx: ApolloContext) => {
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
+          [];
 
-        const itemsVariantFn = defaultResolver('itemsVariant');
-        const itemsVariant = itemsVariantFn(collection, args, ctx);
+        // Get the itemsVariant from the collection
+        const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
 
         try {
           const { contentType, limit, offset, order, filter } =
@@ -124,9 +129,12 @@ export const mappers: Mappers = {
             .filter((r) => r !== null)
             .map((asset: any) => createType('Media', { asset }));
 
+        // Map the itemsVariant value
+        const mappedItemsVariant = mapCardVariant(itemsVariant);
+
         const finalItems = (returnItemsRef || []).concat(imageItems || [])?.map((x: any) => ({
           ...x,
-          itemsVariant
+          variant: mappedItemsVariant
         }));
 
         return finalItems;
@@ -150,7 +158,7 @@ export const mappers: Mappers = {
         return carouselBreakpoints.includes('Mobile');
       },
 
-      numItems: async (collection: any, args: any, ctx: ApolloContext) => {
+      numItems: async (collection: any, _args: any, ctx: ApolloContext) => {
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
@@ -198,7 +206,10 @@ export const mappers: Mappers = {
         return itemsPerRow;
       },
 
-      itemsVariant: defaultResolver('itemsVariant'),
+      itemsVariant: async (collection: any, _args: any, ctx: ApolloContext) => {
+        const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
+        return mapCardVariant(itemsVariant);
+      },
 
       itemsAspectRatio: defaultResolver('itemsAspectRatio'),
 
@@ -243,13 +254,18 @@ export const mappers: Mappers = {
             let fullItemsWithVariant = [];
 
             if (!!items?.length) {
-              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx) ?? [];
+              // Get and map the itemsVariant value
+              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
+              const mappedItemsVariant = mapCardVariant(itemsVariant);
 
               const fullItems = await ctx.loaders.entryLoader.loadMany(
                 items.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
               );
 
-              fullItemsWithVariant = fullItems?.map((x: any) => ({ ...x, variant: itemsVariant }));
+              fullItemsWithVariant = fullItems?.map((x: any) => ({
+                ...x,
+                variant: mappedItemsVariant
+              }));
             }
 
             return {
