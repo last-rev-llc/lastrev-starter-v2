@@ -7,134 +7,49 @@ import {
 
 import { type Theme } from '../ThemeRegistry/theme.types';
 
-import { CardVariants, CardAspectRatios } from './Card.types';
+import { CardVariants } from './Card.types';
 
 const defaultProps: ComponentsProps['Card'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   root: ({ theme, ownerState }) => ({
     'containerType': 'inline-size',
+    'width': '100%', // Full width to fill grid cell
     'height': '100%',
+    'display': 'flex',
+    'flexDirection': 'column',
 
-    ...(ownerState?.link ? { 'cursor': 'pointer', '&:hover': {} } : {}),
+    ...(ownerState?.link ? { cursor: 'pointer' } : {}),
 
-    ...(ownerState?.variant === CardVariants.hover
-      ? {
-          [theme.containerBreakpoints.up('md')]: {
-            ...theme.mixins.applyColorSchemeOverlay({ ownerState, theme })
-          }
-        }
-      : {
-          ...theme.mixins.applyBackgroundColor({ ownerState, theme })
-        }),
+    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
 
-    '&  .MuiTypography-root': {
+    '& .MuiTypography-root': {
       whiteSpace: 'initial'
     }
   }),
 
   cardWrap: ({ theme, ownerState }) => ({
-    ...(ownerState?.variant === CardVariants.hover
-      ? {
-          [theme.containerBreakpoints.up('md')]: {
-            ...theme.mixins.applyColorSchemeOverlay({ ownerState, theme })
-          }
-        }
-      : {
-          ...theme.mixins.applyBackgroundColor({ ownerState, theme })
-        }),
-
+    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
+    minHeight: 0,
     boxShadow: 'initial',
-    position: 'relative',
-
-    ...(ownerState?.aspectRatio === CardAspectRatios.horizontal && {
-      ...(ownerState?.variant === CardVariants.media ||
-      ownerState?.variant === CardVariants.mediaOnlyFit ||
-      ownerState?.variant === CardVariants.mediaOnlyFull
-        ? {
-            [theme.breakpoints.up('md')]: { maxHeight: '56.25cqi' }
-          }
-        : {
-            [theme.breakpoints.up('md')]: {
-              maxHeight: 'initial',
-              minHeight: '56.25cqi'
-            }
-          })
-    }),
-
-    ...(ownerState?.aspectRatio === CardAspectRatios.vertical && {
-      ...(ownerState?.variant === CardVariants.media ||
-      ownerState?.variant === CardVariants.mediaOnlyFit ||
-      ownerState?.variant === CardVariants.mediaOnlyFull
-        ? {
-            [theme.breakpoints.up('md')]: { minHeight: '177.78cqi' }
-          }
-        : {
-            [theme.breakpoints.up('md')]: {
-              maxHeight: 'initial',
-              minHeight: '177.78cqi'
-            }
-          })
-    }),
-
-    ...(ownerState?.aspectRatio === CardAspectRatios.square && {
-      ...(ownerState?.variant === CardVariants.media ||
-      ownerState?.variant === CardVariants.mediaOnlyFit ||
-      ownerState?.variant === CardVariants.mediaOnlyFull
-        ? {
-            [theme.breakpoints.up('md')]: { maxHeight: '100cqi' }
-          }
-        : {
-            [theme.breakpoints.up('md')]: {
-              maxHeight: 'initial',
-              minHeight: '100cqi'
-            }
-          })
-    })
+    position: 'relative'
   }),
 
   media: ({ ownerState, theme }) => ({
     'backgroundColor': 'inherit',
-    ...(ownerState?.variant === CardVariants.hover && {
-      '&::after': {
-        backgroundColor: 'inherit',
-        opacity: '.5'
-      }
-    }),
 
     ':is(picture, svg)': {
       'display': 'flex',
       'height': '100%',
       'width': '100%',
-      'aspectRatio': '16/9',
 
       '&:is(svg)': {
         objectFit: 'fill',
         margin: 'auto'
-      },
-
-      ...(ownerState?.variant === CardVariants.mediaOnlyFull && {
-        aspectRatio: 'unset'
-      }),
-
-      ...(ownerState?.aspectRatio === CardAspectRatios.horizontal && {
-        aspectRatio: '16/9'
-      }),
-
-      ...(ownerState?.aspectRatio === CardAspectRatios.vertical && {
-        aspectRatio: '1/1',
-
-        [theme.breakpoints.up('md')]: {
-          aspectRatio: '9/16'
-        }
-      }),
-
-      ...(ownerState?.aspectRatio === CardAspectRatios.square && {
-        [theme.breakpoints.up('md')]: { aspectRatio: '1/1' }
-      })
+      }
     },
 
     'img': {
@@ -152,20 +67,24 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   }),
 
   contentWrap: ({ ownerState, theme }) => ({
-    flex: 1
-
-    // ...(!!ownerState?.backgroundColor ? { padding: 'var(--grid-gap-half)' } : { padding: 0 })
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 'var(--grid-gap)',
+    minHeight: 0
   }),
 
   bodyWrap: ({ theme }) => ({
+    flex: 1,
+    minHeight: 0,
     '*': {
       ...theme.typography.body1
     }
   }),
 
   actionsWrap: ({ ownerState, theme }) => ({
-    // ...(!!ownerState?.backgroundColor ? { padding: 'var(--grid-gap-half)' } : { padding: 0 }),
-    padding: 0,
+    padding: 'var(--grid-gap)',
+    marginTop: 'auto',
     a: {
       padding: 'var(--grid-gap-half)',
       margin: 0
@@ -188,483 +107,488 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
 };
 
 const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
-  {
-    props: {
-      variant: CardVariants.default
-    },
-    style: {
-      'willChange': 'transform',
-      '[class*=MuiCard-root]': {
-        transition: '.2s ease-in-out',
-        border: '0.5px solid #eaebec'
-      },
-      '[class*=actionsWrap]': {
-        textAlign: 'right',
-        justifyContent: 'flex-end'
-      },
-
-      '& [class*=Card-content]': {
-        display: 'flex',
-        flexDirection: 'column'
-      },
-
-      '& [class*=Card-title]': {
-        marginTop: 0
-      },
-      '&:hover': {
-        '[class*=MuiCard-root]': {
-          'background': 'var(--mui-palette-primary-light)',
-          'borderColor': 'var(--mui-palette-primary-light)',
-          'transform': 'scale(1.05)',
-
-          '*': {
-            'var(--mui-palette-primary-text)': 'white',
-            'color': 'white'
-          }
-        }
-      }
-    }
-  },
-
-  {
-    props: {
-      variant: CardVariants.hover
-    },
-    style: {
-      '[class*=Card-cardMedia]': {
-        '&::after': {
-          content: '""',
-          position: 'absolute',
-          height: '100%',
-          width: '100%',
-          zIndex: 1,
-          top: 0,
-          left: 0
-        }
-      },
-
-      [theme.breakpoints.up('md')]: {
-        'overflow': 'hidden',
-
-        '[class*=cardWrap]': {
-          justifyContent: 'flex-end',
-          height: '100%'
-        },
-
-        '[class*=Card-cardMedia]': {
-          'width': '100%',
-          'position': 'absolute',
-
-          '& > *': {
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }
-        },
-
-        ':is([class*=contentWrap], [class*=actionsWrap])': {
-          'padding': '0 var(--grid-gap)',
-          'flex': 0,
-          'width': '100%',
-          'zIndex': 20,
-          'boxSizing': 'border-box',
-
-          '& > *': {
-            overflow: 'hidden',
-            maxHeight: 0,
-            transition: 'transform .25s linear',
-            willChange: 'transform, max-height',
-            transformOrigin: 'bottom',
-            transform: 'scaleY(0)'
-          },
-
-          '[class*=Card-title]': {
-            maxHeight: 'initial',
-            transform: 'scaleY(1)'
-          }
-        },
-
-        '[class*=bodyWrap]': {
-          paddingBottom: 0
-        },
-
-        '[class*=actionsWrap]': {
-          paddingBottom: 'var(--grid-gap-half)'
-        },
-
-        '&:not(:hover)': {
-          '[class*=Card-title]': {
-            marginBottom: 0
-          }
-        },
-
-        '&:hover': {
-          ':is([class*=contentWrap], [class*=actionsWrap])': {
-            '& > *': {
-              maxHeight: '100%',
-              transform: 'scaleY(1)'
-            }
-          },
-
-          '[class*=contentWrap]': {
-            '& > *:last-child': {
-              paddingBottom: 'var(--grid-gap-quarter)'
-            }
-          }
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: CardVariants.media
-    },
-    style: {}
-  },
-  {
-    props: {
-      variant: CardVariants.logo
-    },
-    style: {
-      '[class*=cardMedia]': {
-        'margin': 'auto',
-        'padding': 'var(--grid-gap-double)',
-        '& :is(img, svg, picture > img)': {
-          objectFit: 'contain'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: CardVariants.mediaOnlyFit
-    },
-    style: {
-      '[class*=CardContent]': {
-        display: 'none'
-      },
-
-      '[class*=CardMedia]': {
-        'margin': 'auto',
-
-        '& :is(img, svg, picture > img)': {
-          objectFit: 'contain'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: CardVariants.mediaOnlyFull
-    },
-    style: {
-      '[class*=CardContent]': {
-        display: 'none'
-      },
-
-      '[class*=CardMedia]': {
-        '& :is(img, svg, picture > img)': {
-          objectFit: 'cover'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: CardVariants.icon
-    },
-    style: {
-      'alignItems': 'flex-start',
-
-      '[class*=Card-title]': {
-        ...theme.typography.h2
-      },
-
-      '[class*=cardMedia]': {
-        maxWidth: 96,
-        paddingLeft: 'var(--grid-gap)',
-
-        [theme.containerBreakpoints.up('lg')]: {
-          '& > :is(img, svg, picture > img)': {
-            objectFit: 'contain'
-          }
-        }
-      },
-
-      '[class*=contentWrap]': {
-        paddingLeft: 'var(--grid-gap)'
-      }
-    }
-  },
-
+  // Icon Left variant
   {
     props: {
       variant: CardVariants.iconLeft
     },
     style: {
-      'alignItems': 'flex-start',
-
-      '[class*=cardWrap]': {
-        display: 'grid',
-        gridTemplateColumns: '15cqi auto',
-        gridTemplateRows: 'auto auto',
-        gridGap: 'var(--grid-gap)'
-      },
-
       '[class*=cardMedia]': {
-        'gridColumn': 1,
-        'gridRow': '1/-1',
-        'alignSelf': 'flex-start',
-        'paddingLeft': 'var(--grid-gap-half)',
-
-        '& > :is(img, svg, picture)': {
-          'aspectRatio': '1/1',
-          'objectFit': 'contain',
-
-          '&, & > img': {
-            objectFit: 'contain',
-            aspectRatio: '1/1'
-          }
-        }
-      },
-
-      '[class*=contentWrap]': {
-        gridColumn: 2,
-        gridRow: 1,
-        paddingTop: 0
-      },
-
-      '[class*=actionsWrap]': {
-        gridColumn: 2,
-        gridRow: 2,
-        paddingBottom: 0
-      }
-    }
-  },
-  {
-    props: {
-      variant: CardVariants.autocomplete
-    },
-    style: {
-      'alignItems': 'flex-start',
-
-      '& .MuiTypography-root': {
-        whiteSpace: 'initial'
-      },
-
-      '[class*=cardWrap]': {
-        display: 'grid',
-        gridTemplateColumns: '15cqi auto',
-        gridTemplateRows: 'auto',
-        gridColumnGap: 'var(--grid-gap-half)',
-        gridRowGap: 0,
-        borderTop: '1px solid var(--variant-highlight-color)',
-        padding: 0
-      },
-
-      '&:is(:first-of-type) [class*=cardWrap]': {
-        borderTopWidth: 0
+        maxWidth: '96px',
+        padding: 'var(--grid-gap)'
       },
 
       '[class*=Card-title]': {
-        ...theme.typography.h5
-      },
-
-      '[class*=CardContent]': {
-        padding: 0
-      },
-
-      '[class*=cardMedia]': {
-        'gridColumn': 1,
-        'gridRow': '1/-1',
-        'alignSelf': 'flex-start',
-        'justifySelf': 'center',
-        'paddingTop': 'var(--grid-gap-quarter)',
-
-        '& > :is(img, svg, picture)': {
-          'aspectRatio': '1/1',
-          'objectFit': 'cover',
-
-          '&, & > img': {
-            objectFit: 'cover',
-            aspectRatio: '1/1'
-          }
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
         }
-      },
-
-      '[class*=contentWrap]': {
-        gridColumn: 2,
-        gridRow: 1,
-        paddingTop: 0
       },
 
       '[class*=bodyWrap]': {
-        [theme.breakpoints.down('sm')]: {
+        '& > *': {
           'overflow': 'hidden',
-          'textOverflow': 'ellipsis',
           'display': '-webkit-box',
-          'lineClamp': '4',
-          '-webkit-line-clamp': '4',
-          '-webkit-box-orient': 'vertical',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
 
-          '@media screen and (orientation:landscape)': {
-            display: 'none'
-          },
-
-          '*': {
-            ...theme.typography.bodyXSmall
-          }
-        },
-
-        [theme.breakpoints.only('sm')]: {
-          '@media screen and (orientation:landscape)': {
-            'overflow': 'hidden',
-            'textOverflow': 'ellipsis',
-            'display': '-webkit-box',
-            'lineClamp': '1',
-            '-webkit-line-clamp': '1',
-            '-webkit-box-orient': 'vertical'
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
           }
         }
       },
 
-      '[class*=actionsWrap]': {
-        display: 'none',
-        gridColumn: 2,
-        gridRow: 1
+      '[class*=cardWrap]': {
+        alignItems: 'flex-start'
+      },
+      '[class*=contentWrap]': {
+        textAlign: 'left'
       }
     }
   },
+
+  // Icon Center variant
   {
     props: {
       variant: CardVariants.iconCenter
     },
     style: {
-      '& * ': {
-        alignItems: 'center'
+      '[class*=cardMedia]': {
+        maxWidth: '96px',
+        padding: 'var(--grid-gap)'
       },
 
       '[class*=Card-title]': {
-        ...theme.typography.h2
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
       },
 
-      '[class*=cardMedia]': {
-        maxWidth: 96,
-        paddingLeft: 'var(--grid-gap)',
-        paddingRight: 'var(--grid-gap)',
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
 
-        [theme.containerBreakpoints.up('lg')]: {
-          '& > :is(img, svg, picture > img)': {
-            objectFit: 'contain'
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
           }
         }
       },
 
+      '[class*=cardWrap]': {
+        alignItems: 'center'
+      },
       '[class*=contentWrap]': {
-        paddingLeft: 'var(--grid-gap)',
-        paddingRight: 'var(--grid-gap)'
+        textAlign: 'center'
       }
     }
   },
 
+  // Icon Padding Left variant
   {
     props: {
-      variant: CardVariants.person
+      variant: CardVariants.iconPaddingLeft
     },
     style: {
-      '[class*=Card-cardMedia]': {
+      'backgroundColor': 'var(--mui-palette-background-paper)',
+
+      '[class*=cardMedia]': {
+        maxWidth: '96px',
+        padding: 'var(--grid-gap-double)',
+        backgroundColor: 'var(--mui-palette-background-default)',
+        borderRadius: 'var(--mui-shape-borderRadius)'
+      },
+
+      '[class*=contentWrap]': {
+        padding: 'var(--grid-gap)'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
+      },
+
+      '[class*=cardWrap]': {
+        alignItems: 'flex-start'
+      },
+      '[class*=contentWrap]': {
+        textAlign: 'left'
+      }
+    }
+  },
+
+  // Icon Padding Center variant
+  {
+    props: {
+      variant: CardVariants.iconPaddingCenter
+    },
+    style: {
+      'backgroundColor': 'var(--mui-palette-background-paper)',
+
+      '[class*=cardMedia]': {
+        maxWidth: '96px',
+        padding: 'var(--grid-gap-double)',
+        backgroundColor: 'var(--mui-palette-background-default)',
+        borderRadius: 'var(--mui-shape-borderRadius)'
+      },
+
+      '[class*=contentWrap]': {
+        padding: 'var(--grid-gap)'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
+      },
+
+      '[class*=cardWrap]': {
+        alignItems: 'center'
+      },
+      '[class*=contentWrap]': {
+        textAlign: 'center'
+      }
+    }
+  },
+
+  // Logo variant
+  {
+    props: {
+      variant: CardVariants.logo
+    },
+    style: {
+      'backgroundColor': 'var(--mui-palette-background-default)',
+
+      '[class*=cardMedia]': {
+        'margin': 'auto',
+        'padding': 'calc(var(--grid-gap) * 2)',
+        'display': 'flex',
+        'alignItems': 'center',
+        'justifyContent': 'center',
+        'minHeight': '120px',
+
+        '& :is(img, svg, picture > img)': {
+          objectFit: 'contain',
+          maxWidth: '100%',
+          maxHeight: '100%',
+          width: 'auto',
+          height: 'auto'
+        }
+      }
+    }
+  },
+
+  // Media variant
+  {
+    props: {
+      variant: CardVariants.media
+    },
+    style: {
+      '[class*=cardMedia]': {
+        'aspectRatio': '16/9',
+        'flexShrink': 0,
+        '& :is(img, picture)': {
+          objectFit: 'cover',
+          width: '100%',
+          height: '100%'
+        }
+      },
+
+      '[class*=contentWrap]': {
+        flex: 1,
+        alignItems: 'flex-start',
+        textAlign: 'left'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
+      }
+    }
+  },
+
+  // Testimonial variant
+  {
+    props: {
+      variant: CardVariants.testimonial
+    },
+    style: {
+      'overflow': 'hidden',
+      'color': 'var(--mui-palette-common-white)',
+
+      '[class*=cardWrap]': {
+        'minHeight': '400px',
+        'padding': 'var(--grid-gap-double)',
+
+        '@container (max-width: 580px)': {
+          minHeight: 'auto',
+          padding: 'var(--grid-gap)'
+        }
+      },
+
+      '[class*=cardMedia]': {
+        'position': 'absolute',
+        'top': 0,
+        'left': 0,
         'width': '100%',
         'height': '100%',
-        'position': 'relative',
-
-        '& > div': {
-          // Needed for animations
-          width: 'inherit',
-          height: 'inherit',
-          position: 'inherit'
-        },
-
-        '& :is(img, picture)': {
-          width: '100%',
-          objectFit: 'contain',
-          minHeight: 'inherit',
-          height: '100%',
-
-          [theme.breakpoints.up('md')]: {
-            objectFit: 'cover'
-          }
-        },
+        'zIndex': 0,
 
         '&::after': {
           content: '""',
           position: 'absolute',
-          height: '100%',
-          width: '100%',
-          zIndex: 1,
           top: 0,
-          left: 0
-        }
-      },
-
-      '[class*=Card-subtitle]': {
-        marginBottom: 'var(--grid-gap-half)'
-      },
-
-      '[class*=Card-overline], [class*=body]': {
-        display: 'none'
-      }
-    }
-  },
-
-  {
-    props: {
-      variant: CardVariants.search
-    },
-    style: {
-      'alignItems': 'flex-start',
-
-      '[class*=cardWrap]': {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 'var(--grid-gap)',
-        minHeight: 'auto'
-      },
-
-      '[class*=cardMedia]': {
-        display: 'none'
-        // Leaving this for now in case we want to show a small icon
-        // 'width': 48,
-        // 'alignSelf': 'center',
-
-        // '& > :is(img, svg, picture)': {
-        //   'aspectRatio': '1/1',
-        //   'objectFit': 'contain',
-
-        //   '&, & > img': {
-        //     objectFit: 'contain',
-        //     aspectRatio: '1/1'
-        //   }
-        // }
-      },
-
-      '[class*=contentWrap]': {
-        'paddingTop': 0,
-        '& [class*=Card-title]': {
-          ...theme.typography.bodySmall,
-          fontWeight: 600,
-          marginBottom: 0
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%)',
+          zIndex: 1
         },
-        '[class*=bodyWrap]': {
-          'paddingBottom': 0,
-          '*': {
-            ...theme.typography.bodyXSmall
+
+        '@container (max-width: 580px)': {
+          'position': 'relative',
+          'height': '200px',
+
+          '&::after': {
+            background: 'rgba(0,0,0,0.6)'
           }
         }
       },
 
-      '[class*=actionsWrap]': {
-        display: 'none'
+      '[class*=contentWrap]': {
+        'position': 'relative',
+        'zIndex': 2,
+        'padding': 0,
+        'display': 'flex',
+        'flexDirection': 'column',
+        'justifyContent': 'center',
+
+        '@container (min-width: 581px)': {
+          maxWidth: '50%'
+        }
+      },
+
+      '[class*=Card-quote]': {
+        'fontSize': 'var(--h3-font-size)',
+        'fontWeight': 'var(--body1-font-weight)',
+        'marginBottom': 'var(--grid-gap)',
+
+        '&::before': {
+          content: '"\\201C"',
+          fontSize: '1.5em',
+          verticalAlign: 'text-top',
+          marginRight: '0.25em'
+        },
+
+        '@container (max-width: 580px)': {
+          fontSize: 'var(--body1-font-size)'
+        }
+      },
+
+      '[class*=Card-attribution]': {
+        '& [class*=name]': {
+          fontSize: 'var(--body2-font-size)',
+          fontWeight: 'var(--body2-font-weight)',
+          marginBottom: 'var(--grid-gap-quarter)'
+        },
+
+        '& [class*=title], & [class*=company]': {
+          fontSize: 'var(--bodyXSmall-font-size)',
+          opacity: 0.9
+        }
+      }
+    }
+  },
+
+  // Icon Stats variant
+  {
+    props: {
+      variant: CardVariants.iconStats
+    },
+    style: {
+      '[class*=cardWrap]': {
+        'display': 'grid',
+        'gridTemplateColumns': 'auto 1fr',
+        'gap': 'var(--grid-gap)',
+        'alignItems': 'center',
+
+        '@container (max-width: 580px)': {
+          gridTemplateColumns: '1fr',
+          alignItems: 'flex-start',
+          gap: 'var(--grid-gap-half)'
+        }
+      },
+
+      '[class*=cardMedia]': {
+        'width': '48px',
+        'height': '48px',
+        'padding': 0,
+
+        '& :is(svg, img)': {
+          width: '100%',
+          height: '100%',
+          color: 'var(--mui-palette-primary-main)'
+        }
+      },
+
+      '[class*=contentWrap]': {
+        padding: 0
+      },
+
+      '[class*=Card-statValue]': {
+        fontSize: 'var(--h2-font-size)',
+        fontWeight: 'var(--h2-font-weight)',
+        color: 'var(--mui-palette-primary-main)',
+        lineHeight: 1,
+        marginBottom: 'var(--grid-gap-quarter)',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap'
+      },
+
+      '[class*=Card-statLabel]': {
+        fontSize: 'var(--body2-font-size)',
+        fontWeight: 'var(--body2-font-weight)',
+        color: 'var(--mui-palette-text-primary)',
+        overflow: 'hidden',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        lineClamp: 2,
+        WebkitBoxOrient: 'vertical'
+      }
+    }
+  },
+
+  // Icon Listing variant
+  {
+    props: {
+      variant: CardVariants.iconListing
+    },
+    style: {
+      '[class*=cardWrap]': {
+        'display': 'grid',
+        'gridTemplateColumns': 'auto 1fr',
+        'gap': 'var(--grid-gap)',
+        'alignItems': 'flex-start',
+
+        '@container (max-width: 580px)': {
+          gridTemplateColumns: '1fr',
+          gap: 'var(--grid-gap-half)'
+        }
+      },
+
+      '[class*=cardMedia]': {
+        'width': '64px',
+        'height': '64px',
+        'padding': 0,
+
+        '& :is(svg, img)': {
+          width: '100%',
+          height: '100%',
+          color: 'var(--mui-palette-primary-main)'
+        }
+      },
+
+      '[class*=contentWrap]': {
+        padding: 0,
+        textAlign: 'left'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
       }
     }
   }
