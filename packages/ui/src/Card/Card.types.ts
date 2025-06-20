@@ -3,22 +3,22 @@ import type { ComponentsOverrides, ComponentsVariants, ComponentsProps } from '@
 import type { Card_BaseFragmentFragment } from '@graphql-sdk/types';
 
 export enum CardVariants {
-  default = 'default',
-  icon = 'icon',
-  logo = 'logo',
-  media = 'media',
-  mediaOnlyFull = 'mediaOnlyFull',
-  mediaOnlyFit = 'mediaOnlyFit',
-  pricing = 'pricing',
-  person = 'person',
-  quote = 'quote',
-  blog = 'blog',
-  hover = 'hover',
+  // Icon variants for specific alignments shown in images
   iconLeft = 'iconLeft',
-  news = 'news',
   iconCenter = 'iconCenter',
-  search = 'search',
-  autocomplete = 'autocomplete'
+
+  // Icon padding variants for specific alignments shown in images
+  iconPaddingLeft = 'iconPaddingLeft',
+  iconPaddingCenter = 'iconPaddingCenter',
+
+  // Logo variant
+  logo = 'logo',
+
+  // Other variants
+  media = 'media',
+  testimonial = 'testimonial',
+  iconStats = 'iconStats',
+  iconListing = 'iconListing'
 }
 
 export enum CardAspectRatios {
@@ -56,6 +56,10 @@ interface CardClasses {
   subtitle: string;
   body: string;
   bodyWrap: string;
+  quote: string;
+  attribution: string;
+  statValue: string;
+  statLabel: string;
 }
 
 export declare type CardClassKey = keyof CardClasses;

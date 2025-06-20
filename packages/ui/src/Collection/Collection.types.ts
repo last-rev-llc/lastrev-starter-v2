@@ -11,13 +11,26 @@ export enum CollectionVariants {
   threePerRow = 'threePerRow',
   fourPerRow = 'fourPerRow',
   fivePerRow = 'fivePerRow',
-  linkList = 'linkList'
+  linkList = 'linkList',
+  logos = 'logos',
+  cta = 'cta',
+  testimonial = 'testimonial'
 }
 
 export interface CollectionProps
   extends Omit<Collection_BaseFragmentFragment, 'variant' | 'itemsVariant'> {
   variant?: CollectionVariants;
   itemsVariant?: CardVariants;
+  enableCarousel?: boolean;
+  autoPlay?: boolean;
+  autoPlayInterval?: number;
+  showArrows?: boolean;
+  showDots?: boolean;
+  itemsPerView?: {
+    desktop?: number;
+    tablet?: number;
+    mobile?: number;
+  };
 }
 
 export interface CollectionOwnerState extends CollectionProps {}

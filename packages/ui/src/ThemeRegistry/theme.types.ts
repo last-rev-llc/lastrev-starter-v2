@@ -21,6 +21,53 @@ declare module '@mui/material/styles' {
     textColor: string;
     overlay: string;
     overlayText: string;
+    // Design System Extensions
+    neutral: {
+      white: string;
+      black: string;
+    };
+    utility: {
+      red: string;
+      orange: string;
+      yellow: string;
+      green: string;
+      blue: string;
+    };
+    designSystemSecondary: {
+      magenta500: string;
+      violet500: string;
+      violet700: string;
+      sky500: string;
+      azure600: string;
+      azure800: string;
+    };
+  }
+
+  interface PaletteOptions {
+    linkColor?: string;
+    headerColor?: string;
+    textColor?: string;
+    overlay?: string;
+    overlayText?: string;
+    neutral?: {
+      white?: string;
+      black?: string;
+    };
+    utility?: {
+      red?: string;
+      orange?: string;
+      yellow?: string;
+      green?: string;
+      blue?: string;
+    };
+    designSystemSecondary?: {
+      magenta500?: string;
+      violet500?: string;
+      violet700?: string;
+      sky500?: string;
+      azure600?: string;
+      azure800?: string;
+    };
   }
 
   interface ExtendedPalette extends Palette {
