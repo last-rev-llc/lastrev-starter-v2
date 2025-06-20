@@ -5,7 +5,10 @@ import {types as schemaTypes} from './schema'
 import {documentInternationalization} from '@sanity/document-internationalization'
 import {supportedLanguages} from './supportedLanguages'
 import {media} from 'sanity-plugin-media'
-// import {structure} from './structure'
+import {iframePane} from 'sanity-plugin-iframe-pane'
+import {structure} from './structure'
+import {previewAction} from './plugins/previewAction'
+import {defaultDocumentNode} from './plugins/previewPane'
 
 if (!process.env.SANITY_STUDIO_SANITY_PROJECT_ID) {
   throw new Error('SANITY_STUDIO_SANITY_PROJECT_ID is not set')
@@ -30,9 +33,22 @@ export default defineConfig({
   title: process.env.SANITY_STUDIO_SANITY_PROJECT_TITLE!,
   projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID!,
   dataset: process.env.SANITY_STUDIO_SANITY_DATASET!,
+  
+  document: {
+    actions: (prev, context) => {
+      // Add preview action to previewable document types
+      const previewableTypes = ['page', 'hero', 'section', 'contentful_block', 'collection', 'collectionDynamic']
+      if (previewableTypes.includes(context.schemaType)) {
+        return [...prev, previewAction]
+      }
+      return prev
+    },
+  },
+  
   plugins: [
     structureTool({
-      // structure,
+      structure,
+      defaultDocumentNode,
     }),
     visionTool(),
     media(),
