@@ -114,9 +114,14 @@ export const mappers: Mappers = {
           });
         }
 
-        const returnItemsRef = await ctx.loaders.entryLoader.loadMany(
-          items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
-        );
+        const returnItemsRef = (
+          await ctx.loaders.entryLoader.loadMany(
+            items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+          )
+        )?.map((resolvedItem: any, index: number) => ({
+          ...items[index],
+          ...resolvedItem
+        }));
 
         let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
         const imageItems =

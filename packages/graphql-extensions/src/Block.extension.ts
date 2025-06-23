@@ -28,7 +28,6 @@ export const mappers: Mappers = {
   Block: {
     Block: {
       variant: defaultResolver('variant'),
-
       imageOverlayColor: defaultResolver('imageOverlayColor'),
 
       backgroundColor: defaultResolver('backgroundColor'),
