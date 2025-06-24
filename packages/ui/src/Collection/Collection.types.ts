@@ -14,7 +14,10 @@ export enum CollectionVariants {
   linkList = 'linkList',
   logos = 'logos',
   cta = 'cta',
-  testimonial = 'testimonial'
+  testimonial = 'testimonial',
+  splitLayout = 'splitLayout',
+  accordionShowcase = 'accordionShowcase',
+  featureShowcase = 'featureShowcase'
 }
 
 export interface CollectionProps

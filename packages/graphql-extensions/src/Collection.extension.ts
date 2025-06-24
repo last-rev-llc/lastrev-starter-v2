@@ -86,7 +86,7 @@ interface CollectionSettings {
 export const mappers: Mappers = {
   Collection: {
     Collection: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       introText: 'introText_raw',
       items: async (collection: any, _args: any, ctx: ApolloContext) => {
         let items =
@@ -173,7 +173,7 @@ export const mappers: Mappers = {
       },
 
       itemsPerRow: async (collection: any, args: any, ctx: ApolloContext) => {
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collection, args, ctx);
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
@@ -204,6 +204,18 @@ export const mappers: Mappers = {
             itemsPerRow = numItems >= 5 ? 5 : numItems;
             break;
 
+          case 'splitLayout':
+            itemsPerRow = 1; // Single column with expandable sections
+            break;
+
+          case 'accordionShowcase':
+            itemsPerRow = 1; // Single column accordion layout
+            break;
+
+          case 'featureShowcase':
+            itemsPerRow = 3; // 2 rows of 3 features each
+            break;
+
           default:
             itemsPerRow = 3;
         }
@@ -222,7 +234,7 @@ export const mappers: Mappers = {
         let carouselBreakpoints =
           getLocalizedField(collection.fields, 'carouselBreakpoints', ctx) ?? [];
 
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collection, args, ctx);
 
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;

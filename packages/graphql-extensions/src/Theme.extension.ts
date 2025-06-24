@@ -23,55 +23,55 @@ export const colorResolver =
 export const mappers = {
   Link: {
     Link: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Hero: {
     Hero: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Block: {
     Block: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Collection: {
     Collection: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   CollectionExpandable: {
     CollectionExpandable: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Header: {
     Header: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Footer: {
     Footer: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Form: {
     Form: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   },
   Section: {
     Section: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       color: colorResolver('color', true)
     }
   }

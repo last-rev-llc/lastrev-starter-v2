@@ -1,6 +1,7 @@
 import { defineType, defineField } from 'sanity'
 import { withAIGeneration } from '../utils/ai-generation'
 import { validateIn } from '../utils/validation'
+import { backgroundColorOptions, validateBackgroundColor } from '../utils/colors'
 
 export const sectionType = defineType({
   type: 'document',
@@ -80,9 +81,12 @@ export const sectionType = defineType({
       hidden: false,
       description:
         'Select the background color for this Section from the options defined in your design system or brand color scheme.',
-      validation: (Rule) =>
-        Rule.custom((value) => validateIn(['primary', 'secondary', 'background.dark'], value)),
-      options: {list: ['primary', 'secondary', 'background.dark'], layout: 'dropdown'},
+      initialValue: 'Light Background',
+      validation: validateBackgroundColor,
+      options: {
+        list: backgroundColorOptions,
+        layout: 'dropdown',
+      },
     }),
     defineField({
       type: 'boolean',

@@ -75,8 +75,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   }),
 
   bodyWrap: ({ theme }) => ({
-    flex: 1,
-    minHeight: 0,
+    'flex': 1,
+    'minHeight': 0,
     '*': {
       ...theme.typography.body1
     }
@@ -107,19 +107,42 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
 };
 
 const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
-  // Icon Left variant
+  // Icon Left variant - horizontal layout with icon on left
   {
     props: {
       variant: CardVariants.iconLeft
     },
     style: {
+      '[class*=cardWrap]': {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        gap: 'var(--grid-gap)',
+        backgroundColor: 'transparent',
+        boxShadow: 'none'
+      },
+
       '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap)'
+        flex: '0 0 auto',
+        width: '80px',
+        height: '80px',
+        minWidth: '80px',
+        padding: 0,
+        backgroundColor: 'transparent'
+      },
+
+      '[class*=contentWrap]': {
+        flex: 1,
+        minWidth: 0,
+        padding: 0,
+        paddingBottom: 'var(--grid-gap)',
+        textAlign: 'left',
+        backgroundColor: 'transparent',
+        borderBottom: '1px solid var(--mui-palette-divider)'
       },
 
       '[class*=Card-title]': {
         '&, & *': {
+          ...theme.typography.h4,
           overflow: 'hidden',
           display: '-webkit-box',
           WebkitLineClamp: 2,
@@ -130,6 +153,9 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
 
       '[class*=bodyWrap]': {
         '& > *': {
+          'fontSize': '0.875rem',
+          'lineHeight': 1.6,
+          'color': 'var(--mui-palette-text-secondary)',
           'overflow': 'hidden',
           'display': '-webkit-box',
           'WebkitLineClamp': 10,
@@ -141,13 +167,6 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
             lineClamp: 4
           }
         }
-      },
-
-      '[class*=cardWrap]': {
-        alignItems: 'flex-start'
-      },
-      '[class*=contentWrap]': {
-        textAlign: 'left'
       }
     }
   },
@@ -203,31 +222,43 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
       variant: CardVariants.iconPaddingLeft
     },
     style: {
-      'backgroundColor': 'var(--mui-palette-background-paper)',
+      '[class*=cardWrap]': {
+        backgroundColor: 'var(--mui-palette-background-paper)',
+        padding: '24px',
+        border: '1px solid var(--mui-palette-divider)',
+        borderRadius: 'var(--mui-shape-borderRadius)',
+        alignItems: 'flex-start'
+      },
 
       '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap-double)',
-        backgroundColor: 'var(--mui-palette-background-default)',
-        borderRadius: 'var(--mui-shape-borderRadius)'
+        maxWidth: '48px',
+        padding: 0,
+        marginBottom: 'var(--grid-gap)'
       },
 
       '[class*=contentWrap]': {
-        padding: 'var(--grid-gap)'
+        padding: 0,
+        textAlign: 'left'
       },
 
       '[class*=Card-title]': {
         '&, & *': {
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: 'var(--grid-gap-half)',
           overflow: 'hidden',
           display: '-webkit-box',
-          WebkitLineClamp: 2,
-          lineClamp: 2,
+          WebkitLineClamp: 3,
+          lineClamp: 3,
           WebkitBoxOrient: 'vertical'
         }
       },
 
       '[class*=bodyWrap]': {
         '& > *': {
+          'fontSize': '0.875rem',
+          'lineHeight': 1.6,
+          'color': 'var(--mui-palette-text-secondary)',
           'overflow': 'hidden',
           'display': '-webkit-box',
           'WebkitLineClamp': 10,
@@ -239,13 +270,6 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
             lineClamp: 4
           }
         }
-      },
-
-      '[class*=cardWrap]': {
-        alignItems: 'flex-start'
-      },
-      '[class*=contentWrap]': {
-        textAlign: 'left'
       }
     }
   },

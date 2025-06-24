@@ -27,7 +27,7 @@ export const mappers = {
         const ctaItems: any = getLocalizedField(header.fields, 'ctaItems', ctx);
         return !!ctaItems.length;
       },
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       autoComplete: async (header: any, _args: any, ctx: ApolloContext) => {
         const settings = {
           configure: {

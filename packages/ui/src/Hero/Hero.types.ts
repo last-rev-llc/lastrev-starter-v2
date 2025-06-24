@@ -31,6 +31,7 @@ interface HeroClasses {
   root: string;
   backgroundGrid: string;
   contentOuterGrid: string;
+  contentInnerWrapper: string;
   mainContentWrap: string;
   bottomContentWrap: string;
   sideContentWrap: string;

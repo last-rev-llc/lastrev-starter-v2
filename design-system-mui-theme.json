@@ -1,5 +1,5 @@
 {
-  "name": "Diligent Design System",
+  "name": "Design System",
   "description": "Design system documentation for Material-UI implementation",
   "palette": {
     "primary": {
@@ -10,7 +10,7 @@
       "800": "#921A1D",
       "900": "#5F091D",
       "contrastText": "#FFFFFF",
-      "name": "Diligent Red",
+      "name": "Primary Red",
       "description": "Our brand color is vibrant and strong. It should always be present, but doesn't need to be everywhere."
     },
     "secondary": {
@@ -938,8 +938,8 @@
   },
   "colorUsageGuidelines": {
     "primary": {
-      "description": "Use Diligent Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
-      "progression": "Use additional shades of red in progression, starting with Diligent Red. Never use more red shades than necessary; Red 5 (#5F091D) should be the least used color."
+      "description": "Use Primary Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
+      "progression": "Use additional shades of red in progression, starting with Primary Red. Never use more red shades than necessary; Red 5 (#5F091D) should be the least used color."
     },
     "secondary": {
       "description": "Secondary colors were chosen to provide a distinctive color approach to information design. They are only to be used for charts, graphs, tables and other data visualizations. The reassuring blue tones symbolize safety, while the warmer purples signal warning. The more intense the color, the stronger it represents its character. These vibrant colors bring the most urgent information to the top."

@@ -42,7 +42,7 @@ declare module '@mui/material/styles' {
 // Color constants
 const colors = {
   primary: {
-    red500: '#EE312E', // Diligent Red
+    red500: '#EE312E', // Primary Red
     red600: '#D3222A', // Red 2
     red700: '#AF292E', // Red 3
     red800: '#921A1D', // Red 4
@@ -614,9 +614,9 @@ export const collectionTokens = {
 export const designGuidelines = {
   colorUsage: {
     primary:
-      "Use Diligent Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
+      "Use Primary Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
     primaryProgression:
-      'Use additional shades of red in progression, starting with Diligent Red. Never use more red shades than necessary; Red 5 (#5F091D) should be the least used color.',
+      'Use additional shades of red in progression, starting with Primary Red. Never use more red shades than necessary; Red 5 (#5F091D) should be the least used color.',
     secondary:
       'Secondary colors are only for charts, graphs, tables and data visualizations. Blue tones symbolize safety, purple tones signal warning. More intense colors represent stronger urgency.',
     neutral:

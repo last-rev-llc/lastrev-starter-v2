@@ -82,7 +82,7 @@ interface CollectionDynamicSettings {
 export const mappers: Mappers = {
   CollectionDynamic: {
     CollectionDynamic: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       algoliaSettings: async (collection: any, args: any, ctx: ApolloContext) => {
         const settings = getLocalizedField(collection.fields, 'settings', ctx);
 
@@ -159,7 +159,11 @@ export const mappers: Mappers = {
       },
 
       itemsPerRow: async (collectionDynamic: any, args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(collectionDynamic, args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(
+          collectionDynamic,
+          args,
+          ctx
+        );
         let items = getLocalizedField(collectionDynamic.fields, 'items', ctx) ?? [];
         let itemsPerRow = 3;
         const numItems = items?.length ?? 3;
@@ -202,7 +206,7 @@ export const mappers: Mappers = {
         let carouselBreakpoints =
           getLocalizedField(collectionDynamic.fields, 'carouselBreakpoints', ctx) ?? [];
 
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collectionDynamic, args, ctx);
 
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;

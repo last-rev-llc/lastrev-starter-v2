@@ -8,6 +8,7 @@ const Card = dynamic(() => import('./Card'));
 const Carousel = dynamic(() => import('./Carousel'));
 const Collection = dynamic(() => import('./Collection'));
 const CollectionDynamic = dynamic(() => import('./CollectionDynamic'));
+const CollectionExpandable = dynamic(() => import('./CollectionExpandable'));
 const Footer = dynamic(() => import('./Footer'));
 const FooterNavigationItem = dynamic(() => import('./Footer/FooterNavigationItem'));
 const FooterNavigationItemGroup = dynamic(() => import('./Footer/FooterNavigationItemGroup'));
@@ -37,6 +38,8 @@ export const contentMapping: {
   'Card:linkList': Link,
   'CollectionDynamic(:.*Carousel)?': CollectionDynamic,
   'Collection:.*Carousel': Carousel,
+  'Collection:splitLayout': Collection,
+  'Collection:accordionShowcase': CollectionExpandable,
   'CollectionExpandable(:Tabs)?': Tabs,
   'CollectionExpandable:Accordion': Accordion,
   'ElementForm': Form,
@@ -53,6 +56,7 @@ export const contentMapping: {
   Card,
   Carousel,
   Collection,
+  CollectionExpandable,
   Footer,
   FooterNavigationItem,
   FooterNavigationItemGroup,

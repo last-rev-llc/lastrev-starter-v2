@@ -20,8 +20,8 @@ export const mappers: Mappers = {
       overline: defaultResolver('overline'),
       title: defaultResolver('title'),
       body: defaultResolver('body'),
-      variant: defaultResolver('variant'),
-      backgroundColor: defaultResolver('backgroundColor')
+      variant: defaultResolver('variant', { camelize: true }),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true })
     }
   }
 };

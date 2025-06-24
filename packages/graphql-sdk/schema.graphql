@@ -360,6 +360,7 @@ type Header implements Content {
 
 type Hero implements Content {
   actions: [ActionLink]
+  actions_raw: [JSON]
   animation: JSON
   background: Media
   backgroundColor: String

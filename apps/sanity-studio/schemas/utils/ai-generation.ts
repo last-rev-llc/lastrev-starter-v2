@@ -1,9 +1,11 @@
 import * as React from 'react'
-import { useFormValue, PatchEvent, set } from 'sanity'
+import {useFormValue, PatchEvent, set} from 'sanity'
 
 // Check if AI generation is enabled via environment variable
-const AI_ENABLED = process.env.SANITY_STUDIO_ENABLE_AI_GENERATION === 'true'
-const AI_API_URL = process.env.SANITY_STUDIO_AI_API_URL || 'https://lr-production.studio.theanswer.ai/api/v1/prediction/718c0507-d5e5-4a62-ba14-989c681c1b8e'
+const AI_ENABLED = true //process.env.SANITY_STUDIO_ENABLE_AI_GENERATION === 'true'
+const AI_API_URL =
+  process.env.SANITY_STUDIO_AI_API_URL ||
+  'https://lr-production.studio.theanswer.ai/api/v1/prediction/718c0507-d5e5-4a62-ba14-989c681c1b8e'
 
 // Helper function to gather comprehensive page content for AI generation
 export const gatherPageContent = (formValues: any) => {

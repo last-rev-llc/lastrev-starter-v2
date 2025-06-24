@@ -1,6 +1,7 @@
-import { defineType, defineField } from 'sanity'
-import { withAIGeneration } from '../utils/ai-generation'
-import { validateIn } from '../utils/validation'
+import {defineType, defineField} from 'sanity'
+import {withAIGeneration} from '../utils/ai-generation'
+import {validateIn} from '../utils/validation'
+import {backgroundColorOptions, colorField, validateBackgroundColor} from '../utils/colors'
 
 export const heroType = defineType({
   type: 'document',
@@ -110,6 +111,7 @@ export const heroType = defineType({
         validation: (Rule) => Rule.max(200).warning('Keep subtitles brief for impact'),
       }),
     ),
+
     defineField({
       name: 'body',
       type: 'array',
@@ -195,13 +197,22 @@ export const heroType = defineType({
     }),
     defineField({
       group: 'content',
-      name: 'actions',
+      name: 'actions_raw',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'link'}]}],
+      of: [
+        // Inline link object for hero-specific actions
+        {type: 'link'},
+        // Reference existing link for reusable CTAs
+        {
+          type: 'reference',
+          title: 'Existing Link',
+          to: [{type: 'link'}],
+        },
+      ],
       title: 'Actions',
       hidden: false,
       description:
-        '💡 Add call-to-action buttons or links. Best practice: use 1-2 CTAs for clear user direction.',
+        '💡 Add call-to-action buttons or links. Create hero-specific actions or reference existing reusable links. Best practice: use 1-2 CTAs for clear user direction.',
       validation: (Rule) => Rule.max(3).warning('More than 2 actions may overwhelm users'),
     }),
     defineField({
@@ -212,31 +223,9 @@ export const heroType = defineType({
       title: 'Background Color',
       hidden: false,
       description: 'Choose a background color from your design system',
-      validation: (Rule) =>
-        Rule.custom((value) =>
-          validateIn(
-            [
-              'None',
-              'Black',
-              'White',
-              'Primary',
-              'Secondary',
-              'Transparent Light',
-              'Transparent Dark',
-            ],
-            value,
-          ),
-        ),
+      validation: validateBackgroundColor,
       options: {
-        list: [
-          {value: 'None', title: '⚪ None'},
-          {value: 'Black', title: '⚫ Black'},
-          {value: 'White', title: '⚪ White'},
-          {value: 'Primary', title: '🔵 Primary'},
-          {value: 'Secondary', title: '🟣 Secondary'},
-          {value: 'Transparent Light', title: '💨 Transparent Light'},
-          {value: 'Transparent Dark', title: '🌫️ Transparent Dark'},
-        ],
+        list: backgroundColorOptions,
         layout: 'dropdown',
       },
     }),
@@ -244,23 +233,119 @@ export const heroType = defineType({
       group: 'media',
       fieldset: 'background',
       name: 'background',
-      type: 'reference',
-      title: 'Background Image',
+      type: 'array',
+      of: [
+        // Reference to media document for responsive images
+        {
+          type: 'reference',
+          title: 'Media Reference',
+          to: [{type: 'media'}],
+          description: 'Use Media items for responsive images with desktop/tablet/mobile variants',
+        },
+        // Direct image upload for simple cases
+        {
+          type: 'image',
+          title: 'Direct Image',
+          fields: [
+            defineField({
+              name: 'altText',
+              type: 'string',
+              title: 'Alt Text',
+              description: 'Required for ADA compliance - describe the image for screen readers',
+              validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+            }),
+          ],
+        },
+        // File upload for PDFs or other documents
+        {
+          type: 'file',
+          title: 'Background Document',
+          description: 'For special cases like animated backgrounds or PDFs',
+          fields: [
+            defineField({
+              name: 'description',
+              type: 'string',
+              title: 'File Description',
+              description: 'Required for ADA compliance - describe the file content',
+              validation: (Rule) =>
+                Rule.required().error('Description is required for accessibility'),
+            }),
+          ],
+        },
+      ],
+      title: 'Background Media',
       hidden: false,
       description:
-        '🖼️ Full-width background image. Use Media items to set different images for desktop/tablet/mobile.',
-      to: [{type: 'media'}],
+        '🖼️ Full-width background. Use Media reference for responsive images, direct upload for simple images, or file upload for special formats.',
+      validation: (Rule) => Rule.max(1).error('Only one background item is allowed'),
     }),
     defineField({
       group: 'media',
       name: 'sideImageItems',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'media'}]}],
-      title: 'Hero Image',
+      of: [
+        // Reference to media document for responsive images/videos
+        {
+          type: 'reference',
+          title: 'Media Reference',
+          to: [{type: 'media'}],
+          description:
+            'Use Media items for responsive images/videos with desktop/tablet/mobile variants',
+        },
+        // Direct image upload for simple cases
+        {
+          type: 'image',
+          title: 'Direct Image',
+          fields: [
+            defineField({
+              name: 'altText',
+              type: 'string',
+              title: 'Alt Text',
+              description: 'Required for ADA compliance - describe the image for screen readers',
+              validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+            }),
+          ],
+        },
+        // Inline video element
+        {
+          type: 'object',
+          name: 'inlineVideo',
+          title: 'Inline Video',
+          fields: [
+            defineField({
+              name: 'url',
+              type: 'url',
+              title: 'Video URL',
+              description: 'YouTube, Vimeo, or direct video URL',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'thumbnail',
+              type: 'image',
+              title: 'Video Thumbnail',
+              description: 'Custom thumbnail for the video',
+            }),
+            defineField({
+              name: 'caption',
+              type: 'string',
+              title: 'Video Caption',
+              description: 'Required for ADA compliance - describe the video content',
+              validation: (Rule) => Rule.required().error('Caption is required for accessibility'),
+            }),
+            defineField({
+              name: 'autoplay',
+              type: 'boolean',
+              title: 'Autoplay',
+              initialValue: false,
+            }),
+          ],
+        },
+      ],
+      title: 'Hero Media',
       hidden: false,
       description:
-        '📸 Main hero image displayed alongside content (position depends on layout style selected above)',
-      validation: (Rule) => Rule.max(1).error('Only one hero image is supported'),
+        '📸 Main hero media displayed alongside content. Position depends on layout style. Supports responsive images, videos, and direct uploads.',
+      validation: (Rule) => Rule.max(1).error('Only one hero media item is supported'),
     }),
     defineField({
       type: 'boolean',
@@ -276,13 +361,15 @@ export const heroType = defineType({
       subtitle: 'title',
       variant: 'variant',
       hasImage: 'sideImageItems.0',
-      hasBackground: 'background',
+      hasBackground: 'background.0',
       backgroundColor: 'backgroundColor',
     },
     prepare(selection) {
       const {title, subtitle, variant, hasImage, hasBackground, backgroundColor} = selection
+
       const media = hasImage ? '📸' : hasBackground ? '🖼️' : ''
       const color = backgroundColor && backgroundColor !== 'None' ? ` • ${backgroundColor}` : ''
+
       return {
         title: title || 'Untitled Hero',
         subtitle: `${variant}${media ? ` • ${media}` : ''}${color}${subtitle ? ` • "${subtitle}"` : ''}`,

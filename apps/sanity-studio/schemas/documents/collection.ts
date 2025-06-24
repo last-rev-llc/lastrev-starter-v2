@@ -1,5 +1,6 @@
 import { defineType, defineField } from 'sanity'
 import { validateIn } from '../utils/validation'
+import { backgroundColorOptions, validateBackgroundColor } from '../utils/colors'
 
 export const collectionType = defineType({
   type: 'document',
@@ -113,7 +114,7 @@ export const collectionType = defineType({
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
-            ['One Per Row', 'Two Per Row', 'Three Per Row', 'Four Per Row', 'Five Per Row'],
+            ['One Per Row', 'Two Per Row', 'Three Per Row', 'Four Per Row', 'Five Per Row', 'Split Layout', 'Accordion Showcase', 'Feature Showcase'],
             value,
           ),
         ),
@@ -124,6 +125,9 @@ export const collectionType = defineType({
           {value: 'Three Per Row', title: '3️⃣ Three Per Row'},
           {value: 'Four Per Row', title: '4️⃣ Four Per Row'},
           {value: 'Five Per Row', title: '5️⃣ Five Per Row'},
+          {value: 'Split Layout', title: '📋 Split Layout'},
+          {value: 'Accordion Showcase', title: '🎵 Accordion Showcase'},
+          {value: 'Feature Showcase', title: '🎯 Feature Showcase'},
         ],
         layout: 'dropdown',
       },
@@ -253,10 +257,13 @@ export const collectionType = defineType({
       title: 'Background Color',
       fieldset: 'styling',
       group: 'styling',
-      initialValue: 'Transparent',
-      validation: (Rule) =>
-        Rule.required().custom((value) => validateIn(['Transparent', 'Black', 'White'], value)),
-      options: {list: ['Transparent', 'Black', 'White'], layout: 'dropdown'},
+      initialValue: 'Light Background',
+      description: 'Choose a background color from the design system',
+      validation: validateBackgroundColor,
+      options: {
+        list: backgroundColorOptions,
+        layout: 'dropdown',
+      },
     }),
 
     defineField({

@@ -56,30 +56,30 @@ const styleOverrides: ComponentsOverrides<Theme>['Link'] = {
     'textDecoration': 'none!important',
     '&:hover': {
       textDecoration: 'underline!important'
-    },
+    }
 
-    '&[href="#"]': {
-      textDecoration: 'none!important',
-      color: 'var(--mui-palette-text-primary)!important'
-    },
+    // '&[href="#"]': {
+    //   textDecoration: 'none!important',
+    //   color: 'var(--mui-palette-text-primary)!important'
+    // }
 
     // TODO: Review, looks out of place but allows for any icon color controlled from Link color
     // TODO Add variant
     // TODO Really review this weird stuff, supports color inversion as well as explicit color on the link
 
-    ...(ownerState?.icon
-      ? {
-          'backgroundColor': 'transparent',
-          '.fill-primary': {
-            fill: `var(--mui-palette-${ownerState?.color ?? 'primary'}-main)`
-          },
-          '.fill-secondary': {
-            fill: `var(--mui-palette-${
-              ownerState?.color ? ownerState?.color + '-contrastText' : 'secondary-main'
-            })`
-          }
-        }
-      : null)
+    // ...(ownerState?.icon
+    //   ? {
+    //       'backgroundColor': 'transparent',
+    //       '.fill-primary': {
+    //         fill: `var(--mui-palette-${ownerState?.color ?? 'primary'}-main)`
+    //       },
+    //       '.fill-secondary': {
+    //         fill: `var(--mui-palette-${
+    //           ownerState?.color ? ownerState?.color + '-contrastText' : 'secondary-main'
+    //         })`
+    //       }
+    //     }
+    //   : null)
   }),
 
   rootButton: {

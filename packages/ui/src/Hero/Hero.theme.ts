@@ -2,53 +2,25 @@ import {
   type ThemeOptions,
   type ComponentsProps,
   type ComponentsOverrides,
-  type ComponentsVariants,
-  alpha
+  type ComponentsVariants
 } from '@mui/material/styles';
 import type { Theme } from '@ui/ThemeRegistry/theme.types';
 
 import { HeroVariants } from './Hero.types';
 
-interface LayoutConfig {
-  [key: string]: { [breakpoint: string]: number };
-}
-
-export const layoutConfig: LayoutConfig = {
-  [HeroVariants.mediaOnRight]: {
-    xs: 1,
-    sm: 2,
-    md: 2,
-    lg: 2,
-    xl: 2
-  },
-  [HeroVariants.mediaOnRightFullBleed]: {
-    xs: 1,
-    sm: 2,
-    md: 2,
-    lg: 2,
-    xl: 2
-  },
-  [HeroVariants.mediaOnLeft]: {
-    xs: 1,
-    sm: 2,
-    md: 2,
-    lg: 2,
-    xl: 2
-  },
-  [HeroVariants.mediaOnLeftFullBleed]: {
-    xs: 1,
-    sm: 2,
-    md: 2,
-    lg: 2,
-    xl: 2
-  },
-  [HeroVariants.mediaSmall]: {
-    xs: 1,
-    sm: 1,
-    md: 3,
-    lg: 3,
-    xl: 3
-  }
+// Layout configuration for media columns per variant
+export const layoutConfig = {
+  [HeroVariants.default]: { xs: 12, md: 6 },
+  [HeroVariants.mediaOnRight]: { xs: 12, md: 6 },
+  [HeroVariants.mediaOnRightFullBleed]: { xs: 12, md: 6 },
+  [HeroVariants.mediaOnLeft]: { xs: 12, md: 6 },
+  [HeroVariants.mediaOnLeftFullBleed]: { xs: 12, md: 6 },
+  [HeroVariants.mediaAbove]: { xs: 12 },
+  [HeroVariants.mediaBelow]: { xs: 12 },
+  [HeroVariants.imageOnly]: { xs: 12 },
+  [HeroVariants.simple]: { xs: 12, md: 8 },
+  [HeroVariants.mediaSmall]: { xs: 12, md: 4 },
+  [HeroVariants.news]: { xs: 12, md: 6 }
 };
 
 const defaultProps: ComponentsProps['Hero'] = {
@@ -60,229 +32,235 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
     containerType: 'inline-size',
     position: 'relative',
-    zIndex: 2,
-    overflow: 'hidden',
-    minHeight: '240px',
-    maxHeight: '35vh',
-    display: 'flex'
+    minHeight: '60vh',
+    display: 'flex',
+    overflow: 'hidden'
   }),
 
-  bottomContentWrap: ({ theme }) => ({
-    '& > *': {
-      [theme.containerBreakpoints.up('sm')]: {
-        padding: '0 !important'
-      }
-    }
-  }),
-
-  contentOuterGrid: ({ theme, ownerState }) => ({
-    // overflow: 'hidden',
-    // margin: 'auto',
-
+  contentOuterGrid: ({ theme }) => ({
+    width: '100%',
     [theme.containerBreakpoints.up('md')]: {
-      minHeight: '20vh'
-    }
-  }),
-
-  title: ({ theme, ownerState }) => ({
-    whiteSpace: 'pre-line',
-    ...(!ownerState?.isHomepage && {
-      ...theme.typography.h2
-    })
-  }),
-
-  subtitle: ({ theme, ownerState }) => ({
-    whiteSpace: 'pre-line'
-  }),
-
-  overline: ({ theme }) => ({
-    [theme.containerBreakpoints.down('md')]: {
-      marginBottom: 0
-    }
-  }),
-
-  content: ({ theme }) => ({
-    'display': 'flex',
-    'flexDirection': 'column',
-    'minHeight': '10vh',
-    'justifyContent': 'center',
-    'margin': 'var(--grid-gap) 0',
-    'gap': 'var(--grid-gap)',
-
-    [theme.containerBreakpoints.up('md')]: {
-      padding: 0,
-      gap: 0
-    },
-
-    '> *:last-child': {
-      marginBottom: 0
-    }
-  }),
-
-  breadcrumbsWrap: ({ theme }) => ({
-    gridColumnStart: 'start',
-    gridColumnEnd: 'end',
-    order: 2,
-
-    [theme.containerBreakpoints.up('md')]: {
-      position: 'absolute',
-      zIndex: 10000,
-      bottom: 'var(--grid-gap)'
+      minHeight: '50vh'
     }
   }),
 
   mainContentWrap: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100%',
     justifyContent: 'center',
     gridColumnStart: 'start',
-    gridColumnEnd: 'end'
+    gridColumnEnd: 'end',
+    zIndex: 2
   },
 
-  mediaWrap: ({ ownerState, theme }) => {
-    let backgroundColor;
-
-    if (
-      ownerState?.backgroundColor &&
-      theme.colorSchemes.light.palette.schemes[ownerState?.backgroundColor]?.primary.main
-    ) {
-      backgroundColor =
-        theme.colorSchemes.light.palette.schemes[ownerState?.backgroundColor]?.primary.main;
-    }
-
-    return {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'column',
-      boxShadow: theme.shadows['L'],
-      maxHeight: 'inherit',
-      gridColumnStart: 'start',
-      gridColumnEnd: 'end',
-
-      picture: {
-        display: 'flex',
-        height: '100%',
-        width: '100%',
-        position: 'relative',
-
-        ...(backgroundColor && {
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            zIndex: 1
-          },
-          '&::after': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-
-            zIndex: 1
-          },
-
-          [theme.breakpoints.up('md')]: {
-            '&::before': {
-              background: `linear-gradient(to right,  ${alpha(backgroundColor, 1)}, ${alpha(
-                backgroundColor,
-                0
-              )} 15cqi)`
-            },
-            '&::after': {
-              background: `linear-gradient(to bottom,  ${alpha(backgroundColor, 0)}, ${alpha(
-                backgroundColor,
-                0
-              )} 20cqi)`
-            }
-          }
-        }),
-
-        [theme.containerBreakpoints.down('md')]: {
-          maxHeight: '30vh'
-        }
-      },
-
-      img: {
-        width: '100%',
-        objectFit: !!ownerState?.showFullImage ? 'contain' : 'cover'
-      }
-    };
-  },
-  actionsWrap: ({ theme }) => ({
-    marginTop: theme.spacing(5),
+  content: ({ theme }) => ({
     display: 'flex',
-    width: '100%',
-    // flexDirection: 'column',
-    gap: theme.spacing(2),
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    gap: theme.spacing(3),
+    padding: theme.spacing(4, 0)
+  }),
+  contentInnerWrap: ({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    gap: theme.spacing()
+  }),
+  title: ({ theme, ownerState }) => ({
+    ...theme.typography.h1,
+    margin: 0,
+    whiteSpace: 'pre-line'
+  }),
+
+  subtitle: ({ theme }) => ({
+    ...theme.typography.h4,
+    margin: 0,
+    whiteSpace: 'pre-line'
+  }),
+
+  overline: ({ theme }) => ({
+    ...theme.typography.overline,
+    margin: 0
+  }),
+
+  body: ({ theme }) => ({
+    ...theme.typography.body1,
+    margin: 0
+  }),
+
+  actionsWrap: ({ theme }) => ({
+    display: 'flex',
+    gap: theme.spacing(2),
+    marginTop: theme.spacing(3),
+    flexWrap: 'wrap',
     [theme.containerBreakpoints.up('sm')]: {
-      flexWrap: 'nowrap',
-      flexDirection: 'row'
+      flexWrap: 'nowrap'
     }
   }),
 
-  contentInnerWrap: ({ ownerState, theme }) => ({
-    '& > *:last-child': {
-      marginBottom: 0,
-      paddingBottom: 0
-    },
+  mediaWrap: ({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    minHeight: '40vh',
+    overflow: 'hidden',
 
-    ...(ownerState?.variant === 'news' ? { padding: 'var(--grid-gap-double) 0' } : {})
+    [theme.containerBreakpoints.up('md')]: {
+      minHeight: '50vh'
+    }
   }),
 
-  scrollToContentWrap: ({ theme }) => ({
+  media: ({ ownerState }) => ({
+    width: '100%',
+    height: '100%',
+    objectFit: ownerState?.showFullImage ? 'contain' : 'cover',
+    objectPosition: 'center',
+    display: 'block'
+  }),
+
+  breadcrumbsWrap: ({ theme }) => ({
+    gridColumnStart: 'start',
+    gridColumnEnd: 'end',
+    zIndex: 10,
+    [theme.containerBreakpoints.up('md')]: {
+      position: 'absolute',
+      bottom: theme.spacing(3)
+    }
+  }),
+
+  background: {
     'position': 'absolute',
-    'zIndex': 100,
-    'bottom': 0,
+    'top': 0,
+    'left': 0,
+    'width': '100%',
+    'height': '100%',
+    'zIndex': 1,
 
-    '& > *': {
-      gridColumn: 'start/end',
-      justifySelf: 'flex-end',
-      minHeight: '4em',
-      display: 'flex',
-      transform: 'translate(0, 50%)',
-      marginBottom: 0,
-      whiteSpace: 'noWrap',
-      cursor: 'pointer',
-
-      [theme.containerBreakpoints.up('xl')]: {
-        transform: 'translate(100%, 50%)'
-      }
+    '& img': {
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      objectPosition: 'center'
     }
-  })
+  }
 };
 
 const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
+  // Media on Right variants
   {
-    props: {
-      variant: HeroVariants.simple
-    },
+    props: { variant: HeroVariants.mediaOnRight },
     style: {
-      '[class*=Hero-mainContentWrap]': {
-        gridRow: 1,
-
+      '[class*=mainContentWrap]': {
+        gridRow: 2,
         [theme.containerBreakpoints.up('md')]: {
-          gridColumnEnd: 'three-quarter'
+          gridRow: 1,
+          gridColumnEnd: 'half'
+        }
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 1,
+        [theme.containerBreakpoints.up('md')]: {
+          gridColumnStart: 'half'
         }
       }
     }
   },
+
   {
-    props: {
-      variant: HeroVariants.imageOnly
-    },
+    props: { variant: HeroVariants.mediaOnRightFullBleed },
     style: {
-      // 'minHeight': 'initial',
-      'maxHeight': 'initial',
-      'position': 'initial',
+      '[class*=mainContentWrap]': {
+        gridRow: 2,
+        [theme.containerBreakpoints.up('md')]: {
+          gridRow: 1,
+          gridColumnEnd: 'half'
+        }
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 1,
+        gridColumnStart: 'full-start',
+        gridColumnEnd: 'full-end',
+        [theme.containerBreakpoints.up('md')]: {
+          gridColumnStart: 'half'
+        }
+      }
+    }
+  },
+
+  // Media on Left variants
+  {
+    props: { variant: HeroVariants.mediaOnLeft },
+    style: {
+      '[class*=mainContentWrap]': {
+        gridRow: 2,
+        [theme.containerBreakpoints.up('md')]: {
+          gridRow: 1,
+          gridColumnStart: 'half'
+        }
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 1,
+        [theme.containerBreakpoints.up('md')]: {
+          gridColumnEnd: 'half'
+        }
+      }
+    }
+  },
+
+  {
+    props: { variant: HeroVariants.mediaOnLeftFullBleed },
+    style: {
+      '[class*=mainContentWrap]': {
+        gridRow: 2,
+        [theme.containerBreakpoints.up('md')]: {
+          gridRow: 1,
+          gridColumnStart: 'half'
+        }
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 1,
+        gridColumnStart: 'full-start',
+        gridColumnEnd: 'full-end',
+        [theme.containerBreakpoints.up('md')]: {
+          gridColumnEnd: 'half'
+        }
+      }
+    }
+  },
+
+  // Stacked variants
+  {
+    props: { variant: HeroVariants.mediaAbove },
+    style: {
+      '[class*=mainContentWrap]': {
+        gridRow: 2
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 1
+      }
+    }
+  },
+
+  {
+    props: { variant: HeroVariants.mediaBelow },
+    style: {
+      '[class*=mainContentWrap]': {
+        gridRow: 1
+      },
+      '[class*=mediaWrap]': {
+        gridRow: 2
+      }
+    }
+  },
+
+  // Special variants
+  {
+    props: { variant: HeroVariants.imageOnly },
+    style: {
+      'minHeight': 'auto',
       'textAlign': 'center',
 
       '[class*=contentOuterGrid]': {
@@ -290,216 +268,46 @@ const createVariants = (theme: Theme): ComponentsVariants['Hero'] => [
         justifyContent: 'center',
         padding: theme.spacing(6)
       },
-      '[class*=Hero-contentInnerWrap]': {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
+
+      '[class*=title]': {
+        ...theme.typography.h1
       },
 
-      '[class*=Hero-title]': { ...theme.typography.h1, width: 'auto', margin: 0 },
-      '[class*=Hero-subtitle]': {
-        ...theme.typography.h1,
-        color: theme.vars.palette.highlightColor,
-        width: 'auto',
-        margin: 0
-      },
-      '[class*=Hero-background]': {
-        gridRow: 1,
-        // position: 'initial',
-
-        img: {
-          gridRow: 1,
-          gridColumnStart: 'full-start',
-          gridColumnEnd: 'full-end',
-          // position: 'initial',
-          // objectFit: 'contain',
-          width: '100%',
-          transform: 'initial'
-        }
+      '[class*=subtitle]': {
+        ...theme.typography.h2,
+        color: theme.vars.palette.primary.main
       }
     }
   },
-  {
-    props: {
-      variant: HeroVariants.news
-    },
-    style: {
-      '[class*=Hero-mainContentWrap]': {
-        gridRow: 1,
 
+  {
+    props: { variant: HeroVariants.simple },
+    style: {
+      '[class*=mainContentWrap]': {
         [theme.containerBreakpoints.up('md')]: {
           gridColumnEnd: 'three-quarter'
         }
       }
     }
   },
+
   {
-    props: {
-      variant: HeroVariants.mediaSmall
-    },
+    props: { variant: HeroVariants.mediaSmall },
     style: {
       '[class*=mainContentWrap]': {
         gridRow: 2,
-
         [theme.containerBreakpoints.up('md')]: {
           gridRow: 1,
           gridColumnEnd: 'three-quarter'
         }
       },
-
       '[class*=mediaWrap]': {
         gridRow: 1,
-
+        minHeight: '30vh',
         [theme.containerBreakpoints.up('md')]: {
           gridColumnStart: 'three-quarter',
           alignItems: 'flex-end'
         }
-      }
-    }
-  },
-  {
-    props: {
-      variant: HeroVariants.mediaOnRight
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        gridRow: 2,
-
-        gridColumnStart: 'start',
-        gridColumnEnd: 'end',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridRow: 1,
-          gridColumnEnd: 'half'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        gridRow: 1,
-        gridColumnStart: 'start',
-        gridColumnEnd: 'end',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridColumnStart: 'half',
-          alignItems: 'flex-end'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: HeroVariants.mediaOnRightFullBleed
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        gridRow: 2,
-
-        gridColumnStart: 'start',
-        gridColumnEnd: 'end',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridRow: 1,
-          gridColumnEnd: 'half'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        gridRow: 1,
-        gridColumnStart: 'full-start',
-        gridColumnEnd: 'full-end',
-        padding: 0,
-        height: '100%',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridColumnStart: 'half',
-          alignItems: 'flex-end'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: HeroVariants.mediaOnLeft
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        gridRow: 2,
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridRow: 1,
-          gridColumnStart: 'half'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        [theme.containerBreakpoints.up('md')]: {
-          gridColumnEnd: 'half',
-          alignItems: 'flex-start'
-        }
-      }
-    }
-  },
-  {
-    props: {
-      variant: HeroVariants.mediaOnLeftFullBleed
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        gridRow: 2,
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridRow: 1,
-          gridColumnStart: 'half'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        gridColumnStart: 'full-start',
-        gridColumnEnd: 'full-end',
-        padding: 0,
-        height: '100%',
-
-        [theme.containerBreakpoints.up('md')]: {
-          gridColumnEnd: 'half',
-          alignItems: 'flex-start'
-        }
-      }
-    }
-  },
-
-  {
-    props: {
-      variant: HeroVariants.mediaAbove
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        'gridRow': 2,
-
-        '& *': {
-          alignSelf: 'center'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        gridRow: 1
-      }
-    }
-  },
-  {
-    props: {
-      variant: HeroVariants.mediaBelow
-    },
-    style: {
-      '[class*=mainContentWrap]': {
-        'gridRow': 1,
-
-        '& *': {
-          alignSelf: 'center'
-        }
-      },
-
-      '[class*=mediaWrap]': {
-        gridRow: 2
       }
     }
   }

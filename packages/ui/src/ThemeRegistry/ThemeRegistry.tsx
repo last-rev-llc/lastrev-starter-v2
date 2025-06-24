@@ -8,19 +8,20 @@ import { theme } from './theme';
 import { Experimental_CssVarsProvider as CssVarsProvider, css } from '@mui/material/styles';
 import { getInitColorSchemeScript } from '@mui/material/styles';
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
-  const h1FontSizeBase = 3;
-  const h2FontSizeBase = 2.25;
-  const h3FontSizeBase = 1.75;
-  const h4FontSizeBase = 1.5;
-  const h5FontSizeBase = 1.25;
-  const h6FontSizeBase = 1;
+  // Design System font sizes in rem (base 16px)
+  const h1FontSizeBase = 3; // 48px
+  const h2FontSizeBase = 2; // 32px
+  const h3FontSizeBase = 1.5; // 24px
+  const h4FontSizeBase = 1.25; // 20px
+  const h5FontSizeBase = 1.125; // 18px
+  const h6FontSizeBase = 1.125; // 18px
 
-  const display1FontSizeBase = 3;
-  const display2FontSizeBase = 2.25;
-  const display3FontSizeBase = 1.75;
-  const display4FontSizeBase = 1.5;
-  const display5FontSizeBase = 1.25;
-  const display6FontSizeBase = 1;
+  const display1FontSizeBase = 3; // 48px
+  const display2FontSizeBase = 2; // 32px
+  const display3FontSizeBase = 1.5; // 24px
+  const display4FontSizeBase = 1.25; // 20px
+  const display5FontSizeBase = 1.125; // 18px
+  const display6FontSizeBase = 1.125; // 18px
 
   return (
     <>
@@ -89,28 +90,28 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 --h6-font-size: ${h6FontSizeBase}rem;
                 --display1-font-size: var(--h1-font-size);
                 --display2-font-size: var(--h2-font-size);
-                --overline-font-size: 0.75rem;
-                --body1-font-size: 1.125rem;
-                --body2-font-size: 1rem;
-                --bodyXSmall-font-size: 0.875rem;
-                --bodySmall-font-size: 1rem;
-                --bodyLarge-font-size: 1.25rem;
+                --overline-font-size: 0.875rem;
+                --body1-font-size: 1rem;
+                --body2-font-size: 0.875rem;
+                --bodyXSmall-font-size: 0.75rem;
+                --bodySmall-font-size: 0.875rem;
+                --bodyLarge-font-size: 1.125rem;
 
-                --h1-line-height: 1.25em;
-                --h2-line-height: 1.25em;
-                --h3-line-height: 1.5em;
-                --h4-line-height: 1.5em;
-                --h5-line-height: 1.5em;
-                --h6-line-height: 1.5em;
+                --h1-line-height: 1.2;
+                --h2-line-height: 1.25;
+                --h3-line-height: 1.3;
+                --h4-line-height: 1.35;
+                --h5-line-height: 1.4;
+                --h6-line-height: 1.4;
                 --display1-line-height: var(--h1-line-height);
                 --display2-line-height: var(--h2-line-height);
-                --overline-line-height: 1.5em;
+                --overline-line-height: 2.66;
 
-                --body1-line-height: 1.5em;
-                --body2-line-height: 1.5em;
-                --bodyXSmall-line-height: 1.5em;
-                --bodySmall-line-height: 1.75em;
-                --bodyLarge-line-height: 1.25em;
+                --body1-line-height: 1.5;
+                --body2-line-height: 1.43;
+                --bodyXSmall-line-height: 1.5;
+                --bodySmall-line-height: 1.5;
+                --bodyLarge-line-height: 1.5;
 
                 --h1-margin: 0 0 0.5em 0;
                 --h2-margin: 0 0 0.5em 0;
@@ -127,12 +128,12 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 --bodySmall-margin: 0;
                 --bodyLarge-margin: 0;
 
-                --h1-font-weight: 600;
-                --h2-font-weight: 600;
-                --h3-font-weight: 600;
-                --h4-font-weight: 600;
-                --h5-font-weight: 600;
-                --h6-font-weight: 600;
+                --h1-font-weight: 500;
+                --h2-font-weight: 500;
+                --h3-font-weight: 500;
+                --h4-font-weight: 500;
+                --h5-font-weight: 500;
+                --h6-font-weight: 400;
                 --display1-font-weight: var(--h1-font-weight);
                 --display2-font-weight: var(--h2-font-weight);
                 --body1-font-weight: 400;
@@ -253,11 +254,11 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                   --h4-font-size: ${(h4FontSizeBase / 8) * 9}rem;
                   --h5-font-size: ${(h5FontSizeBase / 8) * 9}rem;
 
-                  --body1-font-size: 1.125rem;
-                  --body2-font-size: 1.125rem;
-                  --bodyXSmall-font-size: 0.875rem;
-                  --bodySmall-font-size: 1rem;
-                  --bodyLarge-font-size: 1.25rem;
+                  --body1-font-size: 1rem;
+                  --body2-font-size: 0.875rem;
+                  --bodyXSmall-font-size: 0.75rem;
+                  --bodySmall-font-size: 0.875rem;
+                  --bodyLarge-font-size: 1.125rem;
                 }
 
                 ${theme.containerBreakpoints.down('lg')} {
@@ -268,9 +269,9 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                   --h5-font-size: ${(h5FontSizeBase / 8) * 7}rem;
 
                   --body1-font-size: 1rem;
-                  --body2-font-size: 1rem;
-                  --bodyXSmall-font-size: 0.875rem;
-                  --bodySmall-font-size: 1rem;
+                  --body2-font-size: 0.875rem;
+                  --bodyXSmall-font-size: 0.75rem;
+                  --bodySmall-font-size: 0.875rem;
                   --bodyLarge-font-size: 1.125rem;
                 }
 
@@ -296,11 +297,11 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                     calc(50vw - var(--grid-margin) - (var(--container-margin) / 2))
                   );
 
-                  --body1-font-size: 1.375rem;
-                  --body2-font-size: 1.375rem;
-                  --bodyXSmall-font-size: 1.125rem;
-                  --bodySmall-font-size: 1.25rem;
-                  --bodyLarge-font-size: 1.5rem;
+                  --body1-font-size: 1.125rem;
+                  --body2-font-size: 1rem;
+                  --bodyXSmall-font-size: 0.875rem;
+                  --bodySmall-font-size: 1rem;
+                  --bodyLarge-font-size: 1.25rem;
                 }
               }
             `}

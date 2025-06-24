@@ -46,6 +46,27 @@ export const layoutConfig: LayoutConfig = {
     md: 3,
     lg: 5,
     xl: 5
+  },
+  [CollectionVariants.splitLayout]: {
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1
+  },
+  [CollectionVariants.accordionShowcase]: {
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1
+  },
+  [CollectionVariants.featureShowcase]: {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 3,
+    xl: 3
   }
 };
 
@@ -91,12 +112,41 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
     // Three per row variant - can be carousel
     ...(ownerState?.variant === CollectionVariants.threePerRow && {
       overflow: 'hidden'
+    }),
+
+    // Split Layout variant - two column layout with intro on left, items on right
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      backgroundColor: 'var(--mui-palette-background-default)',
+      padding: 'var(--grid-gap-double) 0'
+    }),
+
+    // Accordion Showcase variant - 50-50 layout handled by CollectionExpandable
+    ...(ownerState?.variant === CollectionVariants.accordionShowcase && {
+      backgroundColor: 'var(--mui-palette-background-default)',
+      padding: 'var(--grid-gap-double) 0'
+    }),
+
+    // Feature Showcase variant - feature grid
+    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
+      backgroundColor: 'var(--mui-palette-background-default)',
+      padding: 'var(--grid-gap-double) 0'
     })
   }),
 
   // Navigation controls for carousel variants
   contentGrid: ({ theme, ownerState }) => ({
     position: 'relative',
+
+    // Split Layout - apply grid system for intro + items layout
+    // ...(ownerState?.variant === CollectionVariants.splitLayout && {
+    //   display: 'grid',
+    //   gridTemplateColumns: 'repeat(12, 1fr)',
+    //   gap: 'var(--grid-gap)',
+    //   alignItems: 'start',
+    //   maxWidth: 'var(--grid-max-width, 1200px)',
+    //   margin: '0 auto',
+    //   padding: '0 var(--grid-gap)'
+    // }),
 
     // Navigation arrows for carousel variants
     ...((ownerState?.variant === CollectionVariants.logos ||
@@ -246,11 +296,41 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       }
     }),
 
+    // Split Layout variant - items grid spans columns 7-12
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      'gridColumn': 'seven-start/end',
+      'display': 'flex',
+      'flexDirection': 'column',
+      'gap': 'var(--grid-gap-sm)',
+      '@container (max-width: 768px)': {
+        gridColumn: '1 / -1'
+        // marginTop: 'var(--grid-gap)'
+      }
+    }),
+
+    // Feature Showcase variant - feature grid
+    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
+      ...theme.mixins.generateGridStyles({
+        theme,
+        layoutConfig,
+        variant: CollectionVariants.featureShowcase,
+        defaultVariant: 'default'
+      }),
+      maxWidth: '1200px',
+      margin: '0 auto',
+      gap: 'var(--grid-gap-lg)'
+    }),
+
     // Default grid styles for other variants
     ...(ownerState?.variant &&
-      ![CollectionVariants.logos, CollectionVariants.cta, CollectionVariants.testimonial].includes(
-        ownerState.variant
-      ) &&
+      ![
+        CollectionVariants.logos,
+        CollectionVariants.cta,
+        CollectionVariants.testimonial,
+        CollectionVariants.splitLayout,
+        CollectionVariants.accordionShowcase,
+        CollectionVariants.featureShowcase
+      ].includes(ownerState.variant) &&
       ownerState?.variant !== CollectionVariants.threePerRow &&
       theme.mixins.generateGridStyles({
         theme,
@@ -349,11 +429,51 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
           flex: '0 0 calc(100% - var(--grid-gap))'
         }
       }
+    }),
+
+    // Split Layout items - minimal container styling, let Card handle its own layout
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      '&:not(:last-child)': {
+        marginBottom: 'var(--grid-gap-sm)'
+      }
+    }),
+
+    // Feature Showcase items - icon cards
+    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
+      'backgroundColor': 'var(--mui-palette-background-paper)',
+      'border': '1px solid var(--mui-palette-divider)',
+      'borderRadius': 'var(--mui-shape-borderRadius)',
+      'padding': 'var(--grid-gap-lg)',
+      'textAlign': 'center',
+      'boxShadow': '0 2px 4px rgba(0,0,0,0.05)',
+      'transition': 'all 0.2s ease',
+      '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        borderColor: 'var(--mui-palette-primary-main)'
+      }
     })
   }),
 
+  // Intro text wrapper
+  introTextWrap: ({ ownerState }) => ({
+    // Split Layout - intro text spans columns 1-6 (left half)
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      'gridColumn': 'start/six-end',
+      // 'paddingRight': 'var(--grid-gap)',
+      '@container (max-width: 768px)': {
+        // gridColumn: '1 / -1',
+        // paddingRight: 0,
+        // marginBottom: '72px'
+      }
+    })
+  }),
+
+  // Intro text content
+  introText: () => ({}),
+
   // Pagination dots for carousel variants
-  actionsContainer: ({ theme, ownerState }) => ({
+  actionsContainer: ({ ownerState }) => ({
     // Testimonial pagination dots
     ...(ownerState?.variant === CollectionVariants.testimonial && {
       display: 'flex',

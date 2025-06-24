@@ -1,6 +1,7 @@
-import { defineType, defineField } from 'sanity'
-import { withAIGeneration } from '../utils/ai-generation'
-import { validateIn } from '../utils/validation'
+import {defineType, defineField} from 'sanity'
+import {withAIGeneration} from '../utils/ai-generation'
+import {validateIn} from '../utils/validation'
+import {combinedColorOptions, validateSemanticColor} from '../utils/colors'
 
 export const linkType = defineType({
   type: 'document',
@@ -58,10 +59,10 @@ export const linkType = defineType({
       type: 'string',
       title: 'Icon',
       hidden: false,
-      description: 'For icon-only buttons, leave text field empty',
+      description: 'Optional. Select an icon to display with the link. For icon-only buttons, leave text field empty',
       validation: (Rule) =>
         Rule.custom((value) =>
-          validateIn(
+          !value || validateIn(
             [
               'instagram',
               'facebook',
@@ -95,23 +96,25 @@ export const linkType = defineType({
       title: 'Icon Position',
       hidden: false,
       description:
-        'Optional. This applies only to Links with an icon.  Icon positioned on the right side of the text by default',
+        'Optional. This applies only to Links with an icon. Icon positioned on the right side of the text by default',
 
       initialValue: 'Right',
-      validation: (Rule) => Rule.custom((value) => validateIn(['Right', 'Left', 'None'], value)),
-      options: {list: ['Right', 'Left', 'None'], layout: 'dropdown'},
+      validation: (Rule) => Rule.custom((value) => validateIn(['Right', 'Left'], value)),
+      options: {list: ['Right', 'Left'], layout: 'dropdown'},
     }),
     defineField({
       name: 'color',
       type: 'string',
       title: 'Color',
       hidden: false,
-      description: 'Choose the button or link color within your design system.',
-      validation: (Rule) =>
-        Rule.custom((value) =>
-          validateIn(['primary', 'secondary', 'info', 'success', 'error'], value),
-        ),
-      options: {list: ['primary', 'secondary', 'info', 'success', 'error'], layout: 'dropdown'},
+      description:
+        'Choose the button or link color. Semantic colors adapt to background context automatically.',
+      initialValue: 'Brand',
+      validation: validateSemanticColor,
+      options: {
+        list: combinedColorOptions,
+        layout: 'dropdown',
+      },
     }),
     defineField({
       name: 'target',

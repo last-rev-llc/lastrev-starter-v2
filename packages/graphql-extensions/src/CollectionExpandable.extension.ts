@@ -12,7 +12,7 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   CollectionExpandable: {
     CollectionExpandable: {
-      backgroundColor: defaultResolver('backgroundColor')
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true })
     }
   }
 };

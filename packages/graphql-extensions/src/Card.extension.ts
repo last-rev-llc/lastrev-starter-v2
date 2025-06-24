@@ -35,10 +35,8 @@ export const mappers: Mappers = {
       subtitle: defaultResolver('subtitle'),
       overline: defaultResolver('overline'),
       body: defaultResolver('body'),
-      variant: defaultResolver('variant'),
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       media: defaultResolver('media'),
-      // link: defaultResolver('link'),
       link: async (card: any, _args: any, ctx: ApolloContext) => {
         const link = getLocalizedField(card.fields, 'link', ctx);
 

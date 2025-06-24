@@ -15,7 +15,7 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   ModuleIntegration: {
     ModuleIntegration: {
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     }
   }
 };

@@ -56,12 +56,12 @@ export const typeDefs = gql`
 export const mappers = {
   NavigationItem: {
     NavigationItem: {
-      variant: defaultResolver('variant'),
+      variant: defaultResolver('variant', { camelize: true }),
       href: hrefUrlResolver
     },
     Link: {
       href: hrefUrlResolver,
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     }
   }
 };

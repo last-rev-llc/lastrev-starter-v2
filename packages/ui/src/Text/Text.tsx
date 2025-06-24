@@ -38,7 +38,7 @@ const Text = (props: TextProps) => {
             data-testid="Text-title"
             align={align}
             {...sidekick(sidekickLookup, 'title')}
-            variant="h1"
+            variant="h2"
             ownerState={ownerState}>
             {title}
           </Title>
@@ -50,7 +50,7 @@ const Text = (props: TextProps) => {
             align={align}
             {...sidekick(sidekickLookup, 'subtitle')}
             ownerState={ownerState}
-            variant="h2">
+            variant="h3">
             {subtitle}
           </Subtitle>
         )}

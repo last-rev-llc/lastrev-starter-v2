@@ -17,10 +17,10 @@ export const typeMappings = {};
 export const mappers = {
   Section: {
     Section: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       hasBackground: async (section: any, _args: any, ctx: ApolloContext) =>
         !!getLocalizedField(section.fields, 'background', ctx),
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     }
   }
 };
