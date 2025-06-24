@@ -113,12 +113,12 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 --bodySmall-line-height: 1.5;
                 --bodyLarge-line-height: 1.5;
 
-                --h1-margin: 0 0 0.5em 0;
-                --h2-margin: 0 0 0.5em 0;
-                --h3-margin: 0 0 0.5em 0;
-                --h4-margin: 0 0 0.5em 0;
-                --h5-margin: 0 0 0.5em 0;
-                --h6-margin: 0 0 0.5em 0;
+                --h1-margin: 0 0 16px 0;
+                --h2-margin: 0 0 16px 0;
+                --h3-margin: 0 0 16px 0;
+                --h4-margin: 0 0 16px 0;
+                --h5-margin: 0 0 16px 0;
+                --h6-margin: 0 0 16px 0;
                 --display1-margin: var(--h1-margin);
                 --display2-margin: var(--h2-margin);
                 --overline-margin: 0 0 var(--grid-gap-half) 0;
