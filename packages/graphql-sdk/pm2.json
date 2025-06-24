@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "uniqueValueNeeded-gql-serve",
-      "script": "./node_modules/@last-rev/cli/dist/src/commands/gql-serve/gql-serve.js",
+      "script": "./node_modules/@last-rev/cli/dist/commands/gql-serve/gql-serve.js",
       "instances": "1",
       "exec_mode": "cluster",
       "args": ["-c", "./config.js"],
