@@ -216,7 +216,11 @@ const Image = React.forwardRef<any, ImageProps>(function Image(props, ref) {
         </>
       );
     } else if (width && height && src && columns) {
-      content = <Box component="picture">{generateSources()}</Box>;
+      content = (
+        <Box className={className} component="picture">
+          {generateSources()}
+        </Box>
+      );
     } else if (src) {
       content = (
         <NextImage

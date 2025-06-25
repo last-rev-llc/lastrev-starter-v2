@@ -65,22 +65,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
           marginBottom: '.5em',
           marginTop: '1em'
         }
-
-        // '&[class*=-h1]': {
-        //   ...theme.typography.h1
-        // },
-
-        // '&[class*=-h2]': {
-        //   ...theme.typography.h2
-        // },
-
-        // '&[class*=-h3]': {
-        //   ...theme.typography.h3
-        // },
-
-        // '&[class*=-h4]': {
-        //   ...theme.typography.h4
-        // }
       },
 
       '& > [class*=Text-root] > *:first-child': {

@@ -33,7 +33,7 @@ const styleOverrides: ComponentsOverrides<Theme>['CollectionExpandable'] = {
   itemsContainer: ({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    gap: 'var(--grid-gap-sm)',
+    gap: theme.spacing(2),
     marginTop: theme.spacing(5)
   }),
 
@@ -43,16 +43,17 @@ const styleOverrides: ComponentsOverrides<Theme>['CollectionExpandable'] = {
   }),
 
   itemHeader: ({ ownerState, theme }) => ({
-    padding: theme.spacing(2, 0),
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    position: 'relative',
+    'padding': theme.spacing(2, 0),
+    'cursor': 'pointer',
+    'display': 'flex',
+    'alignItems': 'center',
+    'justifyContent': 'space-between',
+    'position': 'relative',
 
     '& .MuiTypography-root': {
       fontSize: '1.125rem',
-      fontWeight: 500
+      fontWeight: 500,
+      margin: 0
     },
 
     ...(ownerState?.autoPlay &&
@@ -74,20 +75,21 @@ const styleOverrides: ComponentsOverrides<Theme>['CollectionExpandable'] = {
   }),
 
   itemContent: ({ theme }) => ({
-    maxHeight: '0',
-    overflow: 'hidden',
-    transition: 'max-height 0.3s ease',
-    padding: theme.spacing(0, 2),
+    'maxHeight': '0',
+    'overflow': 'hidden',
+    'transition': 'max-height 0.3s ease',
+    'padding': theme.spacing(0, 2),
 
     '[data-expanded="true"] &': {
-      maxHeight: '1000px'
+      maxHeight: '1000px',
+      paddingBottom: theme.spacing(2)
     }
   }),
 
   expandIcon: () => ({
-    width: '24px',
-    height: '24px',
-    transition: 'transform 0.3s ease',
+    'width': '24px',
+    'height': '24px',
+    'transition': 'transform 0.3s ease',
 
     '[data-expanded="true"] &': {
       transform: 'rotate(180deg)'
@@ -95,8 +97,8 @@ const styleOverrides: ComponentsOverrides<Theme>['CollectionExpandable'] = {
   }),
 
   imageContainer: () => ({
-    height: '100%',
-    gridColumn: 'seven-start / end',
+    'height': '100%',
+    'gridColumn': 'seven-start / end',
 
     '@container (max-width: 1024px)': {
       minHeight: '250px',

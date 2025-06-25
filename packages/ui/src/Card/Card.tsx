@@ -63,20 +63,20 @@ const Card = (props: CardProps) => {
             // @ts-ignore: TODO
 
             <CardMedia ownerState={ownerState}>
-              <Fade>
-                {!loading ? (
-                  <ContentModule
-                    __typename="Media"
-                    {...sidekick(sidekickLookup, 'media')}
-                    {...image}
-                    aspectRatio={aspectRatio}
-                    columns={layoutConfig[gridLayout]}
-                    data-testid="Card-media"
-                  />
-                ) : (
-                  <Skeleton variant="rectangular" width={210} height={118} />
-                )}
-              </Fade>
+              {/* <Fade> */}
+              {!loading ? (
+                <ContentModule
+                  __typename="Media"
+                  {...sidekick(sidekickLookup, 'media')}
+                  {...image}
+                  aspectRatio={aspectRatio}
+                  columns={layoutConfig[gridLayout]}
+                  data-testid="Card-media"
+                />
+              ) : (
+                <Skeleton variant="rectangular" width={210} height={118} />
+              )}
+              {/* </Fade> */}
             </CardMedia>
           ) : null}
 

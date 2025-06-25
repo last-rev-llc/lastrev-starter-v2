@@ -79,58 +79,9 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
     flexDirection: 'column',
     width: '100%',
     position: 'relative',
-
-    // Logo carousel variant
-    ...(ownerState?.variant === CollectionVariants.logos && {
-      padding: 'var(--grid-gap-double) 0',
-      backgroundColor: 'var(--mui-palette-background-default)',
-      overflow: 'hidden'
-    }),
-
-    // CTA variant
-    ...(ownerState?.variant === CollectionVariants.cta && {
-      'backgroundColor': 'var(--mui-palette-primary-main)',
-      'backgroundImage':
-        'linear-gradient(135deg, var(--mui-palette-primary-dark) 0%, var(--mui-palette-primary-main) 100%)',
-      'color': 'var(--mui-palette-common-white)',
-      'minHeight': '600px',
-      '@container (max-width: 1024px)': {
-        minHeight: '500px'
-      },
-      '@container (max-width: 580px)': {
-        minHeight: '400px'
-      }
-    }),
-
-    // Testimonial variant - carousel container
-    ...(ownerState?.variant === CollectionVariants.testimonial && {
-      backgroundColor: 'var(--mui-palette-grey-900)',
-      color: 'var(--mui-palette-common-white)',
-      overflow: 'hidden'
-    }),
-
-    // Three per row variant - can be carousel
-    ...(ownerState?.variant === CollectionVariants.threePerRow && {
-      overflow: 'hidden'
-    }),
-
-    // Split Layout variant - two column layout with intro on left, items on right
-    ...(ownerState?.variant === CollectionVariants.splitLayout && {
-      backgroundColor: 'var(--mui-palette-background-default)',
-      padding: 'var(--grid-gap-double) 0'
-    }),
-
-    // Accordion Showcase variant - 50-50 layout handled by CollectionExpandable
-    ...(ownerState?.variant === CollectionVariants.accordionShowcase && {
-      backgroundColor: 'var(--mui-palette-background-default)',
-      padding: 'var(--grid-gap-double) 0'
-    }),
-
-    // Feature Showcase variant - feature grid
-    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
-      backgroundColor: 'var(--mui-palette-background-default)',
-      padding: 'var(--grid-gap-double) 0'
-    })
+    minHeight: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center'
   }),
 
   // Navigation controls for carousel variants
@@ -159,7 +110,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         transform: 'translateY(-50%)',
         width: '48px',
         height: '48px',
-        backgroundColor: 'var(--mui-palette-background-paper)',
+        // backgroundColor: 'var(--mui-palette-background-paper)',
         borderRadius: '50%',
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         cursor: 'pointer',
@@ -186,7 +137,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         backgroundSize: '24px'
       },
       '&::before:hover, &::after:hover': {
-        backgroundColor: 'var(--mui-palette-grey-100)',
+        // backgroundColor: 'var(--mui-palette-grey-100)',
         boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
       },
       '@container (max-width: 580px)': {
@@ -316,8 +267,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         variant: CollectionVariants.featureShowcase,
         defaultVariant: 'default'
       }),
-      maxWidth: '1200px',
-      margin: '0 auto',
+      // maxWidth: '1200px',
+      // margin: '0 auto',
       gap: 'var(--grid-gap-lg)'
     }),
 
@@ -373,7 +324,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
 
     // CTA items (feature blocks)
     ...(ownerState?.variant === CollectionVariants.cta && {
-      'backgroundColor': 'var(--mui-palette-grey-900)',
+      // 'backgroundColor': 'var(--mui-palette-grey-900)',
       'padding': 'var(--grid-gap-double)',
       'borderRadius': 'var(--mui-shape-borderRadius)',
       'maxWidth': '600px',
@@ -391,7 +342,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       'flex': '0 0 100%', // Full width slides
       'scrollSnapAlign': 'start',
       'position': 'relative',
-      'backgroundColor': 'var(--mui-palette-grey-900)',
+      // 'backgroundColor': 'var(--mui-palette-grey-900)',
       'padding': 'var(--grid-gap-double)',
       'borderRadius': 'var(--mui-shape-borderRadius)',
       'minHeight': '400px',
@@ -440,7 +391,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
 
     // Feature Showcase items - icon cards
     ...(ownerState?.variant === CollectionVariants.featureShowcase && {
-      'backgroundColor': 'var(--mui-palette-background-paper)',
+      // 'backgroundColor': 'var(--mui-palette-background-paper)',
       'border': '1px solid var(--mui-palette-divider)',
       'borderRadius': 'var(--mui-shape-borderRadius)',
       'padding': 'var(--grid-gap-lg)',
@@ -449,8 +400,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       'transition': 'all 0.2s ease',
       '&:hover': {
         transform: 'translateY(-2px)',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-        borderColor: 'var(--mui-palette-primary-main)'
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+        // borderColor: 'var(--mui-palette-primary-main)'
       }
     })
   }),
@@ -488,19 +439,19 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         'padding': 0,
         'border': 'none',
         'borderRadius': '50%',
-        'backgroundColor': 'var(--mui-palette-grey-400)',
+        // 'backgroundColor': 'var(--mui-palette-grey-400)',
         'cursor': 'pointer',
         'transition': 'all 0.2s ease',
         '&[data-active="true"]': {
           width: '24px',
-          borderRadius: '4px',
-          backgroundColor: 'var(--mui-palette-primary-main)'
+          borderRadius: '4px'
+          // backgroundColor: 'var(--mui-palette-primary-main)'
         },
         '&:hover': {
-          backgroundColor: 'var(--mui-palette-grey-500)'
+          // backgroundColor: 'var(--mui-palette-grey-500)'
         },
         '&[data-active="true"]:hover': {
-          backgroundColor: 'var(--mui-palette-primary-dark)'
+          // backgroundColor: 'var(--mui-palette-primary-dark)'
         }
       }
     })

@@ -225,27 +225,33 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
       '[class*=cardWrap]': {
         backgroundColor: 'var(--mui-palette-background-paper)',
         padding: '24px',
-        border: '1px solid var(--mui-palette-divider)',
-        borderRadius: 'var(--mui-shape-borderRadius)',
         alignItems: 'flex-start'
       },
 
       '[class*=cardMedia]': {
-        maxWidth: '48px',
-        padding: 0,
-        marginBottom: 'var(--grid-gap)'
+        'width': '56px',
+        'height': '56px',
+        'padding': 0,
+        'marginBottom': 'var(--grid-gap)',
+        ' *': {
+          objectFit: 'contain',
+          objectPosition: 'center',
+          width: '100%',
+          height: '100%'
+        }
       },
 
       '[class*=contentWrap]': {
         padding: 0,
-        textAlign: 'left'
+        textAlign: 'left',
+        paddingBottom: theme.spacing(7)
       },
 
       '[class*=Card-title]': {
         '&, & *': {
           fontSize: '1.25rem',
           fontWeight: 600,
-          marginBottom: 'var(--grid-gap-half)',
+          marginBottom: 'var(--grid-margin-sm)',
           overflow: 'hidden',
           display: '-webkit-box',
           WebkitLineClamp: 3,

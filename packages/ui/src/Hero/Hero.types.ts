@@ -4,7 +4,7 @@ import { type LinkProps } from '../Link';
 
 // TODO Review
 export enum HeroVariants {
-  default = 'mediaOnRight',
+  default = 'default',
   simple = 'simple',
   mediaOnRight = 'mediaOnRight',
   mediaOnRightFullBleed = 'mediaOnRightFullBleed',
