@@ -3,13 +3,18 @@ import { styled } from '@mui/material/styles';
 import { Box, Typography, Collapse, IconButton } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import type { CollectionExpandableProps, CollectionExpandableOwnerState } from './CollectionExpandable.types';
+import type {
+  CollectionExpandableProps,
+  CollectionExpandableOwnerState
+} from './CollectionExpandable.types';
 import { CollectionExpandableVariants } from './CollectionExpandable.types';
 
 import Grid from '@ui/Grid';
 import ContentModule from '@ui/ContentModule';
 import RichText from '@ui/RichText';
 import Media from '@ui/Media';
+import { CollectionOwnerState } from '@ui/Collection/Collection.types';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 const Root = styled(Box, {
   name: 'CollectionExpandable',
@@ -23,6 +28,24 @@ const ContentGrid = styled(Grid, {
   slot: 'ContentGrid',
   shouldForwardProp: (prop) => prop !== 'ownerState',
   overridesResolver: (_, styles) => [styles.contentGrid]
+})<{ ownerState: CollectionExpandableOwnerState }>``;
+
+const IntroTextGrid = styled(Grid, {
+  name: 'CollectionExpandable',
+  slot: 'IntroTextGrid',
+  overridesResolver: (_, styles) => [styles.introTextGrid]
+})<{ ownerState: CollectionExpandableOwnerState }>``;
+
+const IntroTextWrap = styled(Box, {
+  name: 'CollectionExpandable',
+  slot: 'IntroTextWrap',
+  overridesResolver: (_, styles) => [styles.introTextWrap]
+})<{ ownerState: CollectionExpandableOwnerState }>``;
+
+const IntroText = styled(ContentModule, {
+  name: 'CollectionExpandable',
+  slot: 'IntroText',
+  overridesResolver: (_, styles) => [styles.introText]
 })<{ ownerState: CollectionExpandableOwnerState }>``;
 
 const ItemsContainer = styled(Box, {
@@ -81,6 +104,13 @@ const ProgressIndicator = styled(Box, {
   overridesResolver: (_, styles) => [styles.progressIndicator]
 })<{ ownerState: CollectionExpandableOwnerState }>``;
 
+const LeftColumn = styled(Box, {
+  name: 'CollectionExpandable',
+  slot: 'LeftColumn',
+  shouldForwardProp: (prop) => prop !== 'ownerState',
+  overridesResolver: (_, styles) => [styles.leftColumn]
+})<{ ownerState: CollectionExpandableOwnerState }>``;
+
 const CollectionExpandable = (props: CollectionExpandableProps) => {
   const {
     id,
@@ -121,50 +151,53 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
   const progressRef = useRef<{ [key: number]: NodeJS.Timeout | null }>({});
 
   // Handle item expansion
-  const handleItemToggle = useCallback((index: number) => {
-    setExpandedItems(prev => {
-      const newSet = new Set(prev);
-      
-      if (expandMultiple) {
-        if (newSet.has(index)) {
-          newSet.delete(index);
-        } else {
-          newSet.add(index);
-        }
-      } else {
-        newSet.clear();
-        if (!prev.has(index)) {
-          newSet.add(index);
-        }
-      }
-      
-      return newSet;
-    });
+  const handleItemToggle = useCallback(
+    (index: number) => {
+      setExpandedItems((prev) => {
+        const newSet = new Set(prev);
 
-    // Update active index for image display
-    setActiveIndex(index);
-    
-    // Pause autoplay when user interacts
-    if (autoPlay && isPlaying) {
-      setIsPlaying(false);
-      setTimeout(() => setIsPlaying(true), 2000); // Resume after 2s
-    }
-  }, [expandMultiple, autoPlay, isPlaying]);
+        if (expandMultiple) {
+          if (newSet.has(index)) {
+            newSet.delete(index);
+          } else {
+            newSet.add(index);
+          }
+        } else {
+          newSet.clear();
+          if (!prev.has(index)) {
+            newSet.add(index);
+          }
+        }
+
+        return newSet;
+      });
+
+      // Update active index for image display
+      setActiveIndex(index);
+
+      // Pause autoplay when user interacts
+      if (autoPlay && isPlaying) {
+        setIsPlaying(false);
+        setTimeout(() => setIsPlaying(true), 2000); // Resume after 2s
+      }
+    },
+    [expandMultiple, autoPlay, isPlaying]
+  );
 
   // Auto-progression logic
   useEffect(() => {
     if (!autoPlay || !isPlaying || items.length <= 1) return;
 
     intervalRef.current = setInterval(() => {
-      setActiveIndex(prev => {
+      setActiveIndex((prev) => {
         const nextIndex = (prev + 1) % items.length;
-        
+
         // Auto-expand the next item
-        setExpandedItems(currentExpanded => {
+        setExpandedItems((currentExpanded) => {
           const newSet = new Set<number>();
           if (expandMultiple) {
             // Keep existing expanded items and add new one
-            currentExpanded.forEach(idx => newSet.add(idx));
+            currentExpanded.forEach((idx) => newSet.add(idx));
             newSet.add(nextIndex);
           } else {
             // Only expand the new item
@@ -172,7 +205,7 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
           }
           return newSet;
         });
-        
+
         return nextIndex;
       });
     }, autoPlayInterval);
@@ -189,7 +222,7 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
     if (!autoPlay || !showProgressIndicator || !isPlaying) return;
 
     // Clear existing progress timeouts
-    Object.values(progressRef.current).forEach(timeout => {
+    Object.values(progressRef.current).forEach((timeout) => {
       if (timeout) clearTimeout(timeout);
     });
 
@@ -197,14 +230,14 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
     const progressElement = document.querySelector(`[data-progress-index="${activeIndex}"]`);
     if (progressElement) {
       progressElement.setAttribute('data-active', 'true');
-      
+
       progressRef.current[activeIndex] = setTimeout(() => {
         progressElement.setAttribute('data-active', 'false');
       }, autoPlayInterval);
     }
 
     return () => {
-      Object.values(progressRef.current).forEach(timeout => {
+      Object.values(progressRef.current).forEach((timeout) => {
         if (timeout) clearTimeout(timeout);
       });
     };
@@ -213,98 +246,79 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
   // Get the active image for shared image display
   const getActiveImage = () => {
     if (backgroundImage) return backgroundImage;
-    
+
     const activeItem = items[activeIndex];
-    // For now, backgroundImage is not part of the GraphQL schema for items
-    // This would need to be added to the schema if images per item are needed
-    
+    // Check if the item has media property (for Card items)
+    if (activeItem && activeItem.media && activeItem.media.length > 0) {
+      return activeItem.media[0];
+    }
+
     return null;
   };
 
-  const hasSharedImage = !!backgroundImage;
-  const showImageContainer = variant === CollectionExpandableVariants.documentManager && hasSharedImage;
+  const activeImage = getActiveImage();
+  const hasSharedImage = !!activeImage;
+  const showImageContainer =
+    (variant === CollectionExpandableVariants.documentManager ||
+      variant === CollectionExpandableVariants.accordionShowcase) &&
+    hasSharedImage;
 
   return (
-    <Root
-      ownerState={ownerState}
-      data-sidebar-lookup={sidekickLookup}
-      {...rest}
-    >
-      {/* Intro Section */}
-      {(title || subtitle || introText) && (
-        <Box sx={{ marginBottom: 'var(--grid-gap-double)' }}>
-          {title && (
-            <Typography variant="h2" component="h2" sx={{ marginBottom: 'var(--grid-gap)' }}>
-              {title}
-            </Typography>
-          )}
-          {subtitle && (
-            <Typography variant="h5" component="p" sx={{ marginBottom: 'var(--grid-gap)' }}>
-              {subtitle}
-            </Typography>
-          )}
-          {introText && <RichText {...introText} />}
-        </Box>
-      )}
-
+    <Root ownerState={ownerState} data-sidebar-lookup={sidekickLookup} {...rest}>
       <ContentGrid ownerState={ownerState}>
-        {/* Items Container */}
-        <ItemsContainer ownerState={ownerState}>
-          {items.map((item, index) => (
-            <Item
-              key={item.id || index}
-              ownerState={ownerState}
-              data-expanded={expandedItems.has(index)}
-            >
-              <ItemHeader
+        {/* Left Column: Intro Text + Items */}
+        <LeftColumn ownerState={ownerState}>
+          {introText && (
+            <IntroTextWrap ownerState={ownerState}>
+              <IntroText
                 ownerState={ownerState}
-                onClick={() => handleItemToggle(index)}
-                data-active={index === activeIndex}
-              >
-                <Typography variant="h6" component="h3">
-                  {item.title || `Item ${index + 1}`}
-                </Typography>
-                <ExpandIcon
+                {...sidekick(sidekickLookup, 'introText')}
+                {...introText}
+                variant="introText"
+              />
+            </IntroTextWrap>
+          )}
+          {/* Items Container */}
+          <ItemsContainer ownerState={ownerState}>
+            {items.map((item, index) => (
+              <Item
+                key={item.id || index}
+                ownerState={ownerState}
+                data-expanded={expandedItems.has(index)}>
+                <ItemHeader
                   ownerState={ownerState}
-                  data-expanded={expandedItems.has(index)}
-                />
-              </ItemHeader>
+                  onClick={() => handleItemToggle(index)}
+                  data-active={index === activeIndex}>
+                  <Typography variant="h5">{item.title || `Item ${index + 1}`}</Typography>
+                  <ExpandIcon ownerState={ownerState} data-expanded={expandedItems.has(index)} />
+                </ItemHeader>
 
-              <ItemContent
-                in={expandedItems.has(index)}
-                ownerState={ownerState}
-              >
-                <Box>
-                  {/* Item content */}
-                  {item?.body && <RichText {...item.body} />}
-                  
-                  {/* Render nested content module if present */}
-                  {item?.content && (
-                    <ContentModule
-                      {...item.content}
-                    />
-                  )}
-                </Box>
-              </ItemContent>
-            </Item>
-          ))}
-        </ItemsContainer>
+                <ItemContent in={expandedItems.has(index)} ownerState={ownerState}>
+                  <Box>
+                    {/* Item content */}
+                    {item?.body && <RichText body={item.body} />}
+                  </Box>
+                </ItemContent>
+              </Item>
+            ))}
+          </ItemsContainer>
+        </LeftColumn>
 
-        {/* Shared Image Container */}
-        {showImageContainer && backgroundImage && (
+        {/* Right Column: Shared Image Container */}
+        {showImageContainer && activeImage && (
           <ImageContainer ownerState={ownerState}>
-            <Media 
-              {...backgroundImage} 
+            <Media
+              {...activeImage}
               priority
-              sx={{ 
-                width: '100%', 
-                height: '100%', 
+              sx={{
+                'width': '100%',
+                'height': '100%',
                 '& img': {
-                  objectFit: 'cover',
+                  objectFit: 'contain',
                   width: '100%',
                   height: '100%'
                 }
-              }} 
+              }}
             />
           </ImageContainer>
         )}
@@ -318,13 +332,13 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
               key={index}
               data-progress-index={index}
               sx={{
-                flex: 1,
-                height: '4px',
-                backgroundColor: 'var(--mui-palette-grey-300)',
-                borderRadius: '2px',
-                position: 'relative',
-                overflow: 'hidden',
-                cursor: 'pointer',
+                'flex': 1,
+                'height': '4px',
+                'backgroundColor': 'var(--mui-palette-grey-300)',
+                'borderRadius': '2px',
+                'position': 'relative',
+                'overflow': 'hidden',
+                'cursor': 'pointer',
                 '&::before': {
                   content: '""',
                   position: 'absolute',

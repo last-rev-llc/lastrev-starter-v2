@@ -6,7 +6,8 @@ export enum CollectionExpandableVariants {
   default = 'default',
   documentManager = 'documentManager',
   timeline = 'timeline',
-  faq = 'faq'
+  faq = 'faq',
+  accordionShowcase = 'accordionShowcase'
 }
 
 export interface CollectionExpandableProps
@@ -37,6 +38,8 @@ interface CollectionExpandableClasses {
   expandIcon: string;
   imageContainer: string;
   sharedImage: string;
+  introTextGrid: string;
+  leftColumn: string;
 }
 
 export declare type CollectionExpandableClassKey = keyof CollectionExpandableClasses;
