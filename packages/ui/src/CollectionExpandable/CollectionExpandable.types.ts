@@ -3,10 +3,6 @@ import type { ComponentsOverrides, ComponentsVariants, ComponentsProps } from '@
 import type { CollectionExpandable_BaseFragmentFragment } from '@graphql-sdk/types';
 
 export enum CollectionExpandableVariants {
-  default = 'default',
-  documentManager = 'documentManager',
-  timeline = 'timeline',
-  faq = 'faq',
   accordionShowcase = 'accordionShowcase'
 }
 
@@ -32,14 +28,10 @@ interface CollectionExpandableClasses {
   item: string;
   itemHeader: string;
   itemContent: string;
-  itemImage: string;
-  progressIndicator: string;
-  progressBar: string;
   expandIcon: string;
   imageContainer: string;
-  sharedImage: string;
-  introTextGrid: string;
   leftColumn: string;
+  progressIndicator: string;
 }
 
 export declare type CollectionExpandableClassKey = keyof CollectionExpandableClasses;

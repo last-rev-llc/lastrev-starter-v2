@@ -13,7 +13,6 @@ import Grid from '@ui/Grid';
 import ContentModule from '@ui/ContentModule';
 import RichText from '@ui/RichText';
 import Media from '@ui/Media';
-import { CollectionOwnerState } from '@ui/Collection/Collection.types';
 import sidekick from '@last-rev/cms-sidekick-util';
 
 const Root = styled(Box, {
@@ -30,11 +29,6 @@ const ContentGrid = styled(Grid, {
   overridesResolver: (_, styles) => [styles.contentGrid]
 })<{ ownerState: CollectionExpandableOwnerState }>``;
 
-const IntroTextGrid = styled(Grid, {
-  name: 'CollectionExpandable',
-  slot: 'IntroTextGrid',
-  overridesResolver: (_, styles) => [styles.introTextGrid]
-})<{ ownerState: CollectionExpandableOwnerState }>``;
 
 const IntroTextWrap = styled(Box, {
   name: 'CollectionExpandable',
@@ -90,13 +84,6 @@ const ImageContainer = styled(Box, {
   overridesResolver: (_, styles) => [styles.imageContainer]
 })<{ ownerState: CollectionExpandableOwnerState }>``;
 
-const SharedImage = styled('img', {
-  name: 'CollectionExpandable',
-  slot: 'SharedImage',
-  shouldForwardProp: (prop) => prop !== 'ownerState',
-  overridesResolver: (_, styles) => [styles.sharedImage]
-})<{ ownerState: CollectionExpandableOwnerState }>``;
-
 const ProgressIndicator = styled(Box, {
   name: 'CollectionExpandable',
   slot: 'ProgressIndicator',
@@ -119,7 +106,7 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
     introText,
     backgroundImage,
     backgroundColor,
-    variant = CollectionExpandableVariants.default,
+    variant = CollectionExpandableVariants.accordionShowcase,
     autoPlay = false,
     autoPlayInterval = 5000,
     showProgressIndicator = true,
@@ -258,10 +245,7 @@ const CollectionExpandable = (props: CollectionExpandableProps) => {
 
   const activeImage = getActiveImage();
   const hasSharedImage = !!activeImage;
-  const showImageContainer =
-    (variant === CollectionExpandableVariants.documentManager ||
-      variant === CollectionExpandableVariants.accordionShowcase) &&
-    hasSharedImage;
+  const showImageContainer = hasSharedImage;
 
   return (
     <Root ownerState={ownerState} data-sidebar-lookup={sidekickLookup} {...rest}>
