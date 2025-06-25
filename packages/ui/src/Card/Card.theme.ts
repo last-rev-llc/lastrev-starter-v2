@@ -171,6 +171,57 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     }
   },
 
+  // Icon variant - simple icon without padding/background
+  {
+    props: {
+      variant: CardVariants.icon
+    },
+    style: {
+      '[class*=cardMedia]': {
+        maxWidth: '80px',
+        padding: 0,
+        backgroundColor: 'transparent'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          ...theme.typography.h5,
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
+      },
+
+      '[class*=cardWrap]': {
+        // alignItems: 'center',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        gap: theme.spacing(3)
+      },
+      '[class*=contentWrap]': {
+        padding: theme.spacing(0, 0)
+        // textAlign: 'center'
+      }
+    }
+  },
+
   // Icon Center variant
   {
     props: {
@@ -216,10 +267,10 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     }
   },
 
-  // Icon Padding Left variant
+  // Icon Padding variant - icon with padding and background
   {
     props: {
-      variant: CardVariants.iconPaddingLeft
+      variant: CardVariants.iconPadding
     },
     style: {
       '[class*=cardWrap]': {
@@ -276,59 +327,6 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
             lineClamp: 4
           }
         }
-      }
-    }
-  },
-
-  // Icon Padding Center variant
-  {
-    props: {
-      variant: CardVariants.iconPaddingCenter
-    },
-    style: {
-      'backgroundColor': 'var(--mui-palette-background-paper)',
-
-      '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap-double)',
-        backgroundColor: 'var(--mui-palette-background-default)',
-        borderRadius: 'var(--mui-shape-borderRadius)'
-      },
-
-      '[class*=contentWrap]': {
-        padding: 'var(--grid-gap)'
-      },
-
-      '[class*=Card-title]': {
-        '&, & *': {
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          lineClamp: 2,
-          WebkitBoxOrient: 'vertical'
-        }
-      },
-
-      '[class*=bodyWrap]': {
-        '& > *': {
-          'overflow': 'hidden',
-          'display': '-webkit-box',
-          'WebkitLineClamp': 10,
-          'lineClamp': 10,
-          'WebkitBoxOrient': 'vertical',
-
-          '@container (max-width: 580px)': {
-            WebkitLineClamp: 4,
-            lineClamp: 4
-          }
-        }
-      },
-
-      '[class*=cardWrap]': {
-        alignItems: 'center'
-      },
-      '[class*=contentWrap]': {
-        textAlign: 'center'
       }
     }
   },

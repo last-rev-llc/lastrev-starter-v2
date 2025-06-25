@@ -3,13 +3,11 @@ import type { ComponentsOverrides, ComponentsVariants, ComponentsProps } from '@
 import type { Card_BaseFragmentFragment } from '@graphql-sdk/types';
 
 export enum CardVariants {
-  // Icon variants for specific alignments shown in images
+  // Icon variants
+  icon = 'icon',
   iconLeft = 'iconLeft',
   iconCenter = 'iconCenter',
-
-  // Icon padding variants for specific alignments shown in images
-  iconPaddingLeft = 'iconPaddingLeft',
-  iconPaddingCenter = 'iconPaddingCenter',
+  iconPadding = 'iconPadding',
 
   // Logo variant
   logo = 'logo',

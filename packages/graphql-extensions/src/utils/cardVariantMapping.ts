@@ -3,17 +3,15 @@
 
 export const CARD_VARIANT_MAPPING: Record<string, string> = {
   'Default': 'default',
-  'Icon Left': 'iconLeft',
-  'Icon Center': 'iconCenter',
-  'Icon Padding Left': 'iconPaddingLeft',
-  'Icon Padding Center': 'iconPaddingCenter',
-  'Logo': 'logo',
   'Media': 'media',
-  'Quote': 'testimonial',
+  'Logo': 'logo',
+  'Icon': 'icon',
+  'Icon Left': 'iconLeft',
+  'Icon Padding': 'iconPadding',
   'Icon Stats': 'iconStats',
   'Icon Listing': 'iconListing',
+  'Quote': 'testimonial',
   // Legacy mappings for backward compatibility
-  'Icon': 'iconLeft',
   'Blog': 'media',
   'Person': 'media',
   'Pricing': 'media'
