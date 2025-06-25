@@ -1,5 +1,6 @@
-import { defineType, defineField } from 'sanity'
-import { validateIn } from '../utils/validation'
+import {defineType, defineField} from 'sanity'
+import {validateIn} from '../utils/validation'
+import {backgroundColorOptions, validateBackgroundColor} from '../utils/colors'
 
 export const collectionType = defineType({
   type: 'document',
@@ -24,7 +25,7 @@ export const collectionType = defineType({
     {
       name: 'styling',
       title: 'Styling & Background',
-      options: {collapsible: true, collapsed: true},
+      options: {collapsible: true, collapsed: false},
     },
     // {
     //   name: 'carousel',
@@ -113,7 +114,16 @@ export const collectionType = defineType({
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
-            ['One Per Row', 'Two Per Row', 'Three Per Row', 'Four Per Row', 'Five Per Row'],
+            [
+              'One Per Row',
+              'Two Per Row',
+              'Three Per Row',
+              'Four Per Row',
+              'Five Per Row',
+              'Split Layout',
+              'Accordion Showcase',
+              'Feature Showcase',
+            ],
             value,
           ),
         ),
@@ -124,6 +134,9 @@ export const collectionType = defineType({
           {value: 'Three Per Row', title: '3️⃣ Three Per Row'},
           {value: 'Four Per Row', title: '4️⃣ Four Per Row'},
           {value: 'Five Per Row', title: '5️⃣ Five Per Row'},
+          {value: 'Split Layout', title: '📋 Split Layout'},
+          {value: 'Accordion Showcase', title: '🎵 Accordion Showcase'},
+          {value: 'Feature Showcase', title: '🎯 Feature Showcase'},
         ],
         layout: 'dropdown',
       },
@@ -141,15 +154,14 @@ export const collectionType = defineType({
           validateIn(
             [
               'Default',
-              'Icon Left',
-              'Icon Center',
-              'Icon Padding Left',
-              'Icon Padding Center',
-              'Logo',
               'Media',
-              'Quote',
+              'Logo',
+              'Icon',
+              'Icon Left',
+              'Icon Padding',
               'Icon Stats',
               'Icon Listing',
+              'Quote',
             ],
             value,
           ),
@@ -157,15 +169,14 @@ export const collectionType = defineType({
       options: {
         list: [
           {value: 'Default', title: 'Default Card'},
-          {value: 'Icon Left', title: '🎯 Icon Left'},
-          {value: 'Icon Center', title: '🎯 Icon Center'},
-          {value: 'Icon Padding Left', title: '🎯 Icon Padding Left'},
-          {value: 'Icon Padding Center', title: '🎯 Icon Padding Center'},
-          {value: 'Logo', title: '🏢 Logo'},
           {value: 'Media', title: '🎬 Media'},
-          {value: 'Quote', title: '💬 Testimonial'},
+          {value: 'Logo', title: '🏢 Logo'},
+          {value: 'Icon', title: '🎯 Icon '},
+          {value: 'Icon Left', title: '🎯 Icon Left'},
+          {value: 'Icon Padding', title: '🎯 Icon Padding'},
           {value: 'Icon Stats', title: '📊 Icon Stats'},
           {value: 'Icon Listing', title: '📋 Icon Listing'},
+          {value: 'Quote', title: '💬 Testimonial'},
         ],
         layout: 'dropdown',
       },
@@ -253,10 +264,13 @@ export const collectionType = defineType({
       title: 'Background Color',
       fieldset: 'styling',
       group: 'styling',
-      initialValue: 'Transparent',
-      validation: (Rule) =>
-        Rule.required().custom((value) => validateIn(['Transparent', 'Black', 'White'], value)),
-      options: {list: ['Transparent', 'Black', 'White'], layout: 'dropdown'},
+      initialValue: 'Light Background',
+      description: 'Choose a background color from the design system',
+      validation: validateBackgroundColor,
+      options: {
+        list: backgroundColorOptions,
+        layout: 'dropdown',
+      },
     }),
 
     defineField({
@@ -272,19 +286,21 @@ export const collectionType = defineType({
     select: {
       title: 'internalTitle',
       variant: 'variant',
-      itemCount: 'items',
+      itemCount: 'items_raw',
       introTitle: 'introText.title',
       isCarousel: 'carouselBreakpoints',
       itemsVariant: 'itemsVariant',
+      backgroundColor: 'backgroundColor',
     },
     prepare(selection) {
-      const {title, variant, itemCount, introTitle, isCarousel, itemsVariant} = selection
+      const {title, variant, itemCount, introTitle, isCarousel, itemsVariant, backgroundColor} =
+        selection
       const itemCountText = Array.isArray(itemCount) ? `${itemCount.length} items` : 'No items'
       const carouselIndicator = Array.isArray(isCarousel) && isCarousel.length ? '🎠 ' : ''
 
       return {
         title: title || 'Untitled Collection',
-        subtitle: `${carouselIndicator}${variant} • ${itemCountText} - ${itemsVariant}`,
+        subtitle: `${carouselIndicator} ${backgroundColor ? `${backgroundColor} • ` : ''} ${variant} • ${itemCountText} - ${itemsVariant}`,
         description: introTitle,
       }
     },

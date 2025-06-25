@@ -2,7 +2,7 @@ import { useTheme } from '@mui/material/styles';
 import { designSystemColors, getContrastTextColor, designSystemGuidelines } from './theme';
 
 /**
- * Custom hook to access Diligent Design System tokens and utilities
+ * Custom hook to access Design System tokens and utilities
  * Provides easy access to design system colors, guidelines, and helper functions
  */
 export const useDesignSystem = () => {

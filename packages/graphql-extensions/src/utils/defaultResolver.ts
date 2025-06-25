@@ -11,12 +11,11 @@ interface DefaultResolverParams {
 }
 
 export const defaultResolver =
-  (field: string, params: DefaultResolverParams = {}) =>
+  (field: string, { camelize = false, mappings, defaultValue }: DefaultResolverParams = {}) =>
   (ref: any, _args: any, ctx: ApolloContext) => {
     const item = ref?.[field] ?? getLocalizedField(ref?.fields, field, ctx);
-    if (params.mappings?.[item] || params.mappings?.[item] === null) return params.mappings?.[item];
-    if (item) return params.camelize ? item : camelCase(item);
-    if (params.defaultValue)
-      return params.camelize ? params.defaultValue : camelCase(params.defaultValue);
+    if (mappings?.[item] || mappings?.[item] === null) return mappings?.[item];
+    if (item) return camelize ? camelCase(item) : item;
+    if (defaultValue) return camelize ? camelCase(defaultValue) : defaultValue;
     return;
   };

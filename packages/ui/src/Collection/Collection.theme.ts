@@ -46,6 +46,27 @@ export const layoutConfig: LayoutConfig = {
     md: 3,
     lg: 5,
     xl: 5
+  },
+  [CollectionVariants.splitLayout]: {
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1
+  },
+  [CollectionVariants.accordionShowcase]: {
+    xs: 1,
+    sm: 1,
+    md: 1,
+    lg: 1,
+    xl: 1
+  },
+  [CollectionVariants.featureShowcase]: {
+    xs: 1,
+    sm: 2,
+    md: 3,
+    lg: 3,
+    xl: 3
   }
 };
 
@@ -58,45 +79,25 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
     flexDirection: 'column',
     width: '100%',
     position: 'relative',
-
-    // Logo carousel variant
-    ...(ownerState?.variant === CollectionVariants.logos && {
-      padding: 'var(--grid-gap-double) 0',
-      backgroundColor: 'var(--mui-palette-background-default)',
-      overflow: 'hidden'
-    }),
-
-    // CTA variant
-    ...(ownerState?.variant === CollectionVariants.cta && {
-      'backgroundColor': 'var(--mui-palette-primary-main)',
-      'backgroundImage':
-        'linear-gradient(135deg, var(--mui-palette-primary-dark) 0%, var(--mui-palette-primary-main) 100%)',
-      'color': 'var(--mui-palette-common-white)',
-      'minHeight': '600px',
-      '@container (max-width: 1024px)': {
-        minHeight: '500px'
-      },
-      '@container (max-width: 580px)': {
-        minHeight: '400px'
-      }
-    }),
-
-    // Testimonial variant - carousel container
-    ...(ownerState?.variant === CollectionVariants.testimonial && {
-      backgroundColor: 'var(--mui-palette-grey-900)',
-      color: 'var(--mui-palette-common-white)',
-      overflow: 'hidden'
-    }),
-
-    // Three per row variant - can be carousel
-    ...(ownerState?.variant === CollectionVariants.threePerRow && {
-      overflow: 'hidden'
-    })
+    minHeight: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center'
   }),
 
   // Navigation controls for carousel variants
   contentGrid: ({ theme, ownerState }) => ({
     position: 'relative',
+
+    // Split Layout - apply grid system for intro + items layout
+    // ...(ownerState?.variant === CollectionVariants.splitLayout && {
+    //   display: 'grid',
+    //   gridTemplateColumns: 'repeat(12, 1fr)',
+    //   gap: 'var(--grid-gap)',
+    //   alignItems: 'start',
+    //   maxWidth: 'var(--grid-max-width, 1200px)',
+    //   margin: '0 auto',
+    //   padding: '0 var(--grid-gap)'
+    // }),
 
     // Navigation arrows for carousel variants
     ...((ownerState?.variant === CollectionVariants.logos ||
@@ -109,7 +110,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         transform: 'translateY(-50%)',
         width: '48px',
         height: '48px',
-        backgroundColor: 'var(--mui-palette-background-paper)',
+        // backgroundColor: 'var(--mui-palette-background-paper)',
         borderRadius: '50%',
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         cursor: 'pointer',
@@ -136,7 +137,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         backgroundSize: '24px'
       },
       '&::before:hover, &::after:hover': {
-        backgroundColor: 'var(--mui-palette-grey-100)',
+        // backgroundColor: 'var(--mui-palette-grey-100)',
         boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
       },
       '@container (max-width: 580px)': {
@@ -246,11 +247,41 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       }
     }),
 
+    // Split Layout variant - items grid spans columns 7-12
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      'gridColumn': 'seven-start/end',
+      'display': 'flex',
+      'flexDirection': 'column',
+      'gap': 'var(--grid-gap-sm)',
+      '@container (max-width: 768px)': {
+        gridColumn: '1 / -1'
+        // marginTop: 'var(--grid-gap)'
+      }
+    }),
+
+    // Feature Showcase variant - feature grid
+    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
+      ...theme.mixins.generateGridStyles({
+        theme,
+        layoutConfig,
+        variant: CollectionVariants.featureShowcase,
+        defaultVariant: 'default'
+      }),
+      // maxWidth: '1200px',
+      // margin: '0 auto',
+      gap: 'var(--grid-gap-lg)'
+    }),
+
     // Default grid styles for other variants
     ...(ownerState?.variant &&
-      ![CollectionVariants.logos, CollectionVariants.cta, CollectionVariants.testimonial].includes(
-        ownerState.variant
-      ) &&
+      ![
+        CollectionVariants.logos,
+        CollectionVariants.cta,
+        CollectionVariants.testimonial,
+        CollectionVariants.splitLayout,
+        CollectionVariants.accordionShowcase,
+        CollectionVariants.featureShowcase
+      ].includes(ownerState.variant) &&
       ownerState?.variant !== CollectionVariants.threePerRow &&
       theme.mixins.generateGridStyles({
         theme,
@@ -293,7 +324,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
 
     // CTA items (feature blocks)
     ...(ownerState?.variant === CollectionVariants.cta && {
-      'backgroundColor': 'var(--mui-palette-grey-900)',
+      // 'backgroundColor': 'var(--mui-palette-grey-900)',
       'padding': 'var(--grid-gap-double)',
       'borderRadius': 'var(--mui-shape-borderRadius)',
       'maxWidth': '600px',
@@ -311,7 +342,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       'flex': '0 0 100%', // Full width slides
       'scrollSnapAlign': 'start',
       'position': 'relative',
-      'backgroundColor': 'var(--mui-palette-grey-900)',
+      // 'backgroundColor': 'var(--mui-palette-grey-900)',
       'padding': 'var(--grid-gap-double)',
       'borderRadius': 'var(--mui-shape-borderRadius)',
       'minHeight': '400px',
@@ -349,11 +380,51 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
           flex: '0 0 calc(100% - var(--grid-gap))'
         }
       }
+    }),
+
+    // Split Layout items - minimal container styling, let Card handle its own layout
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      '&:not(:last-child)': {
+        marginBottom: 'var(--grid-gap-sm)'
+      }
+    }),
+
+    // Feature Showcase items - icon cards
+    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
+      // 'backgroundColor': 'var(--mui-palette-background-paper)',
+      'border': '1px solid var(--mui-palette-divider)',
+      'borderRadius': 'var(--mui-shape-borderRadius)',
+      'padding': 'var(--grid-gap-lg)',
+      'textAlign': 'center',
+      'boxShadow': '0 2px 4px rgba(0,0,0,0.05)',
+      'transition': 'all 0.2s ease',
+      '&:hover': {
+        transform: 'translateY(-2px)',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+        // borderColor: 'var(--mui-palette-primary-main)'
+      }
     })
   }),
 
+  // Intro text wrapper
+  introTextWrap: ({ ownerState }) => ({
+    // Split Layout - intro text spans columns 1-6 (left half)
+    ...(ownerState?.variant === CollectionVariants.splitLayout && {
+      'gridColumn': 'start/six-end',
+      // 'paddingRight': 'var(--grid-gap)',
+      '@container (max-width: 768px)': {
+        // gridColumn: '1 / -1',
+        // paddingRight: 0,
+        // marginBottom: '72px'
+      }
+    })
+  }),
+
+  // Intro text content
+  introText: () => ({}),
+
   // Pagination dots for carousel variants
-  actionsContainer: ({ theme, ownerState }) => ({
+  actionsContainer: ({ ownerState }) => ({
     // Testimonial pagination dots
     ...(ownerState?.variant === CollectionVariants.testimonial && {
       display: 'flex',
@@ -368,19 +439,19 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         'padding': 0,
         'border': 'none',
         'borderRadius': '50%',
-        'backgroundColor': 'var(--mui-palette-grey-400)',
+        // 'backgroundColor': 'var(--mui-palette-grey-400)',
         'cursor': 'pointer',
         'transition': 'all 0.2s ease',
         '&[data-active="true"]': {
           width: '24px',
-          borderRadius: '4px',
-          backgroundColor: 'var(--mui-palette-primary-main)'
+          borderRadius: '4px'
+          // backgroundColor: 'var(--mui-palette-primary-main)'
         },
         '&:hover': {
-          backgroundColor: 'var(--mui-palette-grey-500)'
+          // backgroundColor: 'var(--mui-palette-grey-500)'
         },
         '&[data-active="true"]:hover': {
-          backgroundColor: 'var(--mui-palette-primary-dark)'
+          // backgroundColor: 'var(--mui-palette-primary-dark)'
         }
       }
     })

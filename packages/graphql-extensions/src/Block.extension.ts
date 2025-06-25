@@ -27,10 +27,10 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   Block: {
     Block: {
-      variant: defaultResolver('variant'),
+      variant: defaultResolver('variant', { camelize: true }),
       imageOverlayColor: defaultResolver('imageOverlayColor'),
 
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
 
       mediaItems: async (block: any, _args: any, ctx: ApolloContext) => {
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);
@@ -38,7 +38,7 @@ export const mappers: Mappers = {
         return null;
       },
       body: async (block: any, _args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(block, _args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(block, _args, ctx);
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);
         const supplementalContent = getLocalizedField(block.fields, 'supplementalContent', ctx);
         if (variant !== 'noContent' && !mediaItem && !supplementalContent) return null;
@@ -49,7 +49,7 @@ export const mappers: Mappers = {
       },
 
       supplementalContent: async (block: any, _args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(block, _args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(block, _args, ctx);
 
         if (variant === 'noContent') return null;
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);

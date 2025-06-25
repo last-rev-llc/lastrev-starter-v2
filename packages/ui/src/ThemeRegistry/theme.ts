@@ -3,7 +3,8 @@ import {
   type Breakpoint,
   experimental_extendTheme as extendTheme,
   lighten,
-  darken
+  darken,
+  ThemeOptions
 } from '@mui/material/styles';
 import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 import { Theme } from '@mui/material/styles';
@@ -23,46 +24,46 @@ export const plusJakartaSans = Plus_Jakarta_Sans({
   display: 'swap'
 });
 
-export const mainColors = ['diligentRed'];
+export const mainColors = ['primaryRed', 'lensRed'];
 
 const defaultSpacing = 8;
-const defaultBorderRadius = 4;
+const defaultBorderRadius = 8;
 
-// Design System Color Tokens - Diligent Design System
+// Design System Color Tokens - Hierarchical Color System
 const commonColors = {
   // Primary Red Scale - Brand Colors
-  diligentRed: '#EE312E',    // Red 500 - Primary brand color
-  red600: '#D3222A',         // Red 600 - Hover states, secondary emphasis
-  red700: '#AF292E',         // Red 700 - Darker accents
-  red800: '#921A1D',         // Red 800 - Deep emphasis
-  red900: '#5F091D',         // Red 900 - Least used, maximum contrast
+  primaryRed: '#EE312E', // Red 500 - Primary brand color
+  red600: '#D3222A', // Red 600 - Hover states, secondary emphasis
+  red700: '#AF292E', // Red 700 - Darker accents
+  red800: '#921A1D', // Red 800 - Deep emphasis
+  red900: '#5F091D', // Red 900 - Least used, maximum contrast
 
   // Neutral Colors - Areas of calm to balance red palette
-  white: '#FFFFFF',          // White 0 - Primary background
-  black: '#000000',          // Pure black
-  gray100: '#F5F3F3',        // Gray 1 - Light backgrounds
-  gray200: '#DADADA',        // Gray 2 - Borders, dividers
-  gray300: '#A0A2A5',        // Gray 3 - Disabled states
-  gray500: '#6F7377',        // Gray 4 - Secondary text
-  gray700: '#50565F',        // Gray 700 - Body text alternative
-  gray800: '#3C424B',        // Gray 800 - Dark UI elements
-  gray900: '#282E37',        // Gray 5 - Primary text
-  gray950: '#141423',        // Gray 950 - Maximum contrast
+  white: '#FFFFFF', // White 0 - Primary background
+  black: '#000000', // Pure black
+  gray100: '#F5F3F3', // Gray 1 - Light backgrounds
+  gray200: '#DADADA', // Gray 2 - Borders, dividers
+  gray300: '#A0A2A5', // Gray 3 - Disabled states
+  gray500: '#6F7377', // Gray 4 - Secondary text
+  gray700: '#50565F', // Gray 700 - Body text alternative
+  gray800: '#3C424B', // Gray 800 - Dark UI elements
+  gray900: '#282E37', // Gray 5 - Primary text
+  gray950: '#141423', // Gray 950 - Maximum contrast
 
   // Secondary Colors - For data visualization only
-  magenta500: '#C247FA',     // Charts, graphs (warning)
-  violet500: '#8B48FA',      // Data visualization
-  violet700: '#642FCF',      // Intense warning states
-  sky500: '#00D3F3',         // Information, safety
-  azure600: '#0086FA',       // Primary info color
-  azure800: '#084CCE',       // Intense safety states
+  magenta500: '#C247FA', // Charts, graphs (warning)
+  violet500: '#8B48FA', // Data visualization
+  violet700: '#642FCF', // Intense warning states
+  sky500: '#00D3F3', // Information, safety
+  azure600: '#0086FA', // Primary info color
+  azure800: '#084CCE', // Intense safety states
 
   // Utility Colors - Success, error, warning states
-  utilityRed: '#EE312E',     // Error states
-  utilityOrange: '#FF6B00',  // Warning states
-  utilityYellow: '#FFD500',  // Caution/attention
-  utilityGreen: '#00C851',   // Success states
-  utilityBlue: '#0066FF',    // Information states
+  utilityRed: '#EE312E', // Error states
+  utilityOrange: '#FF6B00', // Warning states
+  utilityYellow: '#FFD500', // Caution/attention
+  utilityGreen: '#00C851', // Success states
+  utilityBlue: '#0066FF', // Information states
 
   // Transparent colors for overlays
   transparentLight: 'rgba(0, 0, 0, 0)',
@@ -83,7 +84,7 @@ const schemes = {
       light: lighten(commonColors.gray200, 0.2),
       dark: darken(commonColors.gray200, 0.2)
     },
-    linkColor: commonColors.diligentRed,
+    linkColor: commonColors.primaryRed,
     headerColor: commonColors.gray900,
     text: commonColors.gray900,
     overlay: commonColors.gray900,
@@ -118,17 +119,17 @@ const schemes = {
       dark: darken(commonColors.black, 0.2)
     },
     secondary: {
-      main: commonColors.diligentRed,
+      main: commonColors.primaryRed,
       contrastText: commonColors.white,
-      light: lighten(commonColors.diligentRed, 0.2),
-      dark: darken(commonColors.diligentRed, 0.2)
+      light: lighten(commonColors.primaryRed, 0.2),
+      dark: darken(commonColors.primaryRed, 0.2)
     },
     linkColor: commonColors.white,
     headerColor: commonColors.white,
     text: commonColors.white,
     overlay: commonColors.white,
     overlayText: commonColors.black,
-    highlightColor: commonColors.diligentRed
+    highlightColor: commonColors.primaryRed
   },
   dark: {
     primary: {
@@ -138,17 +139,17 @@ const schemes = {
       dark: darken(commonColors.gray900, 0.2)
     },
     secondary: {
-      main: commonColors.diligentRed,
+      main: commonColors.primaryRed,
       contrastText: commonColors.white,
-      light: lighten(commonColors.diligentRed, 0.2),
-      dark: darken(commonColors.diligentRed, 0.2)
+      light: lighten(commonColors.primaryRed, 0.2),
+      dark: darken(commonColors.primaryRed, 0.2)
     },
     linkColor: commonColors.white,
     headerColor: commonColors.white,
     text: commonColors.white,
     overlay: commonColors.white,
     overlayText: commonColors.black,
-    highlightColor: commonColors.diligentRed
+    highlightColor: commonColors.primaryRed
   },
   white: {
     primary: {
@@ -158,24 +159,24 @@ const schemes = {
       dark: commonColors.gray200
     },
     secondary: {
-      main: commonColors.diligentRed,
+      main: commonColors.primaryRed,
       contrastText: commonColors.white,
-      light: lighten(commonColors.diligentRed, 0.2),
-      dark: darken(commonColors.diligentRed, 0.2)
+      light: lighten(commonColors.primaryRed, 0.2),
+      dark: darken(commonColors.primaryRed, 0.2)
     },
-    linkColor: commonColors.diligentRed,
+    linkColor: commonColors.primaryRed,
     headerColor: commonColors.gray900,
     text: commonColors.gray900,
     overlay: commonColors.gray900,
     overlayText: commonColors.white,
-    highlightColor: commonColors.diligentRed
+    highlightColor: commonColors.primaryRed
   },
   light: {
     primary: {
-      main: commonColors.diligentRed,
+      main: commonColors.black,
       contrastText: commonColors.white,
-      light: commonColors.red600,
-      dark: commonColors.red700
+      light: commonColors.gray100,
+      dark: commonColors.gray200
     },
     secondary: {
       main: commonColors.violet500,
@@ -183,40 +184,108 @@ const schemes = {
       light: commonColors.magenta500,
       dark: commonColors.violet700
     },
-    linkColor: commonColors.diligentRed,
+    linkColor: commonColors.black,
     headerColor: commonColors.gray900,
     text: commonColors.gray900,
     overlay: commonColors.gray900,
     overlayText: commonColors.white,
-    highlightColor: commonColors.diligentRed
+    highlightColor: commonColors.black
   },
-  diligentRed: {
+  primaryRed: {
     primary: {
-      main: commonColors.diligentRed,
-      contrastText: commonColors.white,
+      main: commonColors.primaryRed,
+      contrastText: commonColors.black,
       light: commonColors.red600,
       dark: commonColors.red700
     },
     secondary: {
-      main: commonColors.violet500,
+      main: commonColors.black,
       contrastText: commonColors.white,
-      light: commonColors.magenta500,
-      dark: commonColors.violet700
+      light: commonColors.gray100,
+      dark: commonColors.gray200
     },
-    linkColor: commonColors.white,
-    headerColor: commonColors.white,
-    text: commonColors.white,
-    overlay: commonColors.white,
-    overlayText: commonColors.gray900,
+    linkColor: commonColors.black,
+    headerColor: commonColors.black,
+    text: commonColors.black,
+    overlay: commonColors.black,
+    overlayText: commonColors.black,
     highlightColor: commonColors.red600
+  },
+  lensRed: {
+    primary: {
+      main: commonColors.primaryRed,
+      contrastText: commonColors.black,
+      light: commonColors.red600,
+      dark: commonColors.red700
+    },
+    secondary: {
+      main: commonColors.black,
+      contrastText: commonColors.white,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    },
+    linkColor: commonColors.black,
+    headerColor: commonColors.black,
+    text: commonColors.black,
+    overlay: commonColors.black,
+    overlayText: commonColors.black,
+    highlightColor: commonColors.red600
+  },
+  lightPrimary1: {
+    primary: {
+      main: commonColors.white,
+      contrastText: commonColors.gray700,
+      light: commonColors.gray200,
+      dark: commonColors.gray100,
+      divider: commonColors.gray200
+    },
+    secondary: {
+      main: commonColors.black,
+      contrastText: commonColors.white,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    },
+    background: {
+      paper: commonColors.gray100
+    }
+  },
+  lightPrimary3: {
+    primary: {
+      main: commonColors.gray100,
+      contrastText: commonColors.gray700,
+      light: commonColors.gray200,
+      dark: commonColors.gray300,
+      divider: commonColors.gray200
+    },
+    secondary: {
+      main: commonColors.black,
+      contrastText: commonColors.white,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    }
+  },
+  darkPrimary2: {
+    primary: {
+      main: commonColors.gray900,
+      contrastText: commonColors.white,
+      light: commonColors.gray800,
+      dark: commonColors.gray900,
+      divider: commonColors.gray200
+    },
+    secondary: {
+      main: commonColors.white,
+      contrastText: commonColors.black,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    }
   }
 };
 
 export const breakpointsMinMax: Record<string, { min: number; max: number }> = {
   xs: { min: 0, max: 600 },
   sm: { min: 600, max: 800 },
-  md: { min: 900, max: 1200 },
-  lg: { min: 1200, max: 1920 },
+  md: { min: 900, max: 1248 },
+  lg: { min: 1248, max: 1920 },
   xl: { min: 1920, max: 2800 },
   xxl: { min: 2800, max: 3840 }
 };
@@ -232,6 +301,7 @@ const paletteTheme = {
       xxl: breakpointsMinMax.xxl.min
     }
   },
+
   colorSchemes: {
     light: {
       palette: {
@@ -356,7 +426,7 @@ const paletteTheme = {
 
 const muiTheme = extendTheme(paletteTheme);
 
-const baseTheme = {
+const baseTheme: ThemeOptions = {
   ...paletteTheme,
   spacing: defaultSpacing,
   shape: {
@@ -534,55 +604,95 @@ const baseTheme = {
     caption: {}
   },
   components: {
-    MuiLink: {
-      styleOverrides: {
-        root: {
-          'textDecoration': 'none',
-          'textDecorationColor': 'currentColor',
+    // MuiLink: {
+    //   styleOverrides: {
+    //     root: {
+    //       // 'textDecoration': 'none',
+    //       // 'textDecorationColor': 'currentColor',
 
-          '&:hover': {
-            textDecoration: 'underline'
-          }
-        }
-      }
-    },
+    //       '&:hover': {
+    //         textDecoration: 'underline'
+    //       }
+    //     }
+    //   }
+    // },
     MuiButton: {
+      defaultProps: {
+        disableElevation: true
+      },
       styleOverrides: {
         root: {
-          'boxShadow': 'none',
-          'fontSize': 16,
-          'fontWeight': 500,
-          'lineHeight': 1.75,
-          'textTransform': 'none' as const,
-          'borderRadius': defaultBorderRadius,
-
-          '&:hover': {
-            boxShadow: 'none'
-          }
-        },
-
-        contained: {
           padding: muiTheme.spacing(2, 3)
         },
-        outlined: {
-          padding: muiTheme.spacing(2, 3)
-        },
-
+        // Contained variant - only override specific states
         containedPrimary: {
-          'backgroundColor': commonColors.diligentRed,
-          'color': commonColors.white,
-
-          '&:hover': {
-            backgroundColor: commonColors.red600
+          '&:active': {
+            backgroundColor: commonColors.red700
+          },
+          '&.Mui-disabled': {
+            backgroundColor: commonColors.gray200,
+            color: commonColors.gray500
           }
         },
-
         containedSecondary: {
-          'backgroundColor': commonColors.violet500,
-          'color': commonColors.white,
-
+          '&:active': {
+            backgroundColor: commonColors.gray950
+          },
+          '&.Mui-disabled': {
+            backgroundColor: commonColors.gray200,
+            color: commonColors.gray500
+          }
+        },
+        // Text variant - only override specific states
+        textPrimary: {
           '&:hover': {
-            backgroundColor: commonColors.violet700
+            textDecoration: 'underline',
+            backgroundColor: 'transparent'
+          },
+          '&:active': {
+            color: commonColors.red700
+          },
+          '&.Mui-disabled': {
+            color: commonColors.gray300
+          }
+        },
+        textSecondary: {
+          '&:hover': {
+            textDecoration: 'underline',
+            backgroundColor: 'transparent'
+          },
+          '&:active': {
+            color: commonColors.gray950
+          },
+          '&.Mui-disabled': {
+            color: commonColors.gray300
+          }
+        },
+        // Outlined variant - only override specific states
+        outlinedPrimary: {
+          '&:hover': {
+            backgroundColor: 'transparent'
+          },
+          '&:active': {
+            borderColor: commonColors.red700,
+            color: commonColors.red700
+          },
+          '&.Mui-disabled': {
+            borderColor: commonColors.gray200,
+            color: commonColors.gray300
+          }
+        },
+        outlinedSecondary: {
+          '&:hover': {
+            backgroundColor: 'transparent'
+          },
+          '&:active': {
+            borderColor: commonColors.gray950,
+            color: commonColors.gray950
+          },
+          '&.Mui-disabled': {
+            borderColor: commonColors.gray200,
+            color: commonColors.gray300
           }
         }
       }
@@ -600,7 +710,7 @@ const baseTheme = {
             borderWidth: 1
           },
           [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
-            borderColor: commonColors.diligentRed,
+            borderColor: commonColors.primaryRed,
             borderWidth: 2
           }
         },
@@ -639,89 +749,3 @@ export const theme = extendTheme(
 );
 
 export const breakpoints = theme.breakpoints.values;
-
-// Design System Utilities
-export const designSystemColors = {
-  primary: {
-    red500: commonColors.diligentRed,
-    red600: commonColors.red600,
-    red700: commonColors.red700,
-    red800: commonColors.red800,
-    red900: commonColors.red900
-  },
-  designSystemSecondary: {
-    magenta500: commonColors.magenta500,
-    violet500: commonColors.violet500,
-    violet700: commonColors.violet700,
-    sky500: commonColors.sky500,
-    azure600: commonColors.azure600,
-    azure800: commonColors.azure800
-  },
-  neutral: {
-    white: commonColors.white,
-    black: commonColors.black,
-    gray100: commonColors.gray100,
-    gray200: commonColors.gray200,
-    gray300: commonColors.gray300,
-    gray500: commonColors.gray500,
-    gray700: commonColors.gray700,
-    gray800: commonColors.gray800,
-    gray900: commonColors.gray900,
-    gray950: commonColors.gray950
-  },
-  utility: {
-    red: commonColors.utilityRed,
-    orange: commonColors.utilityOrange,
-    yellow: commonColors.utilityYellow,
-    green: commonColors.utilityGreen,
-    blue: commonColors.utilityBlue
-  }
-};
-
-// Helper function to get contrast text color based on background
-export const getContrastTextColor = (backgroundColor: string): string => {
-  const darkBackgrounds = [
-    commonColors.diligentRed,
-    commonColors.red600,
-    commonColors.red700,
-    commonColors.red800,
-    commonColors.red900,
-    commonColors.violet500,
-    commonColors.violet700,
-    commonColors.azure600,
-    commonColors.azure800,
-    commonColors.gray700,
-    commonColors.gray800,
-    commonColors.gray900,
-    commonColors.gray950,
-    commonColors.black
-  ];
-
-  return darkBackgrounds.includes(backgroundColor) ? commonColors.white : commonColors.black;
-};
-
-// Design System Usage Guidelines
-export const designSystemGuidelines = {
-  colorUsage: {
-    primary: "Use Diligent Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
-    primaryProgression: 'Use additional shades of red in progression, starting with Diligent Red. Never use more red shades than necessary; Red 900 (#5F091D) should be the least used color.',
-    secondary: 'Secondary colors are ONLY for charts, graphs, tables and data visualizations. Blue tones symbolize safety, purple tones signal warning. More intense colors represent stronger urgency.',
-    neutral: 'Neutrals provide areas of calm to balance our red palette. Use for backgrounds, textures, section dividers, information in charts and graphs, and typography.',
-    utility: 'Utility colors represent success, error, and warning states, ensuring users receive clear visual cues.'
-  },
-  typography: {
-    h1: 'Use for main headlines - 48px Medium',
-    h2: 'Use for page titles - 32px Medium',
-    h3: 'Use for subheadings - 24px Medium',
-    h4: 'Use for section headers - 20px Medium',
-    h5: 'Use for subsection headers - 18px Medium',
-    h6: 'Use for minor headers - 18px Regular',
-    body1: 'Use for body copy - 16px Regular',
-    body2: 'Use for smaller body text - 14px Regular',
-    button: 'Use for CTAs and interactive elements - 16px Medium',
-    overline: 'Use for labels and overline text - 14px Regular, Uppercase'
-  }
-};
-
-// Export for use in components
-export { commonColors };

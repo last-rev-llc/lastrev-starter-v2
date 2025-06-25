@@ -75,8 +75,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
   }),
 
   bodyWrap: ({ theme }) => ({
-    flex: 1,
-    minHeight: 0,
+    'flex': 1,
+    'minHeight': 0,
     '*': {
       ...theme.typography.body1
     }
@@ -107,19 +107,85 @@ const styleOverrides: ComponentsOverrides<Theme>['Card'] = {
 };
 
 const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
-  // Icon Left variant
+  // Icon Left variant - horizontal layout with icon on left
   {
     props: {
       variant: CardVariants.iconLeft
     },
     style: {
+      '[class*=cardWrap]': {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        gap: 'var(--grid-gap)',
+        backgroundColor: 'transparent',
+        boxShadow: 'none'
+      },
+
       '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap)'
+        flex: '0 0 auto',
+        width: '80px',
+        height: '80px',
+        minWidth: '80px',
+        padding: 0,
+        backgroundColor: 'transparent'
+      },
+
+      '[class*=contentWrap]': {
+        flex: 1,
+        minWidth: 0,
+        padding: 0,
+        paddingBottom: 'var(--grid-gap)',
+        textAlign: 'left',
+        backgroundColor: 'transparent',
+        borderBottom: '1px solid var(--mui-palette-divider)'
       },
 
       '[class*=Card-title]': {
         '&, & *': {
+          ...theme.typography.h4,
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          lineClamp: 2,
+          WebkitBoxOrient: 'vertical'
+        }
+      },
+
+      '[class*=bodyWrap]': {
+        '& > *': {
+          'fontSize': '0.875rem',
+          'lineHeight': 1.6,
+          'color': 'var(--mui-palette-text-secondary)',
+          'overflow': 'hidden',
+          'display': '-webkit-box',
+          'WebkitLineClamp': 10,
+          'lineClamp': 10,
+          'WebkitBoxOrient': 'vertical',
+
+          '@container (max-width: 580px)': {
+            WebkitLineClamp: 4,
+            lineClamp: 4
+          }
+        }
+      }
+    }
+  },
+
+  // Icon variant - simple icon without padding/background
+  {
+    props: {
+      variant: CardVariants.icon
+    },
+    style: {
+      '[class*=cardMedia]': {
+        maxWidth: '80px',
+        padding: 0,
+        backgroundColor: 'transparent'
+      },
+
+      '[class*=Card-title]': {
+        '&, & *': {
+          ...theme.typography.h5,
           overflow: 'hidden',
           display: '-webkit-box',
           WebkitLineClamp: 2,
@@ -144,10 +210,14 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
       },
 
       '[class*=cardWrap]': {
-        alignItems: 'flex-start'
+        // alignItems: 'center',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
+        gap: theme.spacing(3)
       },
       '[class*=contentWrap]': {
-        textAlign: 'left'
+        padding: theme.spacing(0, 0)
+        // textAlign: 'center'
       }
     }
   },
@@ -197,90 +267,55 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     }
   },
 
-  // Icon Padding Left variant
+  // Icon Padding variant - icon with padding and background
   {
     props: {
-      variant: CardVariants.iconPaddingLeft
+      variant: CardVariants.iconPadding
     },
     style: {
-      'backgroundColor': 'var(--mui-palette-background-paper)',
-
-      '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap-double)',
-        backgroundColor: 'var(--mui-palette-background-default)',
-        borderRadius: 'var(--mui-shape-borderRadius)'
-      },
-
-      '[class*=contentWrap]': {
-        padding: 'var(--grid-gap)'
-      },
-
-      '[class*=Card-title]': {
-        '&, & *': {
-          overflow: 'hidden',
-          display: '-webkit-box',
-          WebkitLineClamp: 2,
-          lineClamp: 2,
-          WebkitBoxOrient: 'vertical'
-        }
-      },
-
-      '[class*=bodyWrap]': {
-        '& > *': {
-          'overflow': 'hidden',
-          'display': '-webkit-box',
-          'WebkitLineClamp': 10,
-          'lineClamp': 10,
-          'WebkitBoxOrient': 'vertical',
-
-          '@container (max-width: 580px)': {
-            WebkitLineClamp: 4,
-            lineClamp: 4
-          }
-        }
-      },
-
       '[class*=cardWrap]': {
+        backgroundColor: 'var(--mui-palette-background-paper)',
+        padding: '24px',
         alignItems: 'flex-start'
       },
-      '[class*=contentWrap]': {
-        textAlign: 'left'
-      }
-    }
-  },
-
-  // Icon Padding Center variant
-  {
-    props: {
-      variant: CardVariants.iconPaddingCenter
-    },
-    style: {
-      'backgroundColor': 'var(--mui-palette-background-paper)',
 
       '[class*=cardMedia]': {
-        maxWidth: '96px',
-        padding: 'var(--grid-gap-double)',
-        backgroundColor: 'var(--mui-palette-background-default)',
-        borderRadius: 'var(--mui-shape-borderRadius)'
+        'width': '56px',
+        'height': '56px',
+        'padding': 0,
+        'marginBottom': 'var(--grid-gap)',
+        ' *': {
+          objectFit: 'contain',
+          objectPosition: 'center',
+          width: '100%',
+          height: '100%'
+        }
       },
 
       '[class*=contentWrap]': {
-        padding: 'var(--grid-gap)'
+        padding: 0,
+        textAlign: 'left',
+        paddingBottom: theme.spacing(7)
       },
 
       '[class*=Card-title]': {
         '&, & *': {
+          fontSize: '1.25rem',
+          fontWeight: 600,
+          marginBottom: 'var(--grid-margin-sm)',
           overflow: 'hidden',
           display: '-webkit-box',
-          WebkitLineClamp: 2,
-          lineClamp: 2,
+          WebkitLineClamp: 3,
+          lineClamp: 3,
           WebkitBoxOrient: 'vertical'
         }
       },
 
       '[class*=bodyWrap]': {
         '& > *': {
+          'fontSize': '0.875rem',
+          'lineHeight': 1.6,
+          'color': 'var(--mui-palette-text-secondary)',
           'overflow': 'hidden',
           'display': '-webkit-box',
           'WebkitLineClamp': 10,
@@ -292,13 +327,6 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
             lineClamp: 4
           }
         }
-      },
-
-      '[class*=cardWrap]': {
-        alignItems: 'center'
-      },
-      '[class*=contentWrap]': {
-        textAlign: 'center'
       }
     }
   },

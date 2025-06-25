@@ -1,6 +1,7 @@
 import { defineType, defineField } from 'sanity'
 import { withAIGeneration } from '../utils/ai-generation'
 import { validateIn } from '../utils/validation'
+import { backgroundColorOptions, validateBackgroundColor } from '../utils/colors'
 
 export const headerType = defineType({
   type: 'document',
@@ -149,13 +150,13 @@ export const headerType = defineType({
       title: 'Background Color',
       hidden: false,
 
-      initialValue: 'Inherit',
-      validation: (Rule) =>
-        Rule.required().custom((value) =>
-          validateIn(['Inherit', 'Black', 'White', 'Transparent Light', 'Transparent Dark'], value),
-        ),
+      initialValue: 'Light Background',
+      validation: validateBackgroundColor,
       options: {
-        list: ['Inherit', 'Black', 'White', 'Transparent Light', 'Transparent Dark'],
+        list: [
+          {value: 'Inherit', title: '↗️ Inherit from Page'},
+          ...backgroundColorOptions
+        ],
         layout: 'dropdown',
       },
     }),

@@ -25,7 +25,7 @@ export const mappers = {
         const socialLinks: any = getLocalizedField(footer.fields, 'socialLinks', ctx);
         return !!socialLinks.length;
       },
-      backgroundColor: defaultResolver('backgroundColor')
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true })
     }
   }
 };

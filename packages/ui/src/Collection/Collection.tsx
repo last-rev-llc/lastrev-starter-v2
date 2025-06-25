@@ -41,40 +41,78 @@ const Collection = (props: CollectionProps) => {
           testId="Collection-background"
         />
 
-        {introText && (
-          <IntroTextGrid ownerState={ownerState}>
-            <IntroText
-              ownerState={ownerState}
-              {...sidekick(sidekickLookup, 'introText')}
-              {...introText}
-              variant="introText"
-            />
-          </IntroTextGrid>
-        )}
-
-        <ContentGrid ownerState={ownerState}>
-          {!!items?.length && (
-            <ItemsGrid ownerState={ownerState} id="items">
-              {items?.map((item: any, index) => (
-                <Item
+        {variant === 'splitLayout' ? (
+          <ContentGrid ownerState={ownerState}>
+            {introText && (
+              <IntroTextWrap ownerState={ownerState}>
+                <IntroText
                   ownerState={ownerState}
-                  backgroundColor={backgroundColor}
-                  key={item?.id}
-                  {...item}
-                  layoutConfig={layoutConfig}
-                  gridLayout={variant}
-                  variant={
-                    (itemsVariant as any) === 'linkList'
-                      ? 'buttonContained'
-                      : itemsVariant ?? item?.variant
-                  }
-                  aspectRatio={itemsAspectRatio ?? item?.aspectRatio}
-                  position={index + 1}
+                  {...sidekick(sidekickLookup, 'introText')}
+                  {...introText}
+                  variant="introText"
                 />
-              ))}
-            </ItemsGrid>
-          )}
-        </ContentGrid>
+              </IntroTextWrap>
+            )}
+            {!!items?.length && (
+              <ItemsGrid ownerState={ownerState} id="items">
+                {items?.map((item: any, index) => (
+                  <Item
+                    ownerState={ownerState}
+                    backgroundColor={backgroundColor}
+                    key={item?.id}
+                    {...item}
+                    layoutConfig={layoutConfig}
+                    gridLayout={variant}
+                    variant={
+                      (itemsVariant as any) === 'linkList'
+                        ? 'buttonContained'
+                        : itemsVariant ?? item?.variant
+                    }
+                    aspectRatio={itemsAspectRatio ?? item?.aspectRatio}
+                    position={index + 1}
+                  />
+                ))}
+              </ItemsGrid>
+            )}
+          </ContentGrid>
+        ) : (
+          <>
+            {introText && (
+              <IntroTextGrid ownerState={ownerState}>
+                <IntroText
+                  ownerState={ownerState}
+                  {...sidekick(sidekickLookup, 'introText')}
+                  {...introText}
+                  variant="introText"
+                />
+              </IntroTextGrid>
+            )}
+
+            <ContentGrid ownerState={ownerState}>
+              {!!items?.length && (
+                <ItemsGrid ownerState={ownerState} id="items">
+                  {items?.map((item: any, index) => (
+                    <Item
+                      ownerState={ownerState}
+                      backgroundColor={backgroundColor}
+                      key={item?.id}
+                      {...item}
+                      layoutConfig={layoutConfig}
+                      gridLayout={variant}
+                      variant={
+                        (itemsVariant as any) === 'linkList'
+                          ? 'buttonContained'
+                          : itemsVariant ?? item?.variant
+                      }
+                      aspectRatio={itemsAspectRatio ?? item?.aspectRatio}
+                      position={index + 1}
+                    />
+                  ))}
+                </ItemsGrid>
+              )}
+            </ContentGrid>
+          </>
+        )}
       </Root>
     </ErrorBoundary>
   );
@@ -102,6 +140,12 @@ const IntroTextGrid = styled(Grid, {
   name: 'Collection',
   slot: 'IntroTextGrid',
   overridesResolver: (_, styles) => [styles.introTextGrid]
+})<{ ownerState: CollectionOwnerState }>``;
+
+const IntroTextWrap = styled(Box, {
+  name: 'Collection',
+  slot: 'IntroTextWrap',
+  overridesResolver: (_, styles) => [styles.introTextWrap]
 })<{ ownerState: CollectionOwnerState }>``;
 
 const IntroText = styled(ContentModule, {

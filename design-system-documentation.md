@@ -1,4 +1,4 @@
-# Diligent Design System Documentation
+# Design System Documentation
 
 ## Overview
 
@@ -8,7 +8,7 @@ This design system provides a comprehensive set of design tokens, typography sty
 
 ### Overview
 
-The Diligent grid system is a responsive, flexible layout system that adapts to different screen sizes while maintaining visual consistency. It uses a column-based approach with breakpoint-specific configurations.
+The grid system is a responsive, flexible layout system that adapts to different screen sizes while maintaining visual consistency. It uses a column-based approach with breakpoint-specific configurations.
 
 ### Breakpoint Specifications
 
@@ -412,11 +412,11 @@ const IconStatsCard = styled(Card)(({ theme }) => {
 
 ### Primary Colors - Red Scale
 
-Our brand color is vibrant and strong. The Diligent Red should always be present, but doesn't need to be everywhere.
+Our brand color is vibrant and strong. The Primary Red should always be present, but doesn't need to be everywhere.
 
 | Color Name             | Hex Code | Usage                            |
 | ---------------------- | -------- | -------------------------------- |
-| Red 500 (Diligent Red) | #EE312E  | Primary brand color              |
+| Red 500 (Primary Red)  | #EE312E  | Primary brand color              |
 | Red 600 (Red 2)        | #D3222A  | Hover states, secondary emphasis |
 | Red 700 (Red 3)        | #AF292E  | Darker accents                   |
 | Red 800 (Red 4)        | #921A1D  | Deep emphasis                    |
@@ -425,7 +425,7 @@ Our brand color is vibrant and strong. The Diligent Red should always be present
 **Usage Guidelines:**
 
 - Use white space to provide a blank canvas for clear focus
-- Apply red shades in progression, starting with Diligent Red
+- Apply red shades in progression, starting with Primary Red
 - Never use more red shades than necessary
 - Red 900 (#5F091D) should be the least used color
 
@@ -479,7 +479,7 @@ For success, error, and warning states.
 
 | Color Name   | Hex Code | Usage              |
 | ------------ | -------- | ------------------ |
-| Diligent Red | #EE312E  | Error states       |
+| Red          | #EE312E  | Error states       |
 | Orange       | #FF6B00  | Warning states     |
 | Yellow       | #FFD500  | Caution/attention  |
 | Green        | #00C851  | Success states     |
@@ -571,7 +571,7 @@ function MyComponent() {
 
 ## Best Practices
 
-1. **Color Hierarchy**: Start with Diligent Red, add other colors only as needed
+1. **Color Hierarchy**: Start with Primary Red, add other colors only as needed
 2. **White Space**: Use generously to create focus and clarity
 3. **Data Visualization**: Reserve secondary colors exclusively for charts and graphs
 4. **Accessibility**: Always check contrast ratios, especially with custom color combinations
