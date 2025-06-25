@@ -231,6 +231,24 @@ const schemes = {
     overlayText: commonColors.black,
     highlightColor: commonColors.red600
   },
+  lightPrimary1: {
+    primary: {
+      main: commonColors.white,
+      contrastText: commonColors.gray700,
+      light: commonColors.gray200,
+      dark: commonColors.gray100,
+      divider: commonColors.gray200
+    },
+    secondary: {
+      main: commonColors.black,
+      contrastText: commonColors.white,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    },
+    background: {
+      paper: commonColors.gray100
+    }
+  },
   lightPrimary3: {
     primary: {
       main: commonColors.gray100,
@@ -242,6 +260,21 @@ const schemes = {
     secondary: {
       main: commonColors.black,
       contrastText: commonColors.white,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    }
+  },
+  darkPrimary2: {
+    primary: {
+      main: commonColors.gray900,
+      contrastText: commonColors.white,
+      light: commonColors.gray800,
+      dark: commonColors.gray900,
+      divider: commonColors.gray200
+    },
+    secondary: {
+      main: commonColors.white,
+      contrastText: commonColors.black,
       light: commonColors.gray100,
       dark: commonColors.gray200
     }

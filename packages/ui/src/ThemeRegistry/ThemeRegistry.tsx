@@ -41,7 +41,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
 
               :root {
                 --grid-margin-xs: 12px;
-                --grid-margin-sm: 24px;
+                --grid-margin-sm: 16px;
                 --grid-margin-md: 24px;
                 --grid-margin-lg: 96px;
                 --grid-margin-xl: 128px;
@@ -121,7 +121,7 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
                 --h6-margin: 0 0 16px 0;
                 --display1-margin: var(--h1-margin);
                 --display2-margin: var(--h2-margin);
-                --overline-margin: 0 0 var(--grid-gap-half) 0;
+                --overline-margin: 0 0 24px 0;
                 --body1-margin: 0;
                 --body2-margin: 0;
                 --bodyXSmall-margin: 0;

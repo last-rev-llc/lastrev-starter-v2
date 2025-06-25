@@ -8,15 +8,16 @@ import {defineField} from 'sanity'
 // Background Colors - Simplified semantic approach (5 main options)
 export const backgroundColorOptions = [
   // Light backgrounds
-  {value: 'Light Background', title: '⚪ Light Background (Default)'},
-  {value: 'Light Gray Primary-1', title: '🔘 Light Gray Primary-1'},
-  {value: 'Light Gray Primary-2', title: '🔘 Light Gray Primary-2'},
+  {value: 'Light Primary-1', title: '🔘 Light Primary-1 (White)'},
+  // {value: 'Light Primary-2', title: '🔘 Light Primary-2 (Gray 50)'},
+  {value: 'Light Primary-3', title: '🔘 Light Primary-3 (Gray 100)'},
 
   // Dark backgrounds
-  {value: 'Dark Gray Primary-1', title: '⚫ Dark Gray Primary-1'},
+  {value: 'Dark Primary-2', title: '⚫ Dark Primary-2 (Gray 900)'},
 
   // Brand background
   {value: 'Primary Red', title: '🔴 Primary Red'},
+  {value: 'Lens Red', title: '🔴 Lens Red (with pattern)'},
 ]
 
 export const backgroundColorValues = backgroundColorOptions.map((option) => option.value)
@@ -24,8 +25,8 @@ export const backgroundColorValues = backgroundColorOptions.map((option) => opti
 // Semantic Color Sets - For buttons, CTAs, text, icons (contextual)
 export const semanticColorOptions = [
   // Semantic colors that adapt based on background context
-  {value: 'Primary-1', title: '⚫ Primary-1 (Contextual)'},
-  {value: 'Primary-2', title: '🔘 Primary-2 (Contextual)'},
+  {value: 'Primary-1', title: '⚫ Primary-1 (White)'},
+  {value: 'Primary-2', title: '🔘 Primary-2 (Gray 900)'},
   {value: 'Brand', title: '🔴 Brand (Contextual)'},
 ]
 
@@ -54,6 +55,7 @@ export const legacyColorMapping = {
   Black: 'Dark Gray Primary-1',
   'Gray 900': 'Dark Gray Primary-1',
   'Primary Red': 'Primary Red',
+  'Lens Red': 'Lens Red',
   Primary: 'Primary Red',
   primary: 'Brand',
   secondary: 'Primary-2',
