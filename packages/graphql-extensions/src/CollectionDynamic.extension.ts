@@ -196,7 +196,7 @@ export const mappers: Mappers = {
         return itemsPerRow;
       },
 
-      itemsVariant: defaultResolver('itemsVariant'),
+      itemsVariant: defaultResolver('itemsVariant', { camelize: true }),
 
       itemsAspectRatio: defaultResolver('itemsAspectRatio'),
 

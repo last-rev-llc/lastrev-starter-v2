@@ -23,10 +23,6 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   Hero: {
     Hero: {
-      // Note: This extension supports both Contentful and Sanity schema structures
-      // - Contentful: Direct references or single references
-      // - Sanity: Array-based fields for media (with max validation)
-      // Basic fields with default resolvers
       variant: defaultResolver('variant', {
         mappings: {
           // Map Sanity values to component expected values
@@ -49,25 +45,13 @@ export const mappers: Mappers = {
           'simple': 'simple',
           'news': 'news',
           'mediaSmall': 'mediaSmall'
-        }
+        },
+        camelize: true
       }),
-      overline: defaultResolver('overline'),
-      title: defaultResolver('title'),
-      subtitle: defaultResolver('subtitle'),
-      body: defaultResolver('body'),
+
       backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
 
-      // Boolean fields
-      showFullImage: defaultResolver('showFullImage'),
-      hideBreadcrumbs: defaultResolver('hideBreadcrumbs'),
-
-      // Actions - resolving references to Link items
-      // Works with both array format (Sanity) and single/array format (Contentful)
-      actions: defaultResolver('actions_raw'),
-
-      // Media fields - using resolveField to properly handle references
-      sideImageItems: resolveField('sideImageItems'),
-      background: resolveField('background')
+      actions: 'actions_raw'
     }
   }
 };

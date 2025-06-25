@@ -458,7 +458,6 @@ type ModuleIntegration implements Content {
   iFrameUrl: String
   iFrameWidth: String
   id: String
-  iframeSettings: JSON
   internalTitle: String
   introText: Text
   settings: JSON

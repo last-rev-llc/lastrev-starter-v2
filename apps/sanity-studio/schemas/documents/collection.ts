@@ -1,6 +1,6 @@
-import { defineType, defineField } from 'sanity'
-import { validateIn } from '../utils/validation'
-import { backgroundColorOptions, validateBackgroundColor } from '../utils/colors'
+import {defineType, defineField} from 'sanity'
+import {validateIn} from '../utils/validation'
+import {backgroundColorOptions, validateBackgroundColor} from '../utils/colors'
 
 export const collectionType = defineType({
   type: 'document',
@@ -25,7 +25,7 @@ export const collectionType = defineType({
     {
       name: 'styling',
       title: 'Styling & Background',
-      options: {collapsible: true, collapsed: true},
+      options: {collapsible: true, collapsed: false},
     },
     // {
     //   name: 'carousel',
@@ -114,7 +114,16 @@ export const collectionType = defineType({
       validation: (Rule) =>
         Rule.required().custom((value) =>
           validateIn(
-            ['One Per Row', 'Two Per Row', 'Three Per Row', 'Four Per Row', 'Five Per Row', 'Split Layout', 'Accordion Showcase', 'Feature Showcase'],
+            [
+              'One Per Row',
+              'Two Per Row',
+              'Three Per Row',
+              'Four Per Row',
+              'Five Per Row',
+              'Split Layout',
+              'Accordion Showcase',
+              'Feature Showcase',
+            ],
             value,
           ),
         ),
@@ -283,15 +292,17 @@ export const collectionType = defineType({
       introTitle: 'introText.title',
       isCarousel: 'carouselBreakpoints',
       itemsVariant: 'itemsVariant',
+      backgroundColor: 'backgroundColor',
     },
     prepare(selection) {
-      const {title, variant, itemCount, introTitle, isCarousel, itemsVariant} = selection
+      const {title, variant, itemCount, introTitle, isCarousel, itemsVariant, backgroundColor} =
+        selection
       const itemCountText = Array.isArray(itemCount) ? `${itemCount.length} items` : 'No items'
       const carouselIndicator = Array.isArray(isCarousel) && isCarousel.length ? '🎠 ' : ''
 
       return {
         title: title || 'Untitled Collection',
-        subtitle: `${carouselIndicator}${variant} • ${itemCountText} - ${itemsVariant}`,
+        subtitle: `${carouselIndicator} ${backgroundColor ? `${backgroundColor} • ` : ''} ${variant} • ${itemCountText} - ${itemsVariant}`,
         description: introTitle,
       }
     },
