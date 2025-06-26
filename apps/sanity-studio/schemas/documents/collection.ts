@@ -72,7 +72,19 @@ export const collectionType = defineType({
           title: 'Existing Content',
           to: [{type: 'card'}, {type: 'person'}, {type: 'blog'}, {type: 'page'}, {type: 'link'}],
         },
-        {type: 'image'},
+        {
+          type: 'image',
+          title: 'Direct Image',
+          fields: [
+            defineField({
+              name: 'altText',
+              type: 'string',
+              title: 'Alt Text',
+              description: 'Required for ADA compliance - describe the image for screen readers',
+              validation: (Rule) => Rule.required().error('Alt text is required for accessibility'),
+            }),
+          ],
+        },
       ],
       title: 'Collection Items',
 
@@ -120,6 +132,7 @@ export const collectionType = defineType({
               'Three Per Row',
               'Four Per Row',
               'Five Per Row',
+              'Six Per Row',
               'Split Layout',
               'Accordion Showcase',
               'Feature Showcase',
@@ -134,6 +147,7 @@ export const collectionType = defineType({
           {value: 'Three Per Row', title: '3️⃣ Three Per Row'},
           {value: 'Four Per Row', title: '4️⃣ Four Per Row'},
           {value: 'Five Per Row', title: '5️⃣ Five Per Row'},
+          {value: 'Six Per Row', title: '6️⃣ Six Per Row'},
           {value: 'Split Layout', title: '📋 Split Layout'},
           {value: 'Accordion Showcase', title: '🎵 Accordion Showcase'},
           {value: 'Feature Showcase', title: '🎯 Feature Showcase'},

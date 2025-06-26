@@ -26,6 +26,8 @@ export const typeDefs = gql`
 export const mappers: Mappers = {
   Card: {
     Card: {
+      title: defaultResolver('title'),
+      // media: defaultResolver('media'),
       backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       link: async (card: any, _args: any, ctx: ApolloContext) => {
         const link = getLocalizedField(card.fields, 'link', ctx);
