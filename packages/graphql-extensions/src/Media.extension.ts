@@ -3,6 +3,8 @@ import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from './types';
 import { getVideoEmbedUrl } from './utils/getVideoEmbedUrl';
 import { cleanSVG } from './utils/cleanSVG';
+import { createType } from './utils/createType';
+import { defaultResolver } from './utils/defaultResolver';
 
 export const typeMappings = {};
 
@@ -69,6 +71,55 @@ export const mappers = {
           }
         }
         return null;
+      }
+    },
+    Card: {
+      id: async (asset: any, _args: any, ctx: ApolloContext) => {
+        // For Sanity image types with asset reference
+        if (asset?.asset?._ref) {
+          return asset.asset._ref;
+        }
+        // For direct asset references
+        return asset?.sys?.id || asset?._id || asset?.id;
+      },
+      title: async (asset: any, _args: any, ctx: ApolloContext) => {
+        // Use altText from Sanity image type if available
+        if (asset?.altText) {
+          return asset.altText;
+        }
+        // Fallback to asset title
+        return asset?.title || null;
+      },
+      media: async (asset: any, _args: any, ctx: ApolloContext) => {
+        // Handle Sanity image type structure
+        if (asset?.asset?._ref) {
+          // This is a Sanity image type with asset reference
+          const resolvedAsset = await ctx.loaders.assetLoader.load({
+            id: asset.asset._ref,
+            preview: !!ctx.preview
+          });
+
+          if (resolvedAsset) {
+            return [
+              createType('Media', {
+                asset: resolvedAsset,
+                alt: asset.altText
+              })
+            ];
+          }
+        }
+
+        // Handle direct asset reference
+        return [createType('Media', { asset })];
+      },
+      variant: defaultResolver('variant')
+    }
+  },
+  File: {
+    Card: {
+      title: async (media: any, _args: any, ctx: ApolloContext) => {
+        console.log('[Asset->Media] Title', media);
+        return media.title;
       }
     }
   },

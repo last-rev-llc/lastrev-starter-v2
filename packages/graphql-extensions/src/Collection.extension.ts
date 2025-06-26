@@ -17,7 +17,7 @@ const logger = getWinstonLogger({
 });
 
 // Note: If you want anything other than the below, this is where you will add it
-const COLLECTION_ITEM_TYPES = ['Card', 'Link'];
+const COLLECTION_ITEM_TYPES = ['Card', 'Link', 'Asset'];
 
 export const typeDefs = gql`
   extend type Collection {
@@ -93,7 +93,7 @@ export const mappers: Mappers = {
           getLocalizedField(collection.fields, 'items', ctx) ??
           getLocalizedField(collection.fields, 'items_raw', ctx) ??
           [];
-
+        // console.log('items', items[0]);
         // Get the itemsVariant from the collection
         const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
 
@@ -115,13 +115,30 @@ export const mappers: Mappers = {
         }
 
         const returnItemsRef = (
-          await ctx.loaders.entryLoader.loadMany(
-            items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+          await Promise.all(
+            items?.map((x: any) =>
+              x?.sys?.linkType === 'Asset'
+                ? ctx.loaders.assetLoader.load({
+                    id: x?.sys?.id,
+                    preview: !!ctx.preview
+                  })
+                : ctx.loaders.entryLoader.load({
+                    id: x?.sys?.id,
+                    preview: !!ctx.preview
+                  })
+            )
           )
-        )?.map((resolvedItem: any, index: number) => ({
-          ...items[index],
-          ...resolvedItem
-        }));
+        )?.map((resolvedItem: any, index: number) =>
+          resolvedItem
+            ? {
+                // ...items[index],
+                ...resolvedItem
+              }
+            : items[index]
+        );
+
+        console.log('items', items);
+        console.log('returnItemsRef', returnItemsRef);
 
         let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
         const imageItems =
@@ -141,7 +158,7 @@ export const mappers: Mappers = {
           ...x,
           variant: mappedItemsVariant
         }));
-
+        console.log('finalItems', finalItems);
         return finalItems;
       },
 
@@ -166,6 +183,7 @@ export const mappers: Mappers = {
       numItems: async (collection: any, _args: any, ctx: ApolloContext) => {
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
 
@@ -177,6 +195,7 @@ export const mappers: Mappers = {
         const variant = variantFn(collection, args, ctx);
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
 
@@ -202,6 +221,10 @@ export const mappers: Mappers = {
 
           case 'fivePerRow':
             itemsPerRow = numItems >= 5 ? 5 : numItems;
+            break;
+
+          case 'sixPerRow':
+            itemsPerRow = numItems >= 6 ? 6 : numItems;
             break;
 
           case 'splitLayout':
@@ -247,7 +270,12 @@ export const mappers: Mappers = {
         { limit, offset, filter }: ItemsConnectionArgs,
         ctx: ApolloContext
       ) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
+          getLocalizedField(collection.fields, 'images', ctx) ??
+          [];
+
         try {
           const { contentType, filters } =
             (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
@@ -313,7 +341,8 @@ const ITEM_MAPPING: { [key: string]: string } = {
   Media: 'Card',
   Person: 'Card',
   ElementVideo: 'Card',
-  Link: 'Card'
+  Link: 'Card',
+  Asset: 'Card'
 };
 
 export const resolvers = {
