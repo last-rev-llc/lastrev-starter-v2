@@ -118,7 +118,45 @@ const Carousel = (props: CarouselProps) => {
     }
   };
 
-  if (itemsPerRow >= 4) {
+  if (itemsPerRow >= 6) {
+    swiperBreakpoints[breakpoints.md] = {
+      grid: {
+        rows: isCarouselDesktop ? 1 : numItems,
+        fill: 'row'
+      },
+      slidesPerView: isCarouselDesktop
+        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        : itemsPerRow
+    };
+    swiperBreakpoints[breakpoints.lg] = {
+      grid: {
+        rows: isCarouselDesktop ? 1 : numItems,
+        fill: 'row'
+      },
+      slidesPerView: isCarouselDesktop
+        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        : itemsPerRow
+    };
+    swiperBreakpoints[breakpoints.xl] = {
+      grid: {
+        rows: isCarouselDesktop ? 1 : numItems,
+        fill: 'row'
+      },
+      slidesPerView: isCarouselDesktop
+        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        : itemsPerRow
+    };
+  } else if (itemsPerRow >= 5) {
+    swiperBreakpoints[breakpoints.xl] = {
+      grid: {
+        rows: isCarouselDesktop ? 1 : numItems,
+        fill: 'row'
+      },
+      slidesPerView: isCarouselDesktop
+        ? getSlidesPerView(numItems, itemsPerRow, 5, !!showFullItemsInCarousel ? 0 : 0.5)
+        : itemsPerRow
+    };
+  } else if (itemsPerRow >= 4) {
     swiperBreakpoints[breakpoints.md] = {
       grid: {
         rows: isCarouselDesktop ? 1 : numItems,
@@ -138,17 +176,20 @@ const Carousel = (props: CarouselProps) => {
         ? getSlidesPerView(numItems, itemsPerRow, 4, !!showFullItemsInCarousel ? 0 : 0.5)
         : 4
     };
-  } else if (itemsPerRow >= 5) {
-    swiperBreakpoints[breakpoints.xl] = {
-      grid: {
-        rows: isCarouselDesktop ? 1 : numItems,
-        fill: 'row'
-      },
-      slidesPerView: isCarouselDesktop
-        ? getSlidesPerView(numItems, itemsPerRow, 5, !!showFullItemsInCarousel ? 0 : 0.5)
-        : itemsPerRow
-    };
   }
+
+  console.log('[Carousel] Data', {
+    variant,
+    items,
+    itemsPerRow,
+    numItems,
+    isCarouselDesktop,
+    isCarouselTablet,
+    isCarouselMobile,
+    showFullItemsInCarousel,
+    swiperBreakpoints,
+    jsEnabled
+  });
 
   return (
     <ErrorBoundary>

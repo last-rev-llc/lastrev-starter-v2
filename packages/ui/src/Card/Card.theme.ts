@@ -338,21 +338,21 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
     },
     style: {
       'backgroundColor': 'var(--mui-palette-background-default)',
+      'padding': 0,
+      'height': '100px',
 
       '[class*=cardMedia]': {
-        'margin': 'auto',
-        'padding': 'calc(var(--grid-gap) * 2)',
+        'height': '100%',
+        'width': '100%',
+        'padding': 0,
         'display': 'flex',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'minHeight': '120px',
 
         '& :is(img, svg, picture > img)': {
           objectFit: 'contain',
-          maxWidth: '100%',
-          maxHeight: '100%',
-          width: 'auto',
-          height: 'auto'
+          width: '100%',
+          height: '100%'
         }
       }
     }

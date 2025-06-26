@@ -50,6 +50,13 @@ export const layoutConfig: LayoutConfig = {
     md: 4,
     lg: 5,
     xl: 55
+  },
+  [CarouselVariants.sixPerRow]: {
+    xs: 3,
+    sm: 3,
+    md: 6,
+    lg: 6,
+    xl: 6
   }
 };
 
@@ -88,7 +95,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       '.swiper-slide': {
         'height': 'auto',
         '& > *': {
-          padding: 'var(--grid-gap-half)'
+          padding: 0
         }
       },
       '&.no-js': {
@@ -126,14 +133,14 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       },
 
       '.swiper-wrapper': {
-        width: '100%',
-        paddingTop: 'var(--grid-gap)',
-        paddingBottom: 'var(--grid-gap)'
+        width: '100%'
+        // paddingTop: 'var(--grid-gap)',
+        // paddingBottom: 'var(--grid-gap)'
         // overflow: 'auto !important'
       },
 
-      'gridColumn': 'start/full-end',
-      'padding': '0 0 calc(1.5 * var(--section-padding))',
+      'gridColumn': 'start/end',
+      // 'padding': '0 0 calc(1.5 * var(--section-padding))',
 
       ...(!ownerState?.isCarouselMobile && {
         '[class*=swiper-button-]': {
@@ -149,7 +156,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
 
       ...(!!ownerState?.isCarouselTablet && {
         [theme.breakpoints.up('sm')]: {
-          'gridColumn': 'start/full-end',
+          'gridColumn': 'start/end',
           'padding': '0 0 calc(1.5 * var(--section-padding))',
 
           '[class*=swiper-button-]': {
@@ -178,7 +185,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
 
       ...(!!ownerState?.isCarouselDesktop && {
         [theme.breakpoints.up('md')]: {
-          'gridColumn': 'start/full-end',
+          'gridColumn': 'start/end',
           'padding': '0 0 calc(1.5 * var(--section-padding))',
 
           '[class*=swiper-button-]': {

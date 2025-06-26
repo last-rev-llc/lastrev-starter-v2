@@ -99,54 +99,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
     //   padding: '0 var(--grid-gap)'
     // }),
 
-    // Navigation arrows for carousel variants
-    ...((ownerState?.variant === CollectionVariants.logos ||
-      ownerState?.variant === CollectionVariants.testimonial ||
-      ownerState?.variant === CollectionVariants.threePerRow) && {
-      '&::before, &::after': {
-        content: '""',
-        position: 'absolute',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: '48px',
-        height: '48px',
-        // backgroundColor: 'var(--mui-palette-background-paper)',
-        borderRadius: '50%',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-        cursor: 'pointer',
-        zIndex: 2,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        transition: 'all 0.2s ease'
-      },
-      '&::before': {
-        left: '-24px',
-        backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z' fill='%23282E37'/%3E%3C/svg%3E\")",
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '24px'
-      },
-      '&::after': {
-        right: '-24px',
-        backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z' fill='%23282E37'/%3E%3C/svg%3E\")",
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '24px'
-      },
-      '&::before:hover, &::after:hover': {
-        // backgroundColor: 'var(--mui-palette-grey-100)',
-        boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-      },
-      '@container (max-width: 580px)': {
-        '&::before, &::after': {
-          display: 'none' // Hide arrows on mobile, rely on swipe
-        }
-      }
-    }),
-
     // Pagination dots for testimonial carousel
     ...(ownerState?.variant === CollectionVariants.testimonial && {
       '&::after': {
@@ -158,38 +110,8 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
   itemsGrid: ({ theme, ownerState }) => ({
     gridColumn: 'start/end',
     gap: 'inherit',
+    rowGap: theme.spacing(10),
     alignItems: 'stretch',
-
-    // Logos variant - horizontal carousel/scroll
-    ...(ownerState?.variant === CollectionVariants.logos && {
-      'display': 'flex',
-      'overflowX': 'auto',
-      'scrollBehavior': 'smooth',
-      'scrollSnapType': 'x mandatory',
-      'gap': 'var(--grid-gap-lg)',
-      'paddingBottom': 'var(--grid-gap)', // Space for scroll indicator
-      '&::-webkit-scrollbar': {
-        height: '8px'
-      },
-      '&::-webkit-scrollbar-track': {
-        background: 'var(--mui-palette-grey-200)',
-        borderRadius: '4px'
-      },
-      '&::-webkit-scrollbar-thumb': {
-        'background': 'var(--mui-palette-grey-400)',
-        'borderRadius': '4px',
-        '&:hover': {
-          background: 'var(--mui-palette-grey-500)'
-        }
-      },
-      '@container (max-width: 1024px)': {
-        gap: 'var(--grid-gap-md)'
-      },
-      '@container (max-width: 580px)': {
-        gap: 'var(--grid-gap-sm)',
-        scrollSnapType: 'x proximity' // More flexible on mobile
-      }
-    }),
 
     // CTA variant - special layout
     ...(ownerState?.variant === CollectionVariants.cta && {
@@ -207,22 +129,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       }
     }),
 
-    // Testimonial variant - carousel with snap points
-    ...(ownerState?.variant === CollectionVariants.testimonial && {
-      'display': 'flex',
-      'overflowX': 'hidden', // Hidden by default, JS will handle navigation
-      'scrollBehavior': 'smooth',
-      'scrollSnapType': 'x mandatory',
-      'gap': 'var(--grid-gap-lg)',
-      'position': 'relative',
-      '&[data-scrollable="true"]': {
-        'overflowX': 'auto',
-        '@container (max-width: 580px)': {
-          scrollSnapType: 'x proximity'
-        }
-      }
-    }),
-
     // Three per row - can be carousel or grid
     ...(ownerState?.variant === CollectionVariants.threePerRow && {
       // Default grid layout
@@ -231,20 +137,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         layoutConfig,
         variant: CollectionVariants.threePerRow,
         defaultVariant: 'default'
-      }),
-      // Carousel mode when enabled
-      '&[data-carousel="true"]': {
-        'display': 'flex',
-        'overflowX': 'hidden',
-        'scrollBehavior': 'smooth',
-        'scrollSnapType': 'x mandatory',
-        'gridTemplateColumns': 'none',
-        'gap': 'var(--grid-gap-lg)',
-        '@container (max-width: 580px)': {
-          overflowX: 'auto',
-          scrollSnapType: 'x proximity'
-        }
-      }
+      })
     }),
 
     // Split Layout variant - items grid spans columns 7-12
@@ -257,38 +150,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
         gridColumn: '1 / -1'
         // marginTop: 'var(--grid-gap)'
       }
-    }),
-
-    // Feature Showcase variant - feature grid
-    ...(ownerState?.variant === CollectionVariants.featureShowcase && {
-      ...theme.mixins.generateGridStyles({
-        theme,
-        layoutConfig,
-        variant: CollectionVariants.featureShowcase,
-        defaultVariant: 'default'
-      }),
-      // maxWidth: '1200px',
-      // margin: '0 auto',
-      gap: 'var(--grid-gap-lg)'
-    }),
-
-    // Default grid styles for other variants
-    ...(ownerState?.variant &&
-      ![
-        CollectionVariants.logos,
-        CollectionVariants.cta,
-        CollectionVariants.testimonial,
-        CollectionVariants.splitLayout,
-        CollectionVariants.accordionShowcase,
-        CollectionVariants.featureShowcase
-      ].includes(ownerState.variant) &&
-      ownerState?.variant !== CollectionVariants.threePerRow &&
-      theme.mixins.generateGridStyles({
-        theme,
-        layoutConfig,
-        variant: ownerState.variant,
-        defaultVariant: 'default'
-      }))
+    })
   }),
 
   item: ({ theme, ownerState }) => ({
@@ -365,20 +227,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
       '@container (max-width: 580px)': {
         minHeight: '300px',
         padding: 'var(--grid-gap)'
-      }
-    }),
-
-    // Three per row items - support carousel mode
-    ...(ownerState?.variant === CollectionVariants.threePerRow && {
-      '[data-carousel="true"] &': {
-        'flex': '0 0 calc(33.333% - var(--grid-gap))',
-        'scrollSnapAlign': 'start',
-        '@container (max-width: 1024px)': {
-          flex: '0 0 calc(50% - var(--grid-gap))'
-        },
-        '@container (max-width: 580px)': {
-          flex: '0 0 calc(100% - var(--grid-gap))'
-        }
       }
     }),
 

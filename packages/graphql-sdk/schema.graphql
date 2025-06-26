@@ -238,7 +238,7 @@ input CollectionFilterInput {
   topics: [String]
 }
 
-union CollectionItem = Card | Link
+union CollectionItem = Asset | Card | Link
 
 type CollectionItemConnection {
   items: [CollectionItem]
