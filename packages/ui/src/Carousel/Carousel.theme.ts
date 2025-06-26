@@ -72,6 +72,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
     '&': {
       ':is(.swiper-button-prev, .swiper-button-next)': {
         '--swiper-navigation-color': 'var(--mui-palette-text-primary)',
+        'position': 'absolute',
         'border': 'solid 1px',
         'borderColor': 'var(--mui-palette-divider)',
         'backgroundColor': 'var(--mui-palette-background-paper)',
@@ -96,12 +97,12 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       },
 
       '.swiper-button-prev': {
-        left: 'calc(var(--grid-margin) * -1)',
+        left: 'calc(var(--swiper-navigation-size) * -1.5)',
         right: 'unset'
       },
 
       '.swiper-button-next': {
-        right: 'calc(var(--grid-margin) * -1)',
+        right: 'calc(var(--swiper-navigation-size) * -1.5)',
         left: 'unset'
       }
     }
@@ -159,7 +160,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       },
 
       'gridColumn': 'start/end',
-      'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
       ...(!ownerState?.isCarouselMobile && {
         '[class*=swiper-button-]': {
@@ -176,7 +176,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       ...(!!ownerState?.isCarouselTablet && {
         [theme.breakpoints.up('sm')]: {
           'gridColumn': 'start/end',
-          'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
           '[class*=swiper-button-]': {
             display: 'flex'
@@ -205,7 +204,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       ...(!!ownerState?.isCarouselDesktop && {
         [theme.breakpoints.up('md')]: {
           'gridColumn': 'start/end',
-          'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
           '[class*=swiper-button-]': {
             display: 'flex'
@@ -236,10 +234,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
 
   swiperInnerWrap: {
     'position': 'relative',
+    'overflow': 'visible',
 
     '.swiper': {
       'overflowY': 'unset',
-      'width': 'calc(100% - (var(--grid-margin) / 2px))',
+      'width': '100%',
 
       '&.swiper-grid': {
         width: '100%'
