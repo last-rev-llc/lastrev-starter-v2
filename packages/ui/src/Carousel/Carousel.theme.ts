@@ -71,19 +71,38 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
 
     '&': {
       ':is(.swiper-button-prev, .swiper-button-next)': {
-        // '--swiper-navigation-color': 'var(--mui-palette-text-primary)',
-        border: 'solid 1px',
-        aspectRatio: '1/1',
-        width: 'var(--swiper-navigation-size)',
-        borderRadius: '50%',
-        padding: 'var(--swiper-navigation-size)',
-        top: 'unset',
-        bottom: 'calc(-1.5 * var(--section-padding))'
+        '--swiper-navigation-color': 'var(--mui-palette-text-primary)',
+        'border': 'solid 1px',
+        'borderColor': 'var(--mui-palette-divider)',
+        'backgroundColor': 'var(--mui-palette-background-paper)',
+        'aspectRatio': '1/1',
+        'width': 'var(--swiper-navigation-size)',
+        'borderRadius': '50%',
+        'padding': 'var(--swiper-navigation-size)',
+        'top': '50%',
+        'transform': 'translateY(-50%)',
+        'boxShadow': '0 2px 8px rgba(0, 0, 0, 0.1)',
+        'transition': 'all 0.3s ease',
+        'zIndex': 10,
+        
+        '&:hover': {
+          backgroundColor: 'var(--mui-palette-action-hover)',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+        },
+        
+        '&::after': {
+          fontSize: 'calc(var(--swiper-navigation-size) * 0.7)'
+        }
+      },
+
+      '.swiper-button-prev': {
+        left: 'calc(var(--grid-margin) * -1)',
+        right: 'unset'
       },
 
       '.swiper-button-next': {
-        right: 'unset',
-        left: 'calc(3 * var(--swiper-navigation-size))'
+        right: 'calc(var(--grid-margin) * -1)',
+        left: 'unset'
       }
     }
   }),
@@ -129,7 +148,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       },
 
       '.swiper': {
-        overflow: 'unset'
+        overflow: 'visible'
       },
 
       '.swiper-wrapper': {
@@ -140,7 +159,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       },
 
       'gridColumn': 'start/end',
-      // 'padding': '0 0 calc(1.5 * var(--section-padding))',
+      'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
       ...(!ownerState?.isCarouselMobile && {
         '[class*=swiper-button-]': {
@@ -157,7 +176,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       ...(!!ownerState?.isCarouselTablet && {
         [theme.breakpoints.up('sm')]: {
           'gridColumn': 'start/end',
-          'padding': '0 0 calc(1.5 * var(--section-padding))',
+          'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
           '[class*=swiper-button-]': {
             display: 'flex'
@@ -186,7 +205,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       ...(!!ownerState?.isCarouselDesktop && {
         [theme.breakpoints.up('md')]: {
           'gridColumn': 'start/end',
-          'padding': '0 0 calc(1.5 * var(--section-padding))',
+          'padding': '0 calc(var(--swiper-navigation-size) + var(--grid-margin)) 0',
 
           '[class*=swiper-button-]': {
             display: 'flex'
