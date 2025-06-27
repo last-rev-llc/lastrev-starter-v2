@@ -62,7 +62,8 @@
   },
   "packageManager": "pnpm@9.6.0",
   "engines": {
-    "pnpm": "9.x"
+    "pnpm": "9.x",
+    "node": "22.x"
   },
   "version": "",
   "readme": "ERROR: No README data found!",
@@ -75,7 +76,8 @@
       "systeminformation@>=5.0.0 <5.21.7": ">=5.21.7",
       "elliptic@>=4.0.0 <=6.5.6": ">=6.5.7",
       "elliptic@>=2.0.0 <=6.5.6": ">=6.5.7",
-      "elliptic@>=5.2.1 <=6.5.6": ">=6.5.7"
+      "elliptic@>=5.2.1 <=6.5.6": ">=6.5.7",
+      "sqlite3": "npm:noop2@2.0.0"
     }
   },
   "overrides": {

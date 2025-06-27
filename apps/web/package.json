@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
-    "@last-rev/cms-webhook-handler": "link:../../../lastrev-libraries/packages/cms-webhook-handler",
-    "@last-rev/graphql-algolia-integration": "link:../../../lastrev-libraries/packages/graphql-algolia-integration",
-    "@last-rev/graphql-cms-core": "link:../../../lastrev-libraries/packages/graphql-cms-core",
+    "@last-rev/cms-webhook-handler": "^0.2.0",
+    "@last-rev/graphql-algolia-integration": "^0.5.0",
+    "@last-rev/graphql-cms-core": "^0.2.0",
     "@next/bundle-analyzer": "^14.2.3",
     "@sentry/nextjs": "^7.113.0",
     "cors": "^2.8.5",
@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.13.9",
+    "@last-rev/testing-library": "^0.2.0",
     "@netlify/plugin-nextjs": "4.41.3",
     "@percy/cli": "^1.30.4",
     "@percy/cypress": "^3.1.3",
