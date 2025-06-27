@@ -32,7 +32,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Hero'] = {
     ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
     containerType: 'inline-size',
     position: 'relative',
-    minHeight: '90vh',
+    minHeight: 'calc(100vh - 196px)',
     display: 'flex',
     overflow: 'hidden'
   }),

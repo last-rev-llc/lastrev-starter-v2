@@ -23,8 +23,8 @@ export const usePreview = (id: string, locale: string = 'en-US', initialData?: a
     {
       fallbackData: initialData ? { content: initialData } : undefined,
       revalidateOnFocus: true,
-      revalidateOnReconnect: true,
-      refreshInterval: 5000 // Refresh every 5 seconds for preview mode
+      revalidateOnReconnect: true
+      // refreshInterval: 5000 // Refresh every 5 seconds for preview mode
     }
   );
 

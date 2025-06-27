@@ -43,14 +43,23 @@ export const collectionExpandableType = defineType({
         'Use this field to manually select the items that will appear in this Expanding Collection.',
     }),
     defineField({
-      name: 'actions',
+      name: 'actions_raw',
       type: 'array',
-      of: [{type: 'reference', to: [{type: 'link'}]}],
+      of: [
+        // Inline link object for expandable collection-specific actions
+        {type: 'link'},
+        // Reference existing link for reusable CTAs
+        {
+          type: 'reference',
+          title: 'Existing Link',
+          to: [{type: 'link'}],
+        },
+      ],
       title: 'Actions',
       hidden: false,
       description:
-        'Choose a "Link" item to define the CTA. In the Link item you can define different CTA types such as linked text or a button.',
-      validation: (Rule) => Rule.max(2),
+        '💡 Add call-to-action buttons or links. Create expandable collection-specific actions or reference existing reusable links. Best practice: use 1-2 CTAs for clear user direction.',
+      validation: (Rule) => Rule.max(3).warning('More than 2 actions may overwhelm users'),
     }),
     defineField({name: 'backgroundImage', type: 'image', title: 'Background Image', hidden: false}),
     defineField({

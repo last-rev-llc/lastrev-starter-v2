@@ -9,6 +9,7 @@ export enum BackgroundVariants {
 export interface BackgroundProps {
   background?: ContentModule_BaseFragmentFragment;
   backgroundColor?: string;
+  insetPadding?: boolean;
   testId?: string;
   className?: string;
 }

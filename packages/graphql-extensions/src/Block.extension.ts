@@ -20,6 +20,9 @@ export const typeDefs = gql`
     link: Link
     supplementalContent: Content
     backgroundImage: Media
+    title: String
+    subtitle: String
+    overline: String
     body: RichText
   }
 `;
@@ -31,6 +34,9 @@ export const mappers: Mappers = {
       imageOverlayColor: defaultResolver('imageOverlayColor'),
 
       backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
+      insetPadding: defaultResolver('insetPadding'),
+      introText: 'introText_raw',
+      actions: 'actions_raw',
 
       mediaItems: async (block: any, _args: any, ctx: ApolloContext) => {
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);

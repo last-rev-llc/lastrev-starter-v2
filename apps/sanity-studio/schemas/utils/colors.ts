@@ -17,7 +17,8 @@ export const backgroundColorOptions = [
 
   // Brand background
   {value: 'Primary Red', title: '🔴 Primary Red'},
-  {value: 'Lens Red', title: '🔴 Lens Red (with pattern)'},
+  {value: 'Lens Red', title: '🔴 Lens Red (with white pattern)'},
+  {value: 'Lens Red Primary', title: '🔴 Lens Red Primary (with red pattern)'},
 ]
 
 export const backgroundColorValues = backgroundColorOptions.map((option) => option.value)

@@ -351,8 +351,9 @@ const createVariants = (theme: Theme): ComponentsVariants['Card'] => [
 
         '& :is(img, svg, picture > img)': {
           objectFit: 'contain',
+          height: '100%',
           width: '100%',
-          height: '100%'
+          margin: 'auto'
         }
       }
     }

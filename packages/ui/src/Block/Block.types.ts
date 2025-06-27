@@ -17,6 +17,7 @@ export enum BlockVariants {
 
 export interface BlockProps extends Omit<Block_BaseFragmentFragment, 'variant'> {
   variant: BlockVariants;
+  insetPadding?: boolean;
 }
 
 export interface BlockOwnerState extends BlockProps {}

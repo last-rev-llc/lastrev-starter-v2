@@ -49,14 +49,14 @@ export const layoutConfig: LayoutConfig = {
     sm: 2,
     md: 4,
     lg: 5,
-    xl: 55
+    xl: 5
   },
   [CarouselVariants.sixPerRow]: {
     xs: 3,
-    sm: 3,
+    sm: 4,
     md: 6,
     lg: 6,
-    xl: 6
+    xl: 7
   }
 };
 
@@ -73,36 +73,39 @@ const styleOverrides: ComponentsOverrides<Theme>['Carousel'] = {
       ':is(.swiper-button-prev, .swiper-button-next)': {
         '--swiper-navigation-color': 'var(--mui-palette-text-primary)',
         'position': 'absolute',
-        'border': 'solid 1px',
-        'borderColor': 'var(--mui-palette-divider)',
-        'backgroundColor': 'var(--mui-palette-background-paper)',
+        // 'border': 'solid 1px',
+        // 'borderColor': 'var(--mui-palette-divider)',
+        // 'backgroundColor': 'var(--mui-palette-background-paper)',
         'aspectRatio': '1/1',
-        'width': 'var(--swiper-navigation-size)',
-        'borderRadius': '50%',
-        'padding': 'var(--swiper-navigation-size)',
+        'width': '24px',
+        'height': '24px',
+        'margin': '0px',
+        'fontSize': '24px',
+        // 'borderRadius': '50%',
+        'padding': '0px',
         'top': '50%',
         'transform': 'translateY(-50%)',
-        'boxShadow': '0 2px 8px rgba(0, 0, 0, 0.1)',
+        // 'boxShadow': '0 2px 8px rgba(0, 0, 0, 0.1)',
         'transition': 'all 0.3s ease',
         'zIndex': 10,
-        
+
         '&:hover': {
           backgroundColor: 'var(--mui-palette-action-hover)',
           boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
         },
-        
+
         '&::after': {
-          fontSize: 'calc(var(--swiper-navigation-size) * 0.7)'
+          fontSize: '24px'
         }
       },
 
       '.swiper-button-prev': {
-        left: 'calc(var(--swiper-navigation-size) * -1.5)',
+        left: '-48px',
         right: 'unset'
       },
 
       '.swiper-button-next': {
-        right: 'calc(var(--swiper-navigation-size) * -1.5)',
+        right: '-48px',
         left: 'unset'
       }
     }

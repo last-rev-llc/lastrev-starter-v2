@@ -26,6 +26,7 @@ type Asset {
 
 type Block implements Content {
   actions: [ActionLink]
+  actions_raw: [JSON]
   animation: JSON
   asset: Media
   backgroundColor: String
@@ -33,8 +34,10 @@ type Block implements Content {
   body: RichText
   contentfulArchived: Boolean
   id: String
+  insetPadding: Boolean
   internalTitle: String
   introText: Text
+  introText_raw: JSON
   link: Link
   mediaItems: [Media]
   overline: String
@@ -122,6 +125,8 @@ type CategoryBlog implements Content {
 }
 
 type Collection implements Content {
+  actions: [ActionLink]
+  actions_raw: [JSON]
   animation: JSON
   backgroundColor: String
   backgroundImage: Media
@@ -149,6 +154,7 @@ type Collection implements Content {
 }
 
 type CollectionDynamic implements Content {
+  actions_raw: [JSON]
   algoliaSettings: JSON
   animation: JSON
   backgroundColor: String
@@ -206,6 +212,7 @@ type CollectionDynamicOptions {
 }
 
 type CollectionExpandable implements Content {
+  actions_raw: [JSON]
   animation: JSON
   backgroundColor: String
   backgroundImage: Media

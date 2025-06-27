@@ -119,13 +119,22 @@ const Carousel = (props: CarouselProps) => {
   };
 
   if (itemsPerRow >= 6) {
+    swiperBreakpoints[breakpoints.sm] = {
+      grid: {
+        rows: isCarouselDesktop ? 1 : numItems,
+        fill: 'row'
+      },
+      slidesPerView: isCarouselDesktop
+        ? getSlidesPerView(numItems, itemsPerRow, 4, !!showFullItemsInCarousel ? 0 : 0.5)
+        : itemsPerRow
+    };
     swiperBreakpoints[breakpoints.md] = {
       grid: {
         rows: isCarouselDesktop ? 1 : numItems,
         fill: 'row'
       },
       slidesPerView: isCarouselDesktop
-        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        ? getSlidesPerView(numItems, itemsPerRow, 7, !!showFullItemsInCarousel ? 0 : 0.5)
         : itemsPerRow
     };
     swiperBreakpoints[breakpoints.lg] = {
@@ -134,7 +143,7 @@ const Carousel = (props: CarouselProps) => {
         fill: 'row'
       },
       slidesPerView: isCarouselDesktop
-        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        ? getSlidesPerView(numItems, itemsPerRow, 7, !!showFullItemsInCarousel ? 0 : 0.5)
         : itemsPerRow
     };
     swiperBreakpoints[breakpoints.xl] = {
@@ -143,7 +152,7 @@ const Carousel = (props: CarouselProps) => {
         fill: 'row'
       },
       slidesPerView: isCarouselDesktop
-        ? getSlidesPerView(numItems, itemsPerRow, 6, !!showFullItemsInCarousel ? 0 : 0.5)
+        ? getSlidesPerView(numItems, itemsPerRow, 7, !!showFullItemsInCarousel ? 0 : 0.5)
         : itemsPerRow
     };
   } else if (itemsPerRow >= 5) {
@@ -177,19 +186,6 @@ const Carousel = (props: CarouselProps) => {
         : 4
     };
   }
-
-  console.log('[Carousel] Data', {
-    variant,
-    items,
-    itemsPerRow,
-    numItems,
-    isCarouselDesktop,
-    isCarouselTablet,
-    isCarouselMobile,
-    showFullItemsInCarousel,
-    swiperBreakpoints,
-    jsEnabled
-  });
 
   return (
     <ErrorBoundary>

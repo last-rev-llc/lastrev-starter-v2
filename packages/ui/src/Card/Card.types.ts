@@ -12,6 +12,9 @@ export enum CardVariants {
   // Logo variant
   logo = 'logo',
 
+  // Block variant
+  block = 'block',
+
   // Other variants
   media = 'media',
   testimonial = 'testimonial',

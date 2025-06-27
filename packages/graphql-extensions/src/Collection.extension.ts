@@ -23,6 +23,7 @@ export const typeDefs = gql`
   extend type Collection {
     items: [CollectionItem]
     introText: Text
+    actions: [ActionLink]
     itemsConnection(limit: Int, offset: Int, filter: CollectionFilterInput): CollectionItemConnection
     backgroundImage: Media
     isCarouselDesktop: Boolean
@@ -88,12 +89,12 @@ export const mappers: Mappers = {
     Collection: {
       backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       introText: 'introText_raw',
+      actions: 'actions_raw',
       items: async (collection: any, _args: any, ctx: ApolloContext) => {
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
           getLocalizedField(collection.fields, 'items_raw', ctx) ??
           [];
-        // console.log('items', items[0]);
         // Get the itemsVariant from the collection
         const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
 
@@ -137,9 +138,6 @@ export const mappers: Mappers = {
             : items[index]
         );
 
-        console.log('items', items);
-        console.log('returnItemsRef', returnItemsRef);
-
         let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
         const imageItems =
           imageItemsRef?.length &&
@@ -158,7 +156,7 @@ export const mappers: Mappers = {
           ...x,
           variant: mappedItemsVariant
         }));
-        console.log('finalItems', finalItems);
+
         return finalItems;
       },
 
@@ -224,7 +222,7 @@ export const mappers: Mappers = {
             break;
 
           case 'sixPerRow':
-            itemsPerRow = numItems >= 6 ? 6 : numItems;
+            itemsPerRow = numItems >= 6 ? 7 : numItems;
             break;
 
           case 'splitLayout':

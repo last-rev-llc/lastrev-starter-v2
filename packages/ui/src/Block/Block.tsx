@@ -34,6 +34,7 @@ const Block = (props: BlockProps) => {
   const {
     backgroundImage,
     backgroundColor,
+    insetPadding,
     introText,
     variant,
     overline,
@@ -56,6 +57,7 @@ const Block = (props: BlockProps) => {
         <BlockBackground
           background={backgroundImage}
           backgroundColor={backgroundColor}
+          insetPadding={insetPadding}
           testId="Block-background"
         />
 

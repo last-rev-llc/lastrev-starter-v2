@@ -24,7 +24,7 @@ export const plusJakartaSans = Plus_Jakarta_Sans({
   display: 'swap'
 });
 
-export const mainColors = ['primaryRed', 'lensRed'];
+export const mainColors = ['primaryRed', 'lensRed', 'lensRedPrimary'];
 
 const defaultSpacing = 8;
 const defaultBorderRadius = 8;
@@ -228,6 +228,26 @@ const schemes = {
     headerColor: commonColors.black,
     text: commonColors.black,
     overlay: commonColors.black,
+    overlayText: commonColors.black,
+    highlightColor: commonColors.red600
+  },
+  lensRedPrimary: {
+    primary: {
+      main: commonColors.primaryRed,
+      contrastText: commonColors.white,
+      light: commonColors.red600,
+      dark: commonColors.red700
+    },
+    secondary: {
+      main: commonColors.white,
+      contrastText: commonColors.black,
+      light: commonColors.gray100,
+      dark: commonColors.gray200
+    },
+    linkColor: commonColors.white,
+    headerColor: commonColors.white,
+    text: commonColors.white,
+    overlay: commonColors.white,
     overlayText: commonColors.black,
     highlightColor: commonColors.red600
   },

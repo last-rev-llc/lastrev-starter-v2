@@ -110,7 +110,7 @@ const styleOverrides: ComponentsOverrides<Theme>['Collection'] = {
   itemsGrid: ({ theme, ownerState }) => ({
     gridColumn: 'start/end',
     gap: 'inherit',
-    rowGap: theme.spacing(10),
+    // rowGap: theme.spacing(10),
     alignItems: 'stretch',
 
     // CTA variant - special layout
