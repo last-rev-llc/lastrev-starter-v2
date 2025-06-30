@@ -24,6 +24,7 @@ export const typeDefs = gql`
     subtitle: String
     overline: String
     body: RichText
+    insetPadding: Boolean
   }
 `;
 
