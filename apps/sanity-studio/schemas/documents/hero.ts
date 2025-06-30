@@ -1,7 +1,7 @@
 import {defineType, defineField} from 'sanity'
 import {withAIGeneration} from '../utils/ai-generation'
 import {validateIn} from '../utils/validation'
-import {backgroundColorOptions, colorField, validateBackgroundColor} from '../utils/colors'
+import {backgroundColorOptions, validateBackgroundColor} from '../utils/colors'
 
 export const heroType = defineType({
   type: 'document',

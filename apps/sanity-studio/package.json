@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "sanity build",
+    "build": "sanity build && pnpm compile",
     "compile": "tsc --project tsconfig.build.json",
     "dev-compile": "tsc --project tsconfig.build.json --watch",
     "dev": "concurrently \"pnpm dev-compile\" \"sanity dev\"",
