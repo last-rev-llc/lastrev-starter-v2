@@ -25,6 +25,39 @@ import { validateDeployment } from './update-environments/utils.js';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+// Helper function to properly parse multiline environment variables from BWS output
+function parseEnvironmentOutput(output) {
+  const result = {};
+  const lines = output.split('\n');
+  let currentKey = null;
+  let currentValue = '';
+
+  for (const line of lines) {
+    // Check if this line starts a new variable (has = and doesn't start with whitespace)
+    if (line.includes('=') && !line.startsWith(' ') && !line.startsWith('\t')) {
+      // Save previous variable if exists
+      if (currentKey !== null) {
+        result[currentKey] = currentValue;
+      }
+
+      // Start new variable
+      const equalIndex = line.indexOf('=');
+      currentKey = line.substring(0, equalIndex).trim();
+      currentValue = line.substring(equalIndex + 1);
+    } else if (currentKey !== null && line.trim() !== '') {
+      // This is a continuation line for the current variable
+      currentValue += '\n' + line;
+    }
+  }
+
+  // Don't forget the last variable
+  if (currentKey !== null) {
+    result[currentKey] = currentValue;
+  }
+
+  return result;
+}
+
 // Helper function to get BWS organization ID with fallback
 function getBwsOrgId() {
   return process.env.BWS_ORG_ID || 'YOUR_BWS_ORG_ID_HERE';
@@ -71,20 +104,65 @@ async function readConfigFileWithFallback() {
           const cleanOutput = output.replace(/\u001B\[\d+m/g, '').trim();
           const secrets = JSON.parse(cleanOutput);
 
-          // Look for _bwsconfig_json secret
-          const configSecret = secrets.find((secret) => secret.key === '_bwsconfig_json');
+          // Look for all _bwsconfig_json secrets (could be _bwsconfig_json, _bwsconfig_json_1, etc.)
+          const configSecrets = secrets.filter((secret) =>
+            secret.key.startsWith('_bwsconfig_json')
+          );
 
-          if (configSecret) {
-            log('debug', 'Found _bwsconfig_json secret, parsing content...');
-            // Parse the secret value as JSON
-            const configContent = JSON.parse(configSecret.value);
+          if (configSecrets.length > 0) {
+            log(
+              'debug',
+              `Found ${configSecrets.length} _bwsconfig_json secret(s), parsing and merging content...`
+            );
+
+            // Parse all configs and merge them
+            const mergedConfig = { projects: [] };
+            const projectMap = new Map(); // Use Map to track projects by platform+projectName
+
+            for (const configSecret of configSecrets) {
+              try {
+                log('debug', `Processing secret: ${configSecret.key}`);
+                const configContent = JSON.parse(configSecret.value);
+
+                if (configContent.projects && Array.isArray(configContent.projects)) {
+                  for (const project of configContent.projects) {
+                    const projectKey = `${project.platform}:${project.projectName}`;
+
+                    if (projectMap.has(projectKey)) {
+                      // Merge bwsProjectIds with existing project
+                      const existingProject = projectMap.get(projectKey);
+                      existingProject.bwsProjectIds = {
+                        ...existingProject.bwsProjectIds,
+                        ...project.bwsProjectIds
+                      };
+                      log('debug', `Merged bwsProjectIds for project: ${project.projectName}`);
+                    } else {
+                      // Add new project
+                      projectMap.set(projectKey, { ...project });
+                      log('debug', `Added new project: ${project.projectName}`);
+                    }
+                  }
+                }
+              } catch (parseError) {
+                log('error', `Failed to parse secret ${configSecret.key}: ${parseError.message}`);
+              }
+            }
+
+            // Convert map back to array
+            mergedConfig.projects = Array.from(projectMap.values());
 
             // Create the file locally
             const configPath = path.join(process.cwd(), 'bwsconfig.json');
-            await fsPromises.writeFile(configPath, JSON.stringify(configContent, null, 2));
-            log('info', `✓ Created bwsconfig.json from BWS secret _bwsconfig_json`);
+            await fsPromises.writeFile(configPath, JSON.stringify(mergedConfig, null, 2));
 
-            return configContent;
+            const secretNames = configSecrets.map((s) => s.key).join(', ');
+            log('info', `✓ Created bwsconfig.json from BWS secrets: ${secretNames}`);
+            log(
+              'info',
+              `✓ Merged ${mergedConfig.projects.length} project(s) with combined environments`
+            );
+
+            return mergedConfig;
           } else {
             log('debug', '_bwsconfig_json secret not found in BWS');
           }
@@ -691,7 +769,7 @@ async function setupEnvironment(options = { isPlatformBuild: false }) {
           const decrypted = decryptContent(content, process.env.BWS_EPHEMERAL_KEY);
 
           // Parse decrypted content but don't override existing env vars
-          const decryptedVariables = dotenv.parse(decrypted);
+          const decryptedVariables = parseEnvironmentOutput(decrypted);
           for (const key of Object.keys(decryptedVariables)) {
             // Only set if not already defined in process.env
             if (!(key in process.env)) {
@@ -875,10 +953,10 @@ function loadSecureEnvironment(environment) {
     const decrypted = decryptContent(encryptedText, process.env.BWS_EPHEMERAL_KEY);
 
     // Load decrypted vars into process.env
-    for (const line of decrypted.split('\n')) {
-      const [k, ...rest] = line.split('=');
-      if (k && rest.length > 0) {
-        process.env[k.trim()] = rest.join('=').trim();
+    const parsedVariables = parseEnvironmentOutput(decrypted);
+    for (const [key, value] of Object.entries(parsedVariables)) {
+      if (key && value !== undefined) {
+        process.env[key.trim()] = value;
       }
     }
     console.log(`${environment} environment secrets loaded into process.env`);
