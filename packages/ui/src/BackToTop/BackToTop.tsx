@@ -6,7 +6,7 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fab from '@mui/material/Fab';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ErrorBoundary from '../ErrorBoundary';
 
@@ -35,8 +35,7 @@ const BackToTop = (props: BackToTopProps) => {
         data-testid="BackToTop"
         aria-label="Back to top"
         {...sidekick(sidekickLookup)}
-        ownerState={ownerState}
-      >
+        ownerState={ownerState}>
         <KeyboardArrowUpIcon />
       </Root>
     </ErrorBoundary>

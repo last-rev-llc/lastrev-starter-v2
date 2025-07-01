@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 import type { ApolloContext } from './types';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { processRedirects } from './utils/processRedirects';
 import { processRewrites } from './utils/processRewrites';

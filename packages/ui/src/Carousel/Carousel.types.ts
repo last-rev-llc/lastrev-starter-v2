@@ -10,7 +10,8 @@ export enum CarouselVariants {
   twoPerRow = 'twoPerRowCarousel',
   threePerRow = 'threePerRowCarousel',
   fourPerRow = 'fourPerRowCarousel',
-  fivePerRow = 'fivePerRowCarousel'
+  fivePerRow = 'fivePerRowCarousel',
+  sixPerRow = 'sixPerRowCarousel'
 }
 
 export interface CarouselProps

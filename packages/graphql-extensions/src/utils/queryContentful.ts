@@ -49,8 +49,8 @@ const query = async ({
   };
 
   const response = ctx.preview
-    ? await ctx.contentful.preview.getEntries(contentfulQuery)
-    : await ctx.contentful.prod.getEntries(contentfulQuery);
+    ? await ctx.contentful!.preview.getEntries(contentfulQuery)
+    : await ctx.contentful!.prod.getEntries(contentfulQuery);
 
   let items = response.items;
   if (total === 0) total = response.total;

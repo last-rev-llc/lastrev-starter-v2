@@ -2,11 +2,15 @@ import gql from 'graphql-tag';
 
 import { defaultResolver } from './utils/defaultResolver';
 
-import type { Mappers } from '@last-rev/types';
+import type { Mappers, TypeMappings } from '@last-rev/types';
 import type { ApolloContext } from './types';
 import { createType } from './utils/createType';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import { resolveField } from './utils/resolveField';
+
+export const typeMappings: TypeMappings = {
+  contentful_block: 'Block'
+};
 
 export const typeDefs = gql`
   extend type Block {
@@ -16,17 +20,24 @@ export const typeDefs = gql`
     link: Link
     supplementalContent: Content
     backgroundImage: Media
+    title: String
+    subtitle: String
+    overline: String
+    body: RichText
+    insetPadding: Boolean
   }
 `;
 
 export const mappers: Mappers = {
   Block: {
     Block: {
-      variant: defaultResolver('variant'),
-
+      variant: defaultResolver('variant', { camelize: true }),
       imageOverlayColor: defaultResolver('imageOverlayColor'),
 
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
+      insetPadding: defaultResolver('insetPadding'),
+      introText: 'introText_raw',
+      actions: 'actions_raw',
 
       mediaItems: async (block: any, _args: any, ctx: ApolloContext) => {
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);
@@ -34,7 +45,7 @@ export const mappers: Mappers = {
         return null;
       },
       body: async (block: any, _args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(block, _args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(block, _args, ctx);
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);
         const supplementalContent = getLocalizedField(block.fields, 'supplementalContent', ctx);
         if (variant !== 'noContent' && !mediaItem && !supplementalContent) return null;
@@ -45,7 +56,7 @@ export const mappers: Mappers = {
       },
 
       supplementalContent: async (block: any, _args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(block, _args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(block, _args, ctx);
 
         if (variant === 'noContent') return null;
         const mediaItem = getLocalizedField(block.fields, 'asset', ctx);

@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
-import type { Mappers, ApolloContext } from '@last-rev/types';
-import * as types from '@contentful/rich-text-types';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-
-import { createType } from './utils/createType';
-import { pageHeaderResolver } from './utils/pageHeaderResolver';
-import { pageFooterResolver } from './utils/pageFooterResolver';
+import { type ApolloContext, type Mappers } from '@last-rev/types';
+import { BLOCKS } from '@last-rev/graphql-cms-core';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeMappings = {};
 
@@ -13,6 +9,8 @@ export const typeDefs = gql`
   extend type Settings {
     header: Header
     footer: Footer
+    seo: JSON
+    liveEditorSettings: JSON
     # path: String
     # sideNav: [Content]
     # hero: Hero
@@ -25,17 +23,20 @@ interface Heading {
 }
 
 const HEADINGS: Heading = {
-  [types.BLOCKS.HEADING_1]: 1,
-  [types.BLOCKS.HEADING_2]: 2,
-  [types.BLOCKS.HEADING_3]: 3,
-  [types.BLOCKS.HEADING_4]: 4,
-  [types.BLOCKS.HEADING_5]: 5,
-  [types.BLOCKS.HEADING_6]: 6
+  [BLOCKS.HEADING_1]: 1,
+  [BLOCKS.HEADING_2]: 2,
+  [BLOCKS.HEADING_3]: 3,
+  [BLOCKS.HEADING_4]: 4,
+  [BLOCKS.HEADING_5]: 5,
+  [BLOCKS.HEADING_6]: 6
 };
 
 export const mappers: Mappers = {
   Settings: {
     Settings: {
+      seo: async (settings: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(settings, 'seo', ctx);
+      }
       // path: async (settings: any, _args: any, ctx: ApolloContext) => {
       //   return '/frd';
       // },

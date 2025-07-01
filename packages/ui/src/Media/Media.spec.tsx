@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from '@cypress/react';
 import Media from './Media';
 import { MediaProps } from './Media.types';
 import { mediaBaseImageMock, mediaBaseVideoMock } from './Media.mock';

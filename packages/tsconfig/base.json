@@ -20,6 +20,7 @@
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"],
       "@ui/*": ["../../packages/ui/src/*"],
+      "@hooks/*": ["../../packages/ui/src/hooks/*"],
       "@graphql-sdk/*": ["../../packages/graphql-sdk/src/*"],
       "@graphql-extensions/*": ["../../packages/graphql-sdk/src/*"]
     }

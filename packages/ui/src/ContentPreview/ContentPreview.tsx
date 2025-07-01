@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Box from '@mui/material/Link';
 import Link from '@mui/material/Link';
@@ -38,8 +39,7 @@ const ContentPreview = ({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
-          }}
-        >
+          }}>
           {error ? (
             <Typography>
               <br />
@@ -64,8 +64,7 @@ const ContentPreview = ({
               <br />
               <Link
                 target="_blank"
-                href={`//app.contentful.com/spaces/${spaceId}/environments/${environment}/entries/${id}?locale=${locale}`}
-              >
+                href={`//app.contentful.com/spaces/${spaceId}/environments/${environment}/entries/${id}?locale=${locale}`}>
                 Edit{' '}
                 <Box component="span" sx={{ textTransform: 'capitalize' }}>
                   {content?.__typename}
@@ -87,12 +86,10 @@ const ContentPreview = ({
             background: '#fff',
             padding: 8,
             zIndex: 10
-          }}
-        >
+          }}>
           <Link
             target="_blank"
-            href={`//app.contentful.com/spaces/${spaceId}/environments/${environment}/entries/${id}?locale=${locale}`}
-          >
+            href={`//app.contentful.com/spaces/${spaceId}/environments/${environment}/entries/${id}?locale=${locale}`}>
             <Box component="span" sx={{ textTransform: 'capitalize' }}>
               {content?.__typename}
             </Box>{' '}
@@ -115,8 +112,7 @@ const ContentPreview = ({
             background: '#fff',
             padding: 8,
             zIndex: 10
-          }}
-        >
+          }}>
           <Typography variant="overline">{viewportW}px</Typography>
         </div>
       ) : null}

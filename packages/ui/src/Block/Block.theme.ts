@@ -77,7 +77,7 @@ const defaultProps: ComponentsProps['Block'] = {
 
 const styleOverrides: ComponentsOverrides<Theme>['Block'] = {
   root: ({ theme, ownerState }) => ({
-    ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
+    // Background styling handled by Background component pseudo-element
     'containerType': 'inline-size',
     'position': 'relative',
     'width': '100%',

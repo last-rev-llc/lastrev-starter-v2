@@ -1,6 +1,5 @@
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
-import { Document, BLOCKS, INLINES } from '@contentful/rich-text-types';
-import { ApolloContext } from '@last-rev/types';
+import { documentToPlainTextString } from '@last-rev/graphql-cms-core';
+import { Document, ApolloContext } from '@last-rev/types';
 import { resolveContentFields } from './resolveContentFields';
 
 const parseNode = async (node: any, ctx: ApolloContext): Promise<any> => {

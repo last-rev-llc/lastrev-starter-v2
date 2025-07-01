@@ -12,7 +12,7 @@ import MuiMenuIcon from '@mui/icons-material/Menu';
 import MuiCloseIcon from '@mui/icons-material/Close';
 import MuiSearchIcon from '@mui/icons-material/Search';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import Grid from '../Grid';
 import ContentModule from '../ContentModule';

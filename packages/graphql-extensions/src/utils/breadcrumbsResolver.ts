@@ -1,6 +1,6 @@
 ///
 import type { ApolloContext } from '../types';
-import { getDefaultFieldValue } from '@last-rev/graphql-contentful-core';
+import { getDefaultFieldValue } from '@last-rev/graphql-cms-core';
 
 const getParentPages = async (page: any, ctx: ApolloContext, pages: any[] = []): Promise<any[]> => {
   const parentPageRef = getDefaultFieldValue(page, 'parentPage', ctx.defaultLocale);

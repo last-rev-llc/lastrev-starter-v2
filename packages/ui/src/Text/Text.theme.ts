@@ -64,22 +64,6 @@ const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
         '&[class*=MuiTypography-h]': {
           marginBottom: '.5em',
           marginTop: '1em'
-        },
-
-        '&[class*=-h1]': {
-          ...theme.typography.display3
-        },
-
-        '&[class*=-h2]': {
-          ...theme.typography.h4
-        },
-
-        '&[class*=-h3]': {
-          ...theme.typography.h5
-        },
-
-        '&[class*=-h4]': {
-          ...theme.typography.h5
         }
       },
 
@@ -103,18 +87,11 @@ const styleOverrides: ComponentsOverrides<Theme>['Text'] = {
   },
 
   title: ({ theme, ownerState }) => ({
-    width: '100%',
-    ...(ownerState?.variant === TextVariants.default && {
-      ...theme.typography.h4
-    }),
-
-    ...(ownerState?.variant === TextVariants.introText && {
-      ...theme.typography.h3
-    })
+    width: '100%'
   }),
 
   subtitle: ({ theme }) => ({
-    ...theme.typography.h5
+    ...theme.typography.h3
   })
 };
 
@@ -154,7 +131,7 @@ const createVariants = (_theme: Theme): ComponentsVariants['Text'] => [
       variant: TextVariants.introText
     },
     style: ({ theme }: { theme: Theme }) => ({
-      marginBottom: theme.spacing(4)
+      marginBottom: theme.spacing(9)
     })
   }
 ];

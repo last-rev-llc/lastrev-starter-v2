@@ -3,7 +3,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Typography, { type TypographyProps } from '@mui/material/Typography';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';
@@ -38,7 +38,7 @@ const Text = (props: TextProps) => {
             data-testid="Text-title"
             align={align}
             {...sidekick(sidekickLookup, 'title')}
-            variant="h1"
+            variant="h2"
             ownerState={ownerState}>
             {title}
           </Title>
@@ -50,7 +50,7 @@ const Text = (props: TextProps) => {
             align={align}
             {...sidekick(sidekickLookup, 'subtitle')}
             ownerState={ownerState}
-            variant="h2">
+            variant="h3">
             {subtitle}
           </Subtitle>
         )}

@@ -1,0 +1,988 @@
+{
+  "name": "Design System",
+  "description": "Design system documentation for Material-UI implementation",
+  "palette": {
+    "primary": {
+      "main": "#EE312E",
+      "500": "#EE312E",
+      "600": "#D3222A",
+      "700": "#AF292E",
+      "800": "#921A1D",
+      "900": "#5F091D",
+      "contrastText": "#FFFFFF",
+      "name": "Primary Red",
+      "description": "Our brand color is vibrant and strong. It should always be present, but doesn't need to be everywhere."
+    },
+    "secondary": {
+      "magenta": {
+        "500": "#C247FA",
+        "contrastText": "#000000"
+      },
+      "violet": {
+        "500": "#8B48FA",
+        "700": "#642FCF",
+        "contrastText": "#FFFFFF"
+      },
+      "sky": {
+        "500": "#00D3F3",
+        "contrastText": "#000000"
+      },
+      "azure": {
+        "600": "#0086FA",
+        "800": "#084CCE",
+        "contrastText": "#FFFFFF"
+      }
+    },
+    "grey": {
+      "0": "#FFFFFF",
+      "100": "#F5F3F3",
+      "200": "#DADADA",
+      "300": "#A0A2A5",
+      "500": "#6F7377",
+      "700": "#50565F",
+      "800": "#3C424B",
+      "900": "#282E37",
+      "950": "#141423"
+    },
+    "neutral": {
+      "white": "#FFFFFF",
+      "black": "#000000",
+      "description": "Neutrals provide areas of calm to balance our red palette. They can be used for backgrounds and textures, or as section dividers to depict information in charts and graphs, in type, and more."
+    },
+    "utility": {
+      "red": "#EE312E",
+      "orange": "#FF6B00",
+      "yellow": "#FFD500",
+      "green": "#00C851",
+      "blue": "#0066FF",
+      "description": "Tertiary colors are used to represent success, error, and warning states, ensuring users receive clear visual cues."
+    },
+    "background": {
+      "default": "#FFFFFF",
+      "paper": "#F5F3F3"
+    },
+    "text": {
+      "primary": "#282E37",
+      "secondary": "#50565F",
+      "disabled": "#A0A2A5"
+    }
+  },
+  "typography": {
+    "fontFamily": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+    "fontSize": 16,
+    "htmlFontSize": 16,
+    "h1": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "48px",
+      "lineHeight": 1.2,
+      "letterSpacing": "-0.01562em",
+      "useCase": "Headline",
+      "responsive": {
+        "width": "auto",
+        "minWidth": "130px",
+        "height": "auto",
+        "minHeight": "24px"
+      }
+    },
+    "h2": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "32px",
+      "lineHeight": 1.25,
+      "letterSpacing": "-0.00833em",
+      "useCase": "Title"
+    },
+    "h3": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "24px",
+      "lineHeight": 1.3,
+      "letterSpacing": "0em",
+      "useCase": "Subheading"
+    },
+    "h4": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "20px",
+      "lineHeight": 1.35,
+      "letterSpacing": "0.00735em",
+      "useCase": "Use case"
+    },
+    "h5": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "18px",
+      "lineHeight": 1.4,
+      "letterSpacing": "0em",
+      "useCase": "Use case"
+    },
+    "h6": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 400,
+      "fontSize": "18px",
+      "lineHeight": 1.4,
+      "letterSpacing": "0.0075em",
+      "useCase": "Use case"
+    },
+    "body1": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 400,
+      "fontSize": "16px",
+      "lineHeight": 1.5,
+      "letterSpacing": "0.00938em",
+      "useCase": "Body copy"
+    },
+    "body2": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 400,
+      "fontSize": "14px",
+      "lineHeight": 1.43,
+      "letterSpacing": "0.01071em"
+    },
+    "button": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 500,
+      "fontSize": "16px",
+      "lineHeight": 1.75,
+      "letterSpacing": "0.02857em",
+      "textTransform": "none",
+      "useCase": "CTA"
+    },
+    "overline": {
+      "fontFamily": "'Plus Jakarta Sans', sans-serif",
+      "fontWeight": 400,
+      "fontSize": "14px",
+      "lineHeight": 2.66,
+      "letterSpacing": "0.08333em",
+      "textTransform": "uppercase",
+      "useCase": "Label / Overline"
+    }
+  },
+  "shape": {
+    "borderRadius": 4
+  },
+  "spacing": 8,
+  "breakpoints": {
+    "values": {
+      "xs": 0,
+      "sm": 600,
+      "md": 960,
+      "lg": 1280,
+      "xl": 1920
+    }
+  },
+  "components": {
+    "MuiButton": {
+      "styleOverrides": {
+        "root": {
+          "fontWeight": 500,
+          "fontSize": "16px",
+          "textTransform": "none",
+          "borderRadius": 4
+        },
+        "containedPrimary": {
+          "backgroundColor": "#EE312E",
+          "color": "#FFFFFF",
+          "&:hover": {
+            "backgroundColor": "#D3222A"
+          }
+        }
+      }
+    },
+    "MuiTypography": {
+      "styleOverrides": {
+        "root": {
+          "fontFamily": "'Plus Jakarta Sans', sans-serif"
+        }
+      }
+    }
+  },
+  "gridSystem": {
+    "description": "Responsive grid system with breakpoint-specific configurations",
+    "breakpoints": {
+      "desktop": {
+        "minWidth": 1025,
+        "maxWidth": 1440,
+        "columns": 12,
+        "margins": "96px",
+        "gutters": "24px",
+        "containerQuery": "@container (min-width: 1025px)"
+      },
+      "tabletLarge": {
+        "minWidth": 835,
+        "maxWidth": 1024,
+        "columns": 12,
+        "margins": "56px",
+        "gutters": "16px",
+        "containerQuery": "@container (min-width: 835px) and (max-width: 1024px)"
+      },
+      "tabletSmall": {
+        "minWidth": 581,
+        "maxWidth": 834,
+        "columns": 8,
+        "margins": "56px",
+        "gutters": "16px",
+        "containerQuery": "@container (min-width: 581px) and (max-width: 834px)"
+      },
+      "mobile": {
+        "minWidth": 320,
+        "maxWidth": 580,
+        "columns": 4,
+        "margins": "24px",
+        "gutters": "16px",
+        "containerQuery": "@container (max-width: 580px)"
+      }
+    },
+    "cssVariables": {
+      "margins": {
+        "--grid-margin-xs": "24px",
+        "--grid-margin-sm": "56px",
+        "--grid-margin-md": "56px",
+        "--grid-margin-lg": "96px",
+        "--grid-margin-xl": "96px",
+        "--grid-margin-xxl": "96px"
+      },
+      "gaps": {
+        "--grid-gap-xs": "16px",
+        "--grid-gap-sm": "16px",
+        "--grid-gap-md": "16px",
+        "--grid-gap-lg": "24px",
+        "--grid-gap-xl": "24px",
+        "--grid-gap-xxl": "24px",
+        "--grid-gap-half": "calc(var(--grid-gap) / 2)",
+        "--grid-gap-double": "calc(var(--grid-gap) * 2)",
+        "--grid-gap-quarter": "calc(var(--grid-gap) / 4)"
+      },
+      "containers": {
+        "--container-width": "min(var(--container-max-width), (100vw - (2 * var(--grid-margin))))",
+        "--content-width": "min(var(--container-width), (100vw - (2 * var(--grid-margin))))",
+        "--container-gutter": "minmax(var(--grid-margin), calc(50vw - var(--grid-margin) - (var(--container-margin) / 2)))"
+      }
+    }
+  },
+  "card": {
+    "description": "Card component design system with multiple variants and aspect ratios",
+    "container": {
+      "width": "320px",
+      "maxCharactersPerLine": 25,
+      "description": "Base container specifications for card components"
+    },
+    "aspectRatios": {
+      "description": "Predefined aspect ratios for logo and media content",
+      "horizontal": {
+        "name": "21:9",
+        "ratio": "21/9",
+        "value": 2.333,
+        "dimensions": {
+          "width": "144px",
+          "height": "60px"
+        },
+        "useCase": "Wide logos, banners, horizontal brand marks"
+      },
+      "portrait": {
+        "name": "3:2",
+        "ratio": "3/2",
+        "value": 0.667,
+        "dimensions": {
+          "width": "96px",
+          "height": "144px"
+        },
+        "useCase": "Vertical logos, portrait-oriented content"
+      },
+      "square": {
+        "name": "1:1",
+        "ratio": "1/1",
+        "value": 1,
+        "dimensions": {
+          "width": "96px",
+          "height": "96px"
+        },
+        "useCase": "Icons, square logos, app icons"
+      },
+      "extraWide": {
+        "name": "21:9 (50% Height)",
+        "ratio": "21/9",
+        "value": 2.333,
+        "dimensions": {
+          "width": "280px",
+          "height": "60px"
+        },
+        "heightScale": 0.5,
+        "useCase": "Ultra-wide logos, panoramic content"
+      }
+    },
+    "spacing": {
+      "description": "Responsive spacing values for cards",
+      "containerPadding": {
+        "desktop": "calc(var(--grid-gap) * 2)",
+        "tabletLarge": "calc(var(--grid-gap) * 2)",
+        "tabletSmall": "calc(var(--grid-gap) * 2)",
+        "mobile": "var(--grid-gap)"
+      },
+      "cardGap": {
+        "desktop": "24px",
+        "tabletLarge": "16px",
+        "tabletSmall": "16px",
+        "mobile": "16px"
+      },
+      "contentPadding": {
+        "default": "var(--grid-gap)",
+        "compact": "var(--grid-gap-half)",
+        "spacious": "var(--grid-gap-double)"
+      }
+    },
+    "grid": {
+      "description": "Grid layout configurations for card collections",
+      "columns": {
+        "desktop": {
+          "default": 3,
+          "wide": 2,
+          "narrow": 4
+        },
+        "tabletLarge": {
+          "default": 2,
+          "wide": 1,
+          "narrow": 3
+        },
+        "tabletSmall": {
+          "default": 2,
+          "wide": 1,
+          "narrow": 2
+        },
+        "mobile": {
+          "default": 1,
+          "wide": 1,
+          "narrow": 1
+        }
+      },
+      "gap": {
+        "desktop": "var(--grid-gap-lg)",
+        "tabletLarge": "var(--grid-gap-md)",
+        "tabletSmall": "var(--grid-gap-sm)",
+        "mobile": "var(--grid-gap-xs)"
+      }
+    },
+    "variants": {
+      "description": "Different card variant configurations",
+      "icon": {
+        "description": "Icon card with flexible alignment and optional elements",
+        "mediaMaxWidth": "96px",
+        "alignment": {
+          "options": ["left", "center", "right"],
+          "default": "left"
+        },
+        "contentDirection": "vertical",
+        "textLimits": {
+          "title": "2 lines",
+          "body": "4-10 lines"
+        },
+        "hideableElements": ["icon", "overline", "title", "body", "cta"],
+        "padding": "var(--grid-gap)",
+        "responsive": {
+          "mobile": {
+            "width": "320px"
+          }
+        }
+      },
+      "iconPadding": {
+        "description": "Icon card with extra padding",
+        "extends": "icon",
+        "padding": {
+          "container": "var(--grid-gap)",
+          "icon": "var(--grid-gap-double)"
+        },
+        "backgroundColor": "var(--mui-palette-background-paper)",
+        "iconBackground": "var(--mui-palette-background-default)"
+      },
+      "logo": {
+        "description": "Logo display card with aspect ratio options",
+        "padding": "calc(var(--grid-gap) * 2)",
+        "backgroundColor": "var(--mui-palette-background-default)",
+        "objectFit": "contain",
+        "supportedAspectRatios": {
+          "horizontal": {
+            "name": "21:9",
+            "dimensions": "144x60px"
+          },
+          "portrait": {
+            "name": "3:2",
+            "dimensions": "96x144px"
+          },
+          "square": {
+            "name": "1:1",
+            "dimensions": "96x96px"
+          },
+          "extraWide": {
+            "name": "21:9 (50% Height)",
+            "dimensions": "280x60px"
+          }
+        },
+        "containerWidth": "320px"
+      },
+      "media": {
+        "description": "Media-focused card with full-width image",
+        "aspectRatio": "16/9",
+        "objectFit": "cover",
+        "mediaPosition": "top",
+        "alignment": "left",
+        "textLimits": {
+          "title": "2 lines",
+          "body": "4-10 lines"
+        },
+        "hideableElements": ["image", "overline", "title", "body", "cta"],
+        "containerWidth": "320px"
+      },
+      "testimonial": {
+        "description": "Quote/testimonial card with background image",
+        "backgroundImage": {
+          "required": true,
+          "overlay": {
+            "gradient": "linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%)",
+            "color": "rgba(0,0,0,0.6)"
+          },
+          "objectFit": "cover"
+        },
+        "quote": {
+          "fontSize": {
+            "desktop": "var(--h3-font-size)",
+            "tablet": "var(--h3-font-size)",
+            "mobile": "var(--body1-font-size)"
+          },
+          "fontWeight": "var(--body1-font-weight)",
+          "color": "var(--mui-palette-common-white)",
+          "maxWidth": "100%",
+          "quotationMarks": {
+            "show": true,
+            "size": "1.5em",
+            "color": "var(--mui-palette-common-white)"
+          }
+        },
+        "attribution": {
+          "name": {
+            "fontSize": "var(--body2-font-size)",
+            "fontWeight": "var(--body2-font-weight)",
+            "color": "var(--mui-palette-common-white)"
+          },
+          "title": {
+            "fontSize": "var(--bodyXSmall-font-size)",
+            "color": "var(--mui-palette-common-white)",
+            "opacity": 0.9
+          },
+          "company": {
+            "fontSize": "var(--bodyXSmall-font-size)",
+            "color": "var(--mui-palette-common-white)",
+            "opacity": 0.9
+          },
+          "marginTop": "var(--grid-gap)"
+        },
+        "responsive": {
+          "desktop": {
+            "layout": "horizontal",
+            "minHeight": "400px",
+            "padding": "var(--grid-gap-double)",
+            "imageWidth": "50%"
+          },
+          "tablet": {
+            "layout": "horizontal",
+            "minHeight": "400px",
+            "padding": "var(--grid-gap-double)",
+            "imageWidth": "50%"
+          },
+          "mobile": {
+            "layout": "stacked",
+            "imageHeight": "200px",
+            "contentPadding": "var(--grid-gap)"
+          }
+        },
+        "hideableElements": ["overline", "title", "body", "avatar", "cta"]
+      },
+      "iconStats": {
+        "description": "Statistics card with responsive layout",
+        "responsive": {
+          "desktop": {
+            "layout": "horizontal",
+            "gridTemplate": "auto 1fr",
+            "alignment": "center",
+            "gap": "var(--grid-gap)"
+          },
+          "tablet": {
+            "layout": "horizontal",
+            "gridTemplate": "auto 1fr",
+            "alignment": "center",
+            "gap": "var(--grid-gap)"
+          },
+          "mobile": {
+            "layout": "vertical",
+            "gridTemplate": "auto",
+            "alignment": "left",
+            "gap": "var(--grid-gap-half)"
+          }
+        },
+        "icon": {
+          "size": "48px",
+          "color": "var(--mui-palette-primary-main)"
+        },
+        "statValue": {
+          "fontSize": "var(--h2-font-size)",
+          "fontWeight": "var(--h2-font-weight)",
+          "color": "var(--mui-palette-primary-main)",
+          "lineClamp": 1
+        },
+        "statLabel": {
+          "fontSize": "var(--body2-font-size)",
+          "fontWeight": "var(--body2-font-weight)",
+          "color": "var(--mui-palette-text-primary)",
+          "maxLines": 2
+        },
+        "alignment": "left",
+        "hideableElements": ["image", "icon", "overline", "title", "body", "cta"],
+        "containerWidth": "320px"
+      },
+      "iconListing": {
+        "description": "List-style card with responsive layout",
+        "responsive": {
+          "desktop": {
+            "layout": "horizontal",
+            "gridTemplate": "auto 1fr",
+            "gap": "var(--grid-gap)",
+            "iconPosition": "left"
+          },
+          "tablet": {
+            "layout": "horizontal",
+            "gridTemplate": "auto 1fr",
+            "gap": "var(--grid-gap)",
+            "iconPosition": "left"
+          },
+          "mobile": {
+            "layout": "vertical",
+            "gridTemplate": "auto",
+            "gap": "var(--grid-gap-half)",
+            "iconPosition": "top"
+          }
+        },
+        "icon": {
+          "size": "64px",
+          "color": "var(--mui-palette-primary-main)"
+        },
+        "textLimits": {
+          "title": "2 lines",
+          "body": "4-10 lines"
+        },
+        "alignment": "left",
+        "hideableElements": ["image", "icon", "overline", "title", "body", "cta"],
+        "containerWidth": "320px"
+      }
+    },
+    "commonRules": {
+      "description": "Common rules that apply to all card variants",
+      "maxCharactersPerLine": 25,
+      "containerWidth": "320px",
+      "textLineClamp": {
+        "title": {
+          "default": 2,
+          "max": 3
+        },
+        "body": {
+          "mobile": {
+            "min": 4,
+            "max": 10
+          },
+          "desktop": {
+            "min": 3,
+            "max": 8
+          }
+        },
+        "overline": {
+          "default": 1
+        }
+      },
+      "responsiveBehavior": {
+        "description": "Cards adjust from 320px width on mobile to larger widths on desktop",
+        "containerQuery": true,
+        "flexibleElements": "Any element (icon, overline, title, body, CTA) can be hidden if needed"
+      }
+    }
+  },
+  "collection": {
+    "description": "Collection component design system with various layout and display variants, supporting both grid and carousel modes",
+    "variants": {
+      "logos": {
+        "description": "Logo carousel with continuous horizontal scroll",
+        "carouselMode": "always",
+        "layout": {
+          "desktop": {
+            "itemsPerView": 6,
+            "scrollable": true,
+            "gap": "var(--grid-gap-lg)"
+          },
+          "tablet": {
+            "itemsPerView": 4,
+            "scrollable": true,
+            "gap": "var(--grid-gap-md)"
+          },
+          "mobile": {
+            "itemsPerView": 2,
+            "scrollable": true,
+            "gap": "var(--grid-gap-sm)"
+          }
+        },
+        "logoSpecs": {
+          "maxHeight": "64px",
+          "objectFit": "contain",
+          "padding": "var(--grid-gap)",
+          "backgroundColor": "transparent"
+        },
+        "navigation": {
+          "type": "arrows",
+          "arrows": true,
+          "arrowPosition": "sides",
+          "dots": false,
+          "scrollBehavior": "smooth",
+          "autoPlay": {
+            "enabled": true,
+            "interval": 3000,
+            "pauseOnHover": true
+          }
+        },
+        "responsive": {
+          "minWidth": {
+            "desktop": "1025px",
+            "tablet": "581px",
+            "mobile": "320px"
+          },
+          "maxWidth": {
+            "desktop": "1919px",
+            "tablet": "834px",
+            "mobile": "580px"
+          }
+        }
+      },
+      "cta": {
+        "description": "Call-to-action hero section with emphasis content",
+        "layout": {
+          "desktop": {
+            "containerLayout": "horizontal",
+            "contentWidth": "50%",
+            "minHeight": "600px"
+          },
+          "tablet": {
+            "containerLayout": "vertical",
+            "contentWidth": "100%",
+            "minHeight": "500px"
+          },
+          "mobile": {
+            "containerLayout": "vertical",
+            "contentWidth": "100%",
+            "minHeight": "400px"
+          }
+        },
+        "background": {
+          "color": "var(--mui-palette-primary-main)",
+          "gradient": "linear-gradient(135deg, var(--mui-palette-primary-dark) 0%, var(--mui-palette-primary-main) 100%)",
+          "overlay": "rgba(0,0,0,0.2)"
+        },
+        "content": {
+          "backgroundColor": "var(--mui-palette-grey-900)",
+          "textColor": "var(--mui-palette-common-white)",
+          "padding": {
+            "desktop": "var(--grid-gap-double)",
+            "tablet": "var(--grid-gap-double)",
+            "mobile": "var(--grid-gap)"
+          },
+          "maxWidth": "600px"
+        },
+        "features": {
+          "icon": {
+            "size": "48px",
+            "color": "var(--mui-palette-common-white)",
+            "spacing": "var(--grid-gap)"
+          },
+          "layout": "grid",
+          "columns": {
+            "desktop": 2,
+            "tablet": 2,
+            "mobile": 1
+          }
+        },
+        "responsive": {
+          "minWidth": {
+            "desktop": "1025px",
+            "tablet": "581px",
+            "mobile": "320px"
+          },
+          "maxWidth": {
+            "desktop": "1919px",
+            "tablet": "834px",
+            "mobile": "580px"
+          }
+        }
+      },
+      "threePerRow": {
+        "description": "3-column card display that can switch between grid and carousel modes",
+        "carouselMode": "optional",
+        "layout": {
+          "desktop": {
+            "columns": 3,
+            "itemsPerView": 3,
+            "gap": "var(--grid-gap-lg)"
+          },
+          "tablet": {
+            "columns": 2,
+            "itemsPerView": 2,
+            "gap": "var(--grid-gap-md)"
+          },
+          "mobile": {
+            "columns": 1,
+            "itemsPerView": 1,
+            "gap": "var(--grid-gap-sm)"
+          }
+        },
+        "navigation": {
+          "type": "arrows",
+          "arrows": true,
+          "arrowPosition": "sides",
+          "dots": true,
+          "scrollBehavior": "smooth",
+          "swipeEnabled": true
+        },
+        "cardSpecs": {
+          "aspectRatio": "16/9",
+          "imagePosition": "top",
+          "contentPadding": "var(--grid-gap)",
+          "backgroundColor": "var(--mui-palette-background-paper)"
+        },
+        "textLimits": {
+          "title": {
+            "recommended": "2 lines",
+            "max": "3 lines",
+            "fontSize": "var(--h5-font-size)"
+          },
+          "body": {
+            "recommended": "4 lines",
+            "max": "10 lines",
+            "fontSize": "var(--body1-font-size)"
+          },
+          "overline": {
+            "max": "1 line",
+            "textTransform": "uppercase",
+            "fontSize": "var(--overline-font-size)"
+          }
+        },
+        "characterLimits": {
+          "heading": {
+            "desktop": 60,
+            "tablet": 50,
+            "mobile": 40
+          },
+          "body": {
+            "desktop": 150,
+            "tablet": 120,
+            "mobile": 100
+          }
+        },
+        "cta": {
+          "color": "var(--mui-palette-primary-main)",
+          "textDecoration": "none",
+          "hoverTextDecoration": "underline"
+        },
+        "responsive": {
+          "minWidth": {
+            "desktop": "1025px",
+            "tablet": "581px",
+            "mobile": "320px"
+          },
+          "maxWidth": {
+            "desktop": "1919px",
+            "tablet": "834px",
+            "mobile": "580px"
+          }
+        }
+      },
+      "testimonial": {
+        "description": "Full-width testimonial carousel with background images and pagination",
+        "carouselMode": "always",
+        "layout": {
+          "itemsPerView": 1,
+          "gap": "var(--grid-gap-lg)",
+          "fullWidth": true,
+          "scrollSnapAlign": "start"
+        },
+        "container": {
+          "desktop": {
+            "minHeight": "500px",
+            "padding": "var(--grid-gap-double)"
+          },
+          "tablet": {
+            "minHeight": "400px",
+            "padding": "var(--grid-gap-double)"
+          },
+          "mobile": {
+            "minHeight": "350px",
+            "padding": "var(--grid-gap)"
+          }
+        },
+        "background": {
+          "type": "image",
+          "overlay": {
+            "color": "rgba(0,0,0,0.7)",
+            "gradient": "linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%)"
+          },
+          "objectFit": "cover",
+          "fallbackColor": "var(--mui-palette-grey-900)"
+        },
+        "quote": {
+          "fontSize": {
+            "desktop": "var(--h3-font-size)",
+            "tablet": "var(--h4-font-size)",
+            "mobile": "var(--h5-font-size)"
+          },
+          "fontWeight": "var(--body1-font-weight)",
+          "color": "var(--mui-palette-common-white)",
+          "maxWidth": "800px",
+          "quotationMarks": {
+            "display": true,
+            "size": "2em",
+            "color": "var(--mui-palette-primary-main)",
+            "opacity": 0.8
+          }
+        },
+        "attribution": {
+          "layout": "vertical",
+          "spacing": "var(--grid-gap-half)",
+          "name": {
+            "fontSize": "var(--body1-font-size)",
+            "fontWeight": "var(--body1-font-weight)",
+            "color": "var(--mui-palette-common-white)"
+          },
+          "title": {
+            "fontSize": "var(--body2-font-size)",
+            "color": "var(--mui-palette-common-white)",
+            "opacity": 0.9
+          },
+          "company": {
+            "fontSize": "var(--body2-font-size)",
+            "color": "var(--mui-palette-common-white)",
+            "opacity": 0.9
+          }
+        },
+        "navigation": {
+          "type": "dots",
+          "arrows": true,
+          "arrowPosition": "sides",
+          "dots": true,
+          "dotsPosition": "bottom",
+          "color": "var(--mui-palette-common-white)",
+          "activeColor": "var(--mui-palette-primary-main)",
+          "swipeEnabled": true,
+          "keyboardNavigation": true,
+          "autoPlay": {
+            "enabled": false,
+            "interval": 5000,
+            "pauseOnHover": true
+          }
+        },
+        "responsive": {
+          "minWidth": {
+            "desktop": "1025px",
+            "tablet": "581px",
+            "mobile": "320px"
+          },
+          "maxWidth": {
+            "desktop": "1919px",
+            "tablet": "834px",
+            "mobile": "580px"
+          }
+        }
+      }
+    },
+    "commonRules": {
+      "description": "Common rules that apply to all collection variants",
+      "containerQuery": true,
+      "fullWidthContainer": true,
+      "padding": {
+        "desktop": "0 var(--grid-margin-lg)",
+        "tablet": "0 var(--grid-margin-md)",
+        "mobile": "0 var(--grid-margin-sm)"
+      },
+      "introText": {
+        "maxWidth": "800px",
+        "margin": "0 auto var(--grid-gap-double) auto",
+        "textAlign": "center",
+        "fontSize": "var(--body1-font-size)"
+      },
+      "carouselBehavior": {
+        "mobileSwipe": true,
+        "touchThreshold": 50,
+        "keyboardControls": {
+          "enabled": true,
+          "leftKey": "ArrowLeft",
+          "rightKey": "ArrowRight"
+        },
+        "accessibility": {
+          "announceSlideChange": true,
+          "ariaLabels": {
+            "container": "Carousel",
+            "previousButton": "Previous slide",
+            "nextButton": "Next slide",
+            "pagination": "Slide {current} of {total}"
+          }
+        }
+      }
+    },
+    "carouselModes": {
+      "always": "Component always renders as a carousel",
+      "optional": "Can be toggled between grid and carousel based on enableCarousel prop",
+      "never": "Always renders as a grid, no carousel functionality"
+    }
+  },
+  "colorUsageGuidelines": {
+    "primary": {
+      "description": "Use Primary Red as the primary brand color. It should always be present but doesn't need to be everywhere. Use white space to provide a blank canvas for clear focus.",
+      "progression": "Use additional shades of red in progression, starting with Primary Red. Never use more red shades than necessary; Red 5 (#5F091D) should be the least used color."
+    },
+    "secondary": {
+      "description": "Secondary colors were chosen to provide a distinctive color approach to information design. They are only to be used for charts, graphs, tables and other data visualizations. The reassuring blue tones symbolize safety, while the warmer purples signal warning. The more intense the color, the stronger it represents its character. These vibrant colors bring the most urgent information to the top."
+    },
+    "textContrast": {
+      "onRed500": "white",
+      "onRed600": "white",
+      "onRed700": "white",
+      "onRed800": "white",
+      "onRed900": "white",
+      "onNeutralLight": "black",
+      "onNeutralDark": "white"
+    }
+  },
+  "customTokens": {
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500
+    },
+    "fontSizes": {
+      "xs": "14px",
+      "sm": "16px",
+      "md": "18px",
+      "lg": "20px",
+      "xl": "24px",
+      "xxl": "32px",
+      "xxxl": "48px"
+    },
+    "gridSystem": {
+      "containerQuery": {
+        "xs": "320px",
+        "sm": "581px",
+        "md": "835px",
+        "lg": "1025px",
+        "xl": "1440px"
+      },
+      "containerColumns": {
+        "xs": 4,
+        "sm": 8,
+        "md": 12,
+        "lg": 12,
+        "xl": 12
+      }
+    }
+  }
+}

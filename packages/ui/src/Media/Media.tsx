@@ -3,7 +3,7 @@ import { useAmp } from 'next/amp';
 
 import { styled } from '@mui/material/styles';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ErrorBoundary from '../ErrorBoundary';
 import Image from '../Image';

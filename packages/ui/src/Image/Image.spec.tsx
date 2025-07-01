@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from '@cypress/react';
 import Image from './Image';
 import { imageBaseMock } from './Image.mock';
 import type { ImageProps } from './Image.types';

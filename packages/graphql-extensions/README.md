@@ -1,6 +1,6 @@
 # GraphQL Extensions
 
-The LastRev Framework allows you to create a GraphQL schema that is based on the content models in Contentful. Most people will be able to use the generated schema without too many modifications. But if you want to add custom fields or resolver behavior, you can do so through extensions.
+The LastRev Framework allows you to create a GraphQL schema that is based on the content models in your CMS. Most people will be able to use the generated schema without too many modifications. But if you want to add custom fields or resolver behavior, you can do so through extensions.
 
 ## Extensions Concepts
 
@@ -39,7 +39,7 @@ export const typeDefs = gql`
 
 ### Mappers
 
-Mappers are a construct that we use on top of the standard [Apollo GraphQL Resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) to allow for the resolution and mapping of fields. In most cases, mapping fields and resolving values for fields coming from Contentful can and should be done through mappers. If more complex behavior or other data sources are needed, a custom resolver can be used (see Resolvers below).
+Mappers are a construct that we use on top of the standard [Apollo GraphQL Resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) to allow for the resolution and mapping of fields. In most cases, mapping fields and resolving values for fields coming from the CMS can and should be done through mappers. If more complex behavior or other data sources are needed, a custom resolver can be used (see Resolvers below).
 
 ### Display Types
 
@@ -81,7 +81,7 @@ export const mappers = {
 
 ### Resolvers
 
-Resolvers are useful when you need to create new queries, or whole new types that are not tied to content in Contentful.
+Resolvers are useful when you need to create new queries, or whole new types that are not tied to content in the CMS.
 
 Similar to mappers, you would use a resolver function to define the behavior of the field. The same ApolloContext object is passed in.
 
@@ -115,7 +115,7 @@ It should return an object, keyed by the path, whose value contains the full pat
 The path generator function can generate complex paths with child/parent logic using the loaders to load the parent or child items.
 
 ```javascript
-const pageGeneral: ContentfulPathsGenerator = async (
+const pageGeneral: CmsPathsGenerator = async (
   pageItem,
   loaders,
   defaultLocale,

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { createType } from './utils/createType';
 import { pageFooterResolver } from './utils/pageFooterResolver';
@@ -11,6 +11,7 @@ import { pathResolver } from './utils/pathResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { getDefaultCtaText } from './utils/getDefaultCtaText';
 import { formatDate } from './utils/formatDate';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeDefs = gql`
   extend type Blog {
@@ -23,6 +24,7 @@ export const typeDefs = gql`
     author: Person
     hero: Content
     aboutText: RichText
+    seo: JSON
   }
 `;
 
@@ -33,7 +35,9 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
-
+      seo: async (blog: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(blog, 'seo', ctx);
+      },
       relatedItems: async (blog: any, _args: any, ctx: ApolloContext) => {
         const relatedItems = getLocalizedField(blog.fields, 'relatedItems', ctx);
         if (!relatedItems?.length) return null;
@@ -59,7 +63,7 @@ export const mappers: Mappers = {
         //       facetFilters: ['locale:en-US', 'contentType:Blog'],
         //       hitsPerPage: 3
         //     },
-        //     indexName: 'contentful',
+        //     indexName: 'cms',
         //     showFilters: false,
         //     showSearchBox: false,
         //     showPagination: false,

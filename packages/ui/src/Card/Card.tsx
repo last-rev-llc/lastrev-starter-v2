@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import Link, { type LinkProps } from '../Link';
 import ContentModule from '../ContentModule';
@@ -63,20 +63,20 @@ const Card = (props: CardProps) => {
             // @ts-ignore: TODO
 
             <CardMedia ownerState={ownerState}>
-              <Fade>
-                {!loading ? (
-                  <ContentModule
-                    __typename="Media"
-                    {...sidekick(sidekickLookup, 'media')}
-                    {...image}
-                    aspectRatio={aspectRatio}
-                    columns={layoutConfig[gridLayout]}
-                    data-testid="Card-media"
-                  />
-                ) : (
-                  <Skeleton variant="rectangular" width={210} height={118} />
-                )}
-              </Fade>
+              {/* <Fade> */}
+              {!loading ? (
+                <ContentModule
+                  __typename="Media"
+                  {...sidekick(sidekickLookup, 'media')}
+                  {...image}
+                  aspectRatio={aspectRatio}
+                  columns={layoutConfig[gridLayout]}
+                  data-testid="Card-media"
+                />
+              ) : (
+                <Skeleton variant="rectangular" width={210} height={118} />
+              )}
+              {/* </Fade> */}
             </CardMedia>
           ) : null}
 

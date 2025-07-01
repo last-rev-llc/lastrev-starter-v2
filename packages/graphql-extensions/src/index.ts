@@ -1,6 +1,6 @@
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import type { Source, DocumentNode, GraphQLSchema } from 'graphql';
-import { typeDefs as algoliaTypeDefs } from '@last-rev/graphql-algolia-integration';
+// import { typeDefs as algoliaTypeDefs } from '@last-rev/graphql-algolia-integration';
 
 import fs from 'fs';
 import path from 'path';
@@ -23,7 +23,7 @@ function loadFiles() {
     dirPath = path.resolve(process.cwd(), '../../packages/graphql-extensions/src');
     console.warn('Dynamic Extension Files are not supported in NextJS');
     console.warn('Update graphql-extensions/src/index.ts to load ALL extension files manually');
-    modules['Algolia'] = require('./Algolia.extension');
+    // modules['Algolia'] = require('./Algolia.extension');
     modules['Block'] = require('./Block.extension');
     modules['Blog'] = require('./Blog.extension');
     modules['Card'] = require('./Card.extension');
@@ -85,7 +85,7 @@ function loadFiles() {
 }
 
 const extensions: GraphQlExtension[] = loadFiles();
-extensions.push({ typeDefs: algoliaTypeDefs });
+// extensions.push({ typeDefs: algoliaTypeDefs });
 
 const getNonNullPropertiesFromExtensions = (property: any) =>
   extensions.map((ext: GraphQlExtension) => ext[property]).filter(Boolean);

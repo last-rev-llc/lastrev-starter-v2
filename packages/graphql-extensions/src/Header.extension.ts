@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import type { ApolloContext } from './types';
 import { defaultResolver } from './utils/defaultResolver';
@@ -27,13 +27,13 @@ export const mappers = {
         const ctaItems: any = getLocalizedField(header.fields, 'ctaItems', ctx);
         return !!ctaItems.length;
       },
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       autoComplete: async (header: any, _args: any, ctx: ApolloContext) => {
         const settings = {
           configure: {
             hitsPerPage: 5
           },
-          indexName: 'contentful',
+          indexName: 'cms',
           showFilters: true,
           showSearchBox: true,
           showPagination: false,

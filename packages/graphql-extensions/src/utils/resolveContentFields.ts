@@ -1,7 +1,6 @@
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField, documentToPlainTextString } from '@last-rev/graphql-cms-core';
 import { ApolloContext } from '../types';
 import { resolveField } from './resolveField';
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 
 const pageType = ['page', 'pageDocument', 'pageHr', 'blog'];
 

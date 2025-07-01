@@ -5,8 +5,11 @@
     "ANALYZE_BUNDLE",
     "CONTENTFUL_DELIVERY_TOKEN",
     "CONTENTFUL_ENV",
+    "CONTENTFUL_MANAGEMENT_TOKEN",
     "CONTENTFUL_PREVIEW_TOKEN",
     "CONTENTFUL_SPACE_ID",
+    "CONTENTFUL_STARTER_ACCESS_TOKEN",
+    "CONTENTFUL_STARTER_SPACE_ID",
     "CONTENTFUL_USE_PREVIEW",
     "DEFAULT_SITE_ID",
     "DEPLOY_URL",
@@ -18,6 +21,11 @@
     "PAGES_REVALIDATE",
     "PORT",
     "PREVIEW_TOKEN",
+    "SANITY_STUDIO_SANITY_API_VERSION",
+    "SANITY_STUDIO_SANITY_DATASET",
+    "SANITY_STUDIO_SANITY_PROJECT_ID",
+    "SANITY_STUDIO_SANITY_PROJECT_TITLE",
+    "SANITY_TOKEN",
     "SITE_SETTINGS",
     "SITE",
     "VERCEL_URL"
@@ -28,10 +36,15 @@
       "persistent": true,
       "dependsOn": ["build"]
     },
+    "deploy:sanity": {
+      "outputMode": "new-only",
+      "cache": false,
+      "dependsOn": ["^build"]
+    },
     "build": {
       "outputMode": "new-only",
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**", ".next/**", "build/**"]
     },
     "test": { "outputMode": "new-only", "outputs": ["coverage/**"], "dependsOn": [] },
     "lint": {
@@ -84,6 +97,26 @@
       "outputMode": "new-only",
       "dependsOn": ["graphql-sdk#sync:cms", "graphql-sdk#gql:start", "^build"],
       "outputs": ["out/**", ".next/**"]
+    },
+    "sanity-studio#sanity-contentful-export": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-studio#sanity-create-schema": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-studio#sanity-create-dataset": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-studio#sanity-dataset-import": {
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "sanity-studio#sanity-studio-deploy": {
+      "outputMode": "new-only",
+      "cache": false
     }
   }
 }

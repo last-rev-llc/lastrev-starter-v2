@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography, { type TypographyProps } from '@mui/material/Typography';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ContentModule from '../ContentModule';
 import Grid from '../Grid';
@@ -49,11 +49,13 @@ const Hero = (props: HeroProps) => {
 
   return (
     <Root data-testid="Hero" ownerState={ownerState} {...sidekick(sidekickLookup)} ref={heroRef}>
-      <HeroBackground
-        background={background ? ({ ...background, priority: true } as any) : undefined}
-        backgroundColor={backgroundColor}
-        testId="Hero-background"
-      />
+      {background ? (
+        <HeroBackground
+          background={{ ...background, priority: true } as any}
+          backgroundColor={backgroundColor}
+          testId="Hero-background"
+        />
+      ) : null}
       <ContentOuterGrid ownerState={ownerState}>
         {overline || title || subtitle || body || actions ? (
           <MainContentWrap ownerState={ownerState}>
@@ -119,15 +121,15 @@ const Hero = (props: HeroProps) => {
         {!!images?.length ? (
           <MediaWrap ownerState={ownerState}>
             {images?.map((image) => (
-              <Fade key={image?.id}>
-                <Media
-                  ownerState={ownerState}
-                  {...sidekick(sidekickLookup, 'images')}
-                  {...image}
-                  columns={layoutConfig[variant]}
-                  data-testid="Hero-media"
-                />
-              </Fade>
+              // <Fade key={image?.id}>
+              <Media
+                ownerState={ownerState}
+                {...sidekick(sidekickLookup, 'images')}
+                {...image}
+                columns={layoutConfig[variant]}
+                data-testid="Hero-media"
+              />
+              // </Fade>
             ))}
           </MediaWrap>
         ) : null}

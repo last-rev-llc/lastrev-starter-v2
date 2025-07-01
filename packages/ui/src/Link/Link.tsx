@@ -11,7 +11,7 @@ import IconButton, { type IconButtonProps } from '@mui/material/IconButton';
 import MuiLink, { type LinkProps as MuiLinkProps } from '@mui/material/Link';
 import Button, { type ButtonProps } from '@mui/material/Button';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import type { LinkProps, LinkOwnerState } from './Link.types';
 

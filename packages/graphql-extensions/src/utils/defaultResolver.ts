@@ -1,5 +1,5 @@
 import type { ApolloContext } from '../types';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import { camelCase } from './camelCase';
 
 interface DefaultResolverParams {
@@ -7,16 +7,15 @@ interface DefaultResolverParams {
   mappings?: {
     [key: string]: string | number | null;
   };
-  noCamelCase?: boolean;
+  camelize?: boolean;
 }
 
 export const defaultResolver =
-  (field: string, params: DefaultResolverParams = {}) =>
+  (field: string, { camelize = false, mappings, defaultValue }: DefaultResolverParams = {}) =>
   (ref: any, _args: any, ctx: ApolloContext) => {
-    const item = getLocalizedField(ref?.fields, field, ctx);
-    if (params.mappings?.[item] || params.mappings?.[item] === null) return params.mappings?.[item];
-    if (item) return params.noCamelCase ? item : camelCase(item);
-    if (params.defaultValue)
-      return params.noCamelCase ? params.defaultValue : camelCase(params.defaultValue);
+    const item = ref?.[field] ?? getLocalizedField(ref?.fields, field, ctx);
+    if (mappings?.[item] || mappings?.[item] === null) return mappings?.[item];
+    if (item) return camelize ? camelCase(item) : item;
+    if (defaultValue) return camelize ? camelCase(defaultValue) : defaultValue;
     return;
   };

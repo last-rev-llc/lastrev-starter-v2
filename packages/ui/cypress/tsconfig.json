@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "ES2015"],
-    "types": ["cypress", "webpack-env"],
+    "types": ["cypress"],
     "paths": {
       "@mui/styled-engine": ["./node_modules/@mui/styled-engine-sc"]
     }

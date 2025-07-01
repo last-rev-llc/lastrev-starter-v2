@@ -1,4 +1,4 @@
-import getLocalizedField from '@last-rev/graphql-contentful-core/dist/utils/getLocalizedField';
+import getLocalizedField from '@last-rev/graphql-cms-core/dist/utils/getLocalizedField';
 
 export const mediaFieldResolver = async ({ fields, field, assetField, ctx }: any) => {
   // TODO: Make getting a localized resolved link a single function

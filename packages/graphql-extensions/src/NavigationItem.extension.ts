@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from './types';
 import { pascalCase } from './utils/pascalCase';
 import { defaultResolver } from './utils/defaultResolver';
@@ -56,12 +56,12 @@ export const typeDefs = gql`
 export const mappers = {
   NavigationItem: {
     NavigationItem: {
-      variant: defaultResolver('variant'),
+      variant: defaultResolver('variant', { camelize: true }),
       href: hrefUrlResolver
     },
     Link: {
       href: hrefUrlResolver,
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     }
   }
 };

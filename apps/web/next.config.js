@@ -3,7 +3,7 @@
 const { withSentryConfig } = require('@sentry/nextjs');
 const { client } = require('graphql-sdk/dist/client');
 
-const preview = process.env.CONTENTFUL_USE_PREVIEW === 'true';
+const preview = process.env.USE_PREVIEW === 'true';
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE?.toLowerCase() === 'true'
@@ -55,9 +55,15 @@ let config = {
         hostname: 'images.contentful.com',
         port: '',
         pathname: `/${process.env.CONTENTFUL_SPACE_ID}/**`
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        port: '',
+        pathname: '/**'
       }
     ],
-    formats: ['image/avif', 'image/webp']
+    formats: ['image/webp']
   },
   env: {
     //ALGOLIA_APPLICATION_ID: process.env.ALGOLIA_APPLICATION_ID,
@@ -73,6 +79,8 @@ let config = {
     DEFAULT_SITE_ID: process.env.DEFAULT_SITE_ID,
     DEPLOY_URL: process.env.DEPLOY_URL,
     NEXT_PUBLIC_GTM_ID: process.env.NEXT_PUBLIC_GTM_ID,
+    // TODO: need to pass other sanity vars?
+    SANITY_USE_PREVIEW: process.env.USE_PREVIEW,
     SITE_SETTINGS: process.env.SITE_SETTINGS ?? '',
     SITE: process.env.SITE,
     VERCEL_URL: process.env.VERCEL_URL
@@ -82,6 +90,7 @@ let config = {
       ...config.resolve.alias,
       '@mui/styled-engine': '@mui/styled-engine-sc'
     };
+
     return config;
   },
   experimental: {

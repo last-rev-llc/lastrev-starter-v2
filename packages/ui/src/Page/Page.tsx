@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 
 import ContentModule from '../ContentModule';
 const BackToTop = dynamic(() => import('../BackToTop'));
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import type { PageProps } from './Page.types';
 
