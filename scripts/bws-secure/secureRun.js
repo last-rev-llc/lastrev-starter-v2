@@ -18,12 +18,164 @@ import {
   readConfigFile,
   log
 } from './project-selector.js';
-import { validateDeployment } from './update-environments/utils.js';
+import { execBwsCommandWithRetrySync } from './bws-retry-utils.js';
 // Import functions from project-selector module
 
 // Get the directory name in ESM
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+// Helper function to properly parse multiline environment variables from BWS output
+function parseEnvironmentOutput(output) {
+  const result = {};
+  const lines = output.split('\n');
+  let currentKey = null;
+  let currentValue = '';
+
+  for (const line of lines) {
+    // Check if this line starts a new variable (has = and doesn't start with whitespace)
+    if (line.includes('=') && !line.startsWith(' ') && !line.startsWith('\t')) {
+      // Save previous variable if exists
+      if (currentKey !== null) {
+        result[currentKey] = currentValue;
+      }
+
+      // Start new variable
+      const equalIndex = line.indexOf('=');
+      currentKey = line.substring(0, equalIndex).trim();
+      currentValue = line.substring(equalIndex + 1);
+    } else if (currentKey !== null && line.trim() !== '') {
+      // This is a continuation line for the current variable
+      currentValue += '\n' + line;
+    }
+  }
+
+  // Don't forget the last variable
+  if (currentKey !== null) {
+    result[currentKey] = currentValue;
+  }
+
+  return result;
+}
+
+// Helper function to get BWS organization ID with fallback
+function getBwsOrgId() {
+  return process.env.BWS_ORG_ID || 'YOUR_BWS_ORG_ID_HERE';
+}
+
+// Helper function to get BWS machine accounts URL
+function getMachineAccountsUrl() {
+  const orgId = getBwsOrgId();
+  if (orgId === 'YOUR_BWS_ORG_ID_HERE') {
+    return "\nPlease set BWS_ORG_ID environment variable to access your organization's machine accounts.\n";
+  }
+  return `\nhttps://vault.bitwarden.com/#/sm/${orgId}/machine-accounts\n`;
+}
+
+// Add wrapper function to handle environment variable fallback
+async function readConfigFileWithFallback() {
+  try {
+    // First try the normal readConfigFile
+    return await readConfigFile();
+  } catch (error) {
+    log('debug', `readConfigFile failed with error: ${error.message}`);
+
+    // If it fails and the error is about missing bwsconfig.json, check for _bwsconfig_json in BWS secrets
+    if (error.message.includes('bwsconfig.json not found')) {
+      log('debug', 'bwsconfig.json not found, checking for _bwsconfig_json in BWS secrets');
+
+      const hasToken = process.env.BWS_ACCESS_TOKEN;
+
+      log('debug', `BWS_ACCESS_TOKEN exists: ${!!hasToken}`);
+
+      if (hasToken) {
+        try {
+          log('debug', 'Fetching secrets from BWS to look for _bwsconfig_json...');
+          // Get all secrets using BWS with retry logic
+          const output = execBwsCommandWithRetrySync(
+            `${getBwsCommand()} secret list -t ${process.env.BWS_ACCESS_TOKEN} --output json`,
+            { encoding: 'utf8' },
+            'Config secrets fetch'
+          );
+
+          // Clean output of any ANSI codes
+          const cleanOutput = output.replace(/\u001B\[\d+m/g, '').trim();
+          const secrets = JSON.parse(cleanOutput);
+
+          // Look for all _bwsconfig_json secrets (could be _bwsconfig_json, _bwsconfig_json_1, etc.)
+          const configSecrets = secrets.filter((secret) =>
+            secret.key.startsWith('_bwsconfig_json')
+          );
+
+          if (configSecrets.length > 0) {
+            log(
+              'debug',
+              `Found ${configSecrets.length} _bwsconfig_json secret(s), parsing and merging content...`
+            );
+
+            // Parse all configs and merge them
+            const mergedConfig = { projects: [] };
+            const projectMap = new Map(); // Use Map to track projects by platform+projectName
+
+            for (const configSecret of configSecrets) {
+              try {
+                log('debug', `Processing secret: ${configSecret.key}`);
+                const configContent = JSON.parse(configSecret.value);
+
+                if (configContent.projects && Array.isArray(configContent.projects)) {
+                  for (const project of configContent.projects) {
+                    const projectKey = `${project.platform}:${project.projectName}`;
+
+                    if (projectMap.has(projectKey)) {
+                      // Merge bwsProjectIds with existing project
+                      const existingProject = projectMap.get(projectKey);
+                      existingProject.bwsProjectIds = {
+                        ...existingProject.bwsProjectIds,
+                        ...project.bwsProjectIds
+                      };
+                      log('debug', `Merged bwsProjectIds for project: ${project.projectName}`);
+                    } else {
+                      // Add new project
+                      projectMap.set(projectKey, { ...project });
+                      log('debug', `Added new project: ${project.projectName}`);
+                    }
+                  }
+                }
+              } catch (parseError) {
+                log('error', `Failed to parse secret ${configSecret.key}: ${parseError.message}`);
+              }
+            }
+
+            // Convert map back to array
+            mergedConfig.projects = Array.from(projectMap.values());
+
+            // Create the file locally
+            const configPath = path.join(process.cwd(), 'bwsconfig.json');
+            await fsPromises.writeFile(configPath, JSON.stringify(mergedConfig, null, 2));
+
+            const secretNames = configSecrets.map((s) => s.key).join(', ');
+            log('info', `✓ Created bwsconfig.json from BWS secrets: ${secretNames}`);
+            log(
+              'info',
+              `✓ Merged ${mergedConfig.projects.length} project(s) with combined environments`
+            );
+
+            return mergedConfig;
+          } else {
+            log('debug', '_bwsconfig_json secret not found in BWS');
+          }
+        } catch (bwsError) {
+          log('error', `Failed to retrieve _bwsconfig_json from BWS: ${bwsError.message}`);
+        }
+      } else {
+        log('debug', 'BWS_ACCESS_TOKEN not set');
+      }
+    }
+
+    // Re-throw the original error if we can't handle it
+    throw error;
+  }
+}
 
 // Add flag to detect nested execution
 const isNestedExecution = process.env.BWS_SECURE_RUN_ACTIVE === 'true';
@@ -136,18 +288,19 @@ async function validateBwsToken() {
       console.warn('\u001B[33m╚════════════════════════════════════════════════════════╝\u001B[0m');
       console.warn(
         '\nVisit the link below to create your token: \n' +
-          '\nhttps://vault.bitwarden.com/#/sm/22479128-f194-460a-884b-b24a015686c6/machine-accounts\n'
+          getMachineAccountsUrl()
       );
     }
     return false;
   }
 
   try {
-    // 2) Replace "./node_modules/.bin/bws" with the helper function
-    execSync(`${getBwsCommand()} project list -t ${process.env.BWS_ACCESS_TOKEN}`, {
-      stdio: 'ignore',
-      env: { ...process.env, NO_COLOR: '1', FORCE_COLOR: '0' }
-    });
+    // Use retry logic for BWS token validation
+    execBwsCommandWithRetrySync(
+      `${getBwsCommand()} project list -t ${process.env.BWS_ACCESS_TOKEN}`,
+      { stdio: 'ignore' },
+      'Token validation'
+    );
     return true;
   } catch {
     // prettier-ignore
@@ -167,7 +320,7 @@ async function validateBwsToken() {
       console.error('\u001B[31m╚════════════════════════════════════════════════════════╝\u001B[0m');
       console.error(
         '\nVisit the link below to check or regenerate your token: \n' +
-          '\nhttps://vault.bitwarden.com/#/sm/22479128-f194-460a-884b-b24a015686c6/machine-accounts\n'
+          getMachineAccountsUrl()
       );
     }
     return false;
@@ -275,7 +428,7 @@ async function setupEnvironment(options = { isPlatformBuild: false }) {
   }
 
   try {
-    const config = await readConfigFile();
+    const config = await readConfigFileWithFallback();
     if (!config || !config.projects) {
       throw new Error('Invalid configuration file');
     }
@@ -615,7 +768,7 @@ async function setupEnvironment(options = { isPlatformBuild: false }) {
           const decrypted = decryptContent(content, process.env.BWS_EPHEMERAL_KEY);
 
           // Parse decrypted content but don't override existing env vars
-          const decryptedVariables = dotenv.parse(decrypted);
+          const decryptedVariables = parseEnvironmentOutput(decrypted);
           for (const key of Object.keys(decryptedVariables)) {
             // Only set if not already defined in process.env
             if (!(key in process.env)) {
@@ -654,7 +807,7 @@ async function setupEnvironment(options = { isPlatformBuild: false }) {
     if (process.env.ORIGINAL_BWS_ENV) {
       log('debug', `Restoring original BWS_ENV value: ${process.env.ORIGINAL_BWS_ENV}`);
       // Find the project
-      const config = await readConfigFile();
+      const config = await readConfigFileWithFallback();
       const project = config.projects.find((p) => p.projectName === process.env.BWS_PROJECT);
       if (project) {
         // Update the .env file with the original environment
@@ -718,15 +871,13 @@ async function loadEnvironmentSecrets(environment, projectId) {
     // More concise logging
     log('debug', `Loading secrets for ${projectId}...`);
 
-    // 3) Replace "./node_modules/.bin/bws" with getBwsCommand()
-    const output = execSync(
+    // Use retry logic for BWS secret list command
+    const output = execBwsCommandWithRetrySync(
       `${getBwsCommand()} secret list -t ${
         process.env.BWS_ACCESS_TOKEN
       } ${projectId} --output json`,
-      {
-        encoding: 'utf-8',
-        env: { ...process.env, NO_COLOR: '1', FORCE_COLOR: '0' }
-      }
+      { encoding: 'utf-8' },
+      `Loading secrets for ${projectId}`
     );
 
     let bwsSecrets;
@@ -799,10 +950,10 @@ function loadSecureEnvironment(environment) {
     const decrypted = decryptContent(encryptedText, process.env.BWS_EPHEMERAL_KEY);
 
     // Load decrypted vars into process.env
-    for (const line of decrypted.split('\n')) {
-      const [k, ...rest] = line.split('=');
-      if (k && rest.length > 0) {
-        process.env[k.trim()] = rest.join('=').trim();
+    const parsedVariables = parseEnvironmentOutput(decrypted);
+    for (const [key, value] of Object.entries(parsedVariables)) {
+      if (key && value !== undefined) {
+        process.env[key.trim()] = value;
       }
     }
     console.log(`${environment} environment secrets loaded into process.env`);
