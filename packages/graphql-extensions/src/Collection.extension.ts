@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
 
@@ -9,19 +9,21 @@ import { queryContentful } from './utils/queryContentful';
 import { getWinstonLogger } from '@last-rev/logging';
 import { defaultResolver } from './utils/defaultResolver';
 import { createType } from './utils/createType';
+import { mapCardVariant } from './utils/cardVariantMapping';
 
 const logger = getWinstonLogger({
-  package: 'graphql-contentful-extensions',
+  package: 'graphql-cms-extensions',
   module: 'Collection'
 });
 
 // Note: If you want anything other than the below, this is where you will add it
-const COLLECTION_ITEM_TYPES = ['Card', 'Link'];
+const COLLECTION_ITEM_TYPES = ['Card', 'Link', 'Asset'];
 
 export const typeDefs = gql`
   extend type Collection {
     items: [CollectionItem]
     introText: Text
+    actions: [ActionLink]
     itemsConnection(limit: Int, offset: Int, filter: CollectionFilterInput): CollectionItemConnection
     backgroundImage: Media
     isCarouselDesktop: Boolean
@@ -85,12 +87,16 @@ interface CollectionSettings {
 export const mappers: Mappers = {
   Collection: {
     Collection: {
-      backgroundColor: defaultResolver('backgroundColor'),
-      items: async (collection: any, args: any, ctx: ApolloContext) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
-
-        const itemsVariantFn = defaultResolver('itemsVariant');
-        const itemsVariant = itemsVariantFn(collection, args, ctx);
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
+      introText: 'introText_raw',
+      actions: 'actions_raw',
+      items: async (collection: any, _args: any, ctx: ApolloContext) => {
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
+          [];
+        // Get the itemsVariant from the collection
+        const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
 
         try {
           const { contentType, limit, offset, order, filter } =
@@ -109,8 +115,27 @@ export const mappers: Mappers = {
           });
         }
 
-        const returnItemsRef = await ctx.loaders.entryLoader.loadMany(
-          items?.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
+        const returnItemsRef = (
+          await Promise.all(
+            items?.map((x: any) =>
+              x?.sys?.linkType === 'Asset'
+                ? ctx.loaders.assetLoader.load({
+                    id: x?.sys?.id,
+                    preview: !!ctx.preview
+                  })
+                : ctx.loaders.entryLoader.load({
+                    id: x?.sys?.id,
+                    preview: !!ctx.preview
+                  })
+            )
+          )
+        )?.map((resolvedItem: any, index: number) =>
+          resolvedItem
+            ? {
+                // ...items[index],
+                ...resolvedItem
+              }
+            : items[index]
         );
 
         let imageItemsRef = getLocalizedField(collection.fields, 'images', ctx) ?? [];
@@ -124,9 +149,12 @@ export const mappers: Mappers = {
             .filter((r) => r !== null)
             .map((asset: any) => createType('Media', { asset }));
 
+        // Map the itemsVariant value
+        const mappedItemsVariant = mapCardVariant(itemsVariant);
+
         const finalItems = (returnItemsRef || []).concat(imageItems || [])?.map((x: any) => ({
           ...x,
-          itemsVariant
+          variant: mappedItemsVariant
         }));
 
         return finalItems;
@@ -150,9 +178,10 @@ export const mappers: Mappers = {
         return carouselBreakpoints.includes('Mobile');
       },
 
-      numItems: async (collection: any, args: any, ctx: ApolloContext) => {
+      numItems: async (collection: any, _args: any, ctx: ApolloContext) => {
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
 
@@ -160,10 +189,11 @@ export const mappers: Mappers = {
       },
 
       itemsPerRow: async (collection: any, args: any, ctx: ApolloContext) => {
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collection, args, ctx);
         let items =
           getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
           getLocalizedField(collection.fields, 'images', ctx) ??
           [];
 
@@ -191,6 +221,22 @@ export const mappers: Mappers = {
             itemsPerRow = numItems >= 5 ? 5 : numItems;
             break;
 
+          case 'sixPerRow':
+            itemsPerRow = numItems >= 6 ? 7 : numItems;
+            break;
+
+          case 'splitLayout':
+            itemsPerRow = 1; // Single column with expandable sections
+            break;
+
+          case 'accordionShowcase':
+            itemsPerRow = 1; // Single column accordion layout
+            break;
+
+          case 'featureShowcase':
+            itemsPerRow = 3; // 2 rows of 3 features each
+            break;
+
           default:
             itemsPerRow = 3;
         }
@@ -198,7 +244,10 @@ export const mappers: Mappers = {
         return itemsPerRow;
       },
 
-      itemsVariant: defaultResolver('itemsVariant'),
+      itemsVariant: async (collection: any, _args: any, ctx: ApolloContext) => {
+        const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
+        return mapCardVariant(itemsVariant);
+      },
 
       itemsAspectRatio: defaultResolver('itemsAspectRatio'),
 
@@ -206,7 +255,7 @@ export const mappers: Mappers = {
         let carouselBreakpoints =
           getLocalizedField(collection.fields, 'carouselBreakpoints', ctx) ?? [];
 
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collection, args, ctx);
 
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;
@@ -219,7 +268,12 @@ export const mappers: Mappers = {
         { limit, offset, filter }: ItemsConnectionArgs,
         ctx: ApolloContext
       ) => {
-        let items = getLocalizedField(collection.fields, 'items', ctx) ?? [];
+        let items =
+          getLocalizedField(collection.fields, 'items', ctx) ??
+          getLocalizedField(collection.fields, 'items_raw', ctx) ??
+          getLocalizedField(collection.fields, 'images', ctx) ??
+          [];
+
         try {
           const { contentType, filters } =
             (getLocalizedField(collection.fields, 'settings', ctx) as CollectionSettings) || {};
@@ -243,13 +297,18 @@ export const mappers: Mappers = {
             let fullItemsWithVariant = [];
 
             if (!!items?.length) {
-              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx) ?? [];
+              // Get and map the itemsVariant value
+              const itemsVariant = getLocalizedField(collection.fields, 'itemsVariant', ctx);
+              const mappedItemsVariant = mapCardVariant(itemsVariant);
 
               const fullItems = await ctx.loaders.entryLoader.loadMany(
                 items.map((x: any) => ({ id: x?.sys?.id, preview: !!ctx.preview }))
               );
 
-              fullItemsWithVariant = fullItems?.map((x: any) => ({ ...x, variant: itemsVariant }));
+              fullItemsWithVariant = fullItems?.map((x: any) => ({
+                ...x,
+                variant: mappedItemsVariant
+              }));
             }
 
             return {
@@ -280,7 +339,8 @@ const ITEM_MAPPING: { [key: string]: string } = {
   Media: 'Card',
   Person: 'Card',
   ElementVideo: 'Card',
-  Link: 'Card'
+  Link: 'Card',
+  Asset: 'Card'
 };
 
 export const resolvers = {

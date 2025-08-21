@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ErrorBoundary from '../../ErrorBoundary';
 import ContentModule from '../../ContentModule';

@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
 import { client } from '@graphql-sdk/client';
 
-const preview = process.env.CONTENTFUL_USE_PREVIEW === 'true';
+const preview = process.env.USE_PREVIEW === 'true';
 
 const pageMatcher = /^([^\-]+)-(\d+)-sitemap.xml$/;
 

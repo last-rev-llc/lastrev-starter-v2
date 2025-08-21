@@ -1,7 +1,6 @@
 import type { ApolloContext } from '../types';
-import type { Entry, Asset } from 'contentful';
 
-const { getLocalizedField } = require('@last-rev/graphql-contentful-core');
+const { getLocalizedField } = require('@last-rev/graphql-cms-core');
 
 export const getLocalizedFieldReference = async (
   fields: any,

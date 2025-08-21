@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/system';
 
-import sidekick from '@last-rev/contentful-sidekick-util';
+import sidekick from '@last-rev/cms-sidekick-util';
 
 import ErrorBoundary from '../ErrorBoundary';
 import ContentModule from '../ContentModule';

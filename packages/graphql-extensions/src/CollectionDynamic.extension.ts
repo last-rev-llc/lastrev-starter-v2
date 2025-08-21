@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
 
@@ -8,7 +8,7 @@ import { getWinstonLogger } from '@last-rev/logging';
 import { defaultResolver } from './utils/defaultResolver';
 
 const logger = getWinstonLogger({
-  package: 'graphql-contentful-extensions',
+  package: 'graphql-cms-extensions',
   module: 'CollectionDynamic'
 });
 
@@ -28,6 +28,7 @@ export const typeDefs = gql`
     numItems: Int
     algoliaSettings: JSON
     showFilters: Boolean
+    settings: JSON
   }
 
   type CollectionDynamicOptions {
@@ -81,7 +82,7 @@ interface CollectionDynamicSettings {
 export const mappers: Mappers = {
   CollectionDynamic: {
     CollectionDynamic: {
-      backgroundColor: defaultResolver('backgroundColor'),
+      backgroundColor: defaultResolver('backgroundColor', { camelize: true }),
       algoliaSettings: async (collection: any, args: any, ctx: ApolloContext) => {
         const settings = getLocalizedField(collection.fields, 'settings', ctx);
 
@@ -90,7 +91,7 @@ export const mappers: Mappers = {
 
         if (settings) {
           return {
-            indexName: 'contentful',
+            indexName: 'cms',
             ...settings,
             showFilters: true,
             filtersPlacement
@@ -158,7 +159,11 @@ export const mappers: Mappers = {
       },
 
       itemsPerRow: async (collectionDynamic: any, args: any, ctx: ApolloContext) => {
-        const variant = defaultResolver('variant')(collectionDynamic, args, ctx);
+        const variant = defaultResolver('variant', { camelize: true })(
+          collectionDynamic,
+          args,
+          ctx
+        );
         let items = getLocalizedField(collectionDynamic.fields, 'items', ctx) ?? [];
         let itemsPerRow = 3;
         const numItems = items?.length ?? 3;
@@ -191,7 +196,7 @@ export const mappers: Mappers = {
         return itemsPerRow;
       },
 
-      itemsVariant: defaultResolver('itemsVariant'),
+      itemsVariant: defaultResolver('itemsVariant', { camelize: true }),
 
       itemsAspectRatio: defaultResolver('itemsAspectRatio'),
 
@@ -201,7 +206,7 @@ export const mappers: Mappers = {
         let carouselBreakpoints =
           getLocalizedField(collectionDynamic.fields, 'carouselBreakpoints', ctx) ?? [];
 
-        const variantFn = defaultResolver('variant');
+        const variantFn = defaultResolver('variant', { camelize: true });
         const variant = variantFn(collectionDynamic, args, ctx);
 
         if (!!carouselBreakpoints.length) return `${variant}Carousel`;

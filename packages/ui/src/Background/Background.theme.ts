@@ -10,8 +10,7 @@ const defaultProps: ComponentsProps['Background'] = {};
 
 const styleOverrides: ComponentsOverrides<Theme>['Background'] = {
   root: ({ theme, ownerState }) => ({
-    // ...theme.mixins.applyBackgroundColor({ ownerState, theme }),
-    'backgroundColor': 'inherit',
+    // Use grid layout to match content structure
     'zIndex': -1,
     'position': 'absolute',
     'top': 0,
@@ -20,6 +19,19 @@ const styleOverrides: ComponentsOverrides<Theme>['Background'] = {
     'bottom': 0,
     'width': '100%',
     'height': '100%',
+    'display': 'grid',
+    'gridTemplateColumns': 'var(--grid-template-columns)',
+    'gridTemplateRows': 'var(--grid-template-rows)',
+    'gap': 'var(--grid-gap)',
+    
+    // Pseudo-element for actual background
+    '&::before': {
+      content: '""',
+      gridColumn: 'start / end',
+      gridRow: '1 / -1',
+      zIndex: -1,
+      ...theme.mixins.applyBackgroundColor({ ownerState, theme })
+    },
 
     '> *': {
       'gridColumn': 'full-start/full-end',

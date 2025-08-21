@@ -1,6 +1,6 @@
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { ApolloContext } from '../types';
-import type { Asset, Entry } from 'contentful';
+import type { Asset } from '@last-rev/types';
 
 interface FieldReferenceValue {
   sys: { linkType: string };
@@ -19,7 +19,7 @@ export const resolveLocalizedField = async (
     const firstItem = value[0];
 
     if (firstItem?.sys?.linkType === 'Entry') {
-      // contentful cannot have mixed arrays, so it is okay to make assumptions based on the first item
+      // the CMS cannot have mixed arrays, so it is okay to make assumptions based on the first item
       return (
         await loaders.entryLoader.loadMany(value.map((x) => ({ id: x.sys.id, preview: !!preview })))
       )

@@ -1,22 +1,20 @@
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
-
-import { pathNodeResolver } from './pathNodeResolver';
+import { getLocalizedField, pathNodeResolver } from '@last-rev/graphql-cms-core';
 
 import type { ApolloContext } from '../types';
 
-const fixDriveLink = (url: string): string => {
-  const urlObject = new URL(url);
-  const pathSegments = urlObject.pathname.split('/');
+// const fixDriveLink = (url: string): string => {
+//   const urlObject = new URL(url);
+//   const pathSegments = urlObject.pathname.split('/');
 
-  if (pathSegments[pathSegments.length - 1] !== 'preview') {
-    // Replace the last segment with "preview"
-    pathSegments[pathSegments.length - 1] = 'preview';
-    // Update the pathname with the new path
-    urlObject.pathname = pathSegments.join('/');
-  }
+//   if (pathSegments[pathSegments.length - 1] !== 'preview') {
+//     // Replace the last segment with "preview"
+//     pathSegments[pathSegments.length - 1] = 'preview';
+//     // Update the pathname with the new path
+//     urlObject.pathname = pathSegments.join('/');
+//   }
 
-  return urlObject.toString();
-};
+//   return urlObject.toString();
+// };
 
 export const pathResolver = async (content: any, _args: any, ctx: ApolloContext) => {
   const id = content.sys.id;

@@ -1,12 +1,12 @@
-import { getDefaultFieldValue } from '@last-rev/graphql-contentful-core';
-import { type ContentfulLoaders, type ContentfulPathsGenerator } from '@last-rev/types';
+import { getDefaultFieldValue } from '@last-rev/graphql-cms-core';
+import { type CmsLoaders, type CmsPathsGenerator } from '@last-rev/types';
 
 import { createPath } from './utils/createPath';
 
 // Path generation
 // const validateSite = async (_args: {
 //   item: Entry<any>;
-//   loaders: ContentfulLoaders;
+//   loaders: CmsLoaders;
 //   defaultLocale: string;
 //   locales: string[];
 //   preview: boolean;
@@ -41,7 +41,7 @@ import { createPath } from './utils/createPath';
 // only checking for the first item
 const generateParentPaths = async (
   content: any,
-  loaders: ContentfulLoaders,
+  loaders: CmsLoaders,
   defaultLocale: string,
   preview?: boolean,
   paths: string[] = []
@@ -63,7 +63,7 @@ const generateParentPaths = async (
   return paths;
 };
 
-const generatePaths: ContentfulPathsGenerator = async (
+const generatePaths: CmsPathsGenerator = async (
   contentItem,
   loaders,
   defaultLocale,
@@ -92,7 +92,7 @@ const generatePaths: ContentfulPathsGenerator = async (
 };
 
 // // Used to generate the path for Blog topics and blog posts
-// const blogsLandingSlug = async (loaders: ContentfulLoaders, defaultLocale: string, preview?: boolean) => {
+// const blogsLandingSlug = async (loaders: CmsLoaders, defaultLocale: string, preview?: boolean) => {
 //   if (BLOGS_LANDING_ID) {
 //     const blogsLanding = await loaders.entryLoader.load({ id: BLOGS_LANDING_ID, preview: !!preview });
 //     if (blogsLanding) {

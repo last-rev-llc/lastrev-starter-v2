@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { mount } from '@cypress/react18';
+import { mount } from '@cypress/react';
 import NavigationItem from './NavigationItem';
 import { type NavigationItemProps, NavigationLinkVariants } from './NavigationItem.types';
 import {

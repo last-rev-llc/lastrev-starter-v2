@@ -24,7 +24,7 @@
     "preset": "jest-presets/jest/node"
   },
   "devDependencies": {
-    "@cypress/react18": "^2.0.1",
+    "@cypress/react": "^9.0.1",
     "@types/jest": "^29.5.14",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
@@ -40,12 +40,11 @@
     "schema-dts": "^1.1.2",
     "tsconfig": "workspace:*",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.2",
-    "webpack-env": "^0.8.0"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.19.6",
-    "@last-rev/contentful-sidekick-util": "^0.2.0",
+    "@last-rev/cms-sidekick-util": "^0.2.0",
     "@mui/icons-material": "^5.14.19",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.14.19",
@@ -55,7 +54,7 @@
     "algoliasearch": "^5.17.0",
     "calendar-link": "^2.7.0",
     "clsx": "^2.1.1",
-    "encrypt-storage": "^2.13.3",
+    "encrypt-storage": "^2.14.6",
     "framer-motion": "^11.13.5",
     "next": "^14.2.30",
     "next-recaptcha-v3": "^1.5.0",
@@ -67,6 +66,7 @@
     "react-instantsearch-router-nextjs": "^7.13.9",
     "react-schemaorg": "^2.0.0",
     "styled-components": "^6.1.13",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "swr": "^2.3.3"
   }
 }

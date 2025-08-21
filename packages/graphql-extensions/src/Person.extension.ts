@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
-import { createRichText, getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { createRichText, getLocalizedField } from '@last-rev/graphql-cms-core';
 
 import { pageFooterResolver } from './utils/pageFooterResolver';
 import { pageHeaderResolver } from './utils/pageHeaderResolver';
@@ -9,6 +9,7 @@ import { pathResolver } from './utils/pathResolver';
 import { breadcrumbsResolver } from './utils/breadcrumbsResolver';
 import { createType } from './utils/createType';
 import { getDefaultCtaText } from './utils/getDefaultCtaText';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 export const typeDefs = gql`
   extend type Person {
@@ -20,6 +21,7 @@ export const typeDefs = gql`
     mainImage: Media
     breadcrumbs: [Link]
     hero: Content
+    seo: JSON
   }
 `;
 
@@ -30,6 +32,9 @@ export const mappers: Mappers = {
       header: pageHeaderResolver,
       footer: pageFooterResolver,
       breadcrumbs: breadcrumbsResolver,
+      seo: async (person: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(person, 'seo', ctx);
+      },
       hero: async (person: any, _args: any, ctx: ApolloContext) =>
         createType('Hero', {
           variant: 'mediaOnRightFullBleed',

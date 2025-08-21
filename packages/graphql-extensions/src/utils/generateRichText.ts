@@ -1,4 +1,4 @@
-import { createRichText } from '@last-rev/graphql-contentful-core';
+import { createRichText } from '@last-rev/graphql-cms-core';
 
 import { mappers as richTextMappers } from '../RichText.extension';
 

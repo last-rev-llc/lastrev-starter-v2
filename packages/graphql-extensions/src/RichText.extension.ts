@@ -1,6 +1,5 @@
-import type { Mappers } from '@last-rev/types';
+import type { Mappers, Entry, RichTextContent } from '@last-rev/types';
 import type { ApolloContext } from './types';
-import type { Entry, RichTextContent } from 'contentful';
 import { FilterXSS } from 'xss';
 import { isHTML } from './utils/isHTML';
 
@@ -19,7 +18,7 @@ export const mappers: Mappers = {
   RichText: {
     RichText: {
       json: async (raw: RichTextContent) => {
-        let sanitized = raw; // Sanitize RichText Contentful JSOn
+        let sanitized = raw; // Sanitize RichText JSON
         // It will add extra empty lines almost all the times
         const { content } = sanitized;
         if (content) {

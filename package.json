@@ -13,6 +13,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "gql:dev": "pnpm secure-run turbo sync:cms gql:dev --continue --concurrency 15",
     "gql:logs": "pnpm secure-run turbo gql:logs",
+    "gql:start": "pnpm secure-run turbo sync:cms gql:start",
     "lint": "turbo lint",
     "storybook": "pnpm --filter ui storybook dev -p 6006",
     "sync:cms": "pnpm secure-run turbo sync:cms",
@@ -21,44 +22,45 @@
     "list-projects": "node ./scripts/bws-secure/list-projects.js",
     "bws-deps": "[ -d node_modules/dotenv ] && [ -d node_modules/dotenv-cli ] && [ -f node_modules/.bin/bws ] || npm install",
     "bws-update": "rm -rf scripts/bws-secure && git clone git@github.com:last-rev-llc/bws-secure.git scripts/bws-secure && rm -rf scripts/bws-secure/.git && bash scripts/bws-secure/install.sh",
-    "postinstall": "bash ./scripts/bws-secure/bws-installer.sh"
+    "postinstall": "bash ./scripts/bws-secure/bws-installer.sh",
+    "sanity-contentful-export": "pnpm secure-run turbo sanity-studio#sanity-contentful-export",
+    "sanity-create-schema": "pnpm secure-run turbo sanity-studio#sanity-create-schema",
+    "sanity-create-dataset": "pnpm secure-run turbo sanity-studio#sanity-create-dataset",
+    "sanity-dataset-import": "pnpm secure-run turbo sanity-studio#sanity-dataset-import",
+    "sanity-studio-deploy": "pnpm secure-run turbo sanity-studio#sanity-studio-deploy"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@chromatic-com/storybook": "^3.2.2",
-    "@netlify/plugin-nextjs": "4.41.3",
-    "@storybook/addon-essentials": "^8.4.7",
-    "@storybook/addon-interactions": "^8.4.7",
-    "@storybook/addon-links": "^8.4.7",
-    "@storybook/addon-mdx-gfm": "^8.4.7",
-    "@storybook/addon-onboarding": "^8.4.7",
-    "@storybook/blocks": "^8.4.7",
-    "@storybook/nextjs": "^8.4.7",
-    "@storybook/react": "^8.4.7",
-    "@storybook/test": "^8.4.7",
+    "@netlify/plugin-nextjs": "^5.11.4",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-interactions": "^8.6.14",
+    "@storybook/addon-links": "^9.0.12",
+    "@storybook/addon-mdx-gfm": "^8.6.14",
+    "@storybook/addon-onboarding": "^9.0.12",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/nextjs": "^9.0.12",
+    "@storybook/react": "^9.0.12",
+    "@storybook/test": "^8.6.14",
     "@storybook/testing-library": "^0.2.2",
+    "axios": "^1.7.9",
     "chromatic": "^11.20.1",
     "cypress": "^13.16.1",
+    "dotenv": "^16.4.7",
     "dotenv-cli": "^7.4.4",
+    "glob": "^11.0.1",
     "next": "^14.2.30",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
-    "react-dom": "^18.3.1",
-    "react": "^18.3.1",
-    "storybook": "^8.4.7",
+    "storybook": "^9.0.12",
     "turbo": "^1.13.3",
-    "dotenv": "^16.4.7",
-    "yargs": "^17.7.2",
-    "glob": "^11.0.1",
-    "axios": "^1.7.9"
-  },
-  "dependencies": {
-    "@netlify/plugin-nextjs": "4"
+    "yargs": "^17.7.2"
   },
   "packageManager": "pnpm@9.6.0",
   "engines": {
-    "pnpm": "9.x"
+    "pnpm": "9.x",
+    "node": "22.x"
   },
   "version": "",
   "readme": "ERROR: No README data found!",
@@ -66,11 +68,18 @@
   "pnpm": {
     "patchedDependencies": {
       "@mui/system@5.14.19": "patches/@mui__system@5.14.19.patch"
+    },
+    "overrides": {
+      "systeminformation@>=5.0.0 <5.21.7": ">=5.21.7",
+      "elliptic@>=4.0.0 <=6.5.6": ">=6.5.7",
+      "elliptic@>=2.0.0 <=6.5.6": ">=6.5.7",
+      "elliptic@>=5.2.1 <=6.5.6": ">=6.5.7",
+      "sqlite3": "npm:noop2@2.0.0"
     }
   },
   "overrides": {
-    "dependency-name": {
-      "graphql": "^16.9.0"
-    }
+    "sanity": "3.90.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   }
 }

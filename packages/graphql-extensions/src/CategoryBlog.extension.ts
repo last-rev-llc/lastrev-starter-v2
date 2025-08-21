@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-import createRichText from '@last-rev/graphql-contentful-core/dist/utils/createRichText';
-import getLocalizedField from '@last-rev/graphql-contentful-core/dist/utils/getLocalizedField';
+import createRichText from '@last-rev/graphql-cms-core/dist/utils/createRichText';
+import getLocalizedField from '@last-rev/graphql-cms-core/dist/utils/getLocalizedField';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
 
@@ -9,6 +9,7 @@ import { pageFooterResolver } from './utils/pageFooterResolver';
 import { pageHeaderResolver } from './utils/pageHeaderResolver';
 import { pathResolver } from './utils/pathResolver';
 import { resolveField } from './utils/resolveField';
+import { getSeoFieldValue } from './utils/getSeoFieldValue';
 
 const BLOGS_LANDING_ID = process.env.BLOGS_LANDING_ID;
 
@@ -19,6 +20,7 @@ export const typeDefs = gql`
     path: String
     hero: Hero
     contents: [Content]
+    seo: JSON
   }
 `;
 
@@ -28,6 +30,9 @@ export const mappers: Mappers = {
       path: pathResolver,
       header: pageHeaderResolver,
       footer: pageFooterResolver,
+      seo: async (categoryBlog: any, _args: any, ctx: ApolloContext) => {
+        return await getSeoFieldValue(categoryBlog, 'seo', ctx);
+      },
       contents: async (_: any, _args: any, ctx: ApolloContext) => {
         // TODO: Update once path lookup is implemented to remove dependency on env ID
         if (BLOGS_LANDING_ID) {

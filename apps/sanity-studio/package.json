@@ -1,0 +1,54 @@
+{
+  "name": "sanity-studio",
+  "version": "0.1.0",
+  "private": true,
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build",
+    "dist"
+  ],
+  "scripts": {
+    "build": "sanity build && pnpm compile",
+    "compile": "tsc --project tsconfig.build.json",
+    "dev-compile": "tsc --project tsconfig.build.json --watch",
+    "dev": "concurrently \"pnpm dev-compile\" \"sanity dev\"",
+    "sanity-contentful-export": "contentful-to-sanity export -s $CONTENTFUL_STARTER_SPACE_ID -t $CONTENTFUL_MANAGEMENT_TOKEN -a $CONTENTFUL_STARTER_ACCESS_TOKEN . && node scripts/removeTables.js",
+    "sanity-create-dataset": "contentful-to-sanity dataset --keep-markdown --locale en-US .",
+    "sanity-create-schema-old": "contentful-to-sanity schema --keep-markdown --intl multiple --schema-file schema.js . && node scripts/fixSchemaErrors.js",
+    "sanity-create-schema": "contentful-to-sanity schema --keep-markdown --intl multiple . && node scripts/fixSchemaErrors.js",
+    "sanity-dataset-import": "sanity dataset import ./dataset.ndjson $SANITY_STUDIO_SANITY_DATASET --replace",
+    "sanity-studio-deploy": "sanity deploy -y",
+    "start": "sanity start"
+  },
+  "dependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@sanity/default-layout": "^2.36.2",
+    "@sanity/desk-tool": "^2.36.2",
+    "@sanity/document-internationalization": "^3.3.1",
+    "@sanity/vision": "^3.90.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sanity": "^3.90.0",
+    "sanity-plugin-iframe-pane": "^3.2.1",
+    "sanity-plugin-media": "^3.0.2",
+    "styled-components": "^6.1.15"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^5.0.2",
+    "@types/node": "^20.12.10",
+    "@types/react": "^18.3.1",
+    "concurrently": "^8.2.2",
+    "contentful-to-sanity": "^4.2.10",
+    "eslint": "^9.9.0",
+    "prettier": "^3.0.2",
+    "tsconfig": "workspace:*",
+    "typescript": "^5.1.6"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
+}

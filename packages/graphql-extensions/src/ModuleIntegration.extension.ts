@@ -8,13 +8,14 @@ export const typeDefs = gql`
   extend type ModuleIntegration {
     introText: Text
     backgroundImage: Media
+    settings: JSON
   }
 `;
 
 export const mappers: Mappers = {
   ModuleIntegration: {
     ModuleIntegration: {
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     }
   }
 };

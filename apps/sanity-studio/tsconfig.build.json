@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "ES2015"],
+    "outDir": "./build"
+  },
+  "extends": "tsconfig/base.json",
+  "include": ["index.ts"],
+  "exclude": ["dist", "build", "node_modules", "./**/*.test.ts", "_archived"]
+}

@@ -1,5 +1,5 @@
 // import { draftMode } from 'next/headers';
-const preview = process.env.CONTENTFUL_USE_PREVIEW === 'true';
+const preview = process.env.USE_PREVIEW === 'true';
 
 export const isPreview = () => {
   return preview;

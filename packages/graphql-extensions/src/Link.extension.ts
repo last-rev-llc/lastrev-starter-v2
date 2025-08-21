@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { getLocalizedField } from '@last-rev/graphql-contentful-core';
+import { getLocalizedField } from '@last-rev/graphql-cms-core';
 import type { Mappers } from '@last-rev/types';
 import type { ApolloContext } from './types';
 
@@ -60,13 +60,13 @@ export const mappers: Mappers = {
     Link: {
       href: hrefUrlResolver,
       target: targetResolver,
-      color: defaultResolver('color'),
-      variant: defaultResolver('variant')
+      color: defaultResolver('color', { camelize: true }),
+      variant: defaultResolver('variant', { camelize: true })
     },
     NavigationItem: {
       link: (x: any) => ({ ...x, fieldName: 'link' }),
       children: () => [],
-      variant: defaultResolver('variant')
+      variant: defaultResolver('variant', { camelize: true })
     },
     Card: {
       variant: () => 'default',

@@ -13,7 +13,7 @@ export function middleware() {
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://*.hsforms.com;
-    frame-ancestors 'self' https://app.contentful.com https://lastrev.com https://lr-live-editor.netlify.app https://*.theanswer.ai https://*.flowise.theanswer.ai;
+    frame-ancestors 'self' https://app.contentful.com https://lastrev.com https://lr-live-editor.netlify.app https://*.theanswer.ai https://*.flowise.theanswer.ai http://localhost:3333 https://localhost:3333 https://*.sanity.studio;
     block-all-mixed-content;
     upgrade-insecure-requests;
   `

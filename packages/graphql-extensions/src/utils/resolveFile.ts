@@ -1,4 +1,4 @@
-import getLocalizedField from '@last-rev/graphql-contentful-core/dist/utils/getLocalizedField';
+import getLocalizedField from '@last-rev/graphql-cms-core/dist/utils/getLocalizedField';
 
 import type { ApolloContext } from '../types';
 
