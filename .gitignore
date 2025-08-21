@@ -19,3 +19,4 @@ storybook-static
 requiredVars.env
 .env-debug.html
  
+.bwsconfig.cache
