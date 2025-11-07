@@ -231,14 +231,14 @@ importers:
         specifier: ^4.11.2
         version: 4.11.2(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/cms-webhook-handler':
-        specifier: ^0.2.0
-        version: 0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(jiti@2.5.1)(node-notifier@8.0.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
+        specifier: ^0.2.4
+        version: 0.2.4(@babel/core@7.28.3)(@emotion/is-prop-valid@1.2.2)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(immer@10.1.1)(jest-util@30.0.5)(jiti@2.5.1)(node-notifier@8.0.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
       '@last-rev/graphql-algolia-integration':
         specifier: ^0.5.0
         version: 0.5.0(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/graphql-cms-core':
-        specifier: ^0.2.0
-        version: 0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.28.3)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
+        specifier: ^0.2.4
+        version: 0.2.4(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.28.3)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
       '@next/bundle-analyzer':
         specifier: ^14.2.32
         version: 14.2.32
@@ -346,8 +346,8 @@ importers:
         specifier: ^0.5.0
         version: 0.5.0(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/graphql-cms-core':
-        specifier: ^0.2.0
-        version: 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild@0.25.6)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
+        specifier: ^0.2.4
+        version: 0.2.4(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/logging':
         specifier: ^0.2.0
         version: 0.2.0(encoding@0.1.13)
@@ -355,11 +355,11 @@ importers:
         specifier: ^0.2.0
         version: 0.2.0(@types/node@20.12.10)(postcss@8.5.6)(typescript@5.7.2)
       '@last-rev/sanity-mapper':
-        specifier: ^0.2.0
+        specifier: ^0.2.1
         version: 0.2.1(encoding@0.1.13)
       '@last-rev/types':
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.5.1
+        version: 0.5.1
       css:
         specifier: ^3.0.0
         version: 3.0.0
@@ -425,8 +425,8 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0
       '@last-rev/cli':
-        specifier: ^0.7.0
-        version: 0.7.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(eslint-plugin-import@2.29.0(@typescript-eslint/parser@5.57.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
+        specifier: ^0.7.1
+        version: 0.7.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(eslint-plugin-import@2.29.0(@typescript-eslint/parser@5.57.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
       '@parcel/watcher':
         specifier: ^2.4.1
         version: 2.4.1
@@ -3869,6 +3869,9 @@ packages:
   '@last-rev/cms-path-util@0.2.1':
     resolution: {integrity: sha512-lASVb+PRIj5I8zH0M6RewEimotQXen1igG1vnMvNgAQ5J54k8n0n4QKSkgdL3qpw6bdC2axSuejfKKkQimyhsA==}
 
+  '@last-rev/cms-path-util@0.2.2':
+    resolution: {integrity: sha512-b1FR3xRDh86rs3Z48CDMJ5Wo3XEvNyWS0FA0+zF9XgYTGMHNkCUZp70LgaBK0+dzEqKyEPzR7gS9YTd711h83w==}
+
   '@last-rev/cms-redis-loader@0.2.1':
     resolution: {integrity: sha512-24CiJye9dPosl8ZTjwdyf0S5KZgszbuXpSMdkF+ugbUPGtnVWXxA5EyWHQ6R1zns4U4UoSKx5jkTA7cYJCfquw==}
 
@@ -3878,11 +3881,14 @@ packages:
   '@last-rev/cms-sync-to-fs@0.2.2':
     resolution: {integrity: sha512-9crA1hevrDaktK1cRSIFdTmvUstDCy+rP8aQJpmiFDKRxSXBGo3JuQzvcjFIDRWJV1jDn5pUuNxN0V2eRWs3fA==}
 
-  '@last-rev/cms-webhook-handler@0.2.2':
-    resolution: {integrity: sha512-f6sM2REIQMXuTfQWvt8FNiZXV1deiyOPkhGrPMpYc+37XpbBCJh86D/zY0nFyYeWx7rmS/G3iThcsk2TxvKltg==}
+  '@last-rev/cms-webhook-handler@0.2.4':
+    resolution: {integrity: sha512-aHeDdyMCVgqcMUVT1U+FPVxczdF+lROjxRgnhm3RzguFY+e7rc+nb99LEj5il1+NuxfLCu6S4soELaI1hBZ/yQ==}
 
   '@last-rev/contentful-cms-loader@0.6.0':
     resolution: {integrity: sha512-G1nt2OnzLZNrt1YiS4db74FgHDISYUptvbzDjTJuowZwzzip+Qgo5GPzLyeljnFE9rfqm/S+ykfqLZLyfZfbAg==}
+
+  '@last-rev/contentful-cms-loader@0.6.1':
+    resolution: {integrity: sha512-Pwk4IK9W7ljaAhjzO6jsnuEre48KrbwPws7xmNHTqNrxIOF+rtPk2MkPDw1GSs/5Ln7dOxhnCs5lngAc8x50ew==}
 
   '@last-rev/contentful-fragment-gen@0.4.0':
     resolution: {integrity: sha512-LP3xGNDUoyzar/syByq5N2C9tI4/BDBeLKvEGX2hGxaswjyhP0tm0wn5Sa46oFq+7ZPkYBfV+3xfVGKEJXWvjA==}
@@ -3903,8 +3909,14 @@ packages:
   '@last-rev/graphql-cms-core@0.2.2':
     resolution: {integrity: sha512-kYruAI3EdVBYZ3Go43mhO75Wb/6ryguMKHGuFKvUV039JPf8uIe7P0Ss2EgXV325+CKv58HAEb7uAFvTmicdNw==}
 
+  '@last-rev/graphql-cms-core@0.2.4':
+    resolution: {integrity: sha512-L2A6v9egSC2xBL6+ybUhP02jKqk9jh+kOW2g8hX0Y/IgYQqY6KlenvMMILWqnox0phkc7qFQuR0EYc4rdJtwdg==}
+
   '@last-rev/graphql-cms-helpers@0.2.2':
     resolution: {integrity: sha512-6Y79Mm4ZroBIAMAM3iK5/c8KBy5gjmpJL/JMBjgJ3sGh37xqp7AvUtlGyE2dmE8zSLb/d0U2WuAYu+ml1BUx/Q==}
+
+  '@last-rev/graphql-cms-helpers@0.2.4':
+    resolution: {integrity: sha512-8RqACE/9jxKxQvoKiK1NG/GPXNLh1jZsBuMU063TXWuRCh3efXa5zaLW1K7ropTXWkfKjioC7p3F//hlYPo9dg==}
 
   '@last-rev/graphql-schema-gen@0.4.0':
     resolution: {integrity: sha512-yvNbcfJVoMNOb0VyWpEX44ddk1aOI4cjDvSZVPMF0zA5gNn87+BPdDuQCiekW/u5rgVPOdlpAvCzxVn1RTMVhg==}
@@ -3932,6 +3944,9 @@ packages:
 
   '@last-rev/types@0.5.0':
     resolution: {integrity: sha512-N8+ze+fPNvGJh5S20lGNWmpdBPpKJtB4S+LiFNiabuTvyCVmou9CdiEoRqb2jmav2I9bsg5LaAFO2oDFANgi/g==}
+
+  '@last-rev/types@0.5.1':
+    resolution: {integrity: sha512-e/iLX35wjBzx4aY0z9UcS29KSik4ZblsI2dFQk95h9+bVj6f63zl0iS/DjJaWNY8UT9PKHieDyMqBEjnESoywQ==}
 
   '@leichtgewicht/ip-codec@2.0.4':
     resolution: {integrity: sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==}
@@ -8367,10 +8382,6 @@ packages:
     resolution: {integrity: sha512-Vs0gQJxHJDJFQvl4zW9BbHuSSYuHFDB9Jk0JIgMNe/QOt3Qa3W/zcfh47ur37Aq6OHkRHCy7HvafkXqucSrCig==}
     engines: {node: '>=18'}
     hasBin: true
-
-  contentful-management@11.25.3:
-    resolution: {integrity: sha512-rHOZp5s8pGkmPzEF6W7cWUVXYnMAzNblCdz69Yam41CYcJAu3ayW3ATKH1gYc9qz7l4dYX+7brk3G+kpuku7mw==}
-    engines: {node: '>=18'}
 
   contentful-management@11.26.2:
     resolution: {integrity: sha512-Zen5JnDpkOFRGR+abjTowjuvWbqhqyJMnbkmBNQgAyj0pWgpGhLBs0XzZ7ZJUyRlqjkqN2I6oezaF7Bdk5hdGQ==}
@@ -17970,7 +17981,7 @@ snapshots:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@types/aws-lambda': 8.10.119
 
-  '@as-integrations/next@3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@as-integrations/next@3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       next: 14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -18971,6 +18982,12 @@ snapshots:
     dependencies:
       '@babel/core': 7.28.3
       '@babel/helper-plugin-utils': 7.25.9
+
+  '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.24.7)':
+    dependencies:
+      '@babel/core': 7.24.7
+      '@babel/helper-plugin-utils': 7.25.9
+    optional: true
 
   '@babel/plugin-syntax-class-static-block@7.14.5(@babel/core@7.28.3)':
     dependencies:
@@ -21831,44 +21848,6 @@ snapshots:
       - supports-color
       - ts-node
 
-  '@jest/core@30.0.5(node-notifier@8.0.2)':
-    dependencies:
-      '@jest/console': 30.0.5
-      '@jest/pattern': 30.0.1
-      '@jest/reporters': 30.0.5(node-notifier@8.0.2)
-      '@jest/test-result': 30.0.5
-      '@jest/transform': 30.0.5
-      '@jest/types': 30.0.5
-      '@types/node': 20.12.10
-      ansi-escapes: 4.3.2
-      chalk: 4.1.2
-      ci-info: 4.3.0
-      exit-x: 0.2.2
-      graceful-fs: 4.2.11
-      jest-changed-files: 30.0.5
-      jest-config: 30.0.5(@types/node@20.12.10)
-      jest-haste-map: 30.0.5
-      jest-message-util: 30.0.5
-      jest-regex-util: 30.0.1
-      jest-resolve: 30.0.5
-      jest-resolve-dependencies: 30.0.5
-      jest-runner: 30.0.5
-      jest-runtime: 30.0.5
-      jest-snapshot: 30.0.5
-      jest-util: 30.0.5
-      jest-validate: 30.0.5
-      jest-watcher: 30.0.5
-      micromatch: 4.0.8
-      pretty-format: 30.0.5
-      slash: 3.0.0
-    optionalDependencies:
-      node-notifier: 8.0.2
-    transitivePeerDependencies:
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   '@jest/diff-sequences@30.0.1': {}
 
   '@jest/environment@27.5.1':
@@ -22397,25 +22376,25 @@ snapshots:
     dependencies:
       lodash: 4.17.21
 
-  '@last-rev/cli@0.7.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(eslint-plugin-import@2.29.0(@typescript-eslint/parser@5.57.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/cli@0.7.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(eslint-plugin-import@2.29.0(@typescript-eslint/parser@5.57.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@graphql-tools/merge': 8.4.2(graphql@16.9.0)
       '@last-rev/app-config': 0.6.0
-      '@last-rev/cms-sync-to-fs': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/cms-sync-to-fs': 0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/contentful-fragment-gen': 0.4.0(encoding@0.1.13)
       '@last-rev/contentful-import-export': 0.3.0(encoding@0.1.13)(eslint-plugin-import@2.29.0(@typescript-eslint/parser@5.57.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint-plugin-n@16.6.2(eslint@8.57.1))(eslint-plugin-promise@6.6.0(eslint@8.57.1))
       '@last-rev/contentful-reports': 0.3.0
-      '@last-rev/graphql-cms-core': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)
-      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/graphql-cms-core': 0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@octokit/rest': 18.12.0
       '@types/inquirer': 7.3.3
       axios: 1.13.2
       chalk: 4.1.2
       commander: 7.2.0
       configstore: 5.0.1
-      contentful-management: 11.25.3
+      contentful-management: 11.54.4
       cross-spawn: 7.0.6
       dotenv: 10.0.0
       env-paths: 2.2.1
@@ -22464,7 +22443,7 @@ snapshots:
       '@aws-sdk/lib-dynamodb': 3.405.0(@aws-sdk/client-dynamodb@3.405.0)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      dataloader: 2.2.2
+      dataloader: 2.2.3
       lodash: 4.17.21
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -22475,7 +22454,7 @@ snapshots:
     dependencies:
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      dataloader: 2.2.2
+      dataloader: 2.2.3
       fs-extra: 10.1.0
       lodash: 4.17.21
       tslib: 2.8.1
@@ -22505,11 +22484,28 @@ snapshots:
       - encoding
       - supports-color
 
+  '@last-rev/cms-path-util@0.2.2(encoding@0.1.13)':
+    dependencies:
+      '@aws-sdk/client-dynamodb': 3.405.0
+      '@aws-sdk/lib-dynamodb': 3.405.0(@aws-sdk/client-dynamodb@3.405.0)
+      '@last-rev/cms-path-rules-engine': 0.2.0(encoding@0.1.13)
+      '@last-rev/logging': 0.2.0(encoding@0.1.13)
+      '@last-rev/timer': 0.3.0
+      async-lock: 1.4.0
+      fs-extra: 10.1.0
+      ioredis: 5.3.2
+      lodash: 4.17.21
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - aws-crt
+      - encoding
+      - supports-color
+
   '@last-rev/cms-redis-loader@0.2.1(encoding@0.1.13)':
     dependencies:
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      dataloader: 2.2.2
+      dataloader: 2.2.3
       ioredis: 5.3.2
     transitivePeerDependencies:
       - encoding
@@ -22519,14 +22515,14 @@ snapshots:
     dependencies:
       lodash: 4.17.21
 
-  '@last-rev/cms-sync-to-fs@0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/cms-sync-to-fs@0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@last-rev/cms-path-util': 0.2.1(encoding@0.1.13)
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/sanity-mapper': 0.2.1(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       contentful: 11.7.15
       fs-extra: 10.1.0
       lodash: 4.17.21
@@ -22551,22 +22547,22 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/cms-webhook-handler@0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(jiti@2.5.1)(node-notifier@8.0.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)':
+  '@last-rev/cms-webhook-handler@0.2.4(@babel/core@7.28.3)(@emotion/is-prop-valid@1.2.2)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(immer@10.1.1)(jest-util@30.0.5)(jiti@2.5.1)(node-notifier@8.0.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)':
     dependencies:
       '@aws-sdk/client-dynamodb': 3.405.0
       '@aws-sdk/lib-dynamodb': 3.405.0(@aws-sdk/client-dynamodb@3.405.0)
-      '@last-rev/cms-path-util': 0.2.1(encoding@0.1.13)
+      '@last-rev/cms-path-util': 0.2.2(encoding@0.1.13)
       '@last-rev/contentful-webhook-parser': 0.3.0
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/graphql-cms-helpers': 0.2.4(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/sanity-mapper': 0.2.1(encoding@0.1.13)
-      '@last-rev/sanity-webhook-parser': 0.2.1(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@last-rev/sanity-webhook-parser': 0.2.1(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
+      '@sanity/client': 7.9.0
       contentful: 11.7.15
       ioredis: 5.3.2
       jsonwebtoken: 9.0.2
       lodash: 4.17.21
-      sanity: 3.99.0(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
+      sanity: 3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@babel/core'
       - '@emotion/is-prop-valid'
@@ -22612,7 +22608,17 @@ snapshots:
     dependencies:
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      dataloader: 2.2.2
+      dataloader: 2.2.3
+      lodash: 4.17.21
+      tslib: 2.8.1
+    transitivePeerDependencies:
+      - encoding
+
+  '@last-rev/contentful-cms-loader@0.6.1(encoding@0.1.13)':
+    dependencies:
+      '@last-rev/logging': 0.2.0(encoding@0.1.13)
+      '@last-rev/timer': 0.3.0
+      dataloader: 2.2.3
       lodash: 4.17.21
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -22678,12 +22684,12 @@ snapshots:
       - encoding
       - graphql
 
-  '@last-rev/graphql-cms-core@0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild@0.25.6)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-core@0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@apollo/subgraph': 2.5.4(graphql@16.9.0)
       '@as-integrations/aws-lambda': 3.1.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))
-      '@as-integrations/next': 3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@as-integrations/next': 3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@contentful/rich-text-plain-text-renderer': 17.1.0
       '@graphql-tools/merge': 8.4.2(graphql@16.9.0)
       '@graphql-tools/schema': 8.5.1(graphql@16.9.0)
@@ -22691,10 +22697,10 @@ snapshots:
       '@last-rev/cms-fs-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
       '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/graphql-schema-gen': 0.4.0(encoding@0.1.13)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
-      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
       '@last-rev/types': 0.5.0
       contentful: 11.7.15
@@ -22722,25 +22728,25 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/graphql-cms-core@0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-core@0.2.4(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@apollo/subgraph': 2.5.4(graphql@16.9.0)
       '@as-integrations/aws-lambda': 3.1.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))
-      '@as-integrations/next': 3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@as-integrations/next': 3.2.0(@apollo/server@4.12.2(encoding@0.1.13)(graphql@16.9.0))(next@14.2.32(@babel/core@7.24.7)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@contentful/rich-text-plain-text-renderer': 17.1.0
       '@graphql-tools/merge': 8.4.2(graphql@16.9.0)
       '@graphql-tools/schema': 8.5.1(graphql@16.9.0)
       '@last-rev/app-config': 0.6.0
       '@last-rev/cms-fs-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/contentful-cms-loader': 0.6.1(encoding@0.1.13)
+      '@last-rev/graphql-cms-helpers': 0.2.4(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/graphql-schema-gen': 0.4.0(encoding@0.1.13)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
-      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
-      '@last-rev/types': 0.5.0
+      '@last-rev/types': 0.5.1
       contentful: 11.7.15
       graphql: 16.9.0
       graphql-tag: 2.12.6(graphql@16.9.0)
@@ -22766,7 +22772,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/graphql-cms-core@0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.28.3)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-core@0.2.4(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(next@14.2.32(@babel/core@7.28.3)(@opentelemetry/api@1.8.0)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@apollo/subgraph': 2.5.4(graphql@16.9.0)
@@ -22778,13 +22784,13 @@ snapshots:
       '@last-rev/app-config': 0.6.0
       '@last-rev/cms-fs-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
-      '@last-rev/graphql-cms-helpers': 0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/contentful-cms-loader': 0.6.1(encoding@0.1.13)
+      '@last-rev/graphql-cms-helpers': 0.2.4(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/graphql-schema-gen': 0.4.0(encoding@0.1.13)
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/testing-library': 0.2.0(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
-      '@last-rev/types': 0.5.0
+      '@last-rev/types': 0.5.1
       contentful: 11.7.15
       graphql: 16.9.0
       graphql-tag: 2.12.6(graphql@16.9.0)
@@ -22810,7 +22816,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/graphql-cms-helpers@0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-helpers@0.2.2(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/app-config': 0.6.0
@@ -22821,10 +22827,10 @@ snapshots:
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
       '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
       '@last-rev/sanity-cms-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
       '@last-rev/types': 0.5.0
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       contentful: 11.7.15
       lodash: 4.17.21
     transitivePeerDependencies:
@@ -22846,21 +22852,21 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/graphql-cms-helpers@0.2.2(@babel/core@7.24.7)(@types/node@20.12.10)(encoding@0.1.13)(esbuild@0.25.6)(graphql@16.9.0)(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-helpers@0.2.4(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/app-config': 0.6.0
       '@last-rev/cms-dynamodb-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-fs-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-path-rules-engine': 0.2.0(encoding@0.1.13)
-      '@last-rev/cms-path-util': 0.2.1(encoding@0.1.13)
+      '@last-rev/cms-path-util': 0.2.2(encoding@0.1.13)
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
+      '@last-rev/contentful-cms-loader': 0.6.1(encoding@0.1.13)
       '@last-rev/sanity-cms-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)
+      '@last-rev/testing-library': 0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
-      '@last-rev/types': 0.5.0
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@last-rev/types': 0.5.1
+      '@sanity/client': 7.9.0
       contentful: 11.7.15
       lodash: 4.17.21
     transitivePeerDependencies:
@@ -22882,21 +22888,21 @@ snapshots:
       - ts-node
       - typescript
 
-  '@last-rev/graphql-cms-helpers@0.2.2(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/graphql-cms-helpers@0.2.4(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(encoding@0.1.13)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(graphql@16.9.0)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
       '@apollo/server': 4.12.2(encoding@0.1.13)(graphql@16.9.0)
       '@last-rev/app-config': 0.6.0
       '@last-rev/cms-dynamodb-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-fs-loader': 0.2.0(encoding@0.1.13)
       '@last-rev/cms-path-rules-engine': 0.2.0(encoding@0.1.13)
-      '@last-rev/cms-path-util': 0.2.1(encoding@0.1.13)
+      '@last-rev/cms-path-util': 0.2.2(encoding@0.1.13)
       '@last-rev/cms-redis-loader': 0.2.1(encoding@0.1.13)
-      '@last-rev/contentful-cms-loader': 0.6.0(encoding@0.1.13)
+      '@last-rev/contentful-cms-loader': 0.6.1(encoding@0.1.13)
       '@last-rev/sanity-cms-loader': 0.2.1(encoding@0.1.13)
       '@last-rev/testing-library': 0.2.0(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.28.3))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)
       '@last-rev/timer': 0.3.0
-      '@last-rev/types': 0.5.0
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@last-rev/types': 0.5.1
+      '@sanity/client': 7.9.0
       contentful: 11.7.15
       lodash: 4.17.21
     transitivePeerDependencies:
@@ -22970,8 +22976,8 @@ snapshots:
       '@last-rev/logging': 0.2.0(encoding@0.1.13)
       '@last-rev/sanity-mapper': 0.2.1(encoding@0.1.13)
       '@last-rev/timer': 0.3.0
-      '@sanity/client': 7.9.0(debug@4.4.0)
-      dataloader: 2.2.2
+      '@sanity/client': 7.9.0
+      dataloader: 2.2.3
       lodash: 4.17.21
       tslib: 2.8.1
     transitivePeerDependencies:
@@ -22987,9 +22993,9 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@last-rev/sanity-webhook-parser@0.2.1(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)':
+  '@last-rev/sanity-webhook-parser@0.2.1(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)':
     dependencies:
-      sanity: 3.99.0(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
+      sanity: 3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
       - '@types/node'
@@ -23017,29 +23023,10 @@ snapshots:
       - utf-8-validate
       - yaml
 
-  '@last-rev/testing-library@0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)':
+  '@last-rev/testing-library@0.2.0(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(@types/node@20.12.10)(babel-jest@30.0.5(@babel/core@7.24.7))(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(esbuild@0.25.6)(jest-util@30.0.5)(node-notifier@8.0.2)(typescript@5.7.2)':
     dependencies:
-      jest: 30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(node-notifier@8.0.2)
-      ts-jest: 29.4.1(@babel/core@7.24.7)(esbuild@0.25.6)(jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(node-notifier@8.0.2))(typescript@5.7.2)
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@jest/transform'
-      - '@jest/types'
-      - '@types/node'
-      - babel-jest
-      - babel-plugin-macros
-      - esbuild
-      - esbuild-register
-      - jest-util
-      - node-notifier
-      - supports-color
-      - ts-node
-      - typescript
-
-  '@last-rev/testing-library@0.2.0(@babel/core@7.24.7)(@types/node@20.12.10)(esbuild@0.25.6)(node-notifier@8.0.2)(typescript@5.7.2)':
-    dependencies:
-      jest: 30.0.5(@types/node@20.12.10)(node-notifier@8.0.2)
-      ts-jest: 29.4.1(@babel/core@7.24.7)(esbuild@0.25.6)(jest@30.0.5(@types/node@20.12.10)(node-notifier@8.0.2))(typescript@5.7.2)
+      jest: 30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
+      ts-jest: 29.4.1(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(babel-jest@30.0.5(@babel/core@7.24.7))(esbuild@0.25.6)(jest-util@30.0.5)(jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2))(typescript@5.7.2)
     transitivePeerDependencies:
       - '@babel/core'
       - '@jest/transform'
@@ -23077,6 +23064,8 @@ snapshots:
   '@last-rev/timer@0.3.0': {}
 
   '@last-rev/types@0.5.0': {}
+
+  '@last-rev/types@0.5.1': {}
 
   '@leichtgewicht/ip-codec@2.0.4': {}
 
@@ -24365,7 +24354,15 @@ snapshots:
   '@sanity/client@6.19.1':
     dependencies:
       '@sanity/eventsource': 5.0.2
-      get-it: 8.6.10(debug@4.4.0)
+      get-it: 8.6.10
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - debug
+
+  '@sanity/client@6.29.1':
+    dependencies:
+      '@sanity/eventsource': 5.0.2
+      get-it: 8.6.10
       rxjs: 7.8.1
     transitivePeerDependencies:
       - debug
@@ -24375,6 +24372,15 @@ snapshots:
       '@sanity/eventsource': 5.0.2
       get-it: 8.6.10(debug@4.4.0)
       rxjs: 7.8.1
+    transitivePeerDependencies:
+      - debug
+
+  '@sanity/client@7.9.0':
+    dependencies:
+      '@sanity/eventsource': 5.0.2
+      get-it: 8.6.10
+      nanoid: 3.3.11
+      rxjs: 7.8.2
     transitivePeerDependencies:
       - debug
 
@@ -24713,6 +24719,20 @@ snapshots:
       - react
       - supports-color
 
+  '@sanity/insert-menu@1.1.13(@emotion/is-prop-valid@1.2.2)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+    dependencies:
+      '@sanity/icons': 3.7.4(react@18.3.1)
+      '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      '@sanity/ui': 2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      lodash: 4.17.21
+      react: 18.3.1
+      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
+      react-dom: 18.3.1(react@18.3.1)
+      react-is: 18.2.0
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - styled-components
+
   '@sanity/insert-menu@1.1.13(@emotion/is-prop-valid@1.2.2)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@sanity/icons': 3.7.4(react@18.3.1)
@@ -24727,26 +24747,12 @@ snapshots:
       - '@emotion/is-prop-valid'
       - styled-components
 
-  '@sanity/insert-menu@1.1.13(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      '@sanity/icons': 3.7.4(react@18.3.1)
-      '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
-      '@sanity/ui': 2.16.12(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      lodash: 4.17.21
-      react: 18.3.1
-      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
-      react-is: 18.2.0
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - styled-components
-
   '@sanity/language-filter@4.0.5(@emotion/is-prop-valid@1.2.2)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(sanity@3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1))(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@sanity/icons': 3.7.4(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sanity/ui': 2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/util': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      '@sanity/util': 3.99.0(@types/react@18.3.1)
       react: 18.3.1
       sanity: 3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
       styled-components: 6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -24841,15 +24847,15 @@ snapshots:
 
   '@sanity/presentation-comlink@1.0.28(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))':
     dependencies:
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       '@sanity/comlink': 3.0.9
       '@sanity/visual-editing-types': 1.1.5(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))
     transitivePeerDependencies:
       - '@sanity/types'
 
-  '@sanity/preview-url-secret@2.1.14(@sanity/client@7.9.0)':
+  '@sanity/preview-url-secret@2.1.14(@sanity/client@7.9.0(debug@4.4.0))':
     dependencies:
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       '@sanity/uuid': 3.0.2
 
   '@sanity/react-hooks@2.36.2(@sanity/base@2.36.2(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))(react@18.3.1)':
@@ -25064,7 +25070,7 @@ snapshots:
 
   '@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0)':
     dependencies:
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       '@sanity/media-library-types': 1.0.0
       '@types/react': 18.3.1
     transitivePeerDependencies:
@@ -25086,6 +25092,24 @@ snapshots:
       react-refractor: 2.2.0(react@18.3.1)
       styled-components: 6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
+  '@sanity/ui@2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+    dependencies:
+      '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@juggle/resize-observer': 3.4.0
+      '@sanity/color': 3.0.6
+      '@sanity/icons': 3.7.4(react@18.3.1)
+      csstype: 3.1.3
+      framer-motion: 12.23.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
+      react-dom: 18.3.1(react@18.3.1)
+      react-is: 18.2.0
+      react-refractor: 2.2.0(react@18.3.1)
+      styled-components: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      use-effect-event: 2.0.3(react@18.3.1)
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+
   '@sanity/ui@2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -25100,24 +25124,6 @@ snapshots:
       react-is: 18.2.0
       react-refractor: 2.2.0(react@18.3.1)
       styled-components: 6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      use-effect-event: 2.0.3(react@18.3.1)
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-
-  '@sanity/ui@2.16.12(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
-    dependencies:
-      '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@juggle/resize-observer': 3.4.0
-      '@sanity/color': 3.0.6
-      '@sanity/icons': 3.7.4(react@18.3.1)
-      csstype: 3.1.3
-      framer-motion: 12.23.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react: 18.3.1
-      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
-      react-is: 18.2.0
-      react-refractor: 2.2.0(react@18.3.1)
-      styled-components: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       use-effect-event: 2.0.3(react@18.3.1)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -25148,6 +25154,19 @@ snapshots:
       '@sanity/types': 3.68.3(@types/react@18.3.1)(debug@4.4.0)
       get-random-values-esm: 1.0.2
       moment: 2.30.1
+      rxjs: 7.8.2
+    transitivePeerDependencies:
+      - '@types/react'
+      - debug
+
+  '@sanity/util@3.99.0(@types/react@18.3.1)':
+    dependencies:
+      '@date-fns/tz': 1.4.1
+      '@date-fns/utc': 2.1.1
+      '@sanity/client': 7.9.0
+      '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      date-fns: 4.1.0
+      get-random-values-esm: 1.0.2
       rxjs: 7.8.2
     transitivePeerDependencies:
       - '@types/react'
@@ -25221,7 +25240,7 @@ snapshots:
 
   '@sanity/visual-editing-types@1.1.5(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))':
     dependencies:
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
     optionalDependencies:
       '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
 
@@ -27250,6 +27269,10 @@ snapshots:
     dependencies:
       acorn: 8.14.0
 
+  acorn-jsx@5.3.2(acorn@8.15.0):
+    dependencies:
+      acorn: 8.15.0
+
   acorn-loose@8.4.0:
     dependencies:
       acorn: 8.14.0
@@ -27743,6 +27766,20 @@ snapshots:
       - supports-color
     optional: true
 
+  babel-jest@30.0.5(@babel/core@7.24.7):
+    dependencies:
+      '@babel/core': 7.24.7
+      '@jest/transform': 30.0.5
+      '@types/babel__core': 7.20.5
+      babel-plugin-istanbul: 7.0.0
+      babel-preset-jest: 30.0.1(@babel/core@7.24.7)
+      chalk: 4.1.2
+      graceful-fs: 4.2.11
+      slash: 3.0.0
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
+
   babel-jest@30.0.5(@babel/core@7.28.3):
     dependencies:
       '@babel/core': 7.28.3
@@ -27932,6 +27969,26 @@ snapshots:
       '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.28.3)
     optional: true
 
+  babel-preset-current-node-syntax@1.2.0(@babel/core@7.24.7):
+    dependencies:
+      '@babel/core': 7.24.7
+      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.24.7)
+      '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.24.7)
+      '@babel/plugin-syntax-class-static-block': 7.14.5(@babel/core@7.24.7)
+      '@babel/plugin-syntax-import-attributes': 7.26.0(@babel/core@7.24.7)
+      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.24.7)
+      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.24.7)
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.24.7)
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.24.7)
+      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.24.7)
+      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.24.7)
+    optional: true
+
   babel-preset-current-node-syntax@1.2.0(@babel/core@7.28.3):
     dependencies:
       '@babel/core': 7.28.3
@@ -28007,6 +28064,13 @@ snapshots:
       '@babel/core': 7.28.3
       babel-plugin-jest-hoist: 29.6.3
       babel-preset-current-node-syntax: 1.0.1(@babel/core@7.28.3)
+    optional: true
+
+  babel-preset-jest@30.0.1(@babel/core@7.24.7):
+    dependencies:
+      '@babel/core': 7.24.7
+      babel-plugin-jest-hoist: 30.0.1
+      babel-preset-current-node-syntax: 1.2.0(@babel/core@7.24.7)
     optional: true
 
   babel-preset-jest@30.0.1(@babel/core@7.28.3):
@@ -28928,10 +28992,10 @@ snapshots:
     dependencies:
       bfj: 8.0.0
       bluebird: 3.7.2
-      cli-table3: 0.6.4
+      cli-table3: 0.6.5
       contentful: 10.9.3
       contentful-batch-libs: 9.7.0
-      contentful-management: 11.25.3
+      contentful-management: 11.54.4
       date-fns: 3.6.0
       figures: 3.2.0
       jsonwebtoken: 9.0.2
@@ -29000,18 +29064,6 @@ snapshots:
       - zen-observable
       - zenObservable
 
-  contentful-management@11.25.3:
-    dependencies:
-      '@contentful/rich-text-types': 16.3.5
-      '@types/json-patch': 0.0.30
-      axios: 1.13.2
-      contentful-sdk-core: 8.1.0
-      fast-copy: 3.0.1
-      lodash.isplainobject: 4.0.6
-      type-fest: 4.3.1
-    transitivePeerDependencies:
-      - debug
-
   contentful-management@11.26.2:
     dependencies:
       '@contentful/rich-text-types': 16.3.5
@@ -29029,7 +29081,7 @@ snapshots:
       '@contentful/rich-text-types': 16.8.5
       axios: 1.13.2
       contentful-sdk-core: 9.2.0
-      fast-copy: 3.0.1
+      fast-copy: 3.0.2
       globals: 15.15.0
     transitivePeerDependencies:
       - debug
@@ -29063,9 +29115,9 @@ snapshots:
       lodash: 4.17.21
       p-throttle: 6.2.0
       process: 0.11.10
-      qs: 6.13.1
+      qs: 6.14.0
     optionalDependencies:
-      '@rollup/rollup-linux-x64-gnu': 4.28.1
+      '@rollup/rollup-linux-x64-gnu': 4.47.1
 
   contentful-to-sanity@4.2.10(encoding@0.1.13):
     dependencies:
@@ -29109,12 +29161,12 @@ snapshots:
 
   contentful@10.9.3:
     dependencies:
-      '@contentful/rich-text-types': 16.3.5
+      '@contentful/rich-text-types': 16.8.5
       axios: 1.13.2
-      contentful-resolve-response: 1.8.1
+      contentful-resolve-response: 1.9.3
       contentful-sdk-core: 8.1.0
       json-stringify-safe: 5.0.1
-      type-fest: 4.3.1
+      type-fest: 4.41.0
     transitivePeerDependencies:
       - debug
 
@@ -29126,7 +29178,7 @@ snapshots:
       contentful-resolve-response: 1.9.3
       contentful-sdk-core: 9.2.0
       json-stringify-safe: 5.0.1
-      type-fest: 4.3.1
+      type-fest: 4.41.0
     transitivePeerDependencies:
       - debug
 
@@ -29307,7 +29359,7 @@ snapshots:
 
   cross-inspect@1.0.1:
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   cross-spawn-async@2.2.5:
     dependencies:
@@ -30773,7 +30825,7 @@ snapshots:
 
   eslint@8.57.1:
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.1)
+      '@eslint-community/eslint-utils': 4.7.0(eslint@8.57.1)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.57.1
@@ -30790,7 +30842,7 @@ snapshots:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
-      esquery: 1.5.0
+      esquery: 1.6.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
       file-entry-cache: 6.0.1
@@ -30863,8 +30915,8 @@ snapshots:
 
   espree@9.6.1:
     dependencies:
-      acorn: 8.14.0
-      acorn-jsx: 5.3.2(acorn@8.14.0)
+      acorn: 8.15.0
+      acorn-jsx: 5.3.2(acorn@8.15.0)
       eslint-visitor-keys: 3.4.3
 
   esprima@1.2.2: {}
@@ -31369,6 +31421,10 @@ snapshots:
     optionalDependencies:
       debug: 4.3.7(supports-color@8.1.1)
 
+  follow-redirects@1.15.11(debug@4.4.0):
+    optionalDependencies:
+      debug: 4.4.0
+
   follow-redirects@1.15.11(debug@4.4.1):
     optionalDependencies:
       debug: 4.4.1(supports-color@8.1.1)
@@ -31626,11 +31682,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  get-it@8.6.10(debug@4.4.0):
+  get-it@8.6.10:
     dependencies:
       '@types/follow-redirects': 1.14.4
       decompress-response: 7.0.0
       follow-redirects: 1.15.11(debug@4.3.7)
+      is-retry-allowed: 2.2.0
+      through2: 4.0.2
+      tunnel-agent: 0.6.0
+    transitivePeerDependencies:
+      - debug
+
+  get-it@8.6.10(debug@4.4.0):
+    dependencies:
+      '@types/follow-redirects': 1.14.4
+      decompress-response: 7.0.0
+      follow-redirects: 1.15.11(debug@4.4.0)
       is-retry-allowed: 2.2.0
       through2: 4.0.2
       tunnel-agent: 0.6.0
@@ -32419,7 +32486,7 @@ snapshots:
     dependencies:
       '@ioredis/commands': 1.2.0
       cluster-key-slot: 1.1.2
-      debug: 4.4.0
+      debug: 4.4.1(supports-color@8.1.1)
       denque: 2.1.0
       lodash.defaults: 4.2.0
       lodash.isarguments: 3.1.0
@@ -33022,27 +33089,6 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-cli@30.0.5(@types/node@20.12.10)(node-notifier@8.0.2):
-    dependencies:
-      '@jest/core': 30.0.5(node-notifier@8.0.2)
-      '@jest/test-result': 30.0.5
-      '@jest/types': 30.0.5
-      chalk: 4.1.2
-      exit-x: 0.2.2
-      import-local: 3.2.0
-      jest-config: 30.0.5(@types/node@20.12.10)
-      jest-util: 30.0.5
-      jest-validate: 30.0.5
-      yargs: 17.7.2
-    optionalDependencies:
-      node-notifier: 8.0.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   jest-cli@30.0.5(@types/node@22.10.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2):
     dependencies:
       '@jest/core': 30.0.5(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
@@ -33152,38 +33198,6 @@ snapshots:
       strip-json-comments: 3.1.1
     optionalDependencies:
       '@types/node': 22.10.2
-    transitivePeerDependencies:
-      - babel-plugin-macros
-      - supports-color
-
-  jest-config@30.0.5(@types/node@20.12.10):
-    dependencies:
-      '@babel/core': 7.28.3
-      '@jest/get-type': 30.0.1
-      '@jest/pattern': 30.0.1
-      '@jest/test-sequencer': 30.0.5
-      '@jest/types': 30.0.5
-      babel-jest: 30.0.5(@babel/core@7.28.3)
-      chalk: 4.1.2
-      ci-info: 4.3.0
-      deepmerge: 4.3.1
-      glob: 10.4.5
-      graceful-fs: 4.2.11
-      jest-circus: 30.0.5(babel-plugin-macros@3.1.0)
-      jest-docblock: 30.0.1
-      jest-environment-node: 30.0.5
-      jest-regex-util: 30.0.1
-      jest-resolve: 30.0.5
-      jest-runner: 30.0.5
-      jest-util: 30.0.5
-      jest-validate: 30.0.5
-      micromatch: 4.0.8
-      parse-json: 5.2.0
-      pretty-format: 30.0.5
-      slash: 3.0.0
-      strip-json-comments: 3.1.1
-    optionalDependencies:
-      '@types/node': 20.12.10
     transitivePeerDependencies:
       - babel-plugin-macros
       - supports-color
@@ -34060,36 +34074,6 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(node-notifier@8.0.2):
-    dependencies:
-      '@jest/core': 30.0.5(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
-      '@jest/types': 30.0.5
-      import-local: 3.2.0
-      jest-cli: 30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
-    optionalDependencies:
-      node-notifier: 8.0.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
-  jest@30.0.5(@types/node@20.12.10)(node-notifier@8.0.2):
-    dependencies:
-      '@jest/core': 30.0.5(node-notifier@8.0.2)
-      '@jest/types': 30.0.5
-      import-local: 3.2.0
-      jest-cli: 30.0.5(@types/node@20.12.10)(node-notifier@8.0.2)
-    optionalDependencies:
-      node-notifier: 8.0.2
-    transitivePeerDependencies:
-      - '@types/node'
-      - babel-plugin-macros
-      - esbuild-register
-      - supports-color
-      - ts-node
-
   jest@30.0.5(@types/node@22.10.2)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2):
     dependencies:
       '@jest/core': 30.0.5(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
@@ -34371,7 +34355,7 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.6.3
+      semver: 7.7.2
 
   jsprim@2.0.2:
     dependencies:
@@ -35362,7 +35346,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
       omit.js: 2.0.2
       p-wait-for: 3.2.0
-      qs: 6.13.1
+      qs: 6.14.0
     transitivePeerDependencies:
       - encoding
 
@@ -37992,7 +37976,7 @@ snapshots:
     dependencies:
       '@sanity/icons': 3.7.4(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0)
+      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0(debug@4.4.0))
       '@sanity/ui': 2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       framer-motion: 12.23.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
@@ -38028,7 +38012,7 @@ snapshots:
     dependencies:
       '@hookform/resolvers': 3.10.0(react-hook-form@7.62.0(react@18.3.1))
       '@reduxjs/toolkit': 2.8.2(react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
-      '@sanity/client': 6.29.1(debug@4.4.0)
+      '@sanity/client': 6.29.1
       '@sanity/color': 3.0.6
       '@sanity/icons': 3.7.4(react@18.3.1)
       '@sanity/incompatible-plugin': 1.0.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -38078,6 +38062,175 @@ snapshots:
       - react-dom
       - react-is
 
+  sanity@3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1):
+    dependencies:
+      '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@dnd-kit/modifiers': 6.0.1(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@dnd-kit/sortable': 7.0.2(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
+      '@juggle/resize-observer': 3.4.0
+      '@mux/mux-player-react': 3.5.3(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@portabletext/block-tools': 1.1.38(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@types/react@18.3.1)
+      '@portabletext/editor': 1.58.0(@sanity/schema@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
+      '@portabletext/react': 3.2.4(react@18.3.1)
+      '@portabletext/toolkit': 2.0.18
+      '@rexxars/react-json-inspector': 9.0.1(react@18.3.1)
+      '@sanity/asset-utils': 2.2.1
+      '@sanity/bifur-client': 0.4.1
+      '@sanity/cli': 3.99.0(@types/node@20.12.10)(@types/react@18.3.1)(react@18.3.1)(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
+      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/color': 3.0.6
+      '@sanity/comlink': 3.0.9
+      '@sanity/diff': 3.99.0
+      '@sanity/diff-match-patch': 3.2.0
+      '@sanity/diff-patch': 5.0.0
+      '@sanity/eventsource': 5.0.2
+      '@sanity/export': 3.45.3(@types/react@18.3.1)
+      '@sanity/icons': 3.7.4(react@18.3.1)
+      '@sanity/id-utils': 1.0.0
+      '@sanity/image-url': 1.1.0
+      '@sanity/import': 3.38.3(@types/react@18.3.1)
+      '@sanity/insert-menu': 1.1.13(@emotion/is-prop-valid@1.2.2)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@sanity/logos': 2.2.2(react@18.3.1)
+      '@sanity/media-library-types': 1.0.0
+      '@sanity/message-protocol': 0.13.3
+      '@sanity/migrate': 3.99.0(@types/react@18.3.1)
+      '@sanity/mutator': 3.99.0(@types/react@18.3.1)
+      '@sanity/presentation-comlink': 1.0.28(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))
+      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0(debug@4.4.0))
+      '@sanity/schema': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      '@sanity/sdk': 0.0.0-alpha.25(@types/react@18.3.1)(debug@4.4.0)(immer@10.1.1)(react@18.3.1)(use-sync-external-store@1.5.0(react@18.3.1))
+      '@sanity/telemetry': 0.8.1(react@18.3.1)
+      '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      '@sanity/ui': 2.16.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@sanity/util': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
+      '@sanity/uuid': 3.0.2
+      '@sentry/react': 8.55.0(react@18.3.1)
+      '@tanstack/react-table': 8.21.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/react-virtual': 3.13.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@types/react-is': 19.0.0
+      '@types/shallow-equals': 1.0.3
+      '@types/speakingurl': 13.0.6
+      '@types/tar-stream': 3.1.4
+      '@types/use-sync-external-store': 1.5.0
+      '@types/which': 3.0.4
+      '@vitejs/plugin-react': 4.7.0(vite@6.3.5(@types/node@22.10.2)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.1))
+      '@xstate/react': 6.0.0(@types/react@18.3.1)(react@18.3.1)(xstate@5.20.2)
+      archiver: 7.0.1
+      arrify: 2.0.1
+      async-mutex: 0.4.1
+      chalk: 4.1.2
+      chokidar: 3.5.3
+      classnames: 2.5.1
+      color2k: 2.0.3
+      configstore: 5.0.1
+      console-table-printer: 2.14.6
+      dataloader: 2.2.3
+      date-fns: 2.30.0
+      debug: 4.4.0
+      esbuild: 0.25.6
+      esbuild-register: 3.6.0(esbuild@0.25.6)
+      execa: 2.1.0
+      exif-component: 1.0.1
+      fast-deep-equal: 3.1.3
+      form-data: 4.0.4
+      framer-motion: 12.23.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      get-it: 8.6.10(debug@4.4.0)
+      get-random-values-esm: 1.0.2
+      groq-js: 1.17.3
+      gunzip-maybe: 1.4.2
+      history: 5.3.0
+      i18next: 23.16.8
+      import-fresh: 3.3.0
+      is-hotkey-esm: 1.0.0
+      is-tar: 1.0.0
+      isomorphic-dompurify: 2.26.0
+      jsdom: 23.2.0
+      jsdom-global: 3.0.2(jsdom@23.2.0)
+      json-lexer: 1.2.0
+      json-reduce: 3.0.0
+      json5: 2.2.3
+      lodash: 4.17.21
+      log-symbols: 2.2.0
+      mendoza: 3.0.8
+      module-alias: 2.2.3
+      nano-pubsub: 3.0.0
+      nanoid: 5.1.5
+      node-html-parser: 6.1.13
+      observable-callback: 1.0.3(rxjs@7.8.2)
+      oneline: 1.0.4
+      open: 8.4.2
+      p-map: 7.0.3
+      path-to-regexp: 6.3.0
+      peek-stream: 1.1.3
+      pirates: 4.0.6
+      player.style: 0.1.10(react@18.3.1)
+      pluralize-esm: 9.0.5
+      polished: 4.2.2
+      preferred-pm: 4.1.1
+      pretty-ms: 7.0.1
+      quick-lru: 5.1.1
+      raf: 3.4.1
+      react: 18.3.1
+      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
+      react-dom: 18.3.1(react@18.3.1)
+      react-fast-compare: 3.2.2
+      react-focus-lock: 2.13.6(@types/react@18.3.1)(react@18.3.1)
+      react-i18next: 14.0.2(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-is: 18.2.0
+      react-refractor: 2.2.0(react@18.3.1)
+      react-rx: 4.1.31(react@18.3.1)(rxjs@7.8.2)
+      read-pkg-up: 7.0.1
+      refractor: 3.6.0
+      resolve-from: 5.0.0
+      resolve.exports: 2.0.2
+      rimraf: 5.0.10
+      rxjs: 7.8.2
+      rxjs-exhaustmap-with-trailing: 2.1.1(rxjs@7.8.2)
+      rxjs-mergemap-array: 0.1.0(rxjs@7.8.2)
+      scroll-into-view-if-needed: 3.1.0
+      scrollmirror: 1.2.4
+      semver: 7.6.3
+      shallow-equals: 1.0.0
+      speakingurl: 14.0.1
+      styled-components: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      tar-fs: 3.1.0
+      tar-stream: 3.1.7
+      tinyglobby: 0.2.14
+      urlpattern-polyfill: 10.1.0
+      use-device-pixel-ratio: 1.1.2(react@18.3.1)
+      use-effect-event: 2.0.3(react@18.3.1)
+      use-hot-module-reload: 2.0.0(react@18.3.1)
+      use-sync-external-store: 1.5.0(react@18.3.1)
+      uuid: 11.1.0
+      vite: 6.3.5(@types/node@20.12.10)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.1)
+      which: 5.0.0
+      xstate: 5.20.2
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - '@emotion/is-prop-valid'
+      - '@types/node'
+      - '@types/react'
+      - '@types/react-dom'
+      - bare-buffer
+      - bufferutil
+      - canvas
+      - immer
+      - jiti
+      - less
+      - lightningcss
+      - react-native
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - typescript
+      - utf-8-validate
+      - yaml
+
   sanity@3.99.0(@emotion/is-prop-valid@1.2.2)(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(immer@10.1.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1):
     dependencies:
       '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -38113,7 +38266,7 @@ snapshots:
       '@sanity/migrate': 3.99.0(@types/react@18.3.1)
       '@sanity/mutator': 3.99.0(@types/react@18.3.1)
       '@sanity/presentation-comlink': 1.0.28(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))
-      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0)
+      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0(debug@4.4.0))
       '@sanity/schema': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
       '@sanity/sdk': 0.0.0-alpha.25(@types/react@18.3.1)(debug@4.4.0)(immer@10.1.1)(react@18.3.1)(use-sync-external-store@1.5.0(react@18.3.1))
       '@sanity/telemetry': 0.8.1(react@18.3.1)
@@ -38263,7 +38416,7 @@ snapshots:
       '@sanity/asset-utils': 2.2.1
       '@sanity/bifur-client': 0.4.1
       '@sanity/cli': 3.99.0(@types/node@20.12.10)(@types/react@18.3.1)(react@18.3.1)(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
-      '@sanity/client': 7.9.0(debug@4.4.0)
+      '@sanity/client': 7.9.0
       '@sanity/color': 3.0.6
       '@sanity/comlink': 3.0.9
       '@sanity/diff': 3.99.0
@@ -38282,7 +38435,7 @@ snapshots:
       '@sanity/migrate': 3.99.0(@types/react@18.3.1)
       '@sanity/mutator': 3.99.0(@types/react@18.3.1)
       '@sanity/presentation-comlink': 1.0.28(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))
-      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0)
+      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0(debug@4.4.0))
       '@sanity/schema': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
       '@sanity/sdk': 0.0.0-alpha.25(@types/react@18.3.1)(debug@4.4.0)(immer@10.1.1)(react@18.3.1)(use-sync-external-store@1.5.0(react@18.3.1))
       '@sanity/telemetry': 0.8.1(react@18.3.1)
@@ -38379,175 +38532,6 @@ snapshots:
       shallow-equals: 1.0.0
       speakingurl: 14.0.1
       styled-components: 6.1.19(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      tar-fs: 3.1.0
-      tar-stream: 3.1.7
-      tinyglobby: 0.2.14
-      urlpattern-polyfill: 10.1.0
-      use-device-pixel-ratio: 1.1.2(react@18.3.1)
-      use-effect-event: 2.0.3(react@18.3.1)
-      use-hot-module-reload: 2.0.0(react@18.3.1)
-      use-sync-external-store: 1.5.0(react@18.3.1)
-      uuid: 11.1.0
-      vite: 6.3.5(@types/node@20.12.10)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.1)
-      which: 5.0.0
-      xstate: 5.20.2
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - '@emotion/is-prop-valid'
-      - '@types/node'
-      - '@types/react'
-      - '@types/react-dom'
-      - bare-buffer
-      - bufferutil
-      - canvas
-      - immer
-      - jiti
-      - less
-      - lightningcss
-      - react-native
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - typescript
-      - utf-8-validate
-      - yaml
-
-  sanity@3.99.0(@types/node@20.12.10)(@types/react-dom@18.3.0)(@types/react@18.3.1)(jiti@2.5.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1):
-    dependencies:
-      '@dnd-kit/core': 6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/modifiers': 6.0.1(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/sortable': 7.0.2(@dnd-kit/core@6.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      '@dnd-kit/utilities': 3.2.2(react@18.3.1)
-      '@juggle/resize-observer': 3.4.0
-      '@mux/mux-player-react': 3.5.3(@types/react-dom@18.3.0)(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@portabletext/block-tools': 1.1.38(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@types/react@18.3.1)
-      '@portabletext/editor': 1.58.0(@sanity/schema@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.2)
-      '@portabletext/react': 3.2.4(react@18.3.1)
-      '@portabletext/toolkit': 2.0.18
-      '@rexxars/react-json-inspector': 9.0.1(react@18.3.1)
-      '@sanity/asset-utils': 2.2.1
-      '@sanity/bifur-client': 0.4.1
-      '@sanity/cli': 3.99.0(@types/node@20.12.10)(@types/react@18.3.1)(react@18.3.1)(terser@5.43.1)(typescript@5.7.2)(yaml@2.8.1)
-      '@sanity/client': 7.9.0(debug@4.4.0)
-      '@sanity/color': 3.0.6
-      '@sanity/comlink': 3.0.9
-      '@sanity/diff': 3.99.0
-      '@sanity/diff-match-patch': 3.2.0
-      '@sanity/diff-patch': 5.0.0
-      '@sanity/eventsource': 5.0.2
-      '@sanity/export': 3.45.3(@types/react@18.3.1)
-      '@sanity/icons': 3.7.4(react@18.3.1)
-      '@sanity/id-utils': 1.0.0
-      '@sanity/image-url': 1.1.0
-      '@sanity/import': 3.38.3(@types/react@18.3.1)
-      '@sanity/insert-menu': 1.1.13(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/logos': 2.2.2(react@18.3.1)
-      '@sanity/media-library-types': 1.0.0
-      '@sanity/message-protocol': 0.13.3
-      '@sanity/migrate': 3.99.0(@types/react@18.3.1)
-      '@sanity/mutator': 3.99.0(@types/react@18.3.1)
-      '@sanity/presentation-comlink': 1.0.28(@sanity/client@7.9.0)(@sanity/types@3.99.0(@types/react@18.3.1)(debug@4.4.0))
-      '@sanity/preview-url-secret': 2.1.14(@sanity/client@7.9.0)
-      '@sanity/schema': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
-      '@sanity/sdk': 0.0.0-alpha.25(@types/react@18.3.1)(debug@4.4.0)(immer@10.1.1)(react@18.3.1)(use-sync-external-store@1.5.0(react@18.3.1))
-      '@sanity/telemetry': 0.8.1(react@18.3.1)
-      '@sanity/types': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
-      '@sanity/ui': 2.16.12(react-dom@18.3.1(react@18.3.1))(react-is@18.2.0)(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      '@sanity/util': 3.99.0(@types/react@18.3.1)(debug@4.4.0)
-      '@sanity/uuid': 3.0.2
-      '@sentry/react': 8.55.0(react@18.3.1)
-      '@tanstack/react-table': 8.21.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tanstack/react-virtual': 3.13.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@types/react-is': 19.0.0
-      '@types/shallow-equals': 1.0.3
-      '@types/speakingurl': 13.0.6
-      '@types/tar-stream': 3.1.4
-      '@types/use-sync-external-store': 1.5.0
-      '@types/which': 3.0.4
-      '@vitejs/plugin-react': 4.7.0(vite@6.3.5(@types/node@22.10.2)(jiti@2.5.1)(terser@5.43.1)(yaml@2.8.1))
-      '@xstate/react': 6.0.0(@types/react@18.3.1)(react@18.3.1)(xstate@5.20.2)
-      archiver: 7.0.1
-      arrify: 2.0.1
-      async-mutex: 0.4.1
-      chalk: 4.1.2
-      chokidar: 3.5.3
-      classnames: 2.5.1
-      color2k: 2.0.3
-      configstore: 5.0.1
-      console-table-printer: 2.14.6
-      dataloader: 2.2.3
-      date-fns: 2.30.0
-      debug: 4.4.0
-      esbuild: 0.25.6
-      esbuild-register: 3.6.0(esbuild@0.25.6)
-      execa: 2.1.0
-      exif-component: 1.0.1
-      fast-deep-equal: 3.1.3
-      form-data: 4.0.4
-      framer-motion: 12.23.12(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      get-it: 8.6.10(debug@4.4.0)
-      get-random-values-esm: 1.0.2
-      groq-js: 1.17.3
-      gunzip-maybe: 1.4.2
-      history: 5.3.0
-      i18next: 23.16.8
-      import-fresh: 3.3.0
-      is-hotkey-esm: 1.0.0
-      is-tar: 1.0.0
-      isomorphic-dompurify: 2.26.0
-      jsdom: 23.2.0
-      jsdom-global: 3.0.2(jsdom@23.2.0)
-      json-lexer: 1.2.0
-      json-reduce: 3.0.0
-      json5: 2.2.3
-      lodash: 4.17.21
-      log-symbols: 2.2.0
-      mendoza: 3.0.8
-      module-alias: 2.2.3
-      nano-pubsub: 3.0.0
-      nanoid: 5.1.5
-      node-html-parser: 6.1.13
-      observable-callback: 1.0.3(rxjs@7.8.2)
-      oneline: 1.0.4
-      open: 8.4.2
-      p-map: 7.0.3
-      path-to-regexp: 6.3.0
-      peek-stream: 1.1.3
-      pirates: 4.0.6
-      player.style: 0.1.10(react@18.3.1)
-      pluralize-esm: 9.0.5
-      polished: 4.2.2
-      preferred-pm: 4.1.1
-      pretty-ms: 7.0.1
-      quick-lru: 5.1.1
-      raf: 3.4.1
-      react: 18.3.1
-      react-compiler-runtime: 19.1.0-rc.2(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
-      react-fast-compare: 3.2.2
-      react-focus-lock: 2.13.6(@types/react@18.3.1)(react@18.3.1)
-      react-i18next: 14.0.2(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-is: 18.2.0
-      react-refractor: 2.2.0(react@18.3.1)
-      react-rx: 4.1.31(react@18.3.1)(rxjs@7.8.2)
-      read-pkg-up: 7.0.1
-      refractor: 3.6.0
-      resolve-from: 5.0.0
-      resolve.exports: 2.0.2
-      rimraf: 5.0.10
-      rxjs: 7.8.2
-      rxjs-exhaustmap-with-trailing: 2.1.1(rxjs@7.8.2)
-      rxjs-mergemap-array: 0.1.0(rxjs@7.8.2)
-      scroll-into-view-if-needed: 3.1.0
-      scrollmirror: 1.2.4
-      semver: 7.6.3
-      shallow-equals: 1.0.0
-      speakingurl: 14.0.1
-      styled-components: 6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tar-fs: 3.1.0
       tar-stream: 3.1.7
       tinyglobby: 0.2.14
@@ -38897,7 +38881,7 @@ snapshots:
     dependencies:
       '@kwsites/file-exists': 1.1.1
       '@kwsites/promise-deferred': 1.1.1
-      debug: 4.4.0
+      debug: 4.4.1(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -39969,12 +39953,12 @@ snapshots:
       babel-jest: 29.7.0(@babel/core@7.28.3)
       esbuild: 0.25.6
 
-  ts-jest@29.4.1(@babel/core@7.24.7)(esbuild@0.25.6)(jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(node-notifier@8.0.2))(typescript@5.7.2):
+  ts-jest@29.4.1(@babel/core@7.24.7)(@jest/transform@30.0.5)(@jest/types@30.0.5)(babel-jest@30.0.5(@babel/core@7.24.7))(esbuild@0.25.6)(jest-util@30.0.5)(jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2))(typescript@5.7.2):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       handlebars: 4.7.8
-      jest: 30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(node-notifier@8.0.2)
+      jest: 30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2)
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
@@ -39984,24 +39968,11 @@ snapshots:
       yargs-parser: 21.1.1
     optionalDependencies:
       '@babel/core': 7.24.7
+      '@jest/transform': 30.0.5
+      '@jest/types': 30.0.5
+      babel-jest: 30.0.5(@babel/core@7.24.7)
       esbuild: 0.25.6
-
-  ts-jest@29.4.1(@babel/core@7.24.7)(esbuild@0.25.6)(jest@30.0.5(@types/node@20.12.10)(node-notifier@8.0.2))(typescript@5.7.2):
-    dependencies:
-      bs-logger: 0.2.6
-      fast-json-stable-stringify: 2.1.0
-      handlebars: 4.7.8
-      jest: 30.0.5(@types/node@20.12.10)(node-notifier@8.0.2)
-      json5: 2.2.3
-      lodash.memoize: 4.1.2
-      make-error: 1.3.6
-      semver: 7.7.2
-      type-fest: 4.41.0
-      typescript: 5.7.2
-      yargs-parser: 21.1.1
-    optionalDependencies:
-      '@babel/core': 7.24.7
-      esbuild: 0.25.6
+      jest-util: 30.0.5
 
   ts-jest@29.4.1(@babel/core@7.28.3)(@jest/transform@30.0.5)(@jest/types@30.0.5)(babel-jest@30.0.5(@babel/core@7.28.3))(esbuild@0.25.6)(jest-util@30.0.5)(jest@30.0.5(@types/node@20.12.10)(babel-plugin-macros@3.1.0)(esbuild-register@3.6.0(esbuild@0.25.6))(node-notifier@8.0.2))(typescript@5.7.2):
     dependencies:

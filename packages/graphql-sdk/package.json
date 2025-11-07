@@ -48,7 +48,7 @@
     "@graphql-codegen/typescript-graphql-request": "^6.2.0",
     "@graphql-codegen/typescript-operations": "^4.4.0",
     "@last-rev/app-config": "^0.6.0",
-    "@last-rev/cli": "^0.7.0",
+    "@last-rev/cli": "^0.7.1",
     "@parcel/watcher": "^2.4.1",
     "concurrently": "^8.2.2",
     "dotenv": "^17.2.3",

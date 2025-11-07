@@ -14,9 +14,9 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.2",
-    "@last-rev/cms-webhook-handler": "^0.2.0",
+    "@last-rev/cms-webhook-handler": "^0.2.4",
     "@last-rev/graphql-algolia-integration": "^0.5.0",
-    "@last-rev/graphql-cms-core": "^0.2.0",
+    "@last-rev/graphql-cms-core": "^0.2.4",
     "@next/bundle-analyzer": "^14.2.32",
     "@sentry/nextjs": "^7.113.0",
     "cors": "^2.8.5",
