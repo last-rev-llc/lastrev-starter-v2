@@ -96,7 +96,7 @@
     },
     "web#build": {
       "outputMode": "new-only",
-      "dependsOn": ["graphql-sdk#sync:cms", "graphql-sdk#gql:start", "^build"],
+      "dependsOn": ["graphql-sdk#sync:cms", "^build"],
       "outputs": ["out/**", ".next/**"]
     },
     "sanity-studio#sanity-contentful-export": {

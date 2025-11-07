@@ -3,15 +3,6 @@ require('dotenv').config();
 const LastRevAppConfig = require('@last-rev/app-config');
 const extensions = require('graphql-extensions');
 const { resolve } = require('path');
-const { types: schemaTypes, supportedLanguages } = require('sanity-studio');
-
-const testForEnvVar = (name) => {
-  const envVar = process.env[name];
-  if (!envVar) {
-    throw Error(`Environment variable ${name} is required`);
-  }
-  return envVar;
-};
 
 const parseNumberEnvVar = (value = '') => {
   if (!value.length) return undefined;
@@ -25,29 +16,77 @@ const parseBooleanEnvVar = (value = '') => {
   return /^(true|1|yes|y)$/.test(val);
 };
 
-const projectId = testForEnvVar('SANITY_STUDIO_SANITY_PROJECT_ID');
-const dataset = testForEnvVar('SANITY_STUDIO_SANITY_DATASET');
-const apiVersion = testForEnvVar('SANITY_STUDIO_SANITY_API_VERSION');
-const token = testForEnvVar('SANITY_TOKEN');
-const usePreview = parseBooleanEnvVar(process.env.USE_PREVIEW);
+// Detect which CMS is being used based on environment variables
+const hasSanityVars =
+  process.env.SANITY_STUDIO_SANITY_PROJECT_ID &&
+  process.env.SANITY_STUDIO_SANITY_DATASET &&
+  process.env.SANITY_STUDIO_SANITY_API_VERSION &&
+  process.env.SANITY_TOKEN;
+
+const hasContentfulVars =
+  process.env.CONTENTFUL_SPACE_ID &&
+  process.env.CONTENTFUL_DELIVERY_TOKEN &&
+  process.env.CONTENTFUL_ENV;
+
+// Determine CMS type and content strategy
+let cmsType = null;
+let contentStrategy = 'fs'; // Default to file system if no CMS vars are present
+let cmsConfig = {};
+
+if (hasSanityVars) {
+  cmsType = 'Sanity';
+  contentStrategy = 'cms';
+  let schemaTypes, supportedLanguages;
+  try {
+    const sanityStudio = require('sanity-studio');
+    schemaTypes = sanityStudio.types;
+    supportedLanguages = sanityStudio.supportedLanguages;
+  } catch (error) {
+    // If sanity-studio is not available, use empty arrays
+    console.warn('Warning: sanity-studio module not available, using empty schema types');
+    schemaTypes = [];
+    supportedLanguages = [];
+  }
+  
+  cmsConfig = {
+    sanity: {
+      projectId: process.env.SANITY_STUDIO_SANITY_PROJECT_ID,
+      dataset: process.env.SANITY_STUDIO_SANITY_DATASET,
+      apiVersion: process.env.SANITY_STUDIO_SANITY_API_VERSION,
+      usePreview: parseBooleanEnvVar(process.env.USE_PREVIEW),
+      token: process.env.SANITY_TOKEN,
+      schemaTypes,
+      supportedLanguages
+    }
+  };
+} else if (hasContentfulVars) {
+  cmsType = 'Contentful';
+  contentStrategy = 'cms';
+  cmsConfig = {
+    contentful: {
+      spaceId: process.env.CONTENTFUL_SPACE_ID,
+      deliveryToken: process.env.CONTENTFUL_DELIVERY_TOKEN,
+      previewToken: process.env.CONTENTFUL_PREVIEW_TOKEN,
+      environment: process.env.CONTENTFUL_ENV,
+      usePreview: parseBooleanEnvVar(process.env.CONTENTFUL_USE_PREVIEW || process.env.USE_PREVIEW)
+    }
+  };
+} else {
+  // No CMS vars available - use file system strategy
+  console.warn(
+    'Warning: No CMS environment variables detected. Using file system content strategy. ' +
+    'Set either Sanity or Contentful environment variables to use CMS integration.'
+  );
+}
 
 const config = new LastRevAppConfig({
-  cms: 'Sanity',
-  // contentStrategy: 'fs',
-  contentStrategy: 'cms',
+  ...(cmsType && { cms: cmsType }),
+  contentStrategy,
   // cmsCacheStrategy: 'redis',
-  sites: [process.env.SITE],
+  sites: process.env.SITE ? [process.env.SITE] : [],
   extensions,
   graphql: { port: 8888 },
-  sanity: {
-    projectId,
-    dataset,
-    apiVersion,
-    usePreview,
-    token,
-    schemaTypes,
-    supportedLanguages
-  },
+  ...cmsConfig,
   // algolia: {
   //   applicationId: process.env.ALGOLIA_APPLICATION_ID,
   //   adminApiKey: process.env.ALGOLIA_ADMIN_API_KEY,

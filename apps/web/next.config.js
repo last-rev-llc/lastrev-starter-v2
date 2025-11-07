@@ -101,12 +101,24 @@ let config = {
     }
   },
   async redirects() {
-    const { data } = await client.Redirects({ preview });
-    return data?.redirects ?? [];
+    try {
+      const { data } = await client.Redirects({ preview });
+      return data?.redirects ?? [];
+    } catch (error) {
+      // During build, if GraphQL server is not available, return empty array
+      console.warn('Warning: Could not fetch redirects during build:', error.message);
+      return [];
+    }
   },
   async rewrites() {
-    const { data } = await client.Rewrites({ preview });
-    return data?.rewrites ?? [];
+    try {
+      const { data } = await client.Rewrites({ preview });
+      return data?.rewrites ?? [];
+    } catch (error) {
+      // During build, if GraphQL server is not available, return empty array
+      console.warn('Warning: Could not fetch rewrites during build:', error.message);
+      return [];
+    }
   }
 };
 
