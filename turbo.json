@@ -28,6 +28,7 @@
     "SANITY_TOKEN",
     "SITE_SETTINGS",
     "SITE",
+    "USE_PREVIEW",
     "VERCEL_URL"
   ],
   "pipeline": {
@@ -117,6 +118,11 @@
     "sanity-studio#sanity-studio-deploy": {
       "outputMode": "new-only",
       "cache": false
+    },
+    "web#cypress:regenerate-pages": {
+      "outputMode": "new-only",
+      "cache": false,
+      "dependsOn": ["graphql-sdk#sync:cms"]
     }
   }
 }

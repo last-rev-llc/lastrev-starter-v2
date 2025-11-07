@@ -10,6 +10,7 @@
     "clean": "turbo clean",
     "cypress:open:ui": "pnpm --filter ui cypress:open",
     "cypress:open:web": "pnpm --filter web cypress:open",
+    "cypress:regenerate-pages": "pnpm secure-run pnpm --filter web cypress:regenerate-pages",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "gql:dev": "pnpm secure-run turbo sync:cms gql:dev --continue --concurrency 15",
     "gql:logs": "pnpm secure-run turbo gql:logs",
