@@ -45,7 +45,7 @@ import {
 } from './vercel.js';
 import logger from '../logger.js';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Get the directory name in ESM
 const __filename = fileURLToPath(import.meta.url);
@@ -269,6 +269,8 @@ async function main() {
       }
     }
 
+    // Ensure newline before logger output to prevent merging with progress bar
+    console.log('');
     logger.info('Starting platform variable sync...');
     const config = await readConfigFile();
 

@@ -6,6 +6,7 @@
     "build": "next build",
     "clean": "rm -rf .next",
     "cypress:open": "cypress open --e2e",
+    "cypress:regenerate-pages": "node scripts/regenerate-cypress-pages.js",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
