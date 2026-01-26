@@ -46,7 +46,7 @@ jobs:
 
       - name: ⏳ Wait for Vercel Preview
         if: ${{ inputs.provider == 'vercel' }}
-        uses: patrickedqvist/wait-for-vercel-preview@v1.3.2
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.3
         id: wait-for-vercel-preview
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
